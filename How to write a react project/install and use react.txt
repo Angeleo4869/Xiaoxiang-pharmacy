@@ -1,0 +1,23 @@
+安装nodeJS
+cmd中
+	npm install -g cnpm --registry=https://registry.npm.taobao.org
+	npm config set registry https://registry.npm.taobao.org
+	cnpm install -g create-react-app
+	create-react-app my-app
+	cd my-app
+	//若是start 不了 才执行这一步，首次请跳过npm install react-scripts@2.1.8
+	npm start
+
+创建 dom container html
+创建 load script tag html
+创建 component 组件.js next to html page
+
+在package.json 里改相对路径 "homepage":"./" //避免打包build后空白页
+
+git config  http.postBuffer 524288000 //git buffer问题
+
+npm install --save react-router
+npm install @material-ui/core
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+
