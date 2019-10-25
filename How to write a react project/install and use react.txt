@@ -16,6 +16,7 @@ cmdÖĞ
 
 git config  http.postBuffer 524288000 //git bufferÎÊÌâ
 
+npm install --save react-router-dom
 npm install --save react-router
 npm install @material-ui/core
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
