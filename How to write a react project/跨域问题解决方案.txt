@@ -1,0 +1,39 @@
+1 修改web.xml
+增加以下代码
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.origins</param-name>
+    <param-value>*</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+2在tomcat lib文件夹加入两个跨域lib
+文件在LIb文件夹内
+java-property-utils-1.9.1.jar
+cors-filter-2.4.jar
+
+
+3 增加action跨域权限
+        HttpServletResponse response = ServletActionContext.getResponse();
+        //允许跨域
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+4 跨域访问fetch
+
+ fetch('http://localhost:8080/ReactManage/myaction.action', {
+	method: 'get'
+}).then(function(response) {
+  return response.text();
+}).then(function(T){
+  console.log(T);
+}).catch(function(err) {
+
+});
