@@ -19,7 +19,8 @@ git config  http.postBuffer 524288000 //git bufferÎÊÌâ
 npm install --save react-router-dom
 npm install --save react-router
 npm install @material-ui/core
-npm install react-dimensions
+npm install --save react-swipeable-views
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
 
