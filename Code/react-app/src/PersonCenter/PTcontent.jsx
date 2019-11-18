@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { List } from '@material-ui/core';
+import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -15,7 +16,7 @@ import PTCard from './PTcontentCard.jsx';
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 770 ,
+    minWidth: 400 ,
     minHeight:150,
     
   },
@@ -34,10 +35,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    
-
   },
- 
 });
 
 export default function SimpleCard() {
@@ -45,7 +43,7 @@ export default function SimpleCard() {
   // const bull = <span className={classes.bullet}>•</span>;
   // const decide = 0;
   return (
-      <div>
+  <div style={{position:'relative',left:0,width:'100%'}}>
     <Card className={classes.card}>
       <CardContent>
       <List horizontal="true" style={{display:'flex',justifyContent:'space-around',backgroundColor:'#EFFEFE'}}>
@@ -76,23 +74,38 @@ export default function SimpleCard() {
     <Paper style={{top:30,position:'relative',width:'100%'}} className={classes.card}>
         <div horizontal="true"  style={{display:'flex',backgroundColor:"#EFFEFE",height:50,width:'100%'}}>
              <List  horizontal="true"  style={{display:'flex',width:'100%'}} > 
-                <h3 style={{position:'relative',top:-10,left:10,width:100}}>推荐您的喜好</h3>
-                <Button style={{position:'relative',top:0,height:30,marginLeft:'80%',color:'',backgroundColor:'#6495ED'}}>换一下</Button>
+                <Typography variant="h5"  style={{position:'relative',top:0,left:10,width:350}} >推荐</Typography>
+                <Button style={{position:'absolute',top:10,height:30,right:5,color:'',backgroundColor:'#6495ED'}}>换一下</Button>
             </List>
             
         </div>
 <div className={classes.gridroot}>
-      <GridList cellHeight={350}  cols={4}>
+<nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
+<Hidden smUp implementation="css">
+<GridList cellHeight={300}  cols={2}>
         {['hello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
           <GridListTile key={text} >
-            <PTCard key={index} name={text}/>
+            <PTCard  key={index} size={1} name={text}/>
           </GridListTile>
         ))}
-      </GridList>
+</GridList>
+  </Hidden>
+  <Hidden xsDown implementation="css">
+  <GridList cellHeight={330}  cols={4}>
+        {['hello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
+          <GridListTile key={text} >
+            <PTCard key={index} size={2} name={text}/>
+          </GridListTile>
+        ))}
+</GridList>
+
+  </Hidden>
+  </nav>
+      
     </div>
      
         
     </Paper>
-    </div>
+  </div>
   );
 }

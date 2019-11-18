@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+//个人中心模块接口
 import {
     BrowserRouter as Router,
     Route,
@@ -27,27 +27,27 @@ import App2 from './../Test/App2';
 import App3 from './../Test/App3';
 import './../CSS/Center.css';
 
-const drawerWidth = 250;
+const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   drawer: {
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -121,13 +121,13 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            个人中心
           </Typography>
         </Toolbar>
       </AppBar>
       <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden lgUp implementation="css">
+        <Hidden smUp implementation="css">
           <Drawer
             container={container}
             variant="temporary"
@@ -144,7 +144,7 @@ function ResponsiveDrawer(props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden mdDown implementation="css">
+        <Hidden xsDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,

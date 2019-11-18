@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 export default class norms extends React.Component{
     render(){
         return(
-            <List style={{position:'relative',left:150,top:-40}}>
+            <List style={{position:'relative',left:10,top:0}}>
                 <h2>商品名称</h2>
                 <h3>上商品详情</h3>
                 <h3>规格选择区</h3>

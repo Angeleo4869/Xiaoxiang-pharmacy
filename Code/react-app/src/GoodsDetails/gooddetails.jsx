@@ -9,7 +9,7 @@ import Fab from '@material-ui/core/Fab';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
-
+//商品详情接口入口
 import Rotate from './rotate';
 import Norms from './norms';
 import Tabs from './Tabs';
@@ -33,6 +33,14 @@ import Tabs from './Tabs';
     },
     homeIcon: {
         marginTop:theme.spacing(1),
+        
+    },
+    flexornot: {
+      marginRight:130,
+      display: 'initial',
+      [theme.breakpoints.up('sm')]: {
+        display:'flex',
+      },
     },
    
   }));
@@ -40,7 +48,7 @@ import Tabs from './Tabs';
   const boxProps = {
     m: 1,
     border: 1,
-    marginTop:5
+    marginTop:5,
   };
 
 export default function SimpleContainer() {
@@ -76,9 +84,12 @@ export default function SimpleContainer() {
             lOGIN
         </Fab>
         </List>
-        <Divider style={{marginTop:40,light:true,}}/>
-        <div style={{display:'flex',marginRight:130}}>
-          <Box borderColor="primary.main"  {...boxProps}><ListItem key='1' style={{marginBottom:50}} ><Rotate /></ListItem>
+        <Divider style={{marginTop:30,light:true,}}/>
+        <div className={classes.flexornot}>
+          <Box borderColor="primary.main"  {...boxProps}>
+            <ListItem key='1' style={{marginBottom:50,marginRight:10}} >
+              <Rotate />
+            </ListItem>
           </Box>
           <ListItem key='2'><Norms /></ListItem>  
         </div>

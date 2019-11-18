@@ -19,12 +19,12 @@ const useStyles = makeStyles(theme => ({
     objectFit:'cover',
   }
 }));
-const maximage= {
+// const maximage= {
   
-  width:150,
-  height:100,
-  objectFit:'cover',
-};
+//   width:'100%',
+//   height:'auto',
+//   objectFit:'cover',
+// };
 export default function SimpleSlider() {
   const classes = useStyles();
     const settings = {
@@ -48,7 +48,7 @@ export default function SimpleSlider() {
     };
     return (
         <div >
-        <Slider {...settings} style={{width:500}}>
+        <Slider {...settings} style={{width:360}}>
           <CustomSlide index={1} />
           <CustomSlide index={2} />
           <CustomSlide index={3} />
@@ -70,7 +70,9 @@ class CustomSlide extends Component {
           component="img"
           alt="Contemplative Reptile"
           image="/Pic/D1.jpg"
-          className={maximage}
+          width='100%'
+          height='auto'
+          objectfit='cover'
           />
       </div>
     );

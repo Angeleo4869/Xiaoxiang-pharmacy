@@ -9,21 +9,34 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  card: {
-    position:'relative',
-    // marginLeft:30,
-    margin:30,
-    maxWidth: 250,
-    maxHeight: 300
-  },
+  
 });
+var cstyle=null;
+const card1= {
+  position:'relative',
+  // marginLeft:30,
+  margin:10,
+  maxWidth: '100%',
+  maxHeight: 300,
+};
+const card2= {
+  position:'relative',
+  // marginLeft:30,
+  margin:5,
+  maxWidth: '90%',
+  maxHeight: 300,
+};
 
 export default function ImgMediaCard(props) {
-  const classes = useStyles();
-
+  // const classes = useStyles();
+  if(props.size===1){
+    cstyle=card2;
+  }else{
+    cstyle=card1;
+  }
   return (
-    <Card className={classes.card}>
-      <CardActionArea>
+    <Card style={cstyle}>
+      <CardActionArea style={{marginBottom:-5}}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
