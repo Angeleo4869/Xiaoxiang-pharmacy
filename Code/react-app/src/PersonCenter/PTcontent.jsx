@@ -16,7 +16,7 @@ import PTCard from './PTcontentCard.jsx';
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 400 ,
+    minWidth: 350 ,
     minHeight:150,
     
   },
@@ -48,7 +48,7 @@ export default function SimpleCard() {
       <CardContent>
       <List horizontal="true" style={{display:'flex',justifyContent:'space-around',backgroundColor:'#EFFEFE'}}>
         <Avatar alt="not" src="/Pic/D1.jpg"  />                
-        <div style={{position:'relative',left:-50}}> Word of the name</div>
+        <div style={{position:'relative',left:0}}>Your name</div>
         <Typography className={classes.title} color="textSecondary" gutterBottom>收货地址</Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>优惠信息</Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>会员信息</Typography>              

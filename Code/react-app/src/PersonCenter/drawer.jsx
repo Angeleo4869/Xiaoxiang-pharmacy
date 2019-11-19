@@ -16,16 +16,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
 //个人中心模块接口
 import {
-    BrowserRouter as Router,
     Route,
-    Link
+    Link,
+    Switch,
+    useRouteMatch,
+    useLocation
   } from 'react-router-dom';
 import App from './PTcontent';
 import App2 from './../Test/App2';
 import App3 from './../Test/App3';
 import './../CSS/Center.css';
+
 
 const drawerWidth = 200;
 
@@ -40,6 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   appBar: {
+
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -69,9 +74,9 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const ConT =[{name:'All mail',id:'1',src:'/about'},
-  { name:'Trash',id:'2',src:'/home'},
-  {name:'Spam',id:'3',src:'/release'}
+  const ConT =[{name:'About',id:'1',src:'/PersonCenter/about'},
+  { name:'Home',id:'2',src:'/PersonCenter/'},
+  {name:'Release',id:'3',src:'/PersonCenter/release'}
 ];
 
   const drawer = (
@@ -94,19 +99,19 @@ function ResponsiveDrawer(props) {
         {/* mapy映射关系详细 */}
         <List>
           {ConT.map((text) => (
-            <Link key={text.id} to={"/PersonCenter"+text.src}>
-            <ListItem  button  key={text.name} to={text.src}>
-              <ListItemIcon >{text.id % 2 === 0 ? <InboxIcon /> : <MailIcon />} </ListItemIcon>
-              <ListItemText  primary={text.src} />
-            </ListItem>
-            </Link>
+            // <Link key={text.id} to={"/PersonCenter"+text.src}>
+            // <ListItem  button  key={text.name} to={text.src}>
+            //   <ListItemIcon >{text.id % 2 === 0 ? <InboxIcon /> : <MailIcon />} </ListItemIcon>
+            //   <ListItemText  primary={text.src} />
+            // </ListItem>
+            // </Link>
+            <MyCustomLink key={text.name} to={text.src} label={text.name} icon="1" />
           ))}
         </List>
     </div>
   );
 
   return (
-    <Router>
     <div  className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
@@ -157,18 +162,22 @@ function ResponsiveDrawer(props) {
         </Hidden>
       </nav>
       <main style={{position:'relative',top:90}} >
-        <Route path="/PersonCenter/about">
-              <App3 />
+      <Switch >                                         {/*单选控制path=*有效*/}
+        <Route exact path="/PersonCenter/">
+                <App />
         </Route>
-        <Route path="/PersonCenter/home">
-              <App />
+        <Route path="/PersonCenter/about">
+                <App3 />
         </Route>
         <Route path="/PersonCenter/release">
-              <App2/>
+                <App2/>
         </Route>
+        <Route path="*">
+              <NoMatch />
+        </Route>
+      </Switch>
       </main>
     </div>
-    </Router>
   );
 }
 
@@ -182,5 +191,44 @@ ResponsiveDrawer.propTypes = {
 function lClick(){
     // cPage = coponent;
     console.log("coponent");
+  }
+  function MyCustomLink({ label,icon,key, to, activeOnlyWhenExact }) {
+    var iii=null;
+
+    if(icon==="1"){
+      iii=<InboxIcon/>
+      activeOnlyWhenExact=true;
+    }else{
+      iii=<MailIcon/>
+    }
+
+    let match = useRouteMatch({
+      path: to,
+      exact: activeOnlyWhenExact,
+      
+    });
+    
+    return (
+      <div key={key} style={{display:"flex"}} className={match ? "active" : ""}>
+        {match && <ChevronRightOutlinedIcon style={{position:'relative',top:15}}/>}
+        <Link to={to} style={{width:200}}>
+             <ListItem  button  key={key} >
+              {iii}
+              <ListItemText style={{marginLeft:38}} primary={label} />
+             </ListItem>
+          </Link>
+      </div>
+    );
+  }
+  function NoMatch() {
+    let location = useLocation();
+  
+    return (
+      <div>
+        <h3>
+          No match for <code>{location.pathname}</code>
+        </h3>
+      </div>
+    );
   }
 export default ResponsiveDrawer;

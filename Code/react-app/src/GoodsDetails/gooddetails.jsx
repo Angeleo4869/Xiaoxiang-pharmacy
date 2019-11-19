@@ -60,6 +60,7 @@ export default function SimpleContainer() {
         <List style={{display:'flex'}}>
         <HomeIcon
         className={classes.homeIcon}
+        
         color="primary"
         fontSize="large"
         component={svgProps => {
