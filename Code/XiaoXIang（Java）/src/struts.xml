@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="Json" namespace="/Json" extends="json-default">
-		<action name="testjson"
-			class="com.xiaoxiang.org.action.JsonTestAction">
-			<result name="json">
-				<param name="root">jsonData</param>
-			</result>
+
+	<!-- 
+	<package name="test" extends="struts-default">
+		<action name="TestAction"
+			class="com.xiaoxiang.org.action.TestAction">
+		</action>
+	</package> 
+	-->
+	<package name="login" extends="struts-default">
+		<action name="AdminLogin"
+			class="com.xiaoxiang.org.action.AdminLoginAction">
 		</action>
 	</package>
 </struts>    

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="Json" location="210,105" size="170,70">
-    <action name="testjson" location="23,32" size="150,40">
-      <result name="success" />
-    </action>
+  <package name="test" location="92,49" size="170,70">
+    <action name="TestAction" location="4,24" size="150,40" />
+  </package>
+  <package name="login" location="341,65" size="170,70">
+    <action name="AdminLogin" location="8,23" size="150,40" />
   </package>
 </Struts2Diagram>
 
