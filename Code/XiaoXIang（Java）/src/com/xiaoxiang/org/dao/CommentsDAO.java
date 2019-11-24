@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Comments;
 
 /**
@@ -29,25 +30,36 @@ public class CommentsDAO extends BaseHibernateDAO {
 	public static final String COMMENTSDETAILS = "commentsdetails";
 	public static final String COMMENTS_REPLYID = "commentsReplyid";
 
-	public void save(Comments transientInstance) {
-		log.debug("saving Comments instance");
+	public boolean save(Comments transientInstance) {
 		try {
-			getSession().save(transientInstance);
-			log.debug("save successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			session.save(transientInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
 			throw re;
+			//return false;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Comments persistentInstance) {
-		log.debug("deleting Comments instance");
+	public boolean delete(Comments persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(Comments.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -128,14 +140,19 @@ public class CommentsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Comments instance) {
-		log.debug("attaching dirty Comments instance");
+	public boolean attachDirty(Comments instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(Comments.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

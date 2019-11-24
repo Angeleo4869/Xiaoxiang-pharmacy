@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.xiaoxiang.org.vo.Admin;
+import com.xiaoxiang.org.vo.Oder;
 
 /**
  * A data access object (DAO) providing persistence and search support for Admin
@@ -43,14 +44,20 @@ public class AdminDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Admin persistentInstance) {
-		log.debug("deleting Admin instance");
+	public boolean delete(Admin persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(Admin.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -123,14 +130,19 @@ public class AdminDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Admin instance) {
-		log.debug("attaching dirty Admin instance");
+	public boolean attachDirty(Admin instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(Admin.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

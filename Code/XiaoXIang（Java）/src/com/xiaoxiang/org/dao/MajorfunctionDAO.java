@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Majorfunction;
 
 /**
@@ -28,25 +29,36 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 	public static final String GOODS_CLASS = "goodsClass";
 	public static final String GOODS_SERIES = "goodsSeries";
 
-	public void save(Majorfunction transientInstance) {
-		log.debug("saving Majorfunction instance");
+	public boolean save(Majorfunction transientInstance) {
 		try {
-			getSession().save(transientInstance);
-			log.debug("save successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			session.save(transientInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
 			throw re;
+			//return false;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Majorfunction persistentInstance) {
-		log.debug("deleting Majorfunction instance");
+	public boolean delete(Majorfunction persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(Majorfunction.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -123,14 +135,19 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Majorfunction instance) {
-		log.debug("attaching dirty Majorfunction instance");
+	public boolean attachDirty(Majorfunction instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(Majorfunction.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

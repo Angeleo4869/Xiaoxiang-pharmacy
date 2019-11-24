@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Buyer;
 
 /**
@@ -47,14 +48,20 @@ public class BuyerDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Buyer persistentInstance) {
-		log.debug("deleting Buyer instance");
+	public boolean delete(Buyer persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(Buyer.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -143,14 +150,19 @@ public class BuyerDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Buyer instance) {
-		log.debug("attaching dirty Buyer instance");
+	public boolean attachDirty(Buyer instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(Buyer.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

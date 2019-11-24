@@ -8,6 +8,8 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.Admin;
+import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 /**
@@ -29,25 +31,36 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public static final String SHOP_GOODS_INVENTORY = "shopGoodsInventory";
 	public static final String SHOP_GOODS_FREIGHT = "shopGoodsFreight";
 
-	public void save(ShopGoods transientInstance) {
-		log.debug("saving ShopGoods instance");
+	public boolean save(ShopGoods transientInstance) {
 		try {
-			getSession().save(transientInstance);
-			log.debug("save successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			session.save(transientInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
 			throw re;
+			//return false;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(ShopGoods persistentInstance) {
-		log.debug("deleting ShopGoods instance");
+	public boolean delete(ShopGoods persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(ShopGoods.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -128,14 +141,19 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(ShopGoods instance) {
-		log.debug("attaching dirty ShopGoods instance");
+	public boolean attachDirty(ShopGoods instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(ShopGoods.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

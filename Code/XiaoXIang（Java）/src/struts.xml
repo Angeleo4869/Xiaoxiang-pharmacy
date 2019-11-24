@@ -13,5 +13,10 @@
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminLoginAction">
 		</action>
-	</package>
+		<action name="BuyerLogin"
+			class="com.xiaoxiang.org.action.BuyerLoginAction">
+		</action>
+		<action name="StoreLogin"
+			class="com.xiaoxiang.org.action.StoreLoginAction">
+		</action></package>
 </struts>    

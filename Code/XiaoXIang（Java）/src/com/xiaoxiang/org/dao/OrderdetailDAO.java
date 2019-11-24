@@ -8,6 +8,8 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.Admin;
+import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.Orderdetail;
 
 /**
@@ -28,25 +30,36 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 	public static final String GOODS_NUMBER = "goodsNumber";
 	public static final String LOGISTICS = "logistics";
 
-	public void save(Orderdetail transientInstance) {
-		log.debug("saving Orderdetail instance");
+	public boolean save(Orderdetail transientInstance) {
 		try {
-			getSession().save(transientInstance);
-			log.debug("save successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			session.save(transientInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
 			throw re;
+			//return false;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Orderdetail persistentInstance) {
-		log.debug("deleting Orderdetail instance");
+	public boolean delete(Orderdetail persistentInstance) {
 		try {
-			getSession().delete(persistentInstance);
-			log.debug("delete successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			persistentInstance = session.get(Orderdetail.class, persistentInstance);
+			session.delete(persistentInstance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -123,14 +136,19 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Orderdetail instance) {
-		log.debug("attaching dirty Orderdetail instance");
+	public boolean attachDirty(Orderdetail instance) {
 		try {
-			getSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			session=getSession();
+			transation = session.beginTransaction();
+			instance = session.get(Orderdetail.class, instance);
+			session.delete(instance);
+			transation.commit();
+			closeSession();
+			return true;
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
