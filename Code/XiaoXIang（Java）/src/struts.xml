@@ -12,7 +12,8 @@
 	<package name="login" extends="struts-default">
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminLoginAction">
-		</action>
+		<result name="success">/success.jsp</result>
+		<result name="error">/AdminLogin.jsp</result></action>
 		<action name="BuyerLogin"
 			class="com.xiaoxiang.org.action.BuyerLoginAction">
 		</action>

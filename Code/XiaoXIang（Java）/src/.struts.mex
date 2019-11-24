@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="login" location="11,13" size="170,161">
-    <action name="AdminLogin" location="8,23" size="150,40" />
-    <action name="BuyerLogin" location="9,65" size="150,40" />
-    <action name="StoreLogin" location="8,110" size="150,40" />
+  <package name="login" location="11,13" size="195,274">
+    <action name="AdminLogin" location="10,25" size="150,85">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="success.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="AdminLogin.jsp" />
+      </result>
+    </action>
+    <action name="BuyerLogin" location="9,143" size="150,40" />
+    <action name="StoreLogin" location="10,218" size="150,40" />
   </package>
+  <webResource name="success.jsp" path="/success.jsp" location="208,12" size="150,55" />
+  <webResource name="AdminLogin.jsp" path="/AdminLogin.jsp" location="208,70" size="149,51" />
 </Struts2Diagram>
 

@@ -3,6 +3,11 @@ package com.xiaoxiang.org.action;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.xiaoxiang.org.dao.AdminDAO;
 import com.xiaoxiang.org.vo.Admin;
 
@@ -13,25 +18,34 @@ public class AdminLoginAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Iterator<Admin> iter;
-	private Admin admin;
+	private Admin admin = new Admin();
+	AdminDAO adminDAO = new AdminDAO();
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
 	public String execute() throws Exception{
-		
         PrintWriter out = responseSetHeader();
-        
-        admin.setAdminNumber("leo");
-        admin.setAdminPassword("123456");
-        
-        AdminDAO adminDAO = new AdminDAO();
-        List<Admin> list = adminDAO.findByExample(admin);
-        iter = list.iterator();
-		if(iter.hasNext()){
-			out.println(iter.next().getAdminNumber());
-				return SUCCESS;			
+        List list = adminDAO.findByExample(getAdmin());
+        System.out.println(getAdmin().getAdminNumber());
+        //iter = list.iterator();
+		if(!list.isEmpty()){
+			for(int i=0;i<list.size();i++)
+			System.out.println(((Admin)list.get(i)).getAdminNumber());
+			return SUCCESS;			
 		}
-        //out.print("Hello World!");
-        out.flush();
-        //System.out.println("Hello World");
+		else
 		return ERROR;
+	}
+	
+	public String register() throws Exception{
+        PrintWriter out = responseSetHeader();
+        if(adminDAO.save(getAdmin())){
+        	out.print(getAdmin().getAdminNumber());
+        	return SUCCESS;
+        }else return ERROR;
 	}
 
 }

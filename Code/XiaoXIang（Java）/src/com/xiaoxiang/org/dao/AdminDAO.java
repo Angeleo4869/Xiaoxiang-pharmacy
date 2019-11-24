@@ -36,9 +36,9 @@ public class AdminDAO extends BaseHibernateDAO {
 			transation.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
@@ -53,9 +53,10 @@ public class AdminDAO extends BaseHibernateDAO {
 			transation.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			
-			throw re;
+		} catch (Exception re) {
+			re.printStackTrace();
+			return false;
+			//throw re;
 		}finally {
 			closeSession();
 		}
@@ -81,7 +82,8 @@ public class AdminDAO extends BaseHibernateDAO {
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
-			throw re;
+			re.printStackTrace();
+			return null;
 		}
 	}
 

@@ -1,7 +1,6 @@
 package com.xiaoxiang.org.action;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.BuyerDAO;
@@ -12,26 +11,36 @@ public class BuyerLoginAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Iterator<Buyer> iter;
 	private Buyer buyer;
-	
+	BuyerDAO buyerDAO = new BuyerDAO();
 	public String execute() throws Exception{
 		
-		BuyerDAO buyerDAO = new BuyerDAO();
         PrintWriter out = responseSetHeader();
-        buyer.setBuyerNumber("leo");
-        buyer.setBuyerPassword("123456");
+        //buyer.setBuyerNumber("leo");
+        //buyer.setBuyerPassword("123456");
         
-        List<Buyer> list = buyerDAO.findByExample(buyer);
-        iter = list.iterator();
-		if(iter.hasNext()){
-			out.println(iter.next().getBuyerName());
-				return SUCCESS;			
+        List<Buyer> list = buyerDAO.findByExample(getBuyer());
+		if(!list.isEmpty()){
+			out.println(list.get(0).getBuyerName());
+			out.flush();
+			return SUCCESS;			
 		}
-        //out.print("Hello World!");
-        out.flush();
-        //System.out.println("Hello World");
 		return ERROR;
+	}
+	
+	public String register() throws Exception{
+        PrintWriter out = responseSetHeader();
+        if(buyerDAO.save(getBuyer())){
+        	out.print(getBuyer().getBuyerName());
+        	return SUCCESS;
+        }else return ERROR;
+	}
+	
+	public Buyer getBuyer() {
+		return buyer;
+	}
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 
 }
