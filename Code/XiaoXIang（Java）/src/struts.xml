@@ -2,13 +2,13 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
-	<!-- 
+	
 	<package name="test" extends="struts-default">
 		<action name="TestAction"
 			class="com.xiaoxiang.org.action.TestAction">
 		</action>
 	</package> 
-	-->
+	<!-- 
 	<package name="login" extends="struts-default">
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminLoginAction">
@@ -19,5 +19,7 @@
 		</action>
 		<action name="StoreLogin"
 			class="com.xiaoxiang.org.action.StoreLoginAction">
-		</action></package>
+		</action>
+	</package>
+	-->
 </struts>    
