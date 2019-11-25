@@ -2,24 +2,41 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
-	
-	<package name="test" extends="struts-default">
+	<!-- 
+	<package name="test" extends="json-default,struts-default">
 		<action name="TestAction"
 			class="com.xiaoxiang.org.action.TestAction">
+			 <result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
 		</action>
 	</package> 
-	<!-- 
-	<package name="login" extends="struts-default">
+	-->
+	<package name="login" extends="json-default,struts-default">
+	<!-- AdminLogin -->
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminLoginAction">
-		<result name="success">/success.jsp</result>
-		<result name="error">/AdminLogin.jsp</result></action>
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+	<!-- BuyerLogin -->
 		<action name="BuyerLogin"
 			class="com.xiaoxiang.org.action.BuyerLoginAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
 		</action>
+		
+	<!-- StoreLogin -->	
 		<action name="StoreLogin"
 			class="com.xiaoxiang.org.action.StoreLoginAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
 		</action>
+		
+		
 	</package>
-	-->
 </struts>    

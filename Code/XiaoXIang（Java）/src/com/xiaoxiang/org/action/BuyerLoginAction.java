@@ -1,6 +1,7 @@
 package com.xiaoxiang.org.action;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.BuyerDAO;
@@ -11,27 +12,24 @@ public class BuyerLoginAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Buyer buyer;
-	BuyerDAO buyerDAO = new BuyerDAO();
+	private Buyer buyer = new Buyer();
+	private BuyerDAO buyerDAO = new BuyerDAO();
 	public String execute() throws Exception{
 		
-        PrintWriter out = responseSetHeader();
-        //buyer.setBuyerNumber("leo");
-        //buyer.setBuyerPassword("123456");
-        
-        List<Buyer> list = buyerDAO.findByExample(getBuyer());
-		if(!list.isEmpty()){
-			out.println(list.get(0).getBuyerName());
-			out.flush();
-			return SUCCESS;			
+       responseSetHeader();
+       setDataMap(new HashMap<String, Object>());
+       List<Buyer> list = buyerDAO.findByExample(getBuyer());
+		for(int i=0;i<list.size();i++){
+			buyer = list.get(i);
+			getDataMap().put("Buyer",buyer);
+			getDataMap().put("success", true);
 		}
-		return ERROR;
+		return "dataMap";
 	}
 	
 	public String register() throws Exception{
-        PrintWriter out = responseSetHeader();
+        responseSetHeader();
         if(buyerDAO.save(getBuyer())){
-        	out.print(getBuyer().getBuyerName());
         	return SUCCESS;
         }else return ERROR;
 	}

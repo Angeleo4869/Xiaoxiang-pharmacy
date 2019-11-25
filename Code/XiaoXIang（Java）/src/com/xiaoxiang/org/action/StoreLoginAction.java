@@ -1,5 +1,6 @@
 package com.xiaoxiang.org.action;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.StoreDAO;
@@ -12,25 +13,24 @@ public class StoreLoginAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Store store = new Store();
-	StoreDAO storeDao = new StoreDAO();
+	private StoreDAO storeDao = new StoreDAO();
 	public String execute() throws Exception{
 		// TODO Auto-generated method stub
 		
-		PrintWriter printWriter = responseSetHeader();
+		responseSetHeader();
+		setDataMap(new HashMap<String, Object>());
 		List<Store> list = storeDao.findByExample(store);
-		if(list.isEmpty()){
-			return ERROR;
-		}else{
-			printWriter.print(list.get(0));
-			return SUCCESS;
-		}
-		
+		for(int i=0;i<list.size();i++){
+			store = list.get(i);
+			getDataMap().put("Store", store);
+			getDataMap().put("success", true);
+			}
+		return "dataMap";
 	}
 	
 	public String register() throws Exception{
-        PrintWriter out = responseSetHeader();
+        responseSetHeader();
         if(storeDao.save(getStore())){
-        	out.print(getStore().getStoreName());
         	return SUCCESS;
         }else return ERROR;
 	}
