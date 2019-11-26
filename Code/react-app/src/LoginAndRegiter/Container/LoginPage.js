@@ -12,7 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+// import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios,axios } from 'react-axios'
+//  import requ from './admintest';
+import axios from 'axios';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -24,6 +26,31 @@ function Copyright() {
       {'.'}
     </Typography>
   );
+}
+//事件请求，不需要渲染
+function test (){
+  if(document.getElementById("ad").value!==null&&document.getElementById("pd").value)  {   
+    axios.get('http://172.16.248.107:8080/XiaoXiangPharmacy/AdminLogin.action',
+     {
+      params: {
+        AdminNumber:document.getElementById("ad").value,
+        AdminPassword:document.getElementById("pd").value
+      }
+    })
+    .then(function (response) {
+      alert(response.data.success)
+      if(response.data.success){
+        window.location.href = "http://localhost:3000/PersonCenter"
+      }
+      else
+      alert("message error")
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }else{
+    alert("input message")
+  }
 }
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +85,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignInSide() {
   const classes = useStyles();
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -77,11 +103,11 @@ export default function SignInSide() {
               margin="normal"
               require
               fullWidth
-              id="email"
               label="用户名*"
               name="username"
               autoComplete="email"
               autoFocus
+              id="ad"
             />
             <TextField
               variant="outlined"
@@ -91,19 +117,20 @@ export default function SignInSide() {
               name="password"
               label="密码"
               type="password"
-              id="password"
               autoComplete="current-password"
+              id="pd"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="记住密码"
             />
             <Button
-              type="submit"
+              // type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={test}
             >
               登 录
             </Button>

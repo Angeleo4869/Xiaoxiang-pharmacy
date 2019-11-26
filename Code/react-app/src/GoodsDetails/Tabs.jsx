@@ -92,7 +92,7 @@ export default function FullWidthTabs() {
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <h6>hello</h6>
         </TabPanel>
       </SwipeableViews>
     </div>
