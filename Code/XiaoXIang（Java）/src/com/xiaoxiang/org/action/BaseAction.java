@@ -1,8 +1,6 @@
 package com.xiaoxiang.org.action;
 
-import java.io.PrintWriter;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +17,7 @@ public class BaseAction extends ActionSupport {
 	HttpServletResponse response = ServletActionContext.getResponse();
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Map<String, Object> dataMap;
+	public static String DataMap = "dataMap";
 	public void responseSetHeader() throws Exception{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");

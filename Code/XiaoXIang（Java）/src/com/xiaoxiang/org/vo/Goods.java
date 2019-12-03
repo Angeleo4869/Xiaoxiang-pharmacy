@@ -21,9 +21,9 @@ public class Goods implements java.io.Serializable {
 	private String goodsCharacter;
 	private Double storePurchasePrice;
 	private String goodsSpecifications;
-	private Integer goodsUsage;
+	private String goodsUsage;
 	private String goodsTaboo;
-	private String goodsValidity;
+	private Integer goodsValidity;
 	private Date goodsProductionDate;
 	private String goodsManufacturer;
 	private Set shopGoodses = new HashSet(0);
@@ -37,7 +37,7 @@ public class Goods implements java.io.Serializable {
 	/** minimal constructor */
 	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
 			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
-			Integer goodsUsage, String goodsTaboo, String goodsValidity, Date goodsProductionDate,
+			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
 			String goodsManufacturer) {
 		this.majorfunction = majorfunction;
 		this.goodsNumber = goodsNumber;
@@ -57,7 +57,7 @@ public class Goods implements java.io.Serializable {
 	/** full constructor */
 	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
 			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
-			Integer goodsUsage, String goodsTaboo, String goodsValidity, Date goodsProductionDate,
+			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
 			String goodsManufacturer, Set shopGoodses) {
 		this.majorfunction = majorfunction;
 		this.goodsNumber = goodsNumber;
@@ -149,11 +149,11 @@ public class Goods implements java.io.Serializable {
 		this.goodsSpecifications = goodsSpecifications;
 	}
 
-	public Integer getGoodsUsage() {
+	public String getGoodsUsage() {
 		return this.goodsUsage;
 	}
 
-	public void setGoodsUsage(Integer goodsUsage) {
+	public void setGoodsUsage(String goodsUsage) {
 		this.goodsUsage = goodsUsage;
 	}
 
@@ -165,11 +165,11 @@ public class Goods implements java.io.Serializable {
 		this.goodsTaboo = goodsTaboo;
 	}
 
-	public String getGoodsValidity() {
+	public Integer getGoodsValidity() {
 		return this.goodsValidity;
 	}
 
-	public void setGoodsValidity(String goodsValidity) {
+	public void setGoodsValidity(Integer goodsValidity) {
 		this.goodsValidity = goodsValidity;
 	}
 

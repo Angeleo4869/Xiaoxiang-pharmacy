@@ -8,28 +8,24 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Majorfunction;
+import com.xiaoxiang.org.vo.Shippingaddress;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Majorfunction entities. Transaction control of the save(), update() and
+ * Shippingaddress entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see com.xiaoxiang.org.dao.Majorfunction
+ * @see com.xiaoxiang.org.dao.Shippingaddress
  * @author MyEclipse Persistence Tools
  */
-public class MajorfunctionDAO extends BaseHibernateDAO {
-	private static final Logger log = LoggerFactory.getLogger(MajorfunctionDAO.class);
-	// property constants
-	public static final String GOODS_MAJOR_FUNCTIONCOL = "goodsMajorFunctioncol";
-	public static final String GOODS_CLASS = "goodsClass";
-	public static final String GOODS_SERIES = "goodsSeries";
+public class ShippingaddressDAO extends BaseHibernateDAO {
+	private static final Logger log = LoggerFactory.getLogger(ShippingaddressDAO.class);
 
-	public boolean save(Majorfunction transientInstance) {
+	public boolean save(Shippingaddress transientInstance) {
 		try {
 			session=getSession();
 			transation = session.beginTransaction();
@@ -45,11 +41,11 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean delete(Majorfunction persistentInstance) {
+	public boolean delete(Shippingaddress persistentInstance) {
 		try {
 			session=getSession();
 			transation = session.beginTransaction();
-			persistentInstance = session.get(Majorfunction.class, persistentInstance);
+			persistentInstance = session.get(Shippingaddress.class, persistentInstance);
 			session.delete(persistentInstance);
 			transation.commit();
 			closeSession();
@@ -62,10 +58,10 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Majorfunction findById(java.lang.Integer id) {
-		log.debug("getting Majorfunction instance with id: " + id);
+	public Shippingaddress findById(java.lang.Integer id) {
+		log.debug("getting Shippingaddress instance with id: " + id);
 		try {
-			Majorfunction instance = (Majorfunction) getSession().get(Majorfunction.class, id);
+			Shippingaddress instance = (Shippingaddress) getSession().get(Shippingaddress.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -73,10 +69,10 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByExample(Majorfunction instance) {
-		log.debug("finding Majorfunction instance by example");
+	public List findByExample(Shippingaddress instance) {
+		log.debug("finding Shippingaddress instance by example");
 		try {
-			List results = getSession().createCriteria(Majorfunction.class)
+			List results = getSession().createCriteria(Shippingaddress.class)
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
@@ -87,9 +83,9 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Majorfunction instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding Shippingaddress instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from Majorfunction as model where model." + propertyName + "= ?";
+			String queryString = "from Shippingaddress as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -99,22 +95,10 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByGoodsMajorFunctioncol(Object goodsMajorFunctioncol) {
-		return findByProperty(GOODS_MAJOR_FUNCTIONCOL, goodsMajorFunctioncol);
-	}
-
-	public List findByGoodsClass(Object goodsClass) {
-		return findByProperty(GOODS_CLASS, goodsClass);
-	}
-
-	public List findByGoodsSeries(Object goodsSeries) {
-		return findByProperty(GOODS_SERIES, goodsSeries);
-	}
-
 	public List findAll() {
-		log.debug("finding all Majorfunction instances");
+		log.debug("finding all Shippingaddress instances");
 		try {
-			String queryString = "from Majorfunction";
+			String queryString = "from Shippingaddress";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -123,10 +107,10 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Majorfunction merge(Majorfunction detachedInstance) {
-		log.debug("merging Majorfunction instance");
+	public Shippingaddress merge(Shippingaddress detachedInstance) {
+		log.debug("merging Shippingaddress instance");
 		try {
-			Majorfunction result = (Majorfunction) getSession().merge(detachedInstance);
+			Shippingaddress result = (Shippingaddress) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -135,11 +119,11 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(Majorfunction instance) {
+	public boolean attachDirty(Shippingaddress instance) {
 		try {
 			session=getSession();
 			transation = session.beginTransaction();
-			instance = session.get(Majorfunction.class, instance);
+			instance = session.get(Shippingaddress.class, instance);
 			session.delete(instance);
 			transation.commit();
 			closeSession();
@@ -151,8 +135,8 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachClean(Majorfunction instance) {
-		log.debug("attaching clean Majorfunction instance");
+	public void attachClean(Shippingaddress instance) {
+		log.debug("attaching clean Shippingaddress instance");
 		try {
 			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");

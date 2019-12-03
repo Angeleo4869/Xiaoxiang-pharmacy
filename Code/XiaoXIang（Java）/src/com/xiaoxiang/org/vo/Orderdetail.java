@@ -30,9 +30,8 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orderdetail(Integer idOrder, Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder,
-			Timestamp paymentTime, Double totalPrice, Integer goodsNumber, Short logistics) {
-		this.idOrder = idOrder;
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder, Timestamp paymentTime,
+			Double totalPrice, Integer goodsNumber, Short logistics) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
@@ -44,9 +43,8 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderdetail(Integer idOrder, Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder,
-			Timestamp paymentTime, Double totalPrice, Integer goodsNumber, Short logistics, Set commentses) {
-		this.idOrder = idOrder;
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder, Timestamp paymentTime,
+			Double totalPrice, Integer goodsNumber, Short logistics, Set commentses) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;

@@ -1,8 +1,5 @@
 package com.xiaoxiang.org.vo;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Oder entity. @author MyEclipse Persistence Tools
  */
@@ -15,7 +12,7 @@ public class Oder implements java.io.Serializable {
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Short oderState;
-	private Set orderdetails = new HashSet(0);
+	private Orderdetail orderdetail;
 
 	// Constructors
 
@@ -31,11 +28,11 @@ public class Oder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Oder(Buyer buyer, ShopGoods shopGoods, Short oderState, Set orderdetails) {
+	public Oder(Buyer buyer, ShopGoods shopGoods, Short oderState, Orderdetail orderdetail) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.oderState = oderState;
-		this.orderdetails = orderdetails;
+		this.orderdetail = orderdetail;
 	}
 
 	// Property accessors
@@ -72,12 +69,12 @@ public class Oder implements java.io.Serializable {
 		this.oderState = oderState;
 	}
 
-	public Set getOrderdetails() {
-		return this.orderdetails;
+	public Orderdetail getOrderdetail() {
+		return this.orderdetail;
 	}
 
-	public void setOrderdetails(Set orderdetails) {
-		this.orderdetails = orderdetails;
+	public void setOrderdetail(Orderdetail orderdetail) {
+		this.orderdetail = orderdetail;
 	}
 
 }
