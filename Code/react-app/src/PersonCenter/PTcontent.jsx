@@ -12,13 +12,13 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+
 import PTCard from './PTcontentCard.jsx';
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 350 ,
+    minWidth: 250 ,
     minHeight:150,
-    
   },
   bullet: {
     display: 'inline-block',
@@ -53,7 +53,6 @@ export default function SimpleCard() {
         <Typography className={classes.title} color="textSecondary" gutterBottom>优惠信息</Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>会员信息</Typography>              
         </List>
-        
         <Divider style={{position:'relative',top:10}} />
         <List  horizontal="true" style={{display:'flex',justifyContent:'space-around',top:20,bottom:-1}}  >
         <Typography key="t1"  color="textSecondary" gutterBottom>待付款<span>1</span></Typography>
@@ -80,8 +79,8 @@ export default function SimpleCard() {
             
         </div>
 <div className={classes.gridroot}>
-<nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
-<Hidden smUp implementation="css">
+  <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
+  <Hidden smUp implementation="css">
 <GridList cellHeight={300}  cols={2}>
         {['hello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
           <GridListTile key={text} >
@@ -92,7 +91,7 @@ export default function SimpleCard() {
   </Hidden>
   <Hidden xsDown implementation="css">
   <GridList cellHeight={330}  cols={4}>
-        {['hello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
+        {['hhello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
           <GridListTile key={text} >
             <PTCard key={index} size={2} name={text}/>
           </GridListTile>
@@ -100,12 +99,11 @@ export default function SimpleCard() {
 </GridList>
 
   </Hidden>
-  </nav>
-      
-    </div>
-     
-        
+</nav>
+<div style={{height:95}}>s</div>
+</div> 
     </Paper>
+    
   </div>
   );
 }

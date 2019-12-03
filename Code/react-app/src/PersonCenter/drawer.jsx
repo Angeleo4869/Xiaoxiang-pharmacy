@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -12,11 +12,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 //个人中心模块接口
 import {
     Route,
@@ -26,8 +31,8 @@ import {
     useLocation
   } from 'react-router-dom';
 import App from './PTcontent';
-import App2 from './../Test/App2';
-import App3 from './../Test/App3';
+import App2 from './../ShoppingCart/Container/ShoppingCart';
+import App3 from './../GoodsDetails/allorder';
 import './../CSS/Center.css';
 
 
@@ -36,6 +41,8 @@ const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -44,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   appBar: {
-
+    zIndex:1500,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -64,7 +71,40 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  fixscroll: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
+  },
 }));
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const classes = useStyles();
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = event => {
+    const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.fixscroll}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
 
 function ResponsiveDrawer(props) {
   const { container } = props;
@@ -74,9 +114,9 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const ConT =[{name:'About',id:'1',src:'/PersonCenter/about'},
-  { name:'Home',id:'2',src:'/PersonCenter/'},
-  {name:'Release',id:'3',src:'/PersonCenter/release'}
+  const ConT =[{name:'我的订单',id:'1',src:'/PersonCenter/order'},
+  { name:'个人中心',id:'2',src:'/PersonCenter/'},
+  {name:'购物车',id:'3',src:'/PersonCenter/Shoppingcart'}
 ];
 
   const drawer = (
@@ -123,10 +163,10 @@ function ResponsiveDrawer(props) {
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+            <MenuRoundedIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            个人中心
+            潇湘药房
           </Typography>
         </Toolbar>
       </AppBar>
@@ -162,44 +202,51 @@ function ResponsiveDrawer(props) {
         </Hidden>
       </nav>
       <main style={{position:'relative',top:90}} >
-      <Switch >                                         {/*单选控制path=*有效*/}
-        <Route exact path="/PersonCenter/">
-                <App />
-        </Route>
-        <Route path="/PersonCenter/about">
-                <App3 />
-        </Route>
-        <Route path="/PersonCenter/release">
-                <App2/>
-        </Route>
-        <Route path="*">
-              <NoMatch />
-        </Route>
-      </Switch>
+        <div id="back-to-top-anchor" />
+        <Switch >                                {/*单选控制path=*有效*/}
+          <Route exact path="/PersonCenter/">
+                  <App />
+          </Route>
+          <Route path="/PersonCenter/order">
+                  <App3 />
+          </Route>
+          <Route path="/PersonCenter/Shoppingcart">
+                  <App2/>
+          </Route>
+          <Route path="*">
+                <NoMatch />
+          </Route>
+        </Switch>
+        <ScrollTop {...props}>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
       </main>
+      
     </div>
   );
 }
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
-};
 function lClick(){
     // cPage = coponent;
     console.log("coponent");
   }
+
   function MyCustomLink({ label,icon,key, to, activeOnlyWhenExact }) {
     var iii=null;
-
+    // var iconstyle = {fontSize: 50} 
+    
     if(icon==="1"){
-      iii=<InboxIcon/>
+      iii=<InboxIcon 
+      color='action'
+      // className={iconstyle}
+       />
       activeOnlyWhenExact=true;
     }else{
-      iii=<MailIcon/>
+      iii=<MailIcon 
+      color='action'
+      // className={iconstyle}
+      />
     }
 
     let match = useRouteMatch({
@@ -220,9 +267,9 @@ function lClick(){
       </div>
     );
   }
+
   function NoMatch() {
     let location = useLocation();
-  
     return (
       <div>
         <h3>
@@ -231,4 +278,8 @@ function lClick(){
       </div>
     );
   }
+
+ 
+  
+
 export default ResponsiveDrawer;
