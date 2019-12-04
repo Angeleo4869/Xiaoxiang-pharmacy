@@ -12,31 +12,91 @@
 		</action>
 	</package> 
 	-->
-	<package name="login" extends="json-default,struts-default">
-	<!-- AdminLogin -->
+	
+	<package name="default" extends="json-default,struts-default">
+	
 		<action name="AdminLogin"
-			class="com.xiaoxiang.org.action.AdminLoginAction">
+			class="com.xiaoxiang.org.action.AdminAction">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
-	<!-- BuyerLogin -->
+	
 		<action name="BuyerLogin"
-			class="com.xiaoxiang.org.action.BuyerLoginAction">
+			class="com.xiaoxiang.org.action.BuyerAction">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		
-	<!-- StoreLogin -->	
+		<action name="BuyerRegister"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="register">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+	
 		<action name="StoreLogin"
-			class="com.xiaoxiang.org.action.StoreLoginAction">
+			class="com.xiaoxiang.org.action.StoreAction">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
+		<action name="StoreRegister"
+			class="com.xiaoxiang.org.action.StoreAction" method="register">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+
+		<action name="AddDrugs"
+			class="com.xiaoxiang.org.action.AddDrugs">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
 		
+		<action name="FindGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="BuyerGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="ShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="Oder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="OderDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="Vouchers">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="Comments">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
 	</package>
 </struts>    

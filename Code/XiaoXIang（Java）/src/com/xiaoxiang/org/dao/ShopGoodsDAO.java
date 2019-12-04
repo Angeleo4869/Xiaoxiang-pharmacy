@@ -87,7 +87,30 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-
+	public List search(String keyword){
+		List list = null;
+		try{
+			session=getSession();
+			Query query = session.createQuery("from Shop_Goods where Goods in "
+					+ " (select idGoods from Goods "
+					+ " where GoodCheName like '%?%' or GoodsComName like '%?%' or idMajorFunction in "
+					+ " (select idMajorFunction from MajorFunction where "
+					+ " GoodsMajorFunctioncol like '%?%' or GoodsClass like '%?%' or GoodsSeries like '%?%'))"
+					+ " or Stort in "
+					+ " (select idStore from Store where StoreName like '%?%')");
+			for(int i=0;i<6;i++){
+				query.setParameter(i, keyword);
+			}
+			list = query.list();
+			closeSession();
+			return list;
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}finally {
+			
+		}
+	}
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding ShopGoods instance with property: " + propertyName + ", value: " + value);
 		try {

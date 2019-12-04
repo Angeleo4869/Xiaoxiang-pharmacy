@@ -18,8 +18,8 @@
   <body>
     <h1>潇湘药房管理系统</h1> <br>
     <form action = "AdminLogin.action" method = "post">
-    用户名:<input type="text" name="adminNumber"/><br>
-    密码:<input type="text" name="adminPassword"/><br>
+    用户名:<input type="text" name="AdminNumber"/><br>
+    密码:<input type="text" name="AdminPassword"/><br>
     <input type="submit" value="提交"/>
     </form>
   </body>
