@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Majorfunction;
 
 /**
@@ -22,50 +25,42 @@ import com.xiaoxiang.org.vo.Majorfunction;
  * @see com.xiaoxiang.org.dao.Majorfunction
  * @author MyEclipse Persistence Tools
  */
-public class MajorfunctionDAO extends BaseHibernateDAO {
+@Transactional
+public class MajorfunctionDAO extends BaseDAO{
 	private static final Logger log = LoggerFactory.getLogger(MajorfunctionDAO.class);
-	// property constants
-	public static final String GOODS_MAJOR_FUNCTIONCOL = "goodsMajorFunctioncol";
-	public static final String GOODS_CLASS = "goodsClass";
-	public static final String GOODS_SERIES = "goodsSeries";
 
+	
 	public boolean save(Majorfunction transientInstance) {
 		try {
 			session=getSession();
-			transation = session.beginTransaction();
+			transaction = session.beginTransaction();
 			session.save(transientInstance);
-			transation.commit();
+			transaction.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(Majorfunction persistentInstance) {
+	public void delete(Majorfunction persistentInstance) {
+		log.debug("deleting Majorfunction instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			persistentInstance = session.get(Majorfunction.class, persistentInstance);
-			session.delete(persistentInstance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().delete(persistentInstance);
+			log.debug("delete successful");
 		} catch (RuntimeException re) {
-			
+			log.error("delete failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public Majorfunction findById(java.lang.Integer id) {
 		log.debug("getting Majorfunction instance with id: " + id);
 		try {
-			Majorfunction instance = (Majorfunction) getSession().get(Majorfunction.class, id);
+			Majorfunction instance = (Majorfunction) getCurrentSession().get("com.xiaoxiang.org.dao.Majorfunction", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -76,7 +71,7 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 	public List findByExample(Majorfunction instance) {
 		log.debug("finding Majorfunction instance by example");
 		try {
-			List results = getSession().createCriteria(Majorfunction.class)
+			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Majorfunction")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
@@ -90,7 +85,7 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		log.debug("finding Majorfunction instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Majorfunction as model where model." + propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -99,23 +94,11 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByGoodsMajorFunctioncol(Object goodsMajorFunctioncol) {
-		return findByProperty(GOODS_MAJOR_FUNCTIONCOL, goodsMajorFunctioncol);
-	}
-
-	public List findByGoodsClass(Object goodsClass) {
-		return findByProperty(GOODS_CLASS, goodsClass);
-	}
-
-	public List findByGoodsSeries(Object goodsSeries) {
-		return findByProperty(GOODS_SERIES, goodsSeries);
-	}
-
 	public List findAll() {
 		log.debug("finding all Majorfunction instances");
 		try {
 			String queryString = "from Majorfunction";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -126,7 +109,7 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 	public Majorfunction merge(Majorfunction detachedInstance) {
 		log.debug("merging Majorfunction instance");
 		try {
-			Majorfunction result = (Majorfunction) getSession().merge(detachedInstance);
+			Majorfunction result = (Majorfunction) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -135,30 +118,29 @@ public class MajorfunctionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(Majorfunction instance) {
+	public void attachDirty(Majorfunction instance) {
+		log.debug("attaching dirty Majorfunction instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			instance = session.get(Majorfunction.class, instance);
-			session.delete(instance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().saveOrUpdate(instance);
+			log.debug("attach successful");
 		} catch (RuntimeException re) {
+			log.error("attach failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void attachClean(Majorfunction instance) {
 		log.debug("attaching clean Majorfunction instance");
 		try {
-			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public static MajorfunctionDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (MajorfunctionDAO) ctx.getBean("MajorfunctionDAO");
 	}
 }

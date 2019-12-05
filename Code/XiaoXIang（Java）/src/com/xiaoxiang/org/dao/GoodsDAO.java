@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Goods;
 
 /**
@@ -22,58 +25,42 @@ import com.xiaoxiang.org.vo.Goods;
  * @see com.xiaoxiang.org.dao.Goods
  * @author MyEclipse Persistence Tools
  */
-public class GoodsDAO extends BaseHibernateDAO {
+@Transactional
+public class GoodsDAO extends BaseDAO{
 	private static final Logger log = LoggerFactory.getLogger(GoodsDAO.class);
-	// property constants
-	public static final String GOODS_NUMBER = "goodsNumber";
-	public static final String GOODS_COM_NAME = "goodsComName";
-	public static final String GOODS_CHE_NAME = "goodsCheName";
-	public static final String GOODS_COMPOSITION = "goodsComposition";
-	public static final String GOODS_CHARACTER = "goodsCharacter";
-	public static final String STORE_PURCHASE_PRICE = "storePurchasePrice";
-	public static final String GOODS_SPECIFICATIONS = "goodsSpecifications";
-	public static final String GOODS_USAGE = "goodsUsage";
-	public static final String GOODS_TABOO = "goodsTaboo";
-	public static final String GOODS_VALIDITY = "goodsValidity";
-	public static final String GOODS_MANUFACTURER = "goodsManufacturer";
 
+	
 	public boolean save(Goods transientInstance) {
 		try {
 			session=getSession();
-			transation = session.beginTransaction();
+			transaction = session.beginTransaction();
 			session.save(transientInstance);
-			transation.commit();
+			transaction.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(Goods persistentInstance) {
+	public void delete(Goods persistentInstance) {
+		log.debug("deleting Goods instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			persistentInstance = session.get(Goods.class, persistentInstance);
-			session.delete(persistentInstance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().delete(persistentInstance);
+			log.debug("delete successful");
 		} catch (RuntimeException re) {
-			
+			log.error("delete failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public Goods findById(java.lang.Integer id) {
 		log.debug("getting Goods instance with id: " + id);
 		try {
-			Goods instance = (Goods) getSession().get("com.xiaoxiang.org.dao.Goods", id);
+			Goods instance = (Goods) getCurrentSession().get("com.xiaoxiang.org.dao.Goods", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +71,8 @@ public class GoodsDAO extends BaseHibernateDAO {
 	public List findByExample(Goods instance) {
 		log.debug("finding Goods instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Goods").add(Example.create(instance))
-					.list();
+			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Goods")
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -98,7 +85,7 @@ public class GoodsDAO extends BaseHibernateDAO {
 		log.debug("finding Goods instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Goods as model where model." + propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -107,55 +94,11 @@ public class GoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByGoodsNumber(Object goodsNumber) {
-		return findByProperty(GOODS_NUMBER, goodsNumber);
-	}
-
-	public List findByGoodsComName(Object goodsComName) {
-		return findByProperty(GOODS_COM_NAME, goodsComName);
-	}
-
-	public List findByGoodsCheName(Object goodsCheName) {
-		return findByProperty(GOODS_CHE_NAME, goodsCheName);
-	}
-
-	public List findByGoodsComposition(Object goodsComposition) {
-		return findByProperty(GOODS_COMPOSITION, goodsComposition);
-	}
-
-	public List findByGoodsCharacter(Object goodsCharacter) {
-		return findByProperty(GOODS_CHARACTER, goodsCharacter);
-	}
-
-	public List findByStorePurchasePrice(Object storePurchasePrice) {
-		return findByProperty(STORE_PURCHASE_PRICE, storePurchasePrice);
-	}
-
-	public List findByGoodsSpecifications(Object goodsSpecifications) {
-		return findByProperty(GOODS_SPECIFICATIONS, goodsSpecifications);
-	}
-
-	public List findByGoodsUsage(Object goodsUsage) {
-		return findByProperty(GOODS_USAGE, goodsUsage);
-	}
-
-	public List findByGoodsTaboo(Object goodsTaboo) {
-		return findByProperty(GOODS_TABOO, goodsTaboo);
-	}
-
-	public List findByGoodsValidity(Object goodsValidity) {
-		return findByProperty(GOODS_VALIDITY, goodsValidity);
-	}
-
-	public List findByGoodsManufacturer(Object goodsManufacturer) {
-		return findByProperty(GOODS_MANUFACTURER, goodsManufacturer);
-	}
-
 	public List findAll() {
 		log.debug("finding all Goods instances");
 		try {
 			String queryString = "from Goods";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -166,7 +109,7 @@ public class GoodsDAO extends BaseHibernateDAO {
 	public Goods merge(Goods detachedInstance) {
 		log.debug("merging Goods instance");
 		try {
-			Goods result = (Goods) getSession().merge(detachedInstance);
+			Goods result = (Goods) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -175,30 +118,29 @@ public class GoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(Goods instance) {
+	public void attachDirty(Goods instance) {
+		log.debug("attaching dirty Goods instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			instance = session.get(Goods.class, instance);
-			session.delete(instance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().saveOrUpdate(instance);
+			log.debug("attach successful");
 		} catch (RuntimeException re) {
+			log.error("attach failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void attachClean(Goods instance) {
 		log.debug("attaching clean Goods instance");
 		try {
-			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public static GoodsDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (GoodsDAO) ctx.getBean("GoodsDAO");
 	}
 }
