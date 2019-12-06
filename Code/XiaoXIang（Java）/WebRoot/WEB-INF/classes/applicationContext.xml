@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="jdbc:mysql://118.25.67.96:3306/XiaoXiangPharmacy">
+		</property>
+		<property name="username" value="Kingshion"></property>
+		<property name="password" value="Kingshion0708."></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/xiaoxiang/org/vo/Admin.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Buyer.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Store.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Vouchers.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Collection.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Goods.hbm.xml</value>
+				<value>
+					com/xiaoxiang/org/vo/Majorfunction.hbm.xml
+				</value>
+				<value>com/xiaoxiang/org/vo/Comments.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Complaints.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Oder.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/Orderdetail.hbm.xml</value>
+				<value>
+					com/xiaoxiang/org/vo/Shippingaddress.hbm.xml
+				</value>
+				<value>com/xiaoxiang/org/vo/Shoppingcart.hbm.xml</value>
+				<value>com/xiaoxiang/org/vo/ShopGoods.hbm.xml</value></list>
+		</property></bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" /><bean
+		id="AdminDAO" class="com.xiaoxiang.org.dao.AdminDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+</bean>
+	<bean id="BuyerDAO" class="com.xiaoxiang.org.dao.BuyerDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CollectionDAO"
+		class="com.xiaoxiang.org.dao.CollectionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CommentsDAO" class="com.xiaoxiang.org.dao.CommentsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ComplaintsDAO"
+		class="com.xiaoxiang.org.dao.ComplaintsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GoodsDAO" class="com.xiaoxiang.org.dao.GoodsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MajorfunctionDAO"
+		class="com.xiaoxiang.org.dao.MajorfunctionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OderDAO" class="com.xiaoxiang.org.dao.OderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShippingaddressDAO"
+		class="com.xiaoxiang.org.dao.ShippingaddressDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShopGoodsDAO"
+		class="com.xiaoxiang.org.dao.ShopGoodsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShoppingcartDAO"
+		class="com.xiaoxiang.org.dao.ShoppingcartDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StoreDAO" class="com.xiaoxiang.org.dao.StoreDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VouchersDAO" class="com.xiaoxiang.org.dao.VouchersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderdetailDAO"
+		class="com.xiaoxiang.org.dao.OrderdetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

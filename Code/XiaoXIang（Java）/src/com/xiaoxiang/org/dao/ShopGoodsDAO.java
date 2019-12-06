@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoxiang.org.vo.Admin;
-import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 /**
@@ -23,51 +25,42 @@ import com.xiaoxiang.org.vo.ShopGoods;
  * @see com.xiaoxiang.org.dao.ShopGoods
  * @author MyEclipse Persistence Tools
  */
-public class ShopGoodsDAO extends BaseHibernateDAO {
+@Transactional
+public class ShopGoodsDAO extends BaseDAO{
 	private static final Logger log = LoggerFactory.getLogger(ShopGoodsDAO.class);
-	// property constants
-	public static final String SHOP_GOODS_IMAGE = "shopGoodsImage";
-	public static final String SHOP_GOODS_PRICE = "shopGoodsPrice";
-	public static final String SHOP_GOODS_INVENTORY = "shopGoodsInventory";
-	public static final String SHOP_GOODS_FREIGHT = "shopGoodsFreight";
 
+	
 	public boolean save(ShopGoods transientInstance) {
 		try {
 			session=getSession();
-			transation = session.beginTransaction();
+			transaction = session.beginTransaction();
 			session.save(transientInstance);
-			transation.commit();
+			transaction.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(ShopGoods persistentInstance) {
+	public void delete(ShopGoods persistentInstance) {
+		log.debug("deleting ShopGoods instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			persistentInstance = session.get(ShopGoods.class, persistentInstance);
-			session.delete(persistentInstance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().delete(persistentInstance);
+			log.debug("delete successful");
 		} catch (RuntimeException re) {
-			
+			log.error("delete failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public ShopGoods findById(java.lang.Integer id) {
 		log.debug("getting ShopGoods instance with id: " + id);
 		try {
-			ShopGoods instance = (ShopGoods) getSession().get("com.xiaoxiang.org.dao.ShopGoods", id);
+			ShopGoods instance = (ShopGoods) getCurrentSession().get("com.xiaoxiang.org.dao.ShopGoods", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,8 +71,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List findByExample(ShopGoods instance) {
 		log.debug("finding ShopGoods instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.ShopGoods").add(Example.create(instance))
-					.list();
+			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.ShopGoods")
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -87,35 +80,12 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
-	public List search(String keyword){
-		List list = null;
-		try{
-			session=getSession();
-			Query query = session.createQuery("from Shop_Goods where Goods in "
-					+ " (select idGoods from Goods "
-					+ " where GoodCheName like '%?%' or GoodsComName like '%?%' or idMajorFunction in "
-					+ " (select idMajorFunction from MajorFunction where "
-					+ " GoodsMajorFunctioncol like '%?%' or GoodsClass like '%?%' or GoodsSeries like '%?%'))"
-					+ " or Stort in "
-					+ " (select idStore from Store where StoreName like '%?%')");
-			for(int i=0;i<6;i++){
-				query.setParameter(i, keyword);
-			}
-			list = query.list();
-			closeSession();
-			return list;
-		}catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}finally {
-			
-		}
-	}
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding ShopGoods instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from ShopGoods as model where model." + propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -124,27 +94,11 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByShopGoodsImage(Object shopGoodsImage) {
-		return findByProperty(SHOP_GOODS_IMAGE, shopGoodsImage);
-	}
-
-	public List findByShopGoodsPrice(Object shopGoodsPrice) {
-		return findByProperty(SHOP_GOODS_PRICE, shopGoodsPrice);
-	}
-
-	public List findByShopGoodsInventory(Object shopGoodsInventory) {
-		return findByProperty(SHOP_GOODS_INVENTORY, shopGoodsInventory);
-	}
-
-	public List findByShopGoodsFreight(Object shopGoodsFreight) {
-		return findByProperty(SHOP_GOODS_FREIGHT, shopGoodsFreight);
-	}
-
 	public List findAll() {
 		log.debug("finding all ShopGoods instances");
 		try {
 			String queryString = "from ShopGoods";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -155,7 +109,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public ShopGoods merge(ShopGoods detachedInstance) {
 		log.debug("merging ShopGoods instance");
 		try {
-			ShopGoods result = (ShopGoods) getSession().merge(detachedInstance);
+			ShopGoods result = (ShopGoods) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,30 +118,29 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(ShopGoods instance) {
+	public void attachDirty(ShopGoods instance) {
+		log.debug("attaching dirty ShopGoods instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			instance = session.get(ShopGoods.class, instance);
-			session.delete(instance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().saveOrUpdate(instance);
+			log.debug("attach successful");
 		} catch (RuntimeException re) {
+			log.error("attach failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void attachClean(ShopGoods instance) {
 		log.debug("attaching clean ShopGoods instance");
 		try {
-			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public static ShopGoodsDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (ShopGoodsDAO) ctx.getBean("ShopGoodsDAO");
 	}
 }

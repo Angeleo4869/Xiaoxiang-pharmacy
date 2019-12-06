@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoxiang.org.vo.Majorfunction;
 import com.xiaoxiang.org.vo.Shippingaddress;
 
 /**
@@ -22,46 +25,43 @@ import com.xiaoxiang.org.vo.Shippingaddress;
  * @see com.xiaoxiang.org.dao.Shippingaddress
  * @author MyEclipse Persistence Tools
  */
-public class ShippingaddressDAO extends BaseHibernateDAO {
+@Transactional
+public class ShippingaddressDAO extends BaseDAO{
 	private static final Logger log = LoggerFactory.getLogger(ShippingaddressDAO.class);
 
+	
 	public boolean save(Shippingaddress transientInstance) {
 		try {
 			session=getSession();
-			transation = session.beginTransaction();
+			transaction = session.beginTransaction();
 			session.save(transientInstance);
-			transation.commit();
+			transaction.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(Shippingaddress persistentInstance) {
+	public void delete(Shippingaddress persistentInstance) {
+		log.debug("deleting Shippingaddress instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			persistentInstance = session.get(Shippingaddress.class, persistentInstance);
-			session.delete(persistentInstance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().delete(persistentInstance);
+			log.debug("delete successful");
 		} catch (RuntimeException re) {
-			
+			log.error("delete failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public Shippingaddress findById(java.lang.Integer id) {
 		log.debug("getting Shippingaddress instance with id: " + id);
 		try {
-			Shippingaddress instance = (Shippingaddress) getSession().get(Shippingaddress.class, id);
+			Shippingaddress instance = (Shippingaddress) getCurrentSession()
+					.get("com.xiaoxiang.org.dao.Shippingaddress", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -72,7 +72,7 @@ public class ShippingaddressDAO extends BaseHibernateDAO {
 	public List findByExample(Shippingaddress instance) {
 		log.debug("finding Shippingaddress instance by example");
 		try {
-			List results = getSession().createCriteria(Shippingaddress.class)
+			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Shippingaddress")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
@@ -86,7 +86,7 @@ public class ShippingaddressDAO extends BaseHibernateDAO {
 		log.debug("finding Shippingaddress instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Shippingaddress as model where model." + propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -99,7 +99,7 @@ public class ShippingaddressDAO extends BaseHibernateDAO {
 		log.debug("finding all Shippingaddress instances");
 		try {
 			String queryString = "from Shippingaddress";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -110,7 +110,7 @@ public class ShippingaddressDAO extends BaseHibernateDAO {
 	public Shippingaddress merge(Shippingaddress detachedInstance) {
 		log.debug("merging Shippingaddress instance");
 		try {
-			Shippingaddress result = (Shippingaddress) getSession().merge(detachedInstance);
+			Shippingaddress result = (Shippingaddress) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -119,30 +119,29 @@ public class ShippingaddressDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(Shippingaddress instance) {
+	public void attachDirty(Shippingaddress instance) {
+		log.debug("attaching dirty Shippingaddress instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			instance = session.get(Shippingaddress.class, instance);
-			session.delete(instance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().saveOrUpdate(instance);
+			log.debug("attach successful");
 		} catch (RuntimeException re) {
+			log.error("attach failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void attachClean(Shippingaddress instance) {
 		log.debug("attaching clean Shippingaddress instance");
 		try {
-			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public static ShippingaddressDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (ShippingaddressDAO) ctx.getBean("ShippingaddressDAO");
 	}
 }

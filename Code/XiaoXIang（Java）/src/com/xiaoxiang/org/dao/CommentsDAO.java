@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoxiang.org.vo.Admin;
 import com.xiaoxiang.org.vo.Comments;
 
 /**
@@ -22,51 +25,42 @@ import com.xiaoxiang.org.vo.Comments;
  * @see com.xiaoxiang.org.dao.Comments
  * @author MyEclipse Persistence Tools
  */
-public class CommentsDAO extends BaseHibernateDAO {
+@Transactional
+public class CommentsDAO extends BaseDAO{
 	private static final Logger log = LoggerFactory.getLogger(CommentsDAO.class);
-	// property constants
-	public static final String COMMENT_LEVEL = "commentLevel";
-	public static final String COMMENTS_ANONYMOUS = "commentsAnonymous";
-	public static final String COMMENTSDETAILS = "commentsdetails";
-	public static final String COMMENTS_REPLYID = "commentsReplyid";
+
 
 	public boolean save(Comments transientInstance) {
 		try {
 			session=getSession();
-			transation = session.beginTransaction();
+			transaction = session.beginTransaction();
 			session.save(transientInstance);
-			transation.commit();
+			transaction.commit();
 			closeSession();
 			return true;
-		} catch (RuntimeException re) {
-			throw re;
-			//return false;
+		} catch (Exception re) {
+			re.printStackTrace();;
+			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(Comments persistentInstance) {
+	public void delete(Comments persistentInstance) {
+		log.debug("deleting Comments instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			persistentInstance = session.get(Comments.class, persistentInstance);
-			session.delete(persistentInstance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().delete(persistentInstance);
+			log.debug("delete successful");
 		} catch (RuntimeException re) {
-			
+			log.error("delete failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public Comments findById(java.lang.Integer id) {
 		log.debug("getting Comments instance with id: " + id);
 		try {
-			Comments instance = (Comments) getSession().get("com.xiaoxiang.org.dao.Comments", id);
+			Comments instance = (Comments) getCurrentSession().get("com.xiaoxiang.org.dao.Comments", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -77,8 +71,8 @@ public class CommentsDAO extends BaseHibernateDAO {
 	public List findByExample(Comments instance) {
 		log.debug("finding Comments instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Comments").add(Example.create(instance))
-					.list();
+			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Comments")
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -91,7 +85,7 @@ public class CommentsDAO extends BaseHibernateDAO {
 		log.debug("finding Comments instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Comments as model where model." + propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -100,27 +94,11 @@ public class CommentsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByCommentLevel(Object commentLevel) {
-		return findByProperty(COMMENT_LEVEL, commentLevel);
-	}
-
-	public List findByCommentsAnonymous(Object commentsAnonymous) {
-		return findByProperty(COMMENTS_ANONYMOUS, commentsAnonymous);
-	}
-
-	public List findByCommentsdetails(Object commentsdetails) {
-		return findByProperty(COMMENTSDETAILS, commentsdetails);
-	}
-
-	public List findByCommentsReplyid(Object commentsReplyid) {
-		return findByProperty(COMMENTS_REPLYID, commentsReplyid);
-	}
-
 	public List findAll() {
 		log.debug("finding all Comments instances");
 		try {
 			String queryString = "from Comments";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -131,7 +109,7 @@ public class CommentsDAO extends BaseHibernateDAO {
 	public Comments merge(Comments detachedInstance) {
 		log.debug("merging Comments instance");
 		try {
-			Comments result = (Comments) getSession().merge(detachedInstance);
+			Comments result = (Comments) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -140,30 +118,29 @@ public class CommentsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public boolean attachDirty(Comments instance) {
+	public void attachDirty(Comments instance) {
+		log.debug("attaching dirty Comments instance");
 		try {
-			session=getSession();
-			transation = session.beginTransaction();
-			instance = session.get(Comments.class, instance);
-			session.delete(instance);
-			transation.commit();
-			closeSession();
-			return true;
+			getCurrentSession().saveOrUpdate(instance);
+			log.debug("attach successful");
 		} catch (RuntimeException re) {
+			log.error("attach failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void attachClean(Comments instance) {
 		log.debug("attaching clean Comments instance");
 		try {
-			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
+	}
+
+	public static CommentsDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (CommentsDAO) ctx.getBean("CommentsDAO");
 	}
 }

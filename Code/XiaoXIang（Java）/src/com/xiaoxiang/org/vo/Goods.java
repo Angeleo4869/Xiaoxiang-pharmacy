@@ -4,197 +4,203 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Goods entity. @author MyEclipse Persistence Tools
  */
 
-public class Goods implements java.io.Serializable {
+public class Goods  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer idGoods;
-	private Majorfunction majorfunction;
-	private String goodsNumber;
-	private String goodsComName;
-	private String goodsCheName;
-	private String goodsComposition;
-	private String goodsCharacter;
-	private Double storePurchasePrice;
-	private String goodsSpecifications;
-	private String goodsUsage;
-	private String goodsTaboo;
-	private Integer goodsValidity;
-	private Date goodsProductionDate;
-	private String goodsManufacturer;
-	private Set shopGoodses = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer idGoods;
+     private Majorfunction majorfunction;
+     private String goodsNumber;
+     private String goodsComName;
+     private String goodsCheName;
+     private String goodsComposition;
+     private String goodsCharacter;
+     private Double storePurchasePrice;
+     private String goodsSpecifications;
+     private String goodsUsage;
+     private String goodsTaboo;
+     private Integer goodsValidity;
+     private Date goodsProductionDate;
+     private String goodsManufacturer;
+     private Set shopGoodses = new HashSet(0);
 
-	/** default constructor */
-	public Goods() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Goods() {
+    }
 
 	/** minimal constructor */
-	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
-			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
-			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
-			String goodsManufacturer) {
-		this.majorfunction = majorfunction;
-		this.goodsNumber = goodsNumber;
-		this.goodsComName = goodsComName;
-		this.goodsCheName = goodsCheName;
-		this.goodsComposition = goodsComposition;
-		this.goodsCharacter = goodsCharacter;
-		this.storePurchasePrice = storePurchasePrice;
-		this.goodsSpecifications = goodsSpecifications;
-		this.goodsUsage = goodsUsage;
-		this.goodsTaboo = goodsTaboo;
-		this.goodsValidity = goodsValidity;
-		this.goodsProductionDate = goodsProductionDate;
-		this.goodsManufacturer = goodsManufacturer;
-	}
+    public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName, String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications, String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate, String goodsManufacturer) {
+        this.majorfunction = majorfunction;
+        this.goodsNumber = goodsNumber;
+        this.goodsComName = goodsComName;
+        this.goodsCheName = goodsCheName;
+        this.goodsComposition = goodsComposition;
+        this.goodsCharacter = goodsCharacter;
+        this.storePurchasePrice = storePurchasePrice;
+        this.goodsSpecifications = goodsSpecifications;
+        this.goodsUsage = goodsUsage;
+        this.goodsTaboo = goodsTaboo;
+        this.goodsValidity = goodsValidity;
+        this.goodsProductionDate = goodsProductionDate;
+        this.goodsManufacturer = goodsManufacturer;
+    }
+    
+    /** full constructor */
+    public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName, String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications, String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate, String goodsManufacturer, Set shopGoodses) {
+        this.majorfunction = majorfunction;
+        this.goodsNumber = goodsNumber;
+        this.goodsComName = goodsComName;
+        this.goodsCheName = goodsCheName;
+        this.goodsComposition = goodsComposition;
+        this.goodsCharacter = goodsCharacter;
+        this.storePurchasePrice = storePurchasePrice;
+        this.goodsSpecifications = goodsSpecifications;
+        this.goodsUsage = goodsUsage;
+        this.goodsTaboo = goodsTaboo;
+        this.goodsValidity = goodsValidity;
+        this.goodsProductionDate = goodsProductionDate;
+        this.goodsManufacturer = goodsManufacturer;
+        this.shopGoodses = shopGoodses;
+    }
 
-	/** full constructor */
-	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
-			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
-			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
-			String goodsManufacturer, Set shopGoodses) {
-		this.majorfunction = majorfunction;
-		this.goodsNumber = goodsNumber;
-		this.goodsComName = goodsComName;
-		this.goodsCheName = goodsCheName;
-		this.goodsComposition = goodsComposition;
-		this.goodsCharacter = goodsCharacter;
-		this.storePurchasePrice = storePurchasePrice;
-		this.goodsSpecifications = goodsSpecifications;
-		this.goodsUsage = goodsUsage;
-		this.goodsTaboo = goodsTaboo;
-		this.goodsValidity = goodsValidity;
-		this.goodsProductionDate = goodsProductionDate;
-		this.goodsManufacturer = goodsManufacturer;
-		this.shopGoodses = shopGoodses;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getIdGoods() {
+        return this.idGoods;
+    }
+    
+    public void setIdGoods(Integer idGoods) {
+        this.idGoods = idGoods;
+    }
 
-	public Integer getIdGoods() {
-		return this.idGoods;
-	}
+    public Majorfunction getMajorfunction() {
+        return this.majorfunction;
+    }
+    
+    public void setMajorfunction(Majorfunction majorfunction) {
+        this.majorfunction = majorfunction;
+    }
 
-	public void setIdGoods(Integer idGoods) {
-		this.idGoods = idGoods;
-	}
+    public String getGoodsNumber() {
+        return this.goodsNumber;
+    }
+    
+    public void setGoodsNumber(String goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
 
-	public Majorfunction getMajorfunction() {
-		return this.majorfunction;
-	}
+    public String getGoodsComName() {
+        return this.goodsComName;
+    }
+    
+    public void setGoodsComName(String goodsComName) {
+        this.goodsComName = goodsComName;
+    }
 
-	public void setMajorfunction(Majorfunction majorfunction) {
-		this.majorfunction = majorfunction;
-	}
+    public String getGoodsCheName() {
+        return this.goodsCheName;
+    }
+    
+    public void setGoodsCheName(String goodsCheName) {
+        this.goodsCheName = goodsCheName;
+    }
 
-	public String getGoodsNumber() {
-		return this.goodsNumber;
-	}
+    public String getGoodsComposition() {
+        return this.goodsComposition;
+    }
+    
+    public void setGoodsComposition(String goodsComposition) {
+        this.goodsComposition = goodsComposition;
+    }
 
-	public void setGoodsNumber(String goodsNumber) {
-		this.goodsNumber = goodsNumber;
-	}
+    public String getGoodsCharacter() {
+        return this.goodsCharacter;
+    }
+    
+    public void setGoodsCharacter(String goodsCharacter) {
+        this.goodsCharacter = goodsCharacter;
+    }
 
-	public String getGoodsComName() {
-		return this.goodsComName;
-	}
+    public Double getStorePurchasePrice() {
+        return this.storePurchasePrice;
+    }
+    
+    public void setStorePurchasePrice(Double storePurchasePrice) {
+        this.storePurchasePrice = storePurchasePrice;
+    }
 
-	public void setGoodsComName(String goodsComName) {
-		this.goodsComName = goodsComName;
-	}
+    public String getGoodsSpecifications() {
+        return this.goodsSpecifications;
+    }
+    
+    public void setGoodsSpecifications(String goodsSpecifications) {
+        this.goodsSpecifications = goodsSpecifications;
+    }
 
-	public String getGoodsCheName() {
-		return this.goodsCheName;
-	}
+    public String getGoodsUsage() {
+        return this.goodsUsage;
+    }
+    
+    public void setGoodsUsage(String goodsUsage) {
+        this.goodsUsage = goodsUsage;
+    }
 
-	public void setGoodsCheName(String goodsCheName) {
-		this.goodsCheName = goodsCheName;
-	}
+    public String getGoodsTaboo() {
+        return this.goodsTaboo;
+    }
+    
+    public void setGoodsTaboo(String goodsTaboo) {
+        this.goodsTaboo = goodsTaboo;
+    }
 
-	public String getGoodsComposition() {
-		return this.goodsComposition;
-	}
+    public Integer getGoodsValidity() {
+        return this.goodsValidity;
+    }
+    
+    public void setGoodsValidity(Integer goodsValidity) {
+        this.goodsValidity = goodsValidity;
+    }
 
-	public void setGoodsComposition(String goodsComposition) {
-		this.goodsComposition = goodsComposition;
-	}
+    public Date getGoodsProductionDate() {
+        return this.goodsProductionDate;
+    }
+    
+    public void setGoodsProductionDate(Date goodsProductionDate) {
+        this.goodsProductionDate = goodsProductionDate;
+    }
 
-	public String getGoodsCharacter() {
-		return this.goodsCharacter;
-	}
+    public String getGoodsManufacturer() {
+        return this.goodsManufacturer;
+    }
+    
+    public void setGoodsManufacturer(String goodsManufacturer) {
+        this.goodsManufacturer = goodsManufacturer;
+    }
 
-	public void setGoodsCharacter(String goodsCharacter) {
-		this.goodsCharacter = goodsCharacter;
-	}
+    public Set getShopGoodses() {
+        return this.shopGoodses;
+    }
+    
+    public void setShopGoodses(Set shopGoodses) {
+        this.shopGoodses = shopGoodses;
+    }
+   
 
-	public Double getStorePurchasePrice() {
-		return this.storePurchasePrice;
-	}
 
-	public void setStorePurchasePrice(Double storePurchasePrice) {
-		this.storePurchasePrice = storePurchasePrice;
-	}
 
-	public String getGoodsSpecifications() {
-		return this.goodsSpecifications;
-	}
 
-	public void setGoodsSpecifications(String goodsSpecifications) {
-		this.goodsSpecifications = goodsSpecifications;
-	}
 
-	public String getGoodsUsage() {
-		return this.goodsUsage;
-	}
 
-	public void setGoodsUsage(String goodsUsage) {
-		this.goodsUsage = goodsUsage;
-	}
 
-	public String getGoodsTaboo() {
-		return this.goodsTaboo;
-	}
-
-	public void setGoodsTaboo(String goodsTaboo) {
-		this.goodsTaboo = goodsTaboo;
-	}
-
-	public Integer getGoodsValidity() {
-		return this.goodsValidity;
-	}
-
-	public void setGoodsValidity(Integer goodsValidity) {
-		this.goodsValidity = goodsValidity;
-	}
-
-	public Date getGoodsProductionDate() {
-		return this.goodsProductionDate;
-	}
-
-	public void setGoodsProductionDate(Date goodsProductionDate) {
-		this.goodsProductionDate = goodsProductionDate;
-	}
-
-	public String getGoodsManufacturer() {
-		return this.goodsManufacturer;
-	}
-
-	public void setGoodsManufacturer(String goodsManufacturer) {
-		this.goodsManufacturer = goodsManufacturer;
-	}
-
-	public Set getShopGoodses() {
-		return this.shopGoodses;
-	}
-
-	public void setShopGoodses(Set shopGoodses) {
-		this.shopGoodses = shopGoodses;
-	}
 
 }
