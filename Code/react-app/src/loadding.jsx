@@ -12,7 +12,6 @@ import Data from './GlobalData';
 // import App from './Ftest'
  import App from './Test/C_badge';
 
-//test upload
 // import App from './GoodsDetails/Tabs';
 import {
     BrowserRouter as Router,
