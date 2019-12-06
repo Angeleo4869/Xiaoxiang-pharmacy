@@ -45,6 +45,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    width:'100%',
   },
 }));
 
@@ -74,7 +75,7 @@ export default function SimpleTabs() {
 
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        {/* 收藏夹 */}
       </TabPanel>
       
     </div>

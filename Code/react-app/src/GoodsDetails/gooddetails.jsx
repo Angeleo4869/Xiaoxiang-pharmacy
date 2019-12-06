@@ -14,6 +14,9 @@ import Rotate from './rotate';
 import Norms from './norms';
 import Tabs from './Tabs';
 
+import {
+  useLocation
+} from "react-router-dom";
   function HomeIcon(props) {
     return (
       <SvgIcon {...props}>
@@ -51,8 +54,13 @@ import Tabs from './Tabs';
     marginTop:5,
   };
 
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+
 export default function SimpleContainer() {
     const classes = useStyles();
+    let query = useQuery();
   return (
     <React.Fragment>
       <CssBaseline />
@@ -82,7 +90,7 @@ export default function SimpleContainer() {
         <Fab variant="extended" aria-label="like" className={classes.fab}>
             <PersonIcon className={classes.extendedIcon}/>
             {/* <NavigationIcon className={classes.extendedIcon} /> */}
-            lOGIN
+            lOGIN{query.get("name")}{query.get("age")}
         </Fab>
         </List>
         <Divider style={{marginTop:30,light:true,}}/>
@@ -92,7 +100,7 @@ export default function SimpleContainer() {
               <Rotate />
             </ListItem>
           </Box>
-          <ListItem key='2'><Norms /></ListItem>  
+          <ListItem key='2'><Norms/></ListItem>  
         </div>
         <Box><Tabs/></Box>
       </Container>
