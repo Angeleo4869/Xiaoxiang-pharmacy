@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Welcome from './ES6Clare';
 import Container from './PersonCenter/drawer';
 import Login from './LoginAndRegiter/Container/LoginPage';
@@ -12,6 +12,7 @@ import Data from './GlobalData';
 // import App from './Ftest'
  import App from './Test/C_badge';
 
+//test upload
 // import App from './GoodsDetails/Tabs';
 import {
     BrowserRouter as Router,
