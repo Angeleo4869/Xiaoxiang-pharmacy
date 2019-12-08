@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing(3),
-    overflowX: 'auto',
+    overflowX: 'visible',
   },
   table: {
     minWidth: 700,
@@ -76,6 +76,7 @@ export default function CustomizedTables() {
                 <StyledTableCell component="th" scope="row">
                   {/* 商品图片以及商品名称 */}
                   <GoodsCard></GoodsCard>
+                  
                 </StyledTableCell>
                 <StyledTableCell align="right">￥{row.price}元</StyledTableCell>
                 <StyledTableCell align="right">{row.count}(个/盒)</StyledTableCell>

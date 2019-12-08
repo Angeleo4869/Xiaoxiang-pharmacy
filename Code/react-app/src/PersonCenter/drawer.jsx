@@ -34,7 +34,8 @@ import App from './PTcontent';
 import App2 from './../ShoppingCart/Container/ShoppingCart';
 import App3 from './../GoodsDetails/allorder';
 import './../CSS/Center.css';
-
+import Cbadge from './../Test/C_badge';
+import Data from './../GlobalData';
 
 const drawerWidth = 200;
 
@@ -76,6 +77,7 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(2),
     right: theme.spacing(3),
   },
+  
 }));
 
 function ScrollTop(props) {
@@ -168,6 +170,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             潇湘药房
           </Typography>
+          <Cbadge B_num={Data.Bnum} />
         </Toolbar>
       </AppBar>
       <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
