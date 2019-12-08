@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Buyer;
 
@@ -25,41 +21,39 @@ import com.xiaoxiang.org.vo.Buyer;
  * @see com.xiaoxiang.org.dao.Buyer
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class BuyerDAO extends BaseDAO{
+public class BuyerDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(BuyerDAO.class);
 
 	public boolean save(Buyer transientInstance) {
+		log.debug("saving Buyer instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			session.save(transientInstance);
-			transaction.commit();
-			closeSession();
+			getSession().save(transientInstance);
+			log.debug("save successful");
 			return true;
-		} catch (Exception re) {
-			re.printStackTrace();;
+		} catch (Exception e) {
+			log.error("save failed", e);
 			return false;
-		}finally {
-			closeSession();
 		}
 	}
 
-	public void delete(Buyer persistentInstance) {
+	public boolean delete(Buyer persistentInstance) {
 		log.debug("deleting Buyer instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("delete failed", re);
-			throw re;
+			return false;
 		}
 	}
 
 	public Buyer findById(java.lang.Integer id) {
 		log.debug("getting Buyer instance with id: " + id);
 		try {
-			Buyer instance = (Buyer) getCurrentSession().get("com.xiaoxiang.org.dao.Buyer", id);
+			Buyer instance = (Buyer) getSession().get("com.xiaoxiang.org.dao.Buyer", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,8 +64,8 @@ public class BuyerDAO extends BaseDAO{
 	public List findByExample(Buyer instance) {
 		log.debug("finding Buyer instance by example");
 		try {
-			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Buyer")
-					.add(Example.create(instance)).list();
+			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Buyer").add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -84,7 +78,7 @@ public class BuyerDAO extends BaseDAO{
 		log.debug("finding Buyer instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Buyer as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -97,7 +91,7 @@ public class BuyerDAO extends BaseDAO{
 		log.debug("finding all Buyer instances");
 		try {
 			String queryString = "from Buyer";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -108,7 +102,7 @@ public class BuyerDAO extends BaseDAO{
 	public Buyer merge(Buyer detachedInstance) {
 		log.debug("merging Buyer instance");
 		try {
-			Buyer result = (Buyer) getCurrentSession().merge(detachedInstance);
+			Buyer result = (Buyer) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -120,7 +114,7 @@ public class BuyerDAO extends BaseDAO{
 	public void attachDirty(Buyer instance) {
 		log.debug("attaching dirty Buyer instance");
 		try {
-			getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -131,15 +125,11 @@ public class BuyerDAO extends BaseDAO{
 	public void attachClean(Buyer instance) {
 		log.debug("attaching clean Buyer instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-
-	public static BuyerDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (BuyerDAO) ctx.getBean("BuyerDAO");
 	}
 }

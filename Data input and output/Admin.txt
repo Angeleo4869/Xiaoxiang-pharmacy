@@ -1,0 +1,9 @@
+登录
+
+input
+
+json {AdminNumber：“JsonData”  ，AdminPAssword：“JsonData” }
+
+OutPut
+
+json {AdminNumber：“JsonData”  ，AdminPAssword：“JsonData”， idAdmin ：“JsonData” }

@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Complaints;
 
@@ -25,30 +21,24 @@ import com.xiaoxiang.org.vo.Complaints;
  * @see com.xiaoxiang.org.dao.Complaints
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class ComplaintsDAO extends BaseDAO{
+public class ComplaintsDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(ComplaintsDAO.class);
 
-	public boolean save(Complaints transientInstance) {
+	public void save(Complaints transientInstance) {
+		log.debug("saving Complaints instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			session.save(transientInstance);
-			transaction.commit();
-			closeSession();
-			return true;
-		} catch (Exception re) {
-			re.printStackTrace();;
-			return false;
-		}finally {
-			closeSession();
+			getSession().save(transientInstance);
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
 		}
 	}
 
 	public void delete(Complaints persistentInstance) {
 		log.debug("deleting Complaints instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -59,7 +49,7 @@ public class ComplaintsDAO extends BaseDAO{
 	public Complaints findById(java.lang.Integer id) {
 		log.debug("getting Complaints instance with id: " + id);
 		try {
-			Complaints instance = (Complaints) getCurrentSession().get("com.xiaoxiang.org.dao.Complaints", id);
+			Complaints instance = (Complaints) getSession().get("com.xiaoxiang.org.dao.Complaints", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,8 +60,8 @@ public class ComplaintsDAO extends BaseDAO{
 	public List findByExample(Complaints instance) {
 		log.debug("finding Complaints instance by example");
 		try {
-			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Complaints")
-					.add(Example.create(instance)).list();
+			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Complaints").add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -84,7 +74,7 @@ public class ComplaintsDAO extends BaseDAO{
 		log.debug("finding Complaints instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Complaints as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -97,7 +87,7 @@ public class ComplaintsDAO extends BaseDAO{
 		log.debug("finding all Complaints instances");
 		try {
 			String queryString = "from Complaints";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -108,7 +98,7 @@ public class ComplaintsDAO extends BaseDAO{
 	public Complaints merge(Complaints detachedInstance) {
 		log.debug("merging Complaints instance");
 		try {
-			Complaints result = (Complaints) getCurrentSession().merge(detachedInstance);
+			Complaints result = (Complaints) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -120,7 +110,7 @@ public class ComplaintsDAO extends BaseDAO{
 	public void attachDirty(Complaints instance) {
 		log.debug("attaching dirty Complaints instance");
 		try {
-			getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -131,15 +121,11 @@ public class ComplaintsDAO extends BaseDAO{
 	public void attachClean(Complaints instance) {
 		log.debug("attaching clean Complaints instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-
-	public static ComplaintsDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (ComplaintsDAO) ctx.getBean("ComplaintsDAO");
 	}
 }

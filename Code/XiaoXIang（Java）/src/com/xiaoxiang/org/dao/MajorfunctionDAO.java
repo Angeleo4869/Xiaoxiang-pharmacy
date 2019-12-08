@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Majorfunction;
 
@@ -25,31 +21,24 @@ import com.xiaoxiang.org.vo.Majorfunction;
  * @see com.xiaoxiang.org.dao.Majorfunction
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class MajorfunctionDAO extends BaseDAO{
+public class MajorfunctionDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(MajorfunctionDAO.class);
 
-	
-	public boolean save(Majorfunction transientInstance) {
+	public void save(Majorfunction transientInstance) {
+		log.debug("saving Majorfunction instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			session.save(transientInstance);
-			transaction.commit();
-			closeSession();
-			return true;
-		} catch (Exception re) {
-			re.printStackTrace();;
-			return false;
-		}finally {
-			closeSession();
+			getSession().save(transientInstance);
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
 		}
 	}
 
 	public void delete(Majorfunction persistentInstance) {
 		log.debug("deleting Majorfunction instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -60,7 +49,7 @@ public class MajorfunctionDAO extends BaseDAO{
 	public Majorfunction findById(java.lang.Integer id) {
 		log.debug("getting Majorfunction instance with id: " + id);
 		try {
-			Majorfunction instance = (Majorfunction) getCurrentSession().get("com.xiaoxiang.org.dao.Majorfunction", id);
+			Majorfunction instance = (Majorfunction) getSession().get("com.xiaoxiang.org.dao.Majorfunction", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -71,7 +60,7 @@ public class MajorfunctionDAO extends BaseDAO{
 	public List findByExample(Majorfunction instance) {
 		log.debug("finding Majorfunction instance by example");
 		try {
-			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Majorfunction")
+			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Majorfunction")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
@@ -85,7 +74,7 @@ public class MajorfunctionDAO extends BaseDAO{
 		log.debug("finding Majorfunction instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Majorfunction as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -98,7 +87,7 @@ public class MajorfunctionDAO extends BaseDAO{
 		log.debug("finding all Majorfunction instances");
 		try {
 			String queryString = "from Majorfunction";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -109,7 +98,7 @@ public class MajorfunctionDAO extends BaseDAO{
 	public Majorfunction merge(Majorfunction detachedInstance) {
 		log.debug("merging Majorfunction instance");
 		try {
-			Majorfunction result = (Majorfunction) getCurrentSession().merge(detachedInstance);
+			Majorfunction result = (Majorfunction) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -121,7 +110,7 @@ public class MajorfunctionDAO extends BaseDAO{
 	public void attachDirty(Majorfunction instance) {
 		log.debug("attaching dirty Majorfunction instance");
 		try {
-			getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -132,15 +121,11 @@ public class MajorfunctionDAO extends BaseDAO{
 	public void attachClean(Majorfunction instance) {
 		log.debug("attaching clean Majorfunction instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-
-	public static MajorfunctionDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (MajorfunctionDAO) ctx.getBean("MajorfunctionDAO");
 	}
 }

@@ -15,7 +15,7 @@ public class FindGoodsAction extends BaseAction {
 		List<ShopGoods> list = shopGoodsDAO.findAll();
 		for(int i=0;i<list.size();i++){
 			shopGoods = list.get(i);
-			getDataMap().put("ShopGoods",shopGoods);
+			getDataMap().put("ShopGoodsid"+shopGoods.getIdShopGoods().toString(),shopGoods);
 			getDataMap().put(SUCCESS, true);
 		}
 		return DataMap;

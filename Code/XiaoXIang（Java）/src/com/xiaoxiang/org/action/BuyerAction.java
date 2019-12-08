@@ -42,6 +42,16 @@ public class BuyerAction extends BaseAction {
         }return DataMap;
 	}
 	
+	public String cancellation() throws Exception{
+		 responseSetHeader();
+	     setDataMap(new HashMap<String, Object>());
+	     if(buyerDAO.delete(buyer)){
+	    	getDataMap().put(SUCCESS, true);
+	     }else {
+	    	 getDataMap().put(ERROR,false);
+	     }return DataMap;
+	}
+	
 	public Buyer getBuyer() {
 		return buyer;
 	}

@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Shoppingcart;
 
@@ -25,30 +21,24 @@ import com.xiaoxiang.org.vo.Shoppingcart;
  * @see com.xiaoxiang.org.dao.Shoppingcart
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class ShoppingcartDAO extends BaseDAO {
+public class ShoppingcartDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(ShoppingcartDAO.class);
 
-	public boolean save(Shoppingcart transientInstance) {
+	public void save(Shoppingcart transientInstance) {
+		log.debug("saving Shoppingcart instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			session.save(transientInstance);
-			transaction.commit();
-			closeSession();
-			return true;
-		} catch (Exception re) {
-			re.printStackTrace();;
-			return false;
-		}finally {
-			closeSession();
+			getSession().save(transientInstance);
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
 		}
 	}
 
 	public void delete(Shoppingcart persistentInstance) {
 		log.debug("deleting Shoppingcart instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -59,7 +49,7 @@ public class ShoppingcartDAO extends BaseDAO {
 	public Shoppingcart findById(java.lang.Integer id) {
 		log.debug("getting Shoppingcart instance with id: " + id);
 		try {
-			Shoppingcart instance = (Shoppingcart) getCurrentSession().get("com.xiaoxiang.org.dao.Shoppingcart", id);
+			Shoppingcart instance = (Shoppingcart) getSession().get("com.xiaoxiang.org.dao.Shoppingcart", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,7 +60,7 @@ public class ShoppingcartDAO extends BaseDAO {
 	public List findByExample(Shoppingcart instance) {
 		log.debug("finding Shoppingcart instance by example");
 		try {
-			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Shoppingcart")
+			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Shoppingcart")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
@@ -84,7 +74,7 @@ public class ShoppingcartDAO extends BaseDAO {
 		log.debug("finding Shoppingcart instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Shoppingcart as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -97,7 +87,7 @@ public class ShoppingcartDAO extends BaseDAO {
 		log.debug("finding all Shoppingcart instances");
 		try {
 			String queryString = "from Shoppingcart";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -108,7 +98,7 @@ public class ShoppingcartDAO extends BaseDAO {
 	public Shoppingcart merge(Shoppingcart detachedInstance) {
 		log.debug("merging Shoppingcart instance");
 		try {
-			Shoppingcart result = (Shoppingcart) getCurrentSession().merge(detachedInstance);
+			Shoppingcart result = (Shoppingcart) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -120,7 +110,7 @@ public class ShoppingcartDAO extends BaseDAO {
 	public void attachDirty(Shoppingcart instance) {
 		log.debug("attaching dirty Shoppingcart instance");
 		try {
-			getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -131,15 +121,11 @@ public class ShoppingcartDAO extends BaseDAO {
 	public void attachClean(Shoppingcart instance) {
 		log.debug("attaching clean Shoppingcart instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-
-	public static ShoppingcartDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (ShoppingcartDAO) ctx.getBean("ShoppingcartDAO");
 	}
 }

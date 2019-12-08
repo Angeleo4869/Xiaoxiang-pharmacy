@@ -7,8 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Admin;
 
@@ -23,136 +21,116 @@ import com.xiaoxiang.org.vo.Admin;
  * @see com.xiaoxiang.org.dao.Admin
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class AdminDAO extends BaseDAO{
+public class AdminDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(AdminDAO.class);
 
-	public Boolean save(Admin transientInstance) {
+	public boolean save(Admin transientInstance) {
+		log.debug("saving Admin instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
+			session = getSession();
 			session.save(transientInstance);
-			transaction.commit();
-			closeSession();
+			transation.commit();
+			log.debug("save successful");
 			return true;
-		} catch (Exception re) {
-			re.printStackTrace();;
-			return false;
-		}finally {
-			closeSession();
+		} catch (Exception e) {
+			log.error("save failed", e);
+			throw e;
 		}
 	}
 
 	public boolean delete(Admin persistentInstance) {
+		log.debug("deleting Admin instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			persistentInstance = (Admin) session.get(Admin.class, persistentInstance);
-			session.delete(persistentInstance);
-			transaction.commit();
-			closeSession();
+			getSession().delete(persistentInstance);
+			log.debug("delete successful");
+			transation.commit();
 			return true;
 		} catch (Exception re) {
-			re.printStackTrace();
+			log.error("delete failed", re);
 			return false;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public Admin findById(java.lang.Integer id) {
+		log.debug("getting Admin instance with id: " + id);
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			Admin admin = (Admin) session.get(Admin.class, id);
-			closeSession();
-			return admin;
+			Admin instance = (Admin) getSession().get(Admin.class, id);
+			return instance;
 		} catch (Exception re) {
 			log.error("get failed", re);
 			return null;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public List findByExample(Admin instance) {
 		log.debug("finding Admin instance by example");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			List results = session.createCriteria(Admin.class)
-					.add(Example.create(instance)).list();
+			List results = getSession().createCriteria(Admin.class).add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: " + results.size());
-			closeSession();
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			return null;
-		}finally {
-			closeSession();
 		}
 	}
 
-//	public List findByProperty(String propertyName, Object value) {
-//		log.debug("finding Admin instance with property: " + propertyName + ", value: " + value);
-//		try {
-//			String queryString = "from Admin as model where model." + propertyName + "= ?";
-//			Query queryObject = getCurrentSession().createQuery(queryString);
-//			queryObject.setParameter(0, value);
-//			return queryObject.list();
-//		} catch (RuntimeException re) {
-//			log.error("find by property name failed", re);
-//			throw re;
-//		}
-//	}
-//
-//	public List findAll() {
-//		log.debug("finding all Admin instances");
-//		try {
-//			String queryString = "from Admin";
-//			Query queryObject = getCurrentSession().createQuery(queryString);
-//			return queryObject.list();
-//		} catch (RuntimeException re) {
-//			log.error("find all failed", re);
-//			throw re;
-//		}
-//	}
-//
-//	public Admin merge(Admin detachedInstance) {
-//		log.debug("merging Admin instance");
-//		try {
-//			Admin result = (Admin) getCurrentSession().merge(detachedInstance);
-//			log.debug("merge successful");
-//			return result;
-//		} catch (RuntimeException re) {
-//			log.error("merge failed", re);
-//			throw re;
-//		}
-//	}
-//
-//	public void attachDirty(Admin instance) {
-//		log.debug("attaching dirty Admin instance");
-//		try {
-//			getCurrentSession().saveOrUpdate(instance);
-//			log.debug("attach successful");
-//		} catch (RuntimeException re) {
-//			log.error("attach failed", re);
-//			throw re;
-//		}
-//	}
-//
-//	public void attachClean(Admin instance) {
-//		log.debug("attaching clean Admin instance");
-//		try {
-//			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
-//			log.debug("attach successful");
-//		} catch (RuntimeException re) {
-//			log.error("attach failed", re);
-//			throw re;
-//		}
-//	}
+	public List findByProperty(String propertyName, Object value) {
+		log.debug("finding Admin instance with property: " + propertyName + ", value: " + value);
+		try {
+			String queryString = "from Admin as model where model." + propertyName + "= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
 
-	public static AdminDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (AdminDAO) ctx.getBean("AdminDAO");
+	public List findAll() {
+		log.debug("finding all Admin instances");
+		try {
+			String queryString = "from Admin";
+			Query queryObject = getSession().createQuery(queryString);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all failed", re);
+			throw re;
+		}
+	}
+
+	public Admin merge(Admin detachedInstance) {
+		log.debug("merging Admin instance");
+		try {
+			Admin result = (Admin) getSession().merge(detachedInstance);
+			log.debug("merge successful");
+			return result;
+		} catch (RuntimeException re) {
+			log.error("merge failed", re);
+			throw re;
+		}
+	}
+
+	public void attachDirty(Admin instance) {
+		log.debug("attaching dirty Admin instance");
+		try {
+			getSession().saveOrUpdate(instance);
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
+	}
+
+	public void attachClean(Admin instance) {
+		log.debug("attaching clean Admin instance");
+		try {
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
 	}
 }

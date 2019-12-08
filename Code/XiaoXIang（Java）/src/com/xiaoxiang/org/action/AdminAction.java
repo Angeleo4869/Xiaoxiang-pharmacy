@@ -18,8 +18,8 @@ public class AdminAction extends BaseAction {
 	public String execute() throws Exception {
         responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        //getAdmin().setAdminNumber(request.getParameter("AdminNumber"));
-        //getAdmin().setAdminPassword(request.getParameter("AdminPassword"));
+        getAdmin().setAdminNumber(request.getParameter("AdminNumber"));
+        getAdmin().setAdminPassword(request.getParameter("AdminPassword"));
         List<Admin> list = adminDAO.findByExample(getAdmin());
 		for(int i=0;i<list.size();i++){
 			admin = list.get(i);

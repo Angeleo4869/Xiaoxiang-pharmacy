@@ -16,7 +16,6 @@ public class Orderdetail implements java.io.Serializable {
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Vouchers vouchers;
-	private Oder oder;
 	private Timestamp paymentTime;
 	private Double totalPrice;
 	private Integer goodsNumber;
@@ -30,12 +29,11 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder, Timestamp paymentTime,
-			Double totalPrice, Integer goodsNumber, Short logistics) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Timestamp paymentTime, Double totalPrice,
+			Integer goodsNumber, Short logistics) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
-		this.oder = oder;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
 		this.goodsNumber = goodsNumber;
@@ -43,12 +41,11 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Oder oder, Timestamp paymentTime,
-			Double totalPrice, Integer goodsNumber, Short logistics, Set commentses) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Timestamp paymentTime, Double totalPrice,
+			Integer goodsNumber, Short logistics, Set commentses) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
-		this.oder = oder;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
 		this.goodsNumber = goodsNumber;
@@ -88,14 +85,6 @@ public class Orderdetail implements java.io.Serializable {
 
 	public void setVouchers(Vouchers vouchers) {
 		this.vouchers = vouchers;
-	}
-
-	public Oder getOder() {
-		return this.oder;
-	}
-
-	public void setOder(Oder oder) {
-		this.oder = oder;
 	}
 
 	public Timestamp getPaymentTime() {

@@ -8,7 +8,7 @@
     <class name="com.xiaoxiang.org.vo.Oder" table="oder" catalog="XiaoXiangPharmacy">
         <id name="idOder" type="java.lang.Integer">
             <column name="idOder" />
-            <generator class="identity" />
+            <generator class="native" />
         </id>
         <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="select">
             <column name="idBuyer" not-null="true" />
@@ -19,6 +19,5 @@
         <property name="oderState" type="java.lang.Short">
             <column name="OderState" not-null="true" />
         </property>
-        <one-to-one name="orderdetail" class="com.xiaoxiang.org.vo.Orderdetail"></one-to-one>
     </class>
 </hibernate-mapping>

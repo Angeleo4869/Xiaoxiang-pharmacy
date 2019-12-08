@@ -1,15 +1,12 @@
 package com.xiaoxiang.org.dao;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoxiang.org.vo.Store;
 
@@ -24,31 +21,27 @@ import com.xiaoxiang.org.vo.Store;
  * @see com.xiaoxiang.org.dao.Store
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-public class StoreDAO extends BaseDAO{
+public class StoreDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(StoreDAO.class);
 
-
 	public boolean save(Store transientInstance) {
+		log.debug("saving Store instance");
 		try {
-			session=getSession();
-			transaction = session.beginTransaction();
-			session.save(transientInstance);
-			transaction.commit();
+			getSession().save(transientInstance);
+			transation.commit();
+			log.debug("save successful");
 			closeSession();
 			return true;
 		} catch (Exception re) {
-			re.printStackTrace();;
+			log.error("save failed", re);
 			return false;
-		}finally {
-			closeSession();
 		}
 	}
 
 	public void delete(Store persistentInstance) {
 		log.debug("deleting Store instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -59,7 +52,7 @@ public class StoreDAO extends BaseDAO{
 	public Store findById(java.lang.Integer id) {
 		log.debug("getting Store instance with id: " + id);
 		try {
-			Store instance = (Store) getCurrentSession().get("com.xiaoxiang.org.dao.Store", id);
+			Store instance = (Store) getSession().get(Store.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,8 +63,8 @@ public class StoreDAO extends BaseDAO{
 	public List findByExample(Store instance) {
 		log.debug("finding Store instance by example");
 		try {
-			List results = getCurrentSession().createCriteria("com.xiaoxiang.org.dao.Store")
-					.add(Example.create(instance)).list();
+			List results = getSession().createCriteria(Store.class).add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -84,7 +77,7 @@ public class StoreDAO extends BaseDAO{
 		log.debug("finding Store instance with property: " + propertyName + ", value: " + value);
 		try {
 			String queryString = "from Store as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -97,7 +90,7 @@ public class StoreDAO extends BaseDAO{
 		log.debug("finding all Store instances");
 		try {
 			String queryString = "from Store";
-			Query queryObject = getCurrentSession().createQuery(queryString);
+			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -108,7 +101,7 @@ public class StoreDAO extends BaseDAO{
 	public Store merge(Store detachedInstance) {
 		log.debug("merging Store instance");
 		try {
-			Store result = (Store) getCurrentSession().merge(detachedInstance);
+			Store result = (Store) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -120,7 +113,7 @@ public class StoreDAO extends BaseDAO{
 	public void attachDirty(Store instance) {
 		log.debug("attaching dirty Store instance");
 		try {
-			getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -131,15 +124,11 @@ public class StoreDAO extends BaseDAO{
 	public void attachClean(Store instance) {
 		log.debug("attaching clean Store instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-
-	public static StoreDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (StoreDAO) ctx.getBean("StoreDAO");
 	}
 }

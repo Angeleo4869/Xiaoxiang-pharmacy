@@ -1,0 +1,19 @@
+{"success":true,"
+
+ShopGoods":{"collections":[],
+	"goods":{
+		 "goodsCharacter":"浅棕色至深棕色颗粒；味甜，微苦。",
+		"goodsCheName":"","goodsComName":"感冒灵颗粒",
+		"goodsComposition":"三叉苦，金盏银盘，野菊花，岗梅...",
+		"goodsManufacturer":"华润三九医药有限公司",
+		"goodsNumber":"0009724190",
+		"goodsProductionDate":"2019-12-01T14:00:00",
+		"goodsSpecifications":"每袋重10g",
+		"goodsTaboo":"严重肝肾功能不全者禁用",
+		"goodsUsage":"开水冲服，一次三袋，一日三次",
+		"goodsValidity":24,
+		"idGoods":2,"  
+		majorfunction":{"goodsClass":"西药","goodsMajorFunctioncol":"感冒发烧","goodsSeries":"呼吸道疾病"},
+		"voucherses":[]}],
+		"storePurchasePrice":30.0},null],"idMajorFunction":2},
+	"store":{"complaintses":[],"idStore":1,"shopGoodses":[null],"storeAddress":"湖南 长沙 坡子街","storeLicense":"16501111","storeName":"九芝堂大药房","storeNumber":"hnjzt.com","storePassword":"jiuzhitang","storePhyIdCard":"不详","storePhyName":"劳澄","storeState":1,"storeTel":"0731-84499738"},"voucherses":[]},null],"storePurchasePrice":10.9}],"idMajorFunction":2},"shopGoodses":[null],"storePurchasePrice":30.0},"idShopGoods":4,"oders":[],"orderdetails":[],"shopGoodsFreight":10.0,"shopGoodsImage":"0001","shopGoodsInventory":100,"shopGoodsPrice":40.0,"shopGoodsSales":3,"shoppingcarts":[],"store":null,"voucherses":[]},null],"storeAddress":"北京市丰台区富丰路","storeLicense":"110106003156327","storeName":"仁和药房","storeNumber":"xiaomm@yaofang.com","storePassword":"renhe","storePhyIdCard":"911101068022288754","storePhyName":"陈旭","storeState":1,"storeTel":"010-63626200"},"voucherses":[]}}

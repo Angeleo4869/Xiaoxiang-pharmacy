@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+
 	<package name="default" extends="json-default,struts-default">
 	
 		<action name="AdminLogin"
@@ -9,8 +10,7 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		
-	
+		<!-- 
 		<action name="BuyerLogin"
 			class="com.xiaoxiang.org.action.BuyerAction">
 			<result name="dataMap" type="json">
@@ -37,7 +37,16 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-
+		
+		-->
+		<action name="HomePage"
+		 class="com.xiaoxiang.org.action.HomePageAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!--
 		<action name="AddDrugs"
 			class="com.xiaoxiang.org.action.AddDrugs">
 			<result name="dataMap" type="json">
@@ -86,7 +95,7 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
+		
+		 -->
 	</package>
-
-
 </struts>    

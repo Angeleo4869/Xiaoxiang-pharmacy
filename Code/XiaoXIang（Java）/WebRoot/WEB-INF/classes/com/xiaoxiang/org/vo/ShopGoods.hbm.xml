@@ -10,10 +10,10 @@
             <column name="idShop_Goods" />
             <generator class="native" />
         </id>
-        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="select">
+        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="join">
             <column name="Stort" not-null="true" />
         </many-to-one>
-        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" fetch="select">
+        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" fetch="join" >
             <column name="Goods" not-null="true" />
         </many-to-one>
         <property name="shopGoodsImage" type="java.lang.String">
@@ -31,6 +31,9 @@
         <property name="shopGoodsSales" type="java.lang.Integer">
             <column name="Shop_GoodsSales" not-null="true" />
         </property>
+        
+        <!-- 
+        
         <set name="voucherses" inverse="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
@@ -61,5 +64,7 @@
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Orderdetail" />
         </set>
+        
+         -->
     </class>
 </hibernate-mapping>

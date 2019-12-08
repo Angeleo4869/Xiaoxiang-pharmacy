@@ -1,67 +1,53 @@
 package com.xiaoxiang.org.vo;
 
-
-
 /**
  * Collection entity. @author MyEclipse Persistence Tools
  */
 
-public class Collection  implements java.io.Serializable {
+public class Collection implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Integer idcollection;
+	private Buyer buyer;
+	private ShopGoods shopGoods;
 
-     private Integer idcollection;
-     private Buyer buyer;
-     private ShopGoods shopGoods;
+	// Constructors
 
+	/** default constructor */
+	public Collection() {
+	}
 
-    // Constructors
+	/** full constructor */
+	public Collection(Buyer buyer, ShopGoods shopGoods) {
+		this.buyer = buyer;
+		this.shopGoods = shopGoods;
+	}
 
-    /** default constructor */
-    public Collection() {
-    }
+	// Property accessors
 
-    
-    /** full constructor */
-    public Collection(Buyer buyer, ShopGoods shopGoods) {
-        this.buyer = buyer;
-        this.shopGoods = shopGoods;
-    }
+	public Integer getIdcollection() {
+		return this.idcollection;
+	}
 
-   
-    // Property accessors
+	public void setIdcollection(Integer idcollection) {
+		this.idcollection = idcollection;
+	}
 
-    public Integer getIdcollection() {
-        return this.idcollection;
-    }
-    
-    public void setIdcollection(Integer idcollection) {
-        this.idcollection = idcollection;
-    }
+	public Buyer getBuyer() {
+		return this.buyer;
+	}
 
-    public Buyer getBuyer() {
-        return this.buyer;
-    }
-    
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
 
-    public ShopGoods getShopGoods() {
-        return this.shopGoods;
-    }
-    
-    public void setShopGoods(ShopGoods shopGoods) {
-        this.shopGoods = shopGoods;
-    }
-   
+	public ShopGoods getShopGoods() {
+		return this.shopGoods;
+	}
 
-
-
-
-
-
-
+	public void setShopGoods(ShopGoods shopGoods) {
+		this.shopGoods = shopGoods;
+	}
 
 }

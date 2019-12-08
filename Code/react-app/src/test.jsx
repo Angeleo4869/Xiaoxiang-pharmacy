@@ -22,7 +22,7 @@ export default class BackToTop extends React.Component {
   }
 
   const MyComponent = withAxios({
-    url: 'http://localhost:8080/XiaoXiangPharmacy/TestAction.action',
+    url: 'http://localhost:8080/XiaoXiangPharmacy/AdminLogin.action',
     params: {
     idAdmin: 0,
     AdminNumber:"leo",

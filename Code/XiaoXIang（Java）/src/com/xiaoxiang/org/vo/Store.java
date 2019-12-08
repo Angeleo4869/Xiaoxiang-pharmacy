@@ -21,8 +21,8 @@ public class Store implements java.io.Serializable {
 	private String storeLicense;
 	private String storeTel;
 	private String storeAddress;
-	private Set complaintses = new HashSet(0);
-	private Set shopGoodses = new HashSet(0);
+//	private Set complaintses = new HashSet(0);
+//	private Set shopGoodses = new HashSet(0);
 
 	// Constructors
 
@@ -44,22 +44,22 @@ public class Store implements java.io.Serializable {
 		this.storeAddress = storeAddress;
 	}
 
-	/** full constructor */
-	public Store(String storeNumber, String storePassword, String storeName, Short storeState, String storePhyName,
-			String storePhyIdCard, String storeLicense, String storeTel, String storeAddress, Set complaintses,
-			Set shopGoodses) {
-		this.storeNumber = storeNumber;
-		this.storePassword = storePassword;
-		this.storeName = storeName;
-		this.storeState = storeState;
-		this.storePhyName = storePhyName;
-		this.storePhyIdCard = storePhyIdCard;
-		this.storeLicense = storeLicense;
-		this.storeTel = storeTel;
-		this.storeAddress = storeAddress;
-		this.complaintses = complaintses;
-		this.shopGoodses = shopGoodses;
-	}
+//	/** full constructor */
+//	public Store(String storeNumber, String storePassword, String storeName, Short storeState, String storePhyName,
+//			String storePhyIdCard, String storeLicense, String storeTel, String storeAddress, Set complaintses,
+//			Set shopGoodses) {
+//		this.storeNumber = storeNumber;
+//		this.storePassword = storePassword;
+//		this.storeName = storeName;
+//		this.storeState = storeState;
+//		this.storePhyName = storePhyName;
+//		this.storePhyIdCard = storePhyIdCard;
+//		this.storeLicense = storeLicense;
+//		this.storeTel = storeTel;
+//		this.storeAddress = storeAddress;
+//		this.complaintses = complaintses;
+//		this.shopGoodses = shopGoodses;
+//	}
 
 	// Property accessors
 
@@ -142,21 +142,21 @@ public class Store implements java.io.Serializable {
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress = storeAddress;
 	}
-
-	public Set getComplaintses() {
-		return this.complaintses;
-	}
-
-	public void setComplaintses(Set complaintses) {
-		this.complaintses = complaintses;
-	}
-
-	public Set getShopGoodses() {
-		return this.shopGoodses;
-	}
-
-	public void setShopGoodses(Set shopGoodses) {
-		this.shopGoodses = shopGoodses;
-	}
+//
+//	public Set getComplaintses() {
+//		return this.complaintses;
+//	}
+//
+//	public void setComplaintses(Set complaintses) {
+//		this.complaintses = complaintses;
+//	}
+//
+//	public Set getShopGoodses() {
+//		return this.shopGoodses;
+//	}
+//
+//	public void setShopGoodses(Set shopGoodses) {
+//		this.shopGoodses = shopGoodses;
+//	}
 
 }

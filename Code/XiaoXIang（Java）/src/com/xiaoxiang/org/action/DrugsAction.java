@@ -8,7 +8,11 @@ import com.xiaoxiang.org.dao.MajorfunctionDAO;
 import com.xiaoxiang.org.vo.Goods;
 import com.xiaoxiang.org.vo.Majorfunction;
 
-public class AddDrugs extends BaseAction {
+public class DrugsAction extends BaseAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Goods goods = new Goods();
 	private Majorfunction majorfunction = new Majorfunction();
 	
