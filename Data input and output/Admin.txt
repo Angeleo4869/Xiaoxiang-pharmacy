@@ -2,7 +2,7 @@
 
 input
 
-json {AdminNumber：“JsonData”  ，AdminPAssword：“JsonData” }
+json {AdminNumber：“String(Length)”  ，AdminPAssword：“String(Length)” }
 
 OutPut
 
