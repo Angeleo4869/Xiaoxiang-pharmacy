@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
+// import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -22,6 +23,8 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import SettingsIcon from '@material-ui/icons/Settings';
+
 //个人中心模块接口
 import {
     Route,
@@ -33,6 +36,10 @@ import {
 import App from './PTcontent';
 import App2 from './../ShoppingCart/Container/ShoppingCart';
 import App3 from './../GoodsDetails/allorder';
+import Setting from './../PersonSetting/XXSetting';
+import Revise from './../PersonSetting/revise';
+import Message from './../PersonSetting/message';
+import Address from './../PersonSetting/address';
 import './../CSS/Center.css';
 import Cbadge from './../Test/C_badge';
 import Data from './../GlobalData';
@@ -140,14 +147,14 @@ function ResponsiveDrawer(props) {
         <Divider />
         {/* mapy映射关系详细 */}
         <List>
-          {ConT.map((text) => (
+          {ConT.map((text,index) => (
             // <Link key={text.id} to={"/PersonCenter"+text.src}>
             // <ListItem  button  key={text.name} to={text.src}>
             //   <ListItemIcon >{text.id % 2 === 0 ? <InboxIcon /> : <MailIcon />} </ListItemIcon>
             //   <ListItemText  primary={text.src} />
             // </ListItem>
             // </Link>
-            <MyCustomLink key={text.name} to={text.src} label={text.name} icon="1" />
+            <MyCustomLink key={index} keey={text.name} to={text.src} label={text.name} icon="1" />
           ))}
         </List>
     </div>
@@ -170,7 +177,8 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             潇湘药房
           </Typography>
-          <Cbadge B_num={Data.Bnum} />
+          <Link to="/PersonCenter/message"><Cbadge  B_num={Data.Bnum} /></Link>
+          <Link to="/PersonCenter/Setting"><SettingsIcon style={{color:"#FFFFFF",position:'absolute',right:140,top:25}} /></Link>
         </Toolbar>
       </AppBar>
       <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
@@ -210,6 +218,18 @@ function ResponsiveDrawer(props) {
           <Route exact path="/PersonCenter/">
                   <App />
           </Route>
+          <Route path="/PersonCenter/Setting">
+                  <Setting/>
+          </Route>
+          <Route path="/PersonCenter/modify/Revise">
+                  <Revise/>
+          </Route>
+          <Route path="/PersonCenter/show/address">
+                  <Address/>
+          </Route>
+          <Route path="/PersonCenter/message">
+                  <Message/>
+          </Route>
           <Route path="/PersonCenter/order">
                   <App3 />
           </Route>
@@ -235,7 +255,7 @@ function lClick(){
     console.log("coponent");
   }
 
-  function MyCustomLink({ label,icon,key, to, activeOnlyWhenExact }) {
+  function MyCustomLink({ label,icon,keey, to, activeOnlyWhenExact }) {
     var iii=null;
     // var iconstyle = {fontSize: 50} 
     
@@ -259,10 +279,10 @@ function lClick(){
     });
     
     return (
-      <div key={key} style={{display:"flex"}} className={match ? "active" : ""}>
+      <div  style={{display:"flex"}} className={match ? "active" : ""}>
         {match && <ChevronRightOutlinedIcon style={{position:'relative',top:15}}/>}
         <Link to={to} style={{width:200}}>
-             <ListItem  button  key={key} >
+             <ListItem  button  key={keey} >
               {iii}
               <ListItemText style={{marginLeft:38}} primary={label} />
              </ListItem>

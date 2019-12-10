@@ -25,9 +25,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
   address: {
-    width:'100%',
+    width:`100%`,
     [theme.breakpoints.down('sm')]: {
-      width:250,
+      width:`calc(100vw - 250px)`,
     },
   },
   orange: {
@@ -88,6 +88,7 @@ export default function PaperSheet() {
             </div>
           </Card>
         ))} 
+        <div style={{height:95}}>s</div>{/* 注意一定要加，不然显示不全 */}
     </div>
   );
 }

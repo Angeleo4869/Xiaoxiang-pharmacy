@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         left:10,
         top:10,
         marginBottom:10,
-        marginTop:10,
+        marginTop:10,        
     },
     textLeft: {
         position:'relative',
@@ -62,7 +62,7 @@ export default function FullWidthTabs() {
                     <Button style={{position:'absolute',right:5}}>编辑</Button>
                 </div>
                 <Divider light />
-                <Link>
+                <Link to="/PersonCenter/show/address">
                     <div style={{display:'flex'}}>
                         <Typography  className={classes.textLeft}>我的收货地址</Typography>
                         <InboxIcon className={classes.icontop}></InboxIcon>
