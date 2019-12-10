@@ -53,7 +53,7 @@ public class BuyerDAO extends BaseHibernateDAO {
 	public Buyer findById(java.lang.Integer id) {
 		log.debug("getting Buyer instance with id: " + id);
 		try {
-			Buyer instance = (Buyer) getSession().get("com.xiaoxiang.org.dao.Buyer", id);
+			Buyer instance = (Buyer) getSession().get(Buyer.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

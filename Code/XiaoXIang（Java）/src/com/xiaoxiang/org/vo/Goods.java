@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Goods entity. @author MyEclipse Persistence Tools
  */
@@ -12,10 +14,6 @@ public class Goods implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer idGoods;
 	private Majorfunction majorfunction;
 	private String goodsNumber;
@@ -30,7 +28,7 @@ public class Goods implements java.io.Serializable {
 	private Integer goodsValidity;
 	private Date goodsProductionDate;
 	private String goodsManufacturer;
-//	private Set<ShopGoods> shopGoodses = new HashSet<ShopGoods>(0);
+	private Set shopGoodses = new HashSet(0);
 
 	// Constructors
 
@@ -58,26 +56,26 @@ public class Goods implements java.io.Serializable {
 		this.goodsManufacturer = goodsManufacturer;
 	}
 
-//	/** full constructor */
-//	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
-//			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
-//			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
-//			String goodsManufacturer, Set<ShopGoods> shopGoodses) {
-//		this.majorfunction = majorfunction;
-//		this.goodsNumber = goodsNumber;
-//		this.goodsComName = goodsComName;
-//		this.goodsCheName = goodsCheName;
-//		this.goodsComposition = goodsComposition;
-//		this.goodsCharacter = goodsCharacter;
-//		this.storePurchasePrice = storePurchasePrice;
-//		this.goodsSpecifications = goodsSpecifications;
-//		this.goodsUsage = goodsUsage;
-//		this.goodsTaboo = goodsTaboo;
-//		this.goodsValidity = goodsValidity;
-//		this.goodsProductionDate = goodsProductionDate;
-//		this.goodsManufacturer = goodsManufacturer;
-////		this.shopGoodses = shopGoodses;
-//	}
+	/** full constructor */
+	public Goods(Majorfunction majorfunction, String goodsNumber, String goodsComName, String goodsCheName,
+			String goodsComposition, String goodsCharacter, Double storePurchasePrice, String goodsSpecifications,
+			String goodsUsage, String goodsTaboo, Integer goodsValidity, Date goodsProductionDate,
+			String goodsManufacturer, Set shopGoodses) {
+		this.majorfunction = majorfunction;
+		this.goodsNumber = goodsNumber;
+		this.goodsComName = goodsComName;
+		this.goodsCheName = goodsCheName;
+		this.goodsComposition = goodsComposition;
+		this.goodsCharacter = goodsCharacter;
+		this.storePurchasePrice = storePurchasePrice;
+		this.goodsSpecifications = goodsSpecifications;
+		this.goodsUsage = goodsUsage;
+		this.goodsTaboo = goodsTaboo;
+		this.goodsValidity = goodsValidity;
+		this.goodsProductionDate = goodsProductionDate;
+		this.goodsManufacturer = goodsManufacturer;
+		this.shopGoodses = shopGoodses;
+	}
 
 	// Property accessors
 
@@ -192,13 +190,13 @@ public class Goods implements java.io.Serializable {
 	public void setGoodsManufacturer(String goodsManufacturer) {
 		this.goodsManufacturer = goodsManufacturer;
 	}
+	@JSON(serialize=false)
+	public Set getShopGoodses() {
+		return this.shopGoodses;
+	}
 
-//	public Set<ShopGoods> getShopGoodses() {
-//		return this.shopGoodses;
-//	}
-//
-//	public void setShopGoodses(Set<ShopGoods> shopGoodses) {
-//		this.shopGoodses = shopGoodses;
-//	}
+	public void setShopGoodses(Set shopGoodses) {
+		this.shopGoodses = shopGoodses;
+	}
 
 }

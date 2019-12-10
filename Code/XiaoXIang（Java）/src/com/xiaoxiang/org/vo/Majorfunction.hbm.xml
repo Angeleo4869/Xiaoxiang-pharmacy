@@ -19,7 +19,7 @@
         <property name="goodsSeries" type="java.lang.String">
             <column name="GoodsSeries" length="45" />
         </property>
-        <set name="goodses" inverse="true">
+        <set name="goodses" inverse="true" lazy="false" >
             <key>
                 <column name="idMajorFunction" not-null="true" />
             </key>

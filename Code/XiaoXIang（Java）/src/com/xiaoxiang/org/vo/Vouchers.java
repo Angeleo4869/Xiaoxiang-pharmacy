@@ -3,6 +3,8 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Vouchers entity. @author MyEclipse Persistence Tools
  */
@@ -71,7 +73,7 @@ public class Vouchers implements java.io.Serializable {
 	public void setVouchersAmount(Double vouchersAmount) {
 		this.vouchersAmount = vouchersAmount;
 	}
-
+	@JSON(serialize=false)
 	public Set getOrderdetails() {
 		return this.orderdetails;
 	}

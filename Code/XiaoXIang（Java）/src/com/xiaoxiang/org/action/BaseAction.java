@@ -10,6 +10,9 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+
 public class BaseAction extends ActionSupport {
 	
 	/**
@@ -19,6 +22,8 @@ public class BaseAction extends ActionSupport {
 	HttpServletResponse response = ServletActionContext.getResponse();
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Map<String, Object> dataMap;
+	JSON json;
+	JSONArray jsonArray;
 	public static String DataMap = "dataMap";
 	public void responseSetHeader() throws Exception{
 		
@@ -52,6 +57,22 @@ public class BaseAction extends ActionSupport {
 	}
 	protected void setDataMap(Map<String, Object> dataMap) {
 		this.dataMap = dataMap;
+	}
+
+	public JSONArray getJsonArray() {
+		return jsonArray;
+	}
+
+	public void setJsonArray(JSONArray jsonArray) {
+		this.jsonArray = jsonArray;
+	}
+
+	public JSON getJson() {
+		return json;
+	}
+
+	public void setJson(JSON json) {
+		this.json = json;
 	}
 
 }

@@ -53,7 +53,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public ShopGoods findById(java.lang.Integer id) {
 		log.debug("getting ShopGoods instance with id: " + id);
 		try {
-			ShopGoods instance = (ShopGoods) getSession().get("com.xiaoxiang.org.dao.ShopGoods", id);
+			ShopGoods instance = (ShopGoods) getSession().get(ShopGoods.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -68,12 +68,35 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
-			throw re;
+			return null;
 		}
 	}
-
+	public List search(String keyword){
+		log.debug("finding ShopGoods instance by keyword");
+		try{
+			session=getSession();
+			Query query = session.createQuery("from Shop_Goods where Goods in "
+					+ " (select idGoods from Goods "
+					+ " where GoodCheName like '%?%' or GoodsComName like '%?%' or idMajorFunction in "
+					+ " (select idMajorFunction from MajorFunction where "
+					+ " GoodsMajorFunctioncol like '%?%' or GoodsClass like '%?%' or GoodsSeries like '%?%'))"
+					+ " or Stort in "
+					+ " (select idStore from Store where StoreName like '%?%')");
+			for(int i=0;i<6;i++){
+				query.setParameter(i, keyword);
+			}
+			List list = query.list();
+			closeSession();
+			return list;
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}finally {
+			closeSession();
+		}
+	}
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding ShopGoods instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -101,7 +124,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List touristsRecommendedGoods(){
 		log.debug("recommended Goods instances");
 		try {
-			String queryString = "from ShopGoods order by shop_GoodsSales";
+			String queryString = "from ShopGoods order by shop_GoodsSales desc";
 			
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
@@ -116,7 +139,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		try {
 			String queryString = "from ShopGoods where idShopGoods in "
 					+ " (select idShopGoods from Oder where idBuyer = ? "
-					+ " )order by shopGoodsInventory ";
+					+ " )order by shopGoodssales desc";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, buyer.getIdBuyer());
 			return queryObject.list();

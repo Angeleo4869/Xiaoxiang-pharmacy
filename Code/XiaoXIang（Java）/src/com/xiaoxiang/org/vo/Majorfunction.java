@@ -3,6 +3,8 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Majorfunction entity. @author MyEclipse Persistence Tools
  */
@@ -69,7 +71,7 @@ public class Majorfunction implements java.io.Serializable {
 	public void setGoodsSeries(String goodsSeries) {
 		this.goodsSeries = goodsSeries;
 	}
-
+	@JSON(serialize=false)
 	public Set getGoodses() {
 		return this.goodses;
 	}

@@ -6,11 +6,14 @@
 	
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminAction">
-			<result name="dataMap" type="json">
+			<result name="jsonArray" type="json">
+			 	<param name="root">jsonArray</param>
+			 </result>
+			 <result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		<!-- 
+		
 		<action name="BuyerLogin"
 			class="com.xiaoxiang.org.action.BuyerAction">
 			<result name="dataMap" type="json">
@@ -38,9 +41,15 @@
 			 </result>
 		</action>
 		
-		-->
 		<action name="HomePage"
-		 class="com.xiaoxiang.org.action.HomePageAction">
+		 class="com.xiaoxiang.org.action.HomePageAction" >
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<action name="SearchQuery"
+		 class="com.xiaoxiang.org.action.HomePageAction" method="searchQuery">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
@@ -48,7 +57,7 @@
 		
 		<!--
 		<action name="AddDrugs"
-			class="com.xiaoxiang.org.action.AddDrugs">
+			class="com.xiaoxiang.org.action.DrugsAction">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>

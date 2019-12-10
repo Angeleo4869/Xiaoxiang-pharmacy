@@ -37,8 +37,6 @@
         <property name="storeAddress" type="java.lang.String">
             <column name="StoreAddress" length="45" not-null="true" />
         </property>
-        
-        <!-- 
         <set name="complaintses" inverse="true">
             <key>
                 <column name="idStore" not-null="true" />
@@ -51,9 +49,5 @@
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.ShopGoods" />
         </set>
-        
-         -->
-         
-         
     </class>
 </hibernate-mapping>

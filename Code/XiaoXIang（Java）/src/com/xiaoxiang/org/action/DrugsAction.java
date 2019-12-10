@@ -2,6 +2,7 @@ package com.xiaoxiang.org.action;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import com.xiaoxiang.org.dao.GoodsDAO;
 import com.xiaoxiang.org.dao.MajorfunctionDAO;
@@ -13,13 +14,27 @@ public class DrugsAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private List list;
 	private Goods goods = new Goods();
 	private Majorfunction majorfunction = new Majorfunction();
+	private GoodsDAO goodsDAO = new GoodsDAO();
 	
 	public String execute() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        GoodsDAO goodsDAO = new GoodsDAO();
+        list = goodsDAO.findAll();
+        for(int i=0;i<list.size();i++){
+        	goods = (Goods)list.get(i);
+        	getDataMap().put("Goodsid"+goods.getIdGoods(),goods);
+        	getDataMap().put(SUCCESS, true);
+        }
+        return DataMap;
+	}
+	
+	public String addGoods() throws Exception{
+		responseSetHeader();
+        setDataMap(new HashMap<String, Object>());
+        
         goods.setGoodsNumber("1602082074");
 	    goods.setGoodsCheName("Banlangen Keli");
 	    goods.setGoodsComName("°åÀ¶¸ù¿ÅÁ£");
@@ -36,8 +51,20 @@ public class DrugsAction extends BaseAction {
 	    goods.setMajorfunction(majorfunction);
 	    if(goodsDAO.save(goods)){
 	    	getDataMap().put(SUCCESS, true);
-	    }
+	    }else {
+			getDataMap().put(ERROR, false);
+		}
         return DataMap;
+	}
+	
+	public String deleteGoods() throws Exception{
+		
+		if(goodsDAO.delete(goods)){
+			getDataMap().put(SUCCESS, true);
+		}else {
+			getDataMap().put(ERROR, false);
+		}
+		return DataMap;
 	}
 
 }

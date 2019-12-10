@@ -24,14 +24,17 @@ import com.xiaoxiang.org.vo.Oder;
 public class OderDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(OderDAO.class);
 
-	public void save(Oder transientInstance) {
+	public boolean save(Oder transientInstance) {
 		log.debug("saving Oder instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("save failed", re);
-			throw re;
+			return false;
 		}
 	}
 

@@ -1,7 +1,9 @@
 package com.xiaoxiang.org.vo;
 
-//import java.util.HashSet;
-//import java.util.Set;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.struts2.json.annotations.JSON;
 
 /**
  * ShopGoods entity. @author MyEclipse Persistence Tools
@@ -19,12 +21,12 @@ public class ShopGoods implements java.io.Serializable {
 	private Integer shopGoodsInventory;
 	private Double shopGoodsFreight;
 	private Integer shopGoodsSales;
-//	private Set voucherses = new HashSet(0);
-//	private Set oders = new HashSet(0);
-//	private Set shoppingcarts = new HashSet(0);
-//	private Set collections = new HashSet(0);
-//	private Set orderdetails = new HashSet(0);
-	
+	private Set voucherses = new HashSet(0);
+	private Set oders = new HashSet(0);
+	private Set shoppingcarts = new HashSet(0);
+	private Set collections = new HashSet(0);
+	private Set orderdetails = new HashSet(0);
+
 	// Constructors
 
 	/** default constructor */
@@ -42,23 +44,23 @@ public class ShopGoods implements java.io.Serializable {
 		this.shopGoodsSales = shopGoodsSales;
 	}
 
-//	/** full constructor */
-//	public ShopGoods(Store store, Goods goods, String shopGoodsImage, Double shopGoodsPrice, Integer shopGoodsInventory,
-//			Double shopGoodsFreight, Integer shopGoodsSales, Set voucherses, Set oders, Set shoppingcarts,
-//			Set collections, Set orderdetails) {
-//		this.store = store;
-//		this.goods = goods;
-//		this.shopGoodsImage = shopGoodsImage;
-//		this.shopGoodsPrice = shopGoodsPrice;
-//		this.shopGoodsInventory = shopGoodsInventory;
-//		this.shopGoodsFreight = shopGoodsFreight;
-//		this.shopGoodsSales = shopGoodsSales;
-//		this.voucherses = voucherses;
-//		this.oders = oders;
-//		this.shoppingcarts = shoppingcarts;
-//		this.collections = collections;
-//		this.orderdetails = orderdetails;
-//	}
+	/** full constructor */
+	public ShopGoods(Store store, Goods goods, String shopGoodsImage, Double shopGoodsPrice, Integer shopGoodsInventory,
+			Double shopGoodsFreight, Integer shopGoodsSales, Set voucherses, Set oders, Set shoppingcarts,
+			Set collections, Set orderdetails) {
+		this.store = store;
+		this.goods = goods;
+		this.shopGoodsImage = shopGoodsImage;
+		this.shopGoodsPrice = shopGoodsPrice;
+		this.shopGoodsInventory = shopGoodsInventory;
+		this.shopGoodsFreight = shopGoodsFreight;
+		this.shopGoodsSales = shopGoodsSales;
+		this.voucherses = voucherses;
+		this.oders = oders;
+		this.shoppingcarts = shoppingcarts;
+		this.collections = collections;
+		this.orderdetails = orderdetails;
+	}
 
 	// Property accessors
 
@@ -125,45 +127,45 @@ public class ShopGoods implements java.io.Serializable {
 	public void setShopGoodsSales(Integer shopGoodsSales) {
 		this.shopGoodsSales = shopGoodsSales;
 	}
-//
-//	public Set getVoucherses() {
-//		return this.voucherses;
-//	}
-//
-//	public void setVoucherses(Set voucherses) {
-//		this.voucherses = voucherses;
-//	}
-//
-//	public Set getOders() {
-//		return this.oders;
-//	}
-//
-//	public void setOders(Set oders) {
-//		this.oders = oders;
-//	}
-//
-//	public Set getShoppingcarts() {
-//		return this.shoppingcarts;
-//	}
-//
-//	public void setShoppingcarts(Set shoppingcarts) {
-//		this.shoppingcarts = shoppingcarts;
-//	}
-//
-//	public Set getCollections() {
-//		return this.collections;
-//	}
-//
-//	public void setCollections(Set collections) {
-//		this.collections = collections;
-//	}
-//
-//	public Set getOrderdetails() {
-//		return this.orderdetails;
-//	}
-//
-//	public void setOrderdetails(Set orderdetails) {
-//		this.orderdetails = orderdetails;
-//	}
+	@JSON(serialize=false)
+	public Set getVoucherses() {
+		return this.voucherses;
+	}
+
+	public void setVoucherses(Set voucherses) {
+		this.voucherses = voucherses;
+	}
+	@JSON(serialize=false)
+	public Set getOders() {
+		return this.oders;
+	}
+
+	public void setOders(Set oders) {
+		this.oders = oders;
+	}
+	@JSON(serialize=false)
+	public Set getShoppingcarts() {
+		return this.shoppingcarts;
+	}
+
+	public void setShoppingcarts(Set shoppingcarts) {
+		this.shoppingcarts = shoppingcarts;
+	}
+	@JSON(serialize=false)
+	public Set getCollections() {
+		return this.collections;
+	}
+
+	public void setCollections(Set collections) {
+		this.collections = collections;
+	}
+	@JSON(serialize=false)
+	public Set getOrderdetails() {
+		return this.orderdetails;
+	}
+
+	public void setOrderdetails(Set orderdetails) {
+		this.orderdetails = orderdetails;
+	}
 
 }

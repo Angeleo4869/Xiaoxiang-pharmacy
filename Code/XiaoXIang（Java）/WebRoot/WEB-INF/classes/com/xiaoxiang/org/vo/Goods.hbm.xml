@@ -10,7 +10,7 @@
             <column name="idGoods" />
             <generator class="native" />
         </id>
-        <many-to-one name="majorfunction" class="com.xiaoxiang.org.vo.Majorfunction" lazy="no-proxy">
+        <many-to-one name="majorfunction" class="com.xiaoxiang.org.vo.Majorfunction" fetch="join">
             <column name="idMajorFunction" not-null="true" />
         </many-to-one>
         <property name="goodsNumber" type="java.lang.String">
@@ -49,13 +49,11 @@
         <property name="goodsManufacturer" type="java.lang.String">
             <column name="GoodsManufacturer" length="45" not-null="true" />
         </property>
-        <!-- 
-        <set name="shopGoodses" inverse="true">
+        <set name="shopGoodses" inverse="true" lazy="true">
             <key>
                 <column name="Goods" not-null="true" />
             </key>
-            <many-to-many class="com.xiaoxiang.org.vo.ShopGoods" />
+            <one-to-many class="com.xiaoxiang.org.vo.ShopGoods" />
         </set>
-         -->
     </class>
 </hibernate-mapping>

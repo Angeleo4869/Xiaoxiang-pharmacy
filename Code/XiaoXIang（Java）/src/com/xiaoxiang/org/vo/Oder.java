@@ -12,7 +12,7 @@ public class Oder implements java.io.Serializable {
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Short oderState;
-
+	private Orderdetail orderdetail;
 	// Constructors
 
 	/** default constructor */
@@ -20,10 +20,11 @@ public class Oder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Oder(Buyer buyer, ShopGoods shopGoods, Short oderState) {
+	public Oder(Buyer buyer, ShopGoods shopGoods, Short oderState, Orderdetail orderdetail ) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.oderState = oderState;
+		this.orderdetail = orderdetail;
 	}
 
 	// Property accessors
@@ -58,6 +59,14 @@ public class Oder implements java.io.Serializable {
 
 	public void setOderState(Short oderState) {
 		this.oderState = oderState;
+	}
+
+	public Orderdetail getOrderdetail() {
+		return orderdetail;
+	}
+
+	public void setOrderdetail(Orderdetail orderdetail) {
+		this.orderdetail = orderdetail;
 	}
 
 }

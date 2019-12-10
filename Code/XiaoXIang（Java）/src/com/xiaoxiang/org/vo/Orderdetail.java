@@ -1,6 +1,6 @@
 package com.xiaoxiang.org.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,10 +16,11 @@ public class Orderdetail implements java.io.Serializable {
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Vouchers vouchers;
-	private Timestamp paymentTime;
+	private Date paymentTime;
 	private Double totalPrice;
-	private Integer goodsNumber;
+	private String orderNumber;
 	private Short logistics;
+	private Oder order;
 	private Set commentses = new HashSet(0);
 
 	// Constructors
@@ -29,27 +30,29 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Timestamp paymentTime, Double totalPrice,
-			Integer goodsNumber, Short logistics) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Date paymentTime, Double totalPrice,
+			String orderNumber, Short logistics,Oder order) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
-		this.goodsNumber = goodsNumber;
+		this.setOrderNumber(orderNumber);
 		this.logistics = logistics;
+		this.order = order;
 	}
 
 	/** full constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Timestamp paymentTime, Double totalPrice,
-			Integer goodsNumber, Short logistics, Set commentses) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Date paymentTime, Double totalPrice,
+			String orderNumber, Short logistics,Oder order, Set commentses) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
-		this.goodsNumber = goodsNumber;
+		this.setOrderNumber(orderNumber);
 		this.logistics = logistics;
+		this.order = order;
 		this.commentses = commentses;
 	}
 
@@ -87,11 +90,11 @@ public class Orderdetail implements java.io.Serializable {
 		this.vouchers = vouchers;
 	}
 
-	public Timestamp getPaymentTime() {
+	public Date getPaymentTime() {
 		return this.paymentTime;
 	}
 
-	public void setPaymentTime(Timestamp paymentTime) {
+	public void setPaymentTime(Date paymentTime) {
 		this.paymentTime = paymentTime;
 	}
 
@@ -101,14 +104,6 @@ public class Orderdetail implements java.io.Serializable {
 
 	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-
-	public Integer getGoodsNumber() {
-		return this.goodsNumber;
-	}
-
-	public void setGoodsNumber(Integer goodsNumber) {
-		this.goodsNumber = goodsNumber;
 	}
 
 	public Short getLogistics() {
@@ -125,6 +120,22 @@ public class Orderdetail implements java.io.Serializable {
 
 	public void setCommentses(Set commentses) {
 		this.commentses = commentses;
+	}
+
+	public Oder getOrder() {
+		return order;
+	}
+
+	public void setOrder(Oder order) {
+		this.order = order;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 }
