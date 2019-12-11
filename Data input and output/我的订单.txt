@@ -1,0 +1,16 @@
+输入
+用户id或其他唯一性值 后台写好后再修改
+
+输出 数组的数组 分别代表五种状态 具体看界面 preprice原价 price折后价 finprice成交价
+[[ 
+	{name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+	{name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+	{name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+	{name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+ ],
+ [
+  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+ ]]

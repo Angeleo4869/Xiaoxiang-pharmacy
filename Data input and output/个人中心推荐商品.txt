@@ -1,8 +1,8 @@
 输入
 用户id或其他唯一性值 后台写好后再修改
 
-输出 商品唯一id 名称 价格
+输出： 商品唯一id 名称 价格
 [
-	{id:'1',name:'伸腿瞪眼丸',price:'120'},
-	{id:'1',name:'伸腿瞪眼丸',price:'120'}
+	{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+	{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'}
 ]
