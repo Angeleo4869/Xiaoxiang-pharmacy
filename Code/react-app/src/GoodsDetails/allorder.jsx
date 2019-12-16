@@ -27,7 +27,7 @@ function TabPanel(props) {
     >  </Typography> */}
     {props.content && props.content.map((text) => (
        <Box border={0}  >
-           <OrderDetails  name={text.name} state={text.state}/>
+           <OrderDetails  content={text}/>
         </Box>
     ))}
     <div style={{height:95}}>s</div>
@@ -62,7 +62,17 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-var content1 = [{name:'潇湘药房',state:'交易成功'},{name:'潇湘药房',state:'交易成功'},{name:'潇湘药房',state:'交易成功'},{name:'潇湘药房',state:'交易成功'}]
+var content1 = [[ {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+                ],
+                [
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+                ]];
 
 export default function FullWidthTabs() {
   const classes = useStyles();
@@ -102,19 +112,19 @@ export default function FullWidthTabs() {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} content={content1} dir={theme.direction}>
+        <TabPanel value={value} index={0} content={content1[0]} dir={theme.direction}>
           {value}
         </TabPanel>
-        <TabPanel value={value} index={1} content={content1} dir={theme.direction}>
+        <TabPanel value={value} index={1} content={content1[0]} dir={theme.direction}>
           
         </TabPanel>
-        <TabPanel value={value} index={2} content={content1} dir={theme.direction}>
+        <TabPanel value={value} index={2} content={content1[0]} dir={theme.direction}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={3} content={content1} dir={theme.direction}>
+        <TabPanel value={value} index={3} content={content1[0]} dir={theme.direction}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={4} content={content1} dir={theme.direction}>
+        <TabPanel value={value} index={4} content={content1[1]} dir={theme.direction}>
           Item Three
         </TabPanel>
       </SwipeableViews>

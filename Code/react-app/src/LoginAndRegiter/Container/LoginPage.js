@@ -30,7 +30,7 @@ function Copyright() {
 //事件请求，不需要渲染
 function test (){
   if(document.getElementById("ad").value!==null&&document.getElementById("pd").value)  {   
-    axios.get('http://172.16.248.107:8080/XiaoXiangPharmacy/AdminLogin.action',
+    axios.get('http://localhost:8080/XiaoXiangPharmacy/AdminLogin.action',
      {
       params: {
         AdminNumber:document.getElementById("ad").value,
@@ -38,6 +38,7 @@ function test (){
       }
     })
     .then(function (response) {
+      console.log(response)
       alert(response.data.success)
       if(response.data.success){
         window.location.href = "http://localhost:3000/PersonCenter"

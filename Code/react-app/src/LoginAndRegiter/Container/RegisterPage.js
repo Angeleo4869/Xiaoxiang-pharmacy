@@ -65,7 +65,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           注 册
         </Typography>
-        <form method={'post'} action={'https://www.baidu.com/'} className={classes.form} noValidate>
+        <form method={'post'} action={'http://localhost:8080/XiaoXiangPharmacy/BuyerRegister.action'} className={classes.form} noValidate>
           <Grid container spacing={2}>
             
             <Grid item xs={12}>

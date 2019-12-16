@@ -10,6 +10,10 @@ import { deepOrange } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import {
+  Link
+} from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1, 3),
@@ -51,11 +55,13 @@ export default function PaperSheet() {
           <Typography variant="h6" style={{margin:5,marginLeft:15}} >
               我的地址
           </Typography>
-          <Tooltip title={longText} placement="left">
-            <Fab color="primary" aria-label="add" style={{position:'absolute',right:10,marginTop:10,height:40,width:40}}>
-              <AddIcon />
-            </Fab>
-          </Tooltip>
+          <Link to="/PersonCenter/show/Newaddress">
+            <Tooltip title={longText} placement="left">
+              <Fab color="primary" aria-label="add" style={{position:'absolute',right:10,marginTop:10,height:40,width:40}}>
+                  <AddIcon />
+              </Fab>
+            </Tooltip>
+          </Link>
       </div>
 
       <Divider style={{position:'relative',top:10,left:10}}/>

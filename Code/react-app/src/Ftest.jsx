@@ -29,8 +29,7 @@ export default function funTest(props){
             Date.setText(j.Len);
             ct=j.Len;
             console.log(Date.text);
-            console.log(ct);
-                
+            console.log(ct);  
         })
         
         function getCom(){

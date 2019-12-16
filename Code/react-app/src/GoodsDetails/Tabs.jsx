@@ -11,6 +11,9 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 
+import TabContent1 from './Component/tab1';
+import TabContent2 from './Component/tab2';
+import TabContent3 from './Component/tab3';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -86,13 +89,13 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <TabContent1/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <TabContent2/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <h6>hello</h6>
+          <TabContent3/>
         </TabPanel>
       </SwipeableViews>
     </div>
