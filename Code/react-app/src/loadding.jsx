@@ -1,16 +1,20 @@
-﻿import React from 'react';
+import React from 'react';
 import Welcome from './ES6Clare';
 import Container from './PersonCenter/drawer';
 import Login from './LoginAndRegiter/Container/LoginPage';
 import Register from './LoginAndRegiter/Container/RegisterPage';
 import GoodsDetails from './GoodsDetails/gooddetails';
 import ImedPurchases from './PuerchaseAndPay/ImediyPurchase';
+import Management from './BGManagement/BGMainInterface/bgmgmn';
+import Shop from './ExhibitShow/ShopManage/ShopManagement';
 import Data from './GlobalData';
 // import App from './PersonCenter/PersonCenter.jsx';
 // import App from './GoodsDetails/gooddetails';
 // import App from './GoodsDetails/rotate/TgetData';
 // import App from './Ftest'
  import App from './Test/C_badge';
+//  import App2 from './PersonSetting/XXSetting';
+ import App2 from './PersonSetting/message';
 
 // import App from './GoodsDetails/Tabs';
 import {
@@ -41,6 +45,12 @@ function RootRouter() {
         <Route path="/ImedPurchase">
           <ImedPurchases />
         </Route>
+        <Route path="/XXYFReactManagement">
+          <Management />
+        </Route>
+        <Route path="/Shop">
+          <Shop />
+        </Route>
       </Switch>      
       </Router>
   );
@@ -65,5 +75,6 @@ export default class classConponent extends React.Component{
     //   <div>
     //     <App B_num={Data.Bnum} inv="true"/>
     //   </div>)
+    // return(<App2/>)
   };
 }

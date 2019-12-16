@@ -31,20 +31,20 @@ export default function orderList(props){
     return(
       <Paper className={classes.paper}>
         <List className={classes.list}>
-          <Typography noWrap><PhoneIcon fontSize='small'/>{props.name}</Typography>
-          <Typography noWrap style={{position:'absolute',right:'2%'}}>{props.state}</Typography>
+          <Typography noWrap><PhoneIcon fontSize='small'/>{props.content.name}</Typography>
+          <Typography noWrap style={{position:'absolute',right:'2%'}}>{props.content.state}</Typography>
         </List>
         <List className={classes.list}>
-          <img className={classes.img} alt="complex" src="/Pic/D1.jpg" />
+          <img className={classes.img} alt="complex" src={props.content.imagesrc} />
           <span style={{position:'absolute',left:85,width:250,height:30}}>
-          <p > USB分线器拓展器 USB分线器拓展器
+          <p > {props.content.goodname}
           </p>
           </span>
-          <h6 style={{position:'absolute',right:5}}>￥9.99</h6>
+          <h6 style={{position:'absolute',right:5}}>￥{props.content.finprice}</h6>
           <Hidden smDown>
             <List style={{position:'absolute',left:340,width:50,height:30}}>
-              <Typography><s>￥29.9</s></Typography>
-              <Typography>￥9.9</Typography>
+              <Typography><s>￥{props.content.preprice}</s></Typography>
+              <Typography>￥{props.content.price}</Typography>
             </List>
           </Hidden>
           <Hidden smDown>

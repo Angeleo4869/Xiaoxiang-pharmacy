@@ -12,14 +12,14 @@ import Typography from '@material-ui/core/Typography';
   
 // });
 var cstyle=null;
-const card1= {
+const card1= {//4列
   position:'relative',
   // marginLeft:30,
   margin:10,
   maxWidth: '100%',
   maxHeight: 300,
 };
-const card2= {
+const card2= {//2列
   position:'relative',
   // marginLeft:30,
   margin:5,
@@ -41,15 +41,15 @@ export default function ImgMediaCard(props) {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image="/Pic/D1.jpg"
+          image={props.imagesrc}
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+          <Typography noWrap={true} gutterBottom variant="h5" component="h2">
+            {props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.name}
+            ￥{props.price}
           </Typography>
         </CardContent>
       </CardActionArea>

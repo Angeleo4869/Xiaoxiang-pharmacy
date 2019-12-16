@@ -221,6 +221,7 @@ export default function PaperSheet() {
                 </div>
                 <Divider style={{position:'relative',top:10,left:0}}/>
             </div>
+            <div style={{height:95}}>s</div>{/* 注意一定要加，不然显示不全 */}
     </div>
   );
 }

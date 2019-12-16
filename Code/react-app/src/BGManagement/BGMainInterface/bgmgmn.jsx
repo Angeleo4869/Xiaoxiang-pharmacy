@@ -8,8 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
-import Linechart from './../BackGround/linecharts';
-import Piechart from './../BackGround/piecharts';
+import Linechart from './Component/linecharts';
+import Piechart from './Component/piecharts';
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -64,7 +64,7 @@ const columns = [
             width: '100%',
         },
         tableWrapper: {
-            maxHeight: 440,
+            // maxHeight: 440,
             overflow: 'auto',
         },
 });

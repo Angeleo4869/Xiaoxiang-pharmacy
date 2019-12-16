@@ -29,15 +29,15 @@ export default class C_badge extends React.Component{
             })
           }
         return(
-            <div style={{position:'absolute',right:10}}>
+            <div style={{position:'absolute',right:10,top:20}}>
                 <Badge color="secondary" 
                 showZero={false} 
                 max={99} 
                 badgeContent={this.state.B_num}   
                >
-                    <MailIcon />
+                    <MailIcon style={{color:"#FFFFFF"}}/>
                 </Badge>
-                {this.state.B_num}<Button onClick={fun1}>change</Button>
+                <Button onClick={fun1}>change</Button>
             </div>
         )
     }

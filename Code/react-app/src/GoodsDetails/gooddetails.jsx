@@ -50,7 +50,7 @@ import {
 
   const boxProps = {
     m: 1,
-    border: 1,
+    border: 0,
     marginTop:5,
   };
 

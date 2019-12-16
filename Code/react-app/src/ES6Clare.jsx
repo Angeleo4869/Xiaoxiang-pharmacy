@@ -31,11 +31,10 @@ class Welcome extends React.Component{
     render(){
         return(
             <div>
-                <div style={{display:"flex"}}>
+                <div style={{display:"flex",maxWidth:800}}>
                     <Link  to="/GoodsDetails?name=xiaofeng&age=18">
-                        <Card style={{width:'90%'}}>
+                        <Card style={{width:'90%',maxWidth:600}}>
                             <CardActionArea>
-                            
                                 <CardMedia
                                 component="img"
                                 alt="Contemplative Reptile"
@@ -44,19 +43,18 @@ class Welcome extends React.Component{
                                 title="Contemplative Reptile"
                                 />
                                 <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
+                                <Typography gutterBottom noWrap={true} variant="h5" component="h2">
+                                    伸腿瞪眼丸
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    ￥9.9
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
                     </Link>
                     <Link  to="/GoodsDetails?name=dafeng&age=19">
-                        <Card style={{width:'90%'}}>
+                        <Card style={{width:'90%',maxWidth:600}}>
                             <CardActionArea>
                             
                                 <CardMedia
@@ -67,12 +65,11 @@ class Welcome extends React.Component{
                                 title="Contemplative Reptile"
                                 />
                                 <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
+                                <Typography gutterBottom noWrap={true} variant="h5" component="h2">
+                                    通宵胫骨贴
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                    ￥9.9
                                 </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -89,6 +86,12 @@ class Welcome extends React.Component{
                 </Link>
                 <Link to="/Register">
                     <button onClick={this.handleClick}>click me!</button>
+                </Link>
+                <Link to="/XXYFReactManagement">
+                    <button onClick={this.handleClick}>BG!</button>
+                </Link>
+                <Link to="/Shop">
+                    <button onClick={this.handleClick}>shap!</button>
                 </Link>
                 <Link to="/ImedPurchase">
                      <Button>立即购买</Button>

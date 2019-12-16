@@ -37,7 +37,19 @@ const useStyles = makeStyles({
     justifyContent: 'space-around',
   },
 });
-
+const Cont = [
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
+{id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'}
+]
 export default function SimpleCard() {
   const classes = useStyles();
   // const bull = <span className={classes.bullet}>•</span>;
@@ -76,34 +88,31 @@ export default function SimpleCard() {
                 <Typography variant="h5"  style={{position:'relative',top:0,left:10,width:350}} >推荐</Typography>
                 <Button style={{position:'absolute',top:10,height:30,right:5,color:'',backgroundColor:'#6495ED'}}>换一下</Button>
             </List>
-            
         </div>
-<div className={classes.gridroot}>
-  <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
-  <Hidden smUp implementation="css">
-<GridList cellHeight={300}  cols={2}>
-        {['hello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
-          <GridListTile key={text} >
-            <PTCard  key={index} size={1} name={text}/>
-          </GridListTile>
-        ))}
-</GridList>
-  </Hidden>
-  <Hidden xsDown implementation="css">
-  <GridList cellHeight={330}  cols={4}>
-        {['hhello','the','mad','twhe','mawd','thfe','mafd','thce','mcad'].map((text,index) => (
-          <GridListTile key={text} >
-            <PTCard key={index} size={2} name={text}/>
-          </GridListTile>
-        ))}
-</GridList>
-
-  </Hidden>
-</nav>
-<div style={{height:95}}>s</div>
-</div> 
+        <div className={classes.gridroot}>
+          <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
+          <Hidden xsDown implementation="css">
+            <GridList cellHeight={330}  cols={4}>
+                  {Cont.map((text,index) => (
+                    <GridListTile key={index} >
+                      <PTCard  size={2} id={text.id} name={text.name} price={text.price} imagesrc={text.imagesrc} />
+                    </GridListTile>
+                  ))}
+            </GridList>
+          </Hidden>
+          <Hidden smUp implementation="css">
+            <GridList cellHeight={300}  cols={2}>
+                    {Cont.map((text,index) => (
+                      <GridListTile key={index} >
+                        <PTCard   size={1} id={text.id} name={text.name} price={text.price} imagesrc={text.imagesrc}/>
+                      </GridListTile>
+                    ))}
+            </GridList>
+          </Hidden>
+        </nav>
+        <div style={{height:95}}>s</div>
+        </div> 
     </Paper>
-    
   </div>
   );
 }

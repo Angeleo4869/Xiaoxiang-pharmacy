@@ -40,6 +40,7 @@ import Setting from './../PersonSetting/XXSetting';
 import Revise from './../PersonSetting/revise';
 import Message from './../PersonSetting/message';
 import Address from './../PersonSetting/address';
+import NewAddress from './../PersonSetting/newaddress';
 import './../CSS/Center.css';
 import Cbadge from './../Test/C_badge';
 import Data from './../GlobalData';
@@ -226,6 +227,9 @@ function ResponsiveDrawer(props) {
           </Route>
           <Route path="/PersonCenter/show/address">
                   <Address/>
+          </Route>
+          <Route path="/PersonCenter/show/Newaddress">
+                  <NewAddress/>
           </Route>
           <Route path="/PersonCenter/message">
                   <Message/>
