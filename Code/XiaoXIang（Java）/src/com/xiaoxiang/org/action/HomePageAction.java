@@ -29,25 +29,23 @@ public class HomePageAction extends BaseAction {
 			list = shopGoodsDAO.touristsRecommendedGoods();
 		}
 		
-		for(int i=0;i<list.size();i++){
-			shopGoods = ((ShopGoods)list.get(i));
-//			System.out.println(shopGoods.getGoods().getGoodsComName());
-			getDataMap().put("ShopGoodsid:"+shopGoods.getIdShopGoods().toString(),shopGoods);
-			getDataMap().put(SUCCESS, true);
-		}
+//		for(int i=0;i<list.size();i++){
+//			shopGoods = ((ShopGoods)list.get(i));
+////			System.out.println(shopGoods.getGoods().getGoodsComName());
+//			getDataMap().put("ShopGoodsid:"+shopGoods.getIdShopGoods().toString(),shopGoods);
+//			getDataMap().put(SUCCESS, true);
+//		}
+		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}
 	
 	public String searchQuery() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-//		list = shopGoodsDAO.
-		for(int i=0;i<list.size();i++){
-			shopGoods = ((ShopGoods)list.get(i));
-//			System.out.println(shopGoods.getGoods().getGoodsComName());
-			getDataMap().put("ShopGoodsid"+shopGoods.getIdShopGoods().toString(),shopGoods);
-			getDataMap().put(SUCCESS, true);
-		}
+		String keyWord = request.getParameter("Search");
+		keyWord = "¸ÐÃ°";
+		list = shopGoodsDAO.search(keyWord);
+		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}
 	

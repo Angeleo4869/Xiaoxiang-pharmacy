@@ -33,7 +33,7 @@ public class ShopGoodsTest {
 //		if(dao.save(shopGoods)){
 //			System.out.println(shopGoods.getGoods().getGoodsComName());
 //		}
-		list = dao.touristsRecommendedGoods();
+		list = dao.search("¸ÐÃ°");
 		for(int i=0;i<list.size();i++){
 			shopGoods = (ShopGoods)list.get(i);
 			System.out.println(shopGoods.getGoods().getGoodsComName());

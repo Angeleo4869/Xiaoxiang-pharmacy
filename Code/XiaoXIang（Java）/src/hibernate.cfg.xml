@@ -20,6 +20,7 @@
 		<property name="connection.driver_class">
 			com.mysql.cj.jdbc.Driver
 		</property>
+		<property name="hibernate.show_sql">true</property>
 		<mapping resource="com/xiaoxiang/org/vo/Admin.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Collection.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Oder.hbm.xml" />

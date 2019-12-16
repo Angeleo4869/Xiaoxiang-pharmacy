@@ -22,9 +22,13 @@ public class BaseAction extends ActionSupport {
 	HttpServletResponse response = ServletActionContext.getResponse();
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Map<String, Object> dataMap;
-	JSON json;
-	JSONArray jsonArray;
 	public static String DataMap = "dataMap";
+	public static String Admin = "Admin";
+	public static String Buyer = "Buyer";
+	public static String Store = "Store";;
+	public static String ShopGoods = "ShopGoods";
+	public static String Order = "Oder";
+	public static String Goods = "Goods";
 	public void responseSetHeader() throws Exception{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -57,22 +61,6 @@ public class BaseAction extends ActionSupport {
 	}
 	protected void setDataMap(Map<String, Object> dataMap) {
 		this.dataMap = dataMap;
-	}
-
-	public JSONArray getJsonArray() {
-		return jsonArray;
-	}
-
-	public void setJsonArray(JSONArray jsonArray) {
-		this.jsonArray = jsonArray;
-	}
-
-	public JSON getJson() {
-		return json;
-	}
-
-	public void setJson(JSON json) {
-		this.json = json;
 	}
 
 }

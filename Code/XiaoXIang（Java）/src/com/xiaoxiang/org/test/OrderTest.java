@@ -1,12 +1,15 @@
 package com.xiaoxiang.org.test;
 
 import java.util.Date;
+import java.util.List;
 
 import com.xiaoxiang.org.dao.BuyerDAO;
 import com.xiaoxiang.org.dao.OderDAO;
-import com.xiaoxiang.org.dao.OrderdetailDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
-import com.xiaoxiang.org.vo.*;
+import com.xiaoxiang.org.vo.Buyer;
+import com.xiaoxiang.org.vo.Oder;
+import com.xiaoxiang.org.vo.Orderdetail;
+import com.xiaoxiang.org.vo.ShopGoods;
 
 public class OrderTest {
 
@@ -31,10 +34,13 @@ public class OrderTest {
 		oder.setShopGoods(shopGoods);
 		oder.setOderState((short)1);
 		oder.setOrderdetail(orderdetail);
-		if(oderDAO.save(oder)){
-			System.out.println("OK");
+//		if(oderDAO.save(oder)){
+//			System.out.println("OK");
+//		}
+		List list = oderDAO.findByExample(oder);
+		for(int i=0;i<list.size();i++){
+			System.out.println(((Oder)list.get(i)).getShopGoods());
 		}
-
 	}
 
 }

@@ -43,7 +43,7 @@ public class OderDAO extends BaseHibernateDAO {
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("delete failed", re);
 			throw re;
 		}
@@ -52,7 +52,7 @@ public class OderDAO extends BaseHibernateDAO {
 	public Oder findById(java.lang.Integer id) {
 		log.debug("getting Oder instance with id: " + id);
 		try {
-			Oder instance = (Oder) getSession().get("com.xiaoxiang.org.dao.Oder", id);
+			Oder instance = (Oder) getSession().get(Oder.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -63,7 +63,7 @@ public class OderDAO extends BaseHibernateDAO {
 	public List findByExample(Oder instance) {
 		log.debug("finding Oder instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Oder").add(Example.create(instance))
+			List results = getSession().createCriteria(Oder.class).add(Example.create(instance))
 					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;

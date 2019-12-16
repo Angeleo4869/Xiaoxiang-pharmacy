@@ -55,7 +55,7 @@ public class BuyerDAO extends BaseHibernateDAO {
 		try {
 			Buyer instance = (Buyer) getSession().get(Buyer.class, id);
 			return instance;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
 		}
@@ -64,7 +64,7 @@ public class BuyerDAO extends BaseHibernateDAO {
 	public List findByExample(Buyer instance) {
 		log.debug("finding Buyer instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Buyer").add(Example.create(instance))
+			List results = getSession().createCriteria(Buyer.class).add(Example.create(instance))
 					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;

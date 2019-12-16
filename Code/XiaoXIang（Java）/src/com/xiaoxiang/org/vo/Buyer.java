@@ -3,8 +3,6 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.struts2.json.annotations.JSON;
-
 /**
  * Buyer entity. @author MyEclipse Persistence Tools
  */
@@ -34,8 +32,7 @@ public class Buyer implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Buyer(String buyerName, String buyerNumber, String buyerPassword) {
-		this.buyerName = buyerName;
+	public Buyer(String buyerNumber, String buyerPassword) {
 		this.buyerNumber = buyerNumber;
 		this.buyerPassword = buyerPassword;
 	}
@@ -115,7 +112,7 @@ public class Buyer implements java.io.Serializable {
 	public void setBuyerHeadpor(String buyerHeadpor) {
 		this.buyerHeadpor = buyerHeadpor;
 	}
-	@JSON(serialize=false)
+
 	public Set getOders() {
 		return this.oders;
 	}
@@ -123,7 +120,7 @@ public class Buyer implements java.io.Serializable {
 	public void setOders(Set oders) {
 		this.oders = oders;
 	}
-	@JSON(serialize=false)
+
 	public Set getVoucherses() {
 		return this.voucherses;
 	}
@@ -131,7 +128,7 @@ public class Buyer implements java.io.Serializable {
 	public void setVoucherses(Set voucherses) {
 		this.voucherses = voucherses;
 	}
-	@JSON(serialize=false)
+
 	public Set getShoppingcarts() {
 		return this.shoppingcarts;
 	}
@@ -139,7 +136,7 @@ public class Buyer implements java.io.Serializable {
 	public void setShoppingcarts(Set shoppingcarts) {
 		this.shoppingcarts = shoppingcarts;
 	}
-	@JSON(serialize=false)
+
 	public Set getOrderdetails() {
 		return this.orderdetails;
 	}
@@ -147,7 +144,7 @@ public class Buyer implements java.io.Serializable {
 	public void setOrderdetails(Set orderdetails) {
 		this.orderdetails = orderdetails;
 	}
-	@JSON(serialize=false)
+
 	public Set getComplaintses() {
 		return this.complaintses;
 	}
@@ -155,7 +152,7 @@ public class Buyer implements java.io.Serializable {
 	public void setComplaintses(Set complaintses) {
 		this.complaintses = complaintses;
 	}
-	@JSON(serialize=false)
+
 	public Set getCollections() {
 		return this.collections;
 	}

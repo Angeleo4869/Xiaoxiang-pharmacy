@@ -6,9 +6,6 @@
 	
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminAction">
-			<result name="jsonArray" type="json">
-			 	<param name="root">jsonArray</param>
-			 </result>
 			 <result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
@@ -80,8 +77,10 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
+		-->
 		
-		<action name="Oder">
+		<action name="viewOrder" 
+			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
@@ -92,7 +91,7 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		
+		<!--
 		<action name="Vouchers">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>

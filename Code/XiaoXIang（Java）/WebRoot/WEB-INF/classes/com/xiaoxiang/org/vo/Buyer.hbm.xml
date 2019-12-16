@@ -11,7 +11,7 @@
             <generator class="native" />
         </id>
         <property name="buyerName" type="java.lang.String">
-            <column name="BuyerName" length="45" not-null="true" />
+            <column name="BuyerName" length="45" />
         </property>
         <property name="buyerNumber" type="java.lang.String">
             <column name="BuyerNumber" length="45" not-null="true" unique="true" />

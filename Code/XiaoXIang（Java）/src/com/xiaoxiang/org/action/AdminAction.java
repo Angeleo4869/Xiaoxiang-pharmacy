@@ -7,8 +7,6 @@ import java.util.List;
 import com.xiaoxiang.org.dao.AdminDAO;
 import com.xiaoxiang.org.vo.Admin;
 
-import net.sf.json.JSON;
-
 public class AdminAction extends BaseAction {
 	
 	/**
@@ -21,25 +19,16 @@ public class AdminAction extends BaseAction {
 	public String execute() throws Exception {
         responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        getAdmin().setAdminNumber(request.getParameter("AdminNumber"));
-        getAdmin().setAdminPassword(request.getParameter("AdminPassword"));
-        if(getAdmin()!=null){
-        list = adminDAO.findByExample(getAdmin());
-        jsonArray.add(list);
-//		for(int i=0;i<list.size();i++){
-//			admin = list.get(i);
-//			System.out.println(admin.getAdminNumber());
-//			getDataMap().put("Admin", admin);
-//			
-//			getJsonArray().add(getDataMap().get(admin));
-//			getDataMap().put(SUCCESS, true);
-//		}
-//		
-//        }else {
-//        	getDataMap().put(ERROR, false);
+        admin.setAdminNumber(request.getParameter("AdminNumber"));
+        admin.setAdminPassword(request.getParameter("AdminPassword"));
+        if(admin.getAdminNumber()!=null){
+        	System.out.println(admin.getAdminNumber());
+        list = adminDAO.findByExample(admin);
+        getDataMap().put("Admin", list);
+        }else {
+        	getDataMap().put(ERROR, false);
         }
-//		System.out.println("success");
-		return "jsonArray";
+		return DataMap;
 		
 	}
 	

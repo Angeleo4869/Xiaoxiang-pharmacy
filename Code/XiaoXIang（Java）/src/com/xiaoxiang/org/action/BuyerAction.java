@@ -17,11 +17,13 @@ public class BuyerAction extends BaseAction {
 		
        responseSetHeader();
        setDataMap(new HashMap<String, Object>());
+       buyer.setBuyerNumber(request.getParameter("BuyerNumber"));
+       buyer.setBuyerPassword(request.getParameter("BuyerPassword"));
+       if(buyer.getBuyerNumber()!=null){
        List<Buyer> list = buyerDAO.findByExample(getBuyer());
-		for(int i=0;i<list.size();i++){
-			buyer = list.get(i);
-			getDataMap().put("Buyer",buyer);
-			getDataMap().put(SUCCESS, true);
+       getDataMap().put("Buyer",list);
+		}else {
+			getDataMap().put(ERROR,false);
 		}
 		return "dataMap";
 	}

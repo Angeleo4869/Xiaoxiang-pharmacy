@@ -2,9 +2,10 @@ package com.xiaoxiang.org.action;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import com.xiaoxiang.org.dao.BuyerDAO;
 import com.xiaoxiang.org.dao.OderDAO;
-import com.xiaoxiang.org.dao.OrderdetailDAO;
 import com.xiaoxiang.org.vo.Buyer;
 import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.Orderdetail;
@@ -30,12 +31,22 @@ public class OrderAction extends BaseAction {
 		order.setOderState((short)1);
 		order.setOrderdetail(orderdetail);
 		if(orderDAO.save(order)){
-//			System.out.println("OK");
 			getDataMap().put(SUCCESS, true);
 		}else {
 			getDataMap().put(ERROR,false);
 		}
         return DataMap;
+	}
+	
+	public String viewOrder() throws Exception{
+		responseSetHeader();
+        setDataMap(new HashMap<String, Object>());
+        buyer = new BuyerDAO().findById(11);
+        System.out.println(buyer.getBuyerName());
+        order.setBuyer(buyer);
+		List list = orderDAO.findByExample(order);
+		getDataMap().put("Order", list);
+		return DataMap;
 	}
 
 }

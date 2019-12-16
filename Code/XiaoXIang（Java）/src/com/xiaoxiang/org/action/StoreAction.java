@@ -18,13 +18,15 @@ public class StoreAction extends BaseAction {
 		
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
+		store.setStoreNumber(request.getParameter("StoreNumber"));
+		store.setStorePassword(request.getParameter("StorePassword"));
+		if(store.getStoreNumber()!=null){
 		List<Store> list = storeDao.findByExample(store);
-		for(int i=0;i<list.size();i++){
-			store = list.get(i);
-			getDataMap().put("Store", store);
-			getDataMap().put(SUCCESS, true);
-			}
-		return "dataMap";
+		getDataMap().put("Store", list);
+		} else {
+			getDataMap().put(ERROR, false);
+		}
+		return DataMap;
 	}
 	
 	public String register() throws Exception{

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("save failed", re);
 			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -47,6 +50,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -58,35 +63,32 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
 	public List findByExample(ShopGoods instance) {
 		log.debug("finding ShopGoods instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.ShopGoods").add(Example.create(instance))
+			List results = getSession().createCriteria(ShopGoods.class).add(Example.create(instance))
 					.list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (Exception re) {
 			log.error("find by example failed", re);
 			return null;
+		}finally {
+			closeSession();
 		}
 	}
 	public List search(String keyword){
 		log.debug("finding ShopGoods instance by keyword");
 		try{
 			session=getSession();
-			Query query = session.createQuery("from Shop_Goods where Goods in "
-					+ " (select idGoods from Goods "
-					+ " where GoodCheName like '%?%' or GoodsComName like '%?%' or idMajorFunction in "
-					+ " (select idMajorFunction from MajorFunction where "
-					+ " GoodsMajorFunctioncol like '%?%' or GoodsClass like '%?%' or GoodsSeries like '%?%'))"
-					+ " or Stort in "
-					+ " (select idStore from Store where StoreName like '%?%')");
-			for(int i=0;i<6;i++){
-				query.setParameter(i, keyword);
-			}
+			SQLQuery  query = session.createSQLQuery("call searchByKeyWord(?);");
+			query.setParameter(0, keyword);
+			query.addEntity(ShopGoods.class);
 			List list = query.list();
 			closeSession();
 			return list;
@@ -107,6 +109,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -119,6 +123,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("find all failed", re);
 			return null;
+		}finally {
+			closeSession();
 		}
 	}
 	public List touristsRecommendedGoods(){
@@ -131,6 +137,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("find all failed", re);
 			return null;
+		}finally {
+			closeSession();
 		}
 	}
 	
@@ -146,6 +154,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("find all failed", re);
 			return null;
+		}finally {
+			closeSession();
 		}
 	}
 	
@@ -158,6 +168,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("merge failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -169,6 +181,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -180,6 +194,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 }
