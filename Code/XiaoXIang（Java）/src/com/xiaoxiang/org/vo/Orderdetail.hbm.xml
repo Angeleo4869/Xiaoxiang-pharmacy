@@ -8,15 +8,15 @@
     <class name="com.xiaoxiang.org.vo.Orderdetail" table="orderdetail" catalog="XiaoXiangPharmacy">
         <id name="idOrder" type="java.lang.Integer">
             <column name="idOrder" />
-            <generator class="identity" />
+            <generator class="native" />
         </id>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="select">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false">
             <column name="idBuyer" not-null="true" />
         </many-to-one>
-        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="select">
+        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="join" lazy="false">
             <column name="idShop_Goods" not-null="true" />
         </many-to-one>
-        <many-to-one name="vouchers" class="com.xiaoxiang.org.vo.Vouchers" fetch="select">
+        <many-to-one name="vouchers" class="com.xiaoxiang.org.vo.Vouchers" fetch="join" lazy="false">
             <column name="idVouchers" />
         </many-to-one>
         <property name="paymentTime" type="java.util.Date">
@@ -26,12 +26,17 @@
             <column name="TotalPrice" precision="22" scale="0" not-null="true" />
         </property>
         <property name="orderNumber" type="java.lang.String">
-            <column name="OrderNumber" not-null="true" />
+            <column name="OrderNumber" length="45" not-null="true" unique="true" />
         </property>
         <property name="logistics" type="java.lang.Short">
             <column name="Logistics" not-null="true" />
         </property>
-        <one-to-one name="order" class="com.xiaoxiang.org.vo.Oder" cascade="all" lazy="false"/>
+        <property name="goodsNumber" type="java.lang.Integer">
+            <column name="GoodsNumber" not-null="true" />
+        </property>
+        <property name="oderState" type="java.lang.Short">
+            <column name="OderState" not-null="true" />
+        </property>
         <set name="commentses" inverse="true">
             <key>
                 <column name="idOder" not-null="true" />

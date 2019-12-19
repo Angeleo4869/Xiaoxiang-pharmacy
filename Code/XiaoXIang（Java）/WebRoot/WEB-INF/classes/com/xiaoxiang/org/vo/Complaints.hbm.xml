@@ -10,10 +10,10 @@
             <column name="idComplaints" />
             <generator class="native" />
         </id>
-        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="join">
+        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="join" lazy="false">
             <column name="idStore" not-null="true" />
         </many-to-one>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false">
             <column name="idBuyer" not-null="true" />
         </many-to-one>
         <property name="complaintsContent" type="java.lang.String">

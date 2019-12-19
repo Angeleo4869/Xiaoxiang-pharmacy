@@ -24,12 +24,14 @@ import com.xiaoxiang.org.vo.Orderdetail;
 public class OrderdetailDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(OrderdetailDAO.class);
 
-	public void save(Orderdetail transientInstance) {
+	public boolean save(Orderdetail transientInstance) {
 		log.debug("saving Orderdetail instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("save failed", re);
 			throw re;
 		}
@@ -56,6 +58,7 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+
 
 	public List findByExample(Orderdetail instance) {
 		log.debug("finding Orderdetail instance by example");

@@ -28,12 +28,6 @@
         <property name="buyerHeadpor" type="java.lang.String">
             <column name="buyerHeadpor" length="45" />
         </property>
-        <set name="oders" inverse="true">
-            <key>
-                <column name="idBuyer" not-null="true" />
-            </key>
-            <one-to-many class="com.xiaoxiang.org.vo.Oder" />
-        </set>
         <set name="voucherses" inverse="true">
             <key>
                 <column name="idBuyer" not-null="true" />

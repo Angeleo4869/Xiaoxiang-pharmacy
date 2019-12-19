@@ -47,7 +47,8 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+			closeSession();
+		} catch (Exception re) {
 			log.error("delete failed", re);
 			throw re;
 		}finally {
@@ -59,8 +60,9 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		log.debug("getting ShopGoods instance with id: " + id);
 		try {
 			ShopGoods instance = (ShopGoods) getSession().get(ShopGoods.class, id);
+			closeSession();
 			return instance;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
 		}finally {
@@ -86,9 +88,9 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		log.debug("finding ShopGoods instance by keyword");
 		try{
 			session=getSession();
-			SQLQuery  query = session.createSQLQuery("call searchByKeyWord(?);");
+			SQLQuery  query = session.createSQLQuery("{call searchByKeyWord( ? )}");
 			query.setParameter(0, keyword);
-			query.addEntity(ShopGoods.class);
+			query.addEntity("sg",ShopGoods.class);
 			List list = query.list();
 			closeSession();
 			return list;
@@ -130,7 +132,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List touristsRecommendedGoods(){
 		log.debug("recommended Goods instances");
 		try {
-			String queryString = "from ShopGoods order by shop_GoodsSales desc";
+			String queryString = "from ShopGoods order by shopGoodsSales desc";
 			
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
@@ -145,14 +147,19 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List membersRecommendedGoods(Buyer buyer){
 		log.debug("recommended Goods instances");
 		try {
-			String queryString = "from ShopGoods where idShopGoods in "
-					+ " (select idShopGoods from Oder where idBuyer = ? "
-					+ " )order by shopGoodssales desc";
-			Query queryObject = getSession().createQuery(queryString);
-			queryObject.setParameter(0, buyer.getIdBuyer());
+			String queryString = "select * from shop_goods"
+					+ " where shop_goods.idShop_Goods in ("
+					+ " select od.idShop_Goods"
+					+ " from orderdetail as od"
+					+ " where od.idBuyer = ?)"
+					+ " order by shop_goods.Shop_GoodsSales desc";
+			SQLQuery queryObject = getSession().createSQLQuery(queryString);
+			queryObject.addEntity(ShopGoods.class);
+			queryObject.setParameter(0, buyer);
 			return queryObject.list();
 		} catch (Exception re) {
 			log.error("find all failed", re);
+			re.printStackTrace();
 			return null;
 		}finally {
 			closeSession();

@@ -35,6 +35,8 @@ public class StoreDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("save failed", re);
 			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -43,9 +45,12 @@ public class StoreDAO extends BaseHibernateDAO {
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
+			closeSession();
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -53,10 +58,13 @@ public class StoreDAO extends BaseHibernateDAO {
 		log.debug("getting Store instance with id: " + id);
 		try {
 			Store instance = (Store) getSession().get(Store.class, id);
+			closeSession();
 			return instance;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -66,10 +74,13 @@ public class StoreDAO extends BaseHibernateDAO {
 			List results = getSession().createCriteria(Store.class).add(Example.create(instance))
 					.list();
 			log.debug("find by example successful, result size: " + results.size());
+			closeSession();
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -79,10 +90,13 @@ public class StoreDAO extends BaseHibernateDAO {
 			String queryString = "from Store as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
+			closeSession();
 			return queryObject.list();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by property name failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -91,10 +105,13 @@ public class StoreDAO extends BaseHibernateDAO {
 		try {
 			String queryString = "from Store";
 			Query queryObject = getSession().createQuery(queryString);
+			closeSession();
 			return queryObject.list();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find all failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -103,10 +120,13 @@ public class StoreDAO extends BaseHibernateDAO {
 		try {
 			Store result = (Store) getSession().merge(detachedInstance);
 			log.debug("merge successful");
+			closeSession();
 			return result;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("merge failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -115,9 +135,11 @@ public class StoreDAO extends BaseHibernateDAO {
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

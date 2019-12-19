@@ -60,11 +60,6 @@
 			 </result>
 		</action>
 		
-		<action name="FindGoods">
-			<result name="dataMap" type="json">
-			 	<param name="root">dataMap</param>
-			 </result>
-		</action>
 		
 		<action name="BuyerGoods">
 			<result name="dataMap" type="json">
@@ -79,13 +74,18 @@
 		</action>
 		-->
 		
-		<action name="viewOrder" 
+		<action name="ViewOrder" 
 			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
+		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
 		<action name="OderDetail">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>

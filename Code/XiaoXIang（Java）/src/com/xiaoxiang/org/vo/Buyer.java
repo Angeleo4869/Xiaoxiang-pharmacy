@@ -3,6 +3,8 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Buyer entity. @author MyEclipse Persistence Tools
  */
@@ -18,7 +20,6 @@ public class Buyer implements java.io.Serializable {
 	private String buyerEmail;
 	private String buyerTel;
 	private String buyerHeadpor;
-	private Set oders = new HashSet(0);
 	private Set voucherses = new HashSet(0);
 	private Set shoppingcarts = new HashSet(0);
 	private Set orderdetails = new HashSet(0);
@@ -39,7 +40,7 @@ public class Buyer implements java.io.Serializable {
 
 	/** full constructor */
 	public Buyer(String buyerName, String buyerNumber, String buyerPassword, String buyerEmail, String buyerTel,
-			String buyerHeadpor, Set oders, Set voucherses, Set shoppingcarts, Set orderdetails, Set complaintses,
+			String buyerHeadpor, Set voucherses, Set shoppingcarts, Set orderdetails, Set complaintses,
 			Set collections) {
 		this.buyerName = buyerName;
 		this.buyerNumber = buyerNumber;
@@ -47,7 +48,6 @@ public class Buyer implements java.io.Serializable {
 		this.buyerEmail = buyerEmail;
 		this.buyerTel = buyerTel;
 		this.buyerHeadpor = buyerHeadpor;
-		this.oders = oders;
 		this.voucherses = voucherses;
 		this.shoppingcarts = shoppingcarts;
 		this.orderdetails = orderdetails;
@@ -113,14 +113,7 @@ public class Buyer implements java.io.Serializable {
 		this.buyerHeadpor = buyerHeadpor;
 	}
 
-	public Set getOders() {
-		return this.oders;
-	}
-
-	public void setOders(Set oders) {
-		this.oders = oders;
-	}
-
+	@JSON(serialize=false)
 	public Set getVoucherses() {
 		return this.voucherses;
 	}
@@ -129,6 +122,7 @@ public class Buyer implements java.io.Serializable {
 		this.voucherses = voucherses;
 	}
 
+	@JSON(serialize=false)
 	public Set getShoppingcarts() {
 		return this.shoppingcarts;
 	}
@@ -137,6 +131,7 @@ public class Buyer implements java.io.Serializable {
 		this.shoppingcarts = shoppingcarts;
 	}
 
+	@JSON(serialize=false)
 	public Set getOrderdetails() {
 		return this.orderdetails;
 	}
@@ -145,6 +140,7 @@ public class Buyer implements java.io.Serializable {
 		this.orderdetails = orderdetails;
 	}
 
+	@JSON(serialize=false)
 	public Set getComplaintses() {
 		return this.complaintses;
 	}
@@ -153,6 +149,7 @@ public class Buyer implements java.io.Serializable {
 		this.complaintses = complaintses;
 	}
 
+	@JSON(serialize=false)
 	public Set getCollections() {
 		return this.collections;
 	}

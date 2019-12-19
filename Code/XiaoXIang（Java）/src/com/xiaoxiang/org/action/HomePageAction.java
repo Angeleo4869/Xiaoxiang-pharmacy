@@ -19,31 +19,26 @@ public class HomePageAction extends BaseAction {
 	private Buyer buyer = new Buyer();
 	private ShopGoods shopGoods = new ShopGoods();
 	private ShopGoodsDAO shopGoodsDAO = new ShopGoodsDAO();
+	//Ö÷Ò³ÍÆ¼ö£¨µÇÂ¼/·ÇµÇÂ¼£©
 	public String execute() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		buyer = null;
-		if(buyer!=null)
+		buyer.setIdBuyer(null);
+		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
+		if(buyer.getIdBuyer()!=null)
 		list = shopGoodsDAO.membersRecommendedGoods(buyer);
 		else {
 			list = shopGoodsDAO.touristsRecommendedGoods();
 		}
-		
-//		for(int i=0;i<list.size();i++){
-//			shopGoods = ((ShopGoods)list.get(i));
-////			System.out.println(shopGoods.getGoods().getGoodsComName());
-//			getDataMap().put("ShopGoodsid:"+shopGoods.getIdShopGoods().toString(),shopGoods);
-//			getDataMap().put(SUCCESS, true);
-//		}
 		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}
 	
+	//ËÑË÷ÉÌÆ·£¬µêÆÌ¹Ø¼ü×Ö
 	public String searchQuery() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		String keyWord = request.getParameter("Search");
-		keyWord = "¸ÐÃ°";
 		list = shopGoodsDAO.search(keyWord);
 		getDataMap().put(ShopGoods, list);
 		return DataMap;

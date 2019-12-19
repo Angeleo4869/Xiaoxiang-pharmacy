@@ -10,10 +10,10 @@
             <column name="idshoppingcart" />
             <generator class="native" />
         </id>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false">
             <column name="Buyer" not-null="true" />
         </many-to-one>
-        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="join">
+        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="join" lazy="false">
             <column name="Shop_Goods" not-null="true" />
         </many-to-one>
         <property name="goodsNumber" type="java.lang.Integer">

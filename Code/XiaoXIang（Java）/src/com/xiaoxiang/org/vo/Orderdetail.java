@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Orderdetail entity. @author MyEclipse Persistence Tools
  */
@@ -20,7 +22,8 @@ public class Orderdetail implements java.io.Serializable {
 	private Double totalPrice;
 	private String orderNumber;
 	private Short logistics;
-	private Oder order;
+	private Integer goodsNumber;
+	private Short oderState;
 	private Set commentses = new HashSet(0);
 
 	// Constructors
@@ -30,29 +33,30 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Date paymentTime, Double totalPrice,
-			String orderNumber, Short logistics,Oder order) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Date paymentTime, Double totalPrice, String orderNumber,
+			Short logistics, Integer goodsNumber, Short oderState) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
-		this.vouchers = vouchers;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
-		this.setOrderNumber(orderNumber);
+		this.orderNumber = orderNumber;
 		this.logistics = logistics;
-		this.order = order;
+		this.goodsNumber = goodsNumber;
+		this.oderState = oderState;
 	}
 
 	/** full constructor */
 	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Date paymentTime, Double totalPrice,
-			String orderNumber, Short logistics,Oder order, Set commentses) {
+			String orderNumber, Short logistics, Integer goodsNumber, Short oderState, Set commentses) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
-		this.setOrderNumber(orderNumber);
+		this.orderNumber = orderNumber;
 		this.logistics = logistics;
-		this.order = order;
+		this.goodsNumber = goodsNumber;
+		this.oderState = oderState;
 		this.commentses = commentses;
 	}
 
@@ -106,6 +110,14 @@ public class Orderdetail implements java.io.Serializable {
 		this.totalPrice = totalPrice;
 	}
 
+	public String getOrderNumber() {
+		return this.orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
 	public Short getLogistics() {
 		return this.logistics;
 	}
@@ -114,28 +126,29 @@ public class Orderdetail implements java.io.Serializable {
 		this.logistics = logistics;
 	}
 
+	public Integer getGoodsNumber() {
+		return this.goodsNumber;
+	}
+
+	public void setGoodsNumber(Integer goodsNumber) {
+		this.goodsNumber = goodsNumber;
+	}
+
+	public Short getOderState() {
+		return this.oderState;
+	}
+
+	public void setOderState(Short oderState) {
+		this.oderState = oderState;
+	}
+
+	@JSON(serialize=false)
 	public Set getCommentses() {
 		return this.commentses;
 	}
 
 	public void setCommentses(Set commentses) {
 		this.commentses = commentses;
-	}
-
-	public Oder getOrder() {
-		return order;
-	}
-
-	public void setOrder(Oder order) {
-		this.order = order;
-	}
-
-	public String getOrderNumber() {
-		return orderNumber;
-	}
-
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
 	}
 
 }

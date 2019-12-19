@@ -5,18 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.BuyerDAO;
-import com.xiaoxiang.org.dao.OderDAO;
+import com.xiaoxiang.org.dao.OrderdetailDAO;
 import com.xiaoxiang.org.vo.Buyer;
-import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.Orderdetail;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 public class OrderAction extends BaseAction {
-	private Oder order;
 	private Orderdetail orderdetail;
 	private ShopGoods shopGoods;
 	private Buyer buyer;
-	private OderDAO orderDAO = new OderDAO();
+	private OrderdetailDAO orderdetailDAO = new OrderdetailDAO();
 	public String placeOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
@@ -25,12 +23,9 @@ public class OrderAction extends BaseAction {
 		orderdetail.setShopGoods(shopGoods);
 		orderdetail.setLogistics((short) 5);
 		orderdetail.setPaymentTime(new Date());
-		orderdetail.setTotalPrice(shopGoods.getShopGoodsPrice());
-		order.setBuyer(buyer);
-		order.setShopGoods(shopGoods);
-		order.setOderState((short)1);
-		order.setOrderdetail(orderdetail);
-		if(orderDAO.save(order)){
+		orderdetail.setGoodsNumber(1);
+		orderdetail.setTotalPrice(shopGoods.getShopGoodsPrice()*orderdetail.getGoodsNumber());
+		if(orderdetailDAO.save(orderdetail)){
 			getDataMap().put(SUCCESS, true);
 		}else {
 			getDataMap().put(ERROR,false);
@@ -43,8 +38,7 @@ public class OrderAction extends BaseAction {
         setDataMap(new HashMap<String, Object>());
         buyer = new BuyerDAO().findById(11);
         System.out.println(buyer.getBuyerName());
-        order.setBuyer(buyer);
-		List list = orderDAO.findByExample(order);
+		List list = orderdetailDAO.findByExample(orderdetail);
 		getDataMap().put("Order", list);
 		return DataMap;
 	}

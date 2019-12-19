@@ -23,7 +23,6 @@
 		<property name="hibernate.show_sql">true</property>
 		<mapping resource="com/xiaoxiang/org/vo/Admin.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Collection.hbm.xml" />
-		<mapping resource="com/xiaoxiang/org/vo/Oder.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Buyer.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/ShopGoods.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Orderdetail.hbm.xml" />
@@ -34,6 +33,7 @@
 		<mapping resource="com/xiaoxiang/org/vo/Goods.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Shoppingcart.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Majorfunction.hbm.xml" />
+		<mapping resource="com/xiaoxiang/org/vo/OrderView.hbm.xml" />
 
 	</session-factory>
 
