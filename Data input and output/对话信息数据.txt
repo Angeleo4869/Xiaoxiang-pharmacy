@@ -1,0 +1,9 @@
+输入
+用户的唯一id
+
+输出 昵称 头像 信息
+[{name:'ITEMONE',img:'moren',message:[{con:'0',mess:'diyddddige'},{con:'1',mess:'dieaaaaaaaarge'},{con:'0',mess:'diige'},{con:'1',mess:'diaaaage'}]},
+    {name:'ITEM TWO',img:'moren',message:[{con:'1',mess:'diyige'},{con:'0',mess:'dierge'}]},
+    {name:'ITEM THREE',img:'moren',message:[{con:'0',mess:'diyige'},{con:'1',mess:'dierge'}]},
+    
+  ];

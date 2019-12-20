@@ -6,7 +6,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Hidden } from '@material-ui/core';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import Button from '@material-ui/core/Button';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import GlobalData from './../GlobalData';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
@@ -88,16 +95,85 @@ const useStyles = makeStyles(theme => ({
     marginTop:50,
     right:0,
     position:'absolute',
+    backgroundColor: "#F0F0F0",
     [theme.breakpoints.down('sm')]: {
         marginTop:0,
         bottom:0,
     },
+  },
+  cardmedia: {
+      width: '330px',
+      height:'300px',
   }
 }));
-const conT =[{name:'xiaofeng',num:1,price:29.9},{name:'dafeng',num:1,price:29.9}]
+
+function ResponsiveDialog() {
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const PayedThenhandleClose = () => {
+        setOpen(false);
+      };
+    return (
+      <div>
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          提交订单
+        </Button>
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">{"欢迎使用潇湘支付"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              请扫描下方二维码，支付完成后点击支付完成。您的宝贝即将发货！
+              <center>
+              <CardMedia
+                    className={classes.cardmedia}
+                    image="/Pic/pay.png"
+                    title="Scan It Now!!!"
+                />
+                </center>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose} color="primary">
+              取消
+            </Button>
+            <Button onClick={PayedThenhandleClose} color="primary" autoFocus>
+              支付完成
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+
 export default function imedPurchase() {
   const classes = useStyles();
 
+  const conT =[
+    {name:'xiaofeng',num:1,price:29.9},
+    {name:'dafeng',num:1,price:28.9}
+    ]
+    var Sprice = 0;
+    for(var j = 0,len = conT.length; j < len; j++){
+        Sprice+=conT[j].price;
+    }
+
+
+//地址栏采用全局数据，在进入此界面时获取
   return (
       <div>
         <Typography>立即购买</Typography>
@@ -107,14 +183,14 @@ export default function imedPurchase() {
                 <div style={{display:'inline'}}>
                     <div style={{display:'flex'}}>
                         <Typography  component="h5" >
-                            小峰
+                            {GlobalData.address[0]} &nbsp;&nbsp;&nbsp;&nbsp;
                         </Typography>
                         <Typography  component="h6" >
-                            15107361892
+                            {GlobalData.address[1]}
                         </Typography>
                     </div>
                     <Typography  component="h5" >
-                            湖南中医药大学岳麓区学士街道湖南中医药大学含浦校区
+                            {GlobalData.address[2]}
                     </Typography>
                 </div>
                 <MenuRoundedIcon style={{position:'absolute',right:0,marginRight:10,paddingTop:12}}/>
@@ -200,13 +276,14 @@ export default function imedPurchase() {
             )}
         <Paper>
             <div className={classes.payButtonbar}>
-                <Typography  component="h6" >
-                    共1件
+                <Typography  component="h6" style={{marginTop:5}}>
+                    共{conT.length}件&nbsp;合计
                 </Typography>
-                <Typography  component="h6" >
-                    合计￥9.99
+                <Typography  component="h6" style={{marginTop:5,color:"#FF0000"}}>
+                    ￥{Sprice}&nbsp;&nbsp;
                 </Typography>
-                <Button>提交订单</Button>
+                {/* <Button>提交订单</Button> */}
+                <ResponsiveDialog/>
             </div>
         </Paper>
         </div>

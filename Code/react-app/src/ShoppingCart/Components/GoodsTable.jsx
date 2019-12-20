@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function CustomizedTables() {
   const classes = useStyles();
-
+  
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="customized table">
@@ -72,7 +72,7 @@ export default function CustomizedTables() {
         <TableBody>
           {rows.map(row => (
             <StyledTableRow key={row.name}>
-                <StyledTableCell ><Checkbox/></StyledTableCell>
+                <StyledTableCell ><Checkbox checked={false}/></StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {/* 商品图片以及商品名称 */}
                   <GoodsCard></GoodsCard>

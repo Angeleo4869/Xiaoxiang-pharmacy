@@ -23,7 +23,14 @@ export default class DropzoneDialogExample extends Component {
             files: files, 
             open: false
         });
-        console.log(this.state.files[0].name)
+        // console.log(this.state.files[0].name)
+        fetch('URL', {
+          method: 'post',
+          body: this.state.files,
+          }).then(response => response.json())
+          .then((data) => {
+               console.log(data);
+          });
     }
 
     handleOpen() {
@@ -46,6 +53,8 @@ export default class DropzoneDialogExample extends Component {
                     showPreviews={true}
                     maxFileSize={5000000}
                     onClose={this.handleClose.bind(this)}
+                    onChange={()=>alert("change")}
+                    onDrop={()=>alert("drop")}
                 />
             </div>
         );
