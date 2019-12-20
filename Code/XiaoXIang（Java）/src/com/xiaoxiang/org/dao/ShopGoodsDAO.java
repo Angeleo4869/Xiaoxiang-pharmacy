@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.xiaoxiang.org.vo.Buyer;
+import com.xiaoxiang.org.vo.GoodsView;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 /**
@@ -90,7 +91,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 			session=getSession();
 			SQLQuery  query = session.createSQLQuery("{call searchByKeyWord( ? )}");
 			query.setParameter(0, keyword);
-			query.addEntity("sg",ShopGoods.class);
+			query.addEntity("bv",GoodsView.class);
 			List list = query.list();
 			closeSession();
 			return list;
@@ -132,7 +133,7 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List touristsRecommendedGoods(){
 		log.debug("recommended Goods instances");
 		try {
-			String queryString = "from ShopGoods order by shopGoodsSales desc";
+			String queryString = "from GoodsView";
 			
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
@@ -147,14 +148,13 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 	public List membersRecommendedGoods(Buyer buyer){
 		log.debug("recommended Goods instances");
 		try {
-			String queryString = "select * from shop_goods"
-					+ " where shop_goods.idShop_Goods in ("
+			String queryString = "select * from Goods_view"
+					+ " where Goods_view.idShop_Goods in ("
 					+ " select od.idShop_Goods"
 					+ " from orderdetail as od"
-					+ " where od.idBuyer = ?)"
-					+ " order by shop_goods.Shop_GoodsSales desc";
+					+ " where od.idBuyer = ?)";
 			SQLQuery queryObject = getSession().createSQLQuery(queryString);
-			queryObject.addEntity(ShopGoods.class);
+			queryObject.addEntity(GoodsView.class);
 			queryObject.setParameter(0, buyer);
 			return queryObject.list();
 		} catch (Exception re) {

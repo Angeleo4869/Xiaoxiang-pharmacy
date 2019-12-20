@@ -28,6 +28,7 @@ public class BuyerDAO extends BaseHibernateDAO {
 		log.debug("saving Buyer instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
 			closeSession();
 			return true;

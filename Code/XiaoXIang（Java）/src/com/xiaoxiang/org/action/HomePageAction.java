@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.struts2.json.annotations.JSON;
 
+import com.xiaoxiang.org.dao.MajorfunctionDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Buyer;
 import com.xiaoxiang.org.vo.ShopGoods;
@@ -34,7 +35,7 @@ public class HomePageAction extends BaseAction {
 		return DataMap;
 	}
 	
-	//搜索商品，店铺关键字
+	//搜索商品，店铺，分类关键字
 	public String searchQuery() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
@@ -44,7 +45,14 @@ public class HomePageAction extends BaseAction {
 		return DataMap;
 	}
 	
-	
+	//搜索商品，店铺关键字
+	public String viewGoodscClass() throws Exception{
+		responseSetHeader();
+		setDataMap(new HashMap<String, Object>());
+		list = new MajorfunctionDAO().findAll();
+		getDataMap().put(ShopGoods, list);
+		return DataMap;
+	}	
 	@JSON(serialize=false)
 	public ShopGoods getShopGoods() {
 		return shopGoods;

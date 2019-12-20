@@ -38,8 +38,7 @@ public class ShopGoodsTest {
 		buyer.setIdBuyer(11);
 		list = dao.membersRecommendedGoods(buyer);
 		for(int i=0;i<list.size();i++){
-			shopGoods = (ShopGoods)list.get(i);
-			System.out.println(shopGoods.getGoods().getGoodsComName());
+			System.out.println(list.get(i));
 			
 		}
 	}

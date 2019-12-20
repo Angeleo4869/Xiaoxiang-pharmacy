@@ -22,8 +22,8 @@
             <key-property name="shimage" type="java.lang.String">
                 <column name="shimage" length="45" />
             </key-property>
-            <key-property name="shprice" type="java.lang.Double">
-                <column name="shprice" precision="22" scale="0" />
+            <key-property name="odprice" type="java.lang.Double">
+                <column name="odprice" precision="22" scale="0" />
             </key-property>
             <key-property name="odNumber" type="java.lang.Integer">
                 <column name="odNumber" />

@@ -34,6 +34,7 @@
 		<mapping resource="com/xiaoxiang/org/vo/Shoppingcart.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/Majorfunction.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/OrderView.hbm.xml" />
+		<mapping resource="com/xiaoxiang/org/vo/GoodsView.hbm.xml" />
 
 	</session-factory>
 

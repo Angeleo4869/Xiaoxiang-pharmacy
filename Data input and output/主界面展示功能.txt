@@ -1,5 +1,17 @@
 没有输入
 
-output
-
-[   ]
+后台返回数据：
+goodsClass：一级分类
+goodsMajorFunctioncol： 功能主治
+goodsSeries：二级分类
+idShopGoods：上架商品id
+shopGoodsImage：商品图片地址
+shopGoodsName：商品名称
+shopGoodsPrice：商品价格
+{"ShopGoods":
+    [
+	{"id":{"goodsClass":"西药","goodsMajorFunctioncol":"感冒发烧","goodsSeries":"呼吸道疾病","idShopGoods":1,"shopGoodsImage":"0001","shopGoodsName":"感冒灵 ","shopGoodsPrice":20.9}},
+	{"id":{"goodsClass":"西药","goodsMajorFunctioncol":"感冒发烧","goodsSeries":"呼吸道疾病","idShopGoods":4,"shopGoodsImage":"0001","shopGoodsName":"板蓝根·","shopGoodsPrice":40.0}},
+	{"id":{"goodsClass":"西药","goodsMajorFunctioncol":"感冒发烧","goodsSeries":"呼吸道疾病","idShopGoods":5,"shopGoodsImage":"0001","shopGoodsName":"感冒灵","shopGoodsPrice":20.9}}
+    ]
+}

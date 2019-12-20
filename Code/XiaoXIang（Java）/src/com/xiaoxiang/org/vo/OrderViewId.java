@@ -13,7 +13,7 @@ public class OrderViewId implements java.io.Serializable {
 	private Short odstate;
 	private String shname;
 	private String shimage;
-	private Double shprice;
+	private Double odprice;
 	private Integer odNumber;
 
 	// Constructors
@@ -23,25 +23,25 @@ public class OrderViewId implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public OrderViewId(Integer idorder, Integer idbuyer, Short odstate, String shname, Double shprice,
+	public OrderViewId(Integer idorder, Integer idbuyer, Short odstate, String shname, Double odprice,
 			Integer odNumber) {
 		this.idorder = idorder;
 		this.idbuyer = idbuyer;
 		this.odstate = odstate;
 		this.shname = shname;
-		this.shprice = shprice;
+		this.odprice = odprice;
 		this.odNumber = odNumber;
 	}
 
 	/** full constructor */
-	public OrderViewId(Integer idorder, Integer idbuyer, Short odstate, String shname, String shimage, Double shprice,
+	public OrderViewId(Integer idorder, Integer idbuyer, Short odstate, String shname, String shimage, Double odprice,
 			Integer odNumber) {
 		this.idorder = idorder;
 		this.idbuyer = idbuyer;
 		this.odstate = odstate;
 		this.shname = shname;
 		this.shimage = shimage;
-		this.shprice = shprice;
+		this.odprice = odprice;
 		this.odNumber = odNumber;
 	}
 
@@ -87,12 +87,12 @@ public class OrderViewId implements java.io.Serializable {
 		this.shimage = shimage;
 	}
 
-	public Double getShprice() {
-		return this.shprice;
+	public Double getOdprice() {
+		return this.odprice;
 	}
 
-	public void setShprice(Double shprice) {
-		this.shprice = shprice;
+	public void setOdprice(Double odprice) {
+		this.odprice = odprice;
 	}
 
 	public Integer getOdNumber() {
@@ -122,8 +122,8 @@ public class OrderViewId implements java.io.Serializable {
 						&& castOther.getShname() != null && this.getShname().equals(castOther.getShname())))
 				&& ((this.getShimage() == castOther.getShimage()) || (this.getShimage() != null
 						&& castOther.getShimage() != null && this.getShimage().equals(castOther.getShimage())))
-				&& ((this.getShprice() == castOther.getShprice()) || (this.getShprice() != null
-						&& castOther.getShprice() != null && this.getShprice().equals(castOther.getShprice())))
+				&& ((this.getOdprice() == castOther.getOdprice()) || (this.getOdprice() != null
+						&& castOther.getOdprice() != null && this.getOdprice().equals(castOther.getOdprice())))
 				&& ((this.getOdNumber() == castOther.getOdNumber()) || (this.getOdNumber() != null
 						&& castOther.getOdNumber() != null && this.getOdNumber().equals(castOther.getOdNumber())));
 	}
@@ -136,7 +136,7 @@ public class OrderViewId implements java.io.Serializable {
 		result = 37 * result + (getOdstate() == null ? 0 : this.getOdstate().hashCode());
 		result = 37 * result + (getShname() == null ? 0 : this.getShname().hashCode());
 		result = 37 * result + (getShimage() == null ? 0 : this.getShimage().hashCode());
-		result = 37 * result + (getShprice() == null ? 0 : this.getShprice().hashCode());
+		result = 37 * result + (getOdprice() == null ? 0 : this.getOdprice().hashCode());
 		result = 37 * result + (getOdNumber() == null ? 0 : this.getOdNumber().hashCode());
 		return result;
 	}

@@ -4,6 +4,7 @@
 
 	<package name="default" extends="json-default,struts-default">
 	
+		<!-- 管理员登录 -->
 		<action name="AdminLogin"
 			class="com.xiaoxiang.org.action.AdminAction">
 			 <result name="dataMap" type="json">
@@ -11,19 +12,31 @@
 			 </result>
 		</action>
 		
+		<!-- 买家登录 -->
 		<action name="BuyerLogin"
-			class="com.xiaoxiang.org.action.BuyerAction">
+			class="com.xiaoxiang.org.action.BuyerAction" method="buyerLogin">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
+		
+		<!-- 买家注册 -->
 		<action name="BuyerRegister"
-		 class="com.xiaoxiang.org.action.BuyerAction" method="register">
+		 class="com.xiaoxiang.org.action.BuyerAction" method="buyerRegister">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-	
+		
+		<!-- 查看个人中心 -->
+		<action name="PersonalCenter"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="personalCenter">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 卖家登录 -->
 		<action name="StoreLogin"
 			class="com.xiaoxiang.org.action.StoreAction">
 			<result name="dataMap" type="json">
@@ -31,6 +44,7 @@
 			 </result>
 		</action>
 		
+		<!-- 卖家注册 -->
 		<action name="StoreRegister"
 			class="com.xiaoxiang.org.action.StoreAction" method="register">
 			<result name="dataMap" type="json">
@@ -38,6 +52,7 @@
 			 </result>
 		</action>
 		
+		<!-- 主页推荐 -->
 		<action name="HomePage"
 		 class="com.xiaoxiang.org.action.HomePageAction" >
 			<result name="dataMap" type="json">
@@ -45,6 +60,7 @@
 			 </result>
 		</action>
 		
+		<!-- 搜索 -->
 		<action name="SearchQuery"
 		 class="com.xiaoxiang.org.action.HomePageAction" method="searchQuery">
 			<result name="dataMap" type="json">
@@ -52,28 +68,47 @@
 			 </result>
 		</action>
 		
-		<!--
-		<action name="AddDrugs"
-			class="com.xiaoxiang.org.action.DrugsAction">
+		<!-- 添加商品 -->
+		<action name="AddGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="addGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
-		
-		<action name="BuyerGoods">
+		<!-- 删除商品 -->
+		<action name="DeleteGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="deleteGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
-		<action name="ShoppingCart">
+		<!-- 商品详情 -->
+		<action name="ViewGoodsDetail"
+			class="com.xiaoxiang.org.action.GoodsAction" method="viewGoodsDetail">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		-->
 		
+		<!-- 添加购物车 -->							
+		<action name="AddShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction" 
+		 method="addShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除购物车 -->
+		<action name="DeleteShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction"
+		  method="deleteShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 查看订单 -->
 		<action name="ViewOrder" 
 			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
 			<result name="dataMap" type="json">
@@ -81,12 +116,22 @@
 			 </result>
 		</action>
 		
+		<!-- 购买   未付款 -->
 		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		<action name="OderDetail">
+		
+		<!-- 查看订单详情 -->
+		<action name="ViewOrderDetail" class="com.xiaoxiang.org.action.OrderAction" method="viewOrderDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 修改订单表   -->
+		<action name="PaymentOrder" class="com.xiaoxiang.org.action.OrderAction" method="paymentOrder">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
