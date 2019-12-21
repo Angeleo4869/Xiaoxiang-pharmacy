@@ -36,6 +36,14 @@
 			 </result>
 		</action>
 		
+		<!-- 编辑个人中心 -->
+		<action name="EditBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="editBuyer">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
 		<!-- 卖家登录 -->
 		<action name="StoreLogin"
 			class="com.xiaoxiang.org.action.StoreAction">
@@ -132,6 +140,13 @@
 		
 		<!-- 修改订单表   -->
 		<action name="PaymentOrder" class="com.xiaoxiang.org.action.OrderAction" method="paymentOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 测试action   -->
+		<action name="TestAction" class="com.xiaoxiang.org.action.TestAction">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>

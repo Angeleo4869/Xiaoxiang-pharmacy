@@ -22,7 +22,7 @@ public class BuyerAction extends BaseAction {
        buyer.setBuyerPassword(request.getParameter("BuyerPassword"));
        if(buyer.getBuyerNumber()!=null){
        List<Buyer> list = buyerDAO.findByExample(getBuyer());
-       getDataMap().put("Buyer",list);
+       getDataMap().put(Buyer,list);
 		}else {
 			getDataMap().put(ERROR,false);
 		}
@@ -62,6 +62,24 @@ public class BuyerAction extends BaseAction {
 	     getDataMap().put(SUCCESS, buyer);
 	     return DataMap;
 	}
+	
+	//编辑个人信息
+	public String editBuyer() throws Exception{
+		 responseSetHeader();
+	     setDataMap(new HashMap<String, Object>());
+		 buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
+		 buyer.setBuyerName(request.getParameter("BuyerName"));
+		 buyer.setBuyerHeadpor(request.getParameter("Headpor"));
+		 buyer.setBuyerTel(request.getParameter("BuyerTel"));
+		 buyer.setBuyerEmail(request.getParameter("BuyerEmail"));
+	     if(buyerDAO.attachDirty(buyer)){
+	    	 getDataMap().put(SUCCESS, true);
+	     }else {
+	    	 getDataMap().put(ERROR, false);
+	     }
+	     return DataMap;
+	}
+	
 	
 	public Buyer getBuyer() {
 		return buyer;

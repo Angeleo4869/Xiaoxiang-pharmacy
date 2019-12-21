@@ -24,7 +24,6 @@ public class HomePageAction extends BaseAction {
 	public String execute() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		buyer.setIdBuyer(null);
 		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
 		if(buyer.getIdBuyer()!=null)
 		list = shopGoodsDAO.membersRecommendedGoods(buyer);

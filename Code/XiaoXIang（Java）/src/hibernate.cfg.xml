@@ -35,6 +35,8 @@
 		<mapping resource="com/xiaoxiang/org/vo/Majorfunction.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/OrderView.hbm.xml" />
 		<mapping resource="com/xiaoxiang/org/vo/GoodsView.hbm.xml" />
+		<mapping
+			resource="com/xiaoxiang/org/vo/Shippingaddress.hbm.xml" />
 
 	</session-factory>
 

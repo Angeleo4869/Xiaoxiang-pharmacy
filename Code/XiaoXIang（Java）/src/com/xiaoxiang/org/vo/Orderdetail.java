@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.struts2.json.annotations.JSON;
-
 /**
  * Orderdetail entity. @author MyEclipse Persistence Tools
  */
@@ -18,6 +16,7 @@ public class Orderdetail implements java.io.Serializable {
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Vouchers vouchers;
+	private Shippingaddress shippingaddress;
 	private Date paymentTime;
 	private Double totalPrice;
 	private String orderNumber;
@@ -46,11 +45,13 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Date paymentTime, Double totalPrice,
-			String orderNumber, Short logistics, Integer goodsNumber, Short oderState, Set commentses) {
+	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Shippingaddress shippingaddress,
+			Date paymentTime, Double totalPrice, String orderNumber, Short logistics, Integer goodsNumber,
+			Short oderState, Set commentses) {
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
+		this.shippingaddress = shippingaddress;
 		this.paymentTime = paymentTime;
 		this.totalPrice = totalPrice;
 		this.orderNumber = orderNumber;
@@ -92,6 +93,14 @@ public class Orderdetail implements java.io.Serializable {
 
 	public void setVouchers(Vouchers vouchers) {
 		this.vouchers = vouchers;
+	}
+
+	public Shippingaddress getShippingaddress() {
+		return this.shippingaddress;
+	}
+
+	public void setShippingaddress(Shippingaddress shippingaddress) {
+		this.shippingaddress = shippingaddress;
 	}
 
 	public Date getPaymentTime() {
@@ -142,7 +151,6 @@ public class Orderdetail implements java.io.Serializable {
 		this.oderState = oderState;
 	}
 
-	@JSON(serialize=false)
 	public Set getCommentses() {
 		return this.commentses;
 	}
