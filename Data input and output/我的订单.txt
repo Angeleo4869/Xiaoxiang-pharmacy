@@ -15,10 +15,10 @@
   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
  ]]
 
-leo写的
+leo写的   ！！！！！！！！！！数据格式不对
 前台返回数据：
 
-idbuyer：买家ID
+idBuyer：买家ID
 
 后台返回数据
 
