@@ -132,15 +132,17 @@ public class BuyerDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Buyer instance) {
+	public boolean attachDirty(Buyer instance) {
 		log.debug("attaching dirty Buyer instance");
 		try {
-			getSession().saveOrUpdate(instance);
+			getSession().update(instance);
+			transation.commit();
 			log.debug("attach successful");
 			closeSession();
-		} catch (RuntimeException re) {
+			return true;
+		} catch (Exception re) {
 			log.error("attach failed", re);
-			throw re;
+			return false;
 		}finally {
 			closeSession();
 		}

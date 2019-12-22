@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Fri Dec 20 11:38:17 CST 2019
+#Sat Dec 21 18:28:11 CST 2019
 genBasicCompId=false
 sessionFactoryName=com.xiaoxiang.org.dao.HibernateSessionFactory
 profile=
@@ -18,4 +18,3 @@ genAnnotations=false
 reSettingsFile=/XiaoXiangPharmacy/hibernate.reveng.xml
 configFile=/XiaoXiangPharmacy/src/hibernate.cfg.xml
 createConfigFile=true
-baseDaoClass=com.xiaoxiang.org.dao.BaseHibernateDAO

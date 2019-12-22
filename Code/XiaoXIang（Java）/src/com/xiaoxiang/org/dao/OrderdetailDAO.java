@@ -84,13 +84,14 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 		}
 	}
 	
-	public List findByOrderView(Integer idbuyer){
+	public List findByOrderView(Integer idbuyer,Short orderstate){
 		log.debug("finding Orderdetail_View instance by idbuyer");
 		try {
 			String queryString = "SELECT * FROM order_view"
-					+ " where idbuyer = ? ";
+					+ " where idbuyer = ?  and odstate = ? ";
 			SQLQuery queryObject = getSession().createSQLQuery(queryString);
 			queryObject.setParameter(0, idbuyer);
+			queryObject.setParameter(1, orderstate);
 			queryObject.addEntity(OrderView.class);
 			return queryObject.list();
 		} catch (Exception re) {

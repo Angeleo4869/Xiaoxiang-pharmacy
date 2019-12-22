@@ -18,6 +18,7 @@ public class OrderAction extends BaseAction {
 	private ShopGoods shopGoods;
 	private Buyer buyer;
 	private OrderdetailDAO orderdetailDAO = new OrderdetailDAO();
+	private List<List> list;
 	
 	//¹ºÂò£¬µ«Î´¸¶¿î
 	public String placeOrder() throws Exception{
@@ -44,8 +45,11 @@ public class OrderAction extends BaseAction {
 	public String viewOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
-        List list = orderdetailDAO.findByOrderView(buyer.getIdBuyer());
+//		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
+		list = null;
+		for(Short orderstate = 0;orderstate<4;orderstate++){
+			list.add(orderdetailDAO.findByOrderView(11,orderstate));
+		}
 		getDataMap().put(Order, list);
 		return DataMap;
 	}
