@@ -124,8 +124,9 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const ConT =[{name:'我的订单',id:'1',src:'/PersonCenter/order'},
+  const ConT =[
   { name:'个人中心',id:'2',src:'/PersonCenter/'},
+  {name:'我的订单',id:'1',src:'/PersonCenter/order'},
   {name:'购物车',id:'3',src:'/PersonCenter/Shoppingcart'}
 ];
 
@@ -138,11 +139,13 @@ function ResponsiveDrawer(props) {
       </div>
       <Divider />
       <List>
-          {['first', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem onClick={lClick} button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {[{aim:'登录',go:'/Login'}, {aim:'注册',go:'/Register'}, {aim:'注销',go:'/Register'}].map((text, index) => (
+            <Link key={text.aim} to={text.go} >
+              <ListItem  button >
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text.aim} />
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
@@ -279,7 +282,6 @@ function lClick(){
     let match = useRouteMatch({
       path: to,
       exact: activeOnlyWhenExact,
-      
     });
     
     return (

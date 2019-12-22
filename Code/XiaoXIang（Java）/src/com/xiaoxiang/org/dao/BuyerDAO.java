@@ -28,11 +28,15 @@ public class BuyerDAO extends BaseHibernateDAO {
 		log.debug("saving Buyer instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
+			closeSession();
 			return true;
 		} catch (Exception e) {
 			log.error("save failed", e);
 			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -47,6 +51,8 @@ public class BuyerDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("delete failed", re);
 			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -54,23 +60,29 @@ public class BuyerDAO extends BaseHibernateDAO {
 		log.debug("getting Buyer instance with id: " + id);
 		try {
 			Buyer instance = (Buyer) getSession().get(Buyer.class, id);
+			closeSession();
 			return instance;
 		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
 	public List findByExample(Buyer instance) {
 		log.debug("finding Buyer instance by example");
 		try {
-			List results = getSession().createCriteria(Buyer.class).add(Example.create(instance))
-					.list();
+			List results = getSession().createCriteria(Buyer.class)
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
+			closeSession();
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -80,10 +92,13 @@ public class BuyerDAO extends BaseHibernateDAO {
 			String queryString = "from Buyer as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
+			closeSession();
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -92,10 +107,13 @@ public class BuyerDAO extends BaseHibernateDAO {
 		try {
 			String queryString = "from Buyer";
 			Query queryObject = getSession().createQuery(queryString);
+			closeSession();
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -104,21 +122,29 @@ public class BuyerDAO extends BaseHibernateDAO {
 		try {
 			Buyer result = (Buyer) getSession().merge(detachedInstance);
 			log.debug("merge successful");
+			closeSession();
 			return result;
 		} catch (RuntimeException re) {
 			log.error("merge failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void attachDirty(Buyer instance) {
+	public boolean attachDirty(Buyer instance) {
 		log.debug("attaching dirty Buyer instance");
 		try {
 			getSession().saveOrUpdate(instance);
+			transation.commit();
 			log.debug("attach successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("attach failed", re);
-			throw re;
+			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -127,9 +153,12 @@ public class BuyerDAO extends BaseHibernateDAO {
 		try {
 			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
+			closeSession();
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 }

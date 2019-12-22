@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -13,6 +13,9 @@ import Box from '@material-ui/core/Box';
 
 import OrderDetails from './orderDetails';
 
+import {
+  useLocation
+} from "react-router-dom";
 function TabPanel(props) {
   // const { children, content, value, index, ...other } = props;
   return (
@@ -62,23 +65,50 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-var content1 = [[ {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+var content1 = [[ {name:'潇湘药房1',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
                 ],
                 [
-                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房2',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
                   {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
-                ]];
-
+                ],
+                [
+                  {name:'潇湘药房3',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+                ],
+                [
+                  {name:'潇湘药房4',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+                ],
+                [
+                  {name:'潇湘药房5',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'},
+                  {name:'潇湘药房',imagesrc:'/Pic/D1.jpg',goodname:'USBB分线器拓展器 USB分线器拓展器',preprice:'29,9',price:'9.9',finprice:'9.9',state:'交易成功'}
+                ]
+              ];
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 export default function FullWidthTabs() {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
+  let query = useQuery().get('tab');
+  // alert(query)
+  const [value, setValue] = React.useState(query);
+  //在function组件中使用变量变化触发的函数
+  useEffect(() => {
+    setValue(query);
+  }, [query]);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -89,6 +119,7 @@ export default function FullWidthTabs() {
 
   return (
     <div className={classes.root}>
+      
       <AppBar position="relative" color="" style={{width:'100%'}} >
         <Tabs
           value={value}
@@ -115,19 +146,27 @@ export default function FullWidthTabs() {
         <TabPanel value={value} index={0} content={content1[0]} dir={theme.direction}>
           {value}
         </TabPanel>
-        <TabPanel value={value} index={1} content={content1[0]} dir={theme.direction}>
+        <TabPanel value={value} index={1} content={content1[1]} dir={theme.direction}>
           
         </TabPanel>
-        <TabPanel value={value} index={2} content={content1[0]} dir={theme.direction}>
+        <TabPanel value={value} index={2} content={content1[2]} dir={theme.direction}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={3} content={content1[0]} dir={theme.direction}>
+        <TabPanel value={value} index={3} content={content1[3]} dir={theme.direction}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={4} content={content1[1]} dir={theme.direction}>
+        <TabPanel value={value} index={4} content={content1[4]} dir={theme.direction}>
           Item Three
         </TabPanel>
       </SwipeableViews>
     </div>
   );
+}
+
+class Noshow{
+
+  componentDidMount(){
+    
+    alert(111)
+  }
 }

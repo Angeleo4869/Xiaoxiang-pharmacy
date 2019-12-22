@@ -24,34 +24,44 @@ import com.xiaoxiang.org.vo.Shoppingcart;
 public class ShoppingcartDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(ShoppingcartDAO.class);
 
-	public void save(Shoppingcart transientInstance) {
+	public boolean save(Shoppingcart transientInstance) {
 		log.debug("saving Shoppingcart instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("save failed", re);
-			throw re;
+			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Shoppingcart persistentInstance) {
+	public boolean delete(Shoppingcart persistentInstance) {
 		log.debug("deleting Shoppingcart instance");
 		try {
 			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("delete failed", re);
-			throw re;
+			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
 	public Shoppingcart findById(java.lang.Integer id) {
 		log.debug("getting Shoppingcart instance with id: " + id);
 		try {
-			Shoppingcart instance = (Shoppingcart) getSession().get("com.xiaoxiang.org.dao.Shoppingcart", id);
+			Shoppingcart instance = (Shoppingcart) getSession().get(Shoppingcart.class, id);
 			return instance;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
 		}
@@ -60,11 +70,11 @@ public class ShoppingcartDAO extends BaseHibernateDAO {
 	public List findByExample(Shoppingcart instance) {
 		log.debug("finding Shoppingcart instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Shoppingcart")
+			List results = getSession().createCriteria(Shoppingcart.class)
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
@@ -77,7 +87,7 @@ public class ShoppingcartDAO extends BaseHibernateDAO {
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by property name failed", re);
 			throw re;
 		}
@@ -89,7 +99,7 @@ public class ShoppingcartDAO extends BaseHibernateDAO {
 			String queryString = "from Shoppingcart";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find all failed", re);
 			throw re;
 		}

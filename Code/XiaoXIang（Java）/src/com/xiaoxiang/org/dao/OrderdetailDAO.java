@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiaoxiang.org.vo.OrderView;
 import com.xiaoxiang.org.vo.Orderdetail;
 
 /**
@@ -21,35 +23,46 @@ import com.xiaoxiang.org.vo.Orderdetail;
  * @see com.xiaoxiang.org.dao.Orderdetail
  * @author MyEclipse Persistence Tools
  */
+//∂©µ•±ÌDAO
 public class OrderdetailDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(OrderdetailDAO.class);
 
-	public void save(Orderdetail transientInstance) {
+	public boolean save(Orderdetail transientInstance) {
 		log.debug("saving Orderdetail instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("save failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Orderdetail persistentInstance) {
+	public boolean delete(Orderdetail persistentInstance) {
 		log.debug("deleting Orderdetail instance");
 		try {
 			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("delete failed", re);
-			throw re;
+			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
 	public Orderdetail findById(java.lang.Integer id) {
 		log.debug("getting Orderdetail instance with id: " + id);
 		try {
-			Orderdetail instance = (Orderdetail) getSession().get("com.xiaoxiang.org.dao.Orderdetail", id);
+			Orderdetail instance = (Orderdetail) getSession().get(Orderdetail.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -57,16 +70,35 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 		}
 	}
 
+
 	public List findByExample(Orderdetail instance) {
 		log.debug("finding Orderdetail instance by example");
 		try {
-			List results = getSession().createCriteria("com.xiaoxiang.org.dao.Orderdetail")
+			List results = getSession().createCriteria(Orderdetail.class)
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
+		}
+	}
+	
+	public List findByOrderView(Integer idbuyer,Short orderstate){
+		log.debug("finding Orderdetail_View instance by idbuyer");
+		try {
+			String queryString = "SELECT * FROM order_view"
+					+ " where idbuyer = ?  and odstate = ? ";
+			SQLQuery queryObject = getSession().createSQLQuery(queryString);
+			queryObject.setParameter(0, idbuyer);
+			queryObject.setParameter(1, orderstate);
+			queryObject.addEntity(OrderView.class);
+			return queryObject.list();
+		} catch (Exception re) {
+			log.error("find by idbuyer failed", re);
+			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -107,14 +139,19 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Orderdetail instance) {
+	public boolean attachDirty(Orderdetail instance) {
 		log.debug("attaching dirty Orderdetail instance");
 		try {
-			getSession().saveOrUpdate(instance);
+			getSession().update(instance);
+			transation.commit();
 			log.debug("attach successful");
-		} catch (RuntimeException re) {
+			closeSession();
+			return true;
+		} catch (Exception re) {
 			log.error("attach failed", re);
-			throw re;
+			return false;
+		}finally {
+			closeSession();
 		}
 	}
 

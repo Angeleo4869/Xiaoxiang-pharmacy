@@ -13,6 +13,14 @@ import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
+import {
+  Route,
+  Link,
+  Switch,
+  useRouteMatch,
+  useLocation
+} from 'react-router-dom';
+
 import PTCard from './PTcontentCard.jsx';
 
 const useStyles = makeStyles({
@@ -61,21 +69,21 @@ export default function SimpleCard() {
       <List horizontal="true" style={{display:'flex',justifyContent:'space-around',backgroundColor:'#EFFEFE'}}>
         <Avatar alt="not" src="/Pic/D1.jpg"  />                
         <div style={{position:'relative',left:0}}>Your name</div>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>收货地址</Typography>
+        <Link to="/PersonCenter/show/address"><Typography className={classes.title} color="textSecondary" gutterBottom>收货地址</Typography></Link>
         <Typography className={classes.title} color="textSecondary" gutterBottom>优惠信息</Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>会员信息</Typography>              
         </List>
         <Divider style={{position:'relative',top:10}} />
         <List  horizontal="true" style={{display:'flex',justifyContent:'space-around',top:20,bottom:-1}}  >
-        <Typography key="t1"  color="textSecondary" gutterBottom>待付款<span>1</span></Typography>
+        <Link to="/PersonCenter/order?tab=0"><Typography key="t1"  color="textSecondary" gutterBottom>待付款<span>1</span></Typography></Link>
         <Divider component="li" />
-        <Typography key="t3" color="textSecondary" gutterBottom>待发货</Typography>
+        <Link to="/PersonCenter/order?tab=1"><Typography key="t3" color="textSecondary" gutterBottom>待发货</Typography></Link>
         <Divider key="t4" orientation="vertical" />
-        <Typography key="t5" color="textSecondary" gutterBottom>待收货</Typography>
+        <Link to="/PersonCenter/order?tab=2"><Typography key="t5" color="textSecondary" gutterBottom>待收货</Typography></Link>
         <Divider key="t6" orientation="vertical" />
-        <Typography key="t7" color="textSecondary" gutterBottom>待评价</Typography>
+        <Link to="/PersonCenter/order?tab=3"><Typography key="t7" color="textSecondary" gutterBottom>待评价</Typography></Link>
         <Divider key="t8" orientation="vertical" />
-        <Typography key="t9"  color="textSecondary" gutterBottom>退款</Typography>
+        <Link to="/PersonCenter/order?tab=4"><Typography key="t9"  color="textSecondary" gutterBottom>退款</Typography></Link>
         </List>
       </CardContent>
       <CardActions>

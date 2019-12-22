@@ -1,45 +1,32 @@
 package com.xiaoxiang.org.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.BuyerDAO;
-import com.xiaoxiang.org.dao.OderDAO;
+import com.xiaoxiang.org.dao.OrderdetailDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Buyer;
-import com.xiaoxiang.org.vo.Oder;
 import com.xiaoxiang.org.vo.Orderdetail;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 public class OrderTest {
 
+	private static ArrayList<List> list = new ArrayList<List>();
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Buyer buyer = new Buyer();
 		ShopGoods shopGoods = new ShopGoods();
-		
-		OderDAO oderDAO = new OderDAO();
-		Oder oder = new Oder();
+		OrderdetailDAO orderdetailDAO  = new OrderdetailDAO();
 		Orderdetail orderdetail = new Orderdetail();
 		buyer = new BuyerDAO().findById(11);
-		shopGoods = new ShopGoodsDAO().findById(5);
-		System.out.println(buyer.getBuyerName());
-		orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer().toString()+shopGoods.getIdShopGoods().toString());
-		orderdetail.setBuyer(buyer);
-		orderdetail.setShopGoods(shopGoods);
-		orderdetail.setLogistics((short) 5);
-		orderdetail.setPaymentTime(new Date());
-		orderdetail.setTotalPrice(shopGoods.getShopGoodsPrice());
-		oder.setBuyer(buyer);
-		oder.setShopGoods(shopGoods);
-		oder.setOderState((short)1);
-		oder.setOrderdetail(orderdetail);
-//		if(oderDAO.save(oder)){
-//			System.out.println("OK");
-//		}
-		List list = oderDAO.findByExample(oder);
-		for(int i=0;i<list.size();i++){
-			System.out.println(((Oder)list.get(i)).getShopGoods());
+		for(int orderstate = 0;orderstate<4;orderstate++){
+			List order = orderdetailDAO.findByOrderView(11,(short)orderstate);
+			System.out.println(order.get(0));
+			list.addAll(order);
+			System.out.println(list.get(0));
 		}
 	}
 

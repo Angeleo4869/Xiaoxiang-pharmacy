@@ -10,10 +10,10 @@
             <column name="idShop_Goods" />
             <generator class="native" />
         </id>
-        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" lazy="false">
+        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="join" lazy="false">
             <column name="Stort" not-null="true" />
         </many-to-one>
-        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" lazy="false">
+        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" fetch="join" lazy="false">
             <column name="Goods" not-null="true" />
         </many-to-one>
         <property name="shopGoodsImage" type="java.lang.String">
@@ -31,31 +31,28 @@
         <property name="shopGoodsSales" type="java.lang.Integer">
             <column name="Shop_GoodsSales" not-null="true" />
         </property>
-        <set name="voucherses" inverse="true" lazy="true">
+        <property name="shopGoodsName" type="java.lang.String">
+            <column name="shop_goodsName" length="45" not-null="true" />
+        </property>
+        <set name="voucherses" inverse="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Vouchers" />
         </set>
-        <set name="oders" inverse="true" lazy="true">
-            <key>
-                <column name="idShop_Goods" not-null="true" />
-            </key>
-            <one-to-many class="com.xiaoxiang.org.vo.Oder" />
-        </set>
-        <set name="shoppingcarts" inverse="true" lazy="true">
+        <set name="shoppingcarts" inverse="true">
             <key>
                 <column name="Shop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Shoppingcart" />
         </set>
-        <set name="collections" inverse="true" lazy="true">
+        <set name="collections" inverse="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Collection" />
         </set>
-        <set name="orderdetails" inverse="true" lazy="true">
+        <set name="orderdetails" inverse="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>

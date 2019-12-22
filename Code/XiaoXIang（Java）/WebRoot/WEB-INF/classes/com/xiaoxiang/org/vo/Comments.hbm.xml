@@ -10,7 +10,7 @@
             <column name="idComments" />
             <generator class="native" />
         </id>
-        <many-to-one name="orderdetail" class="com.xiaoxiang.org.vo.Orderdetail" fetch="select">
+        <many-to-one name="orderdetail" class="com.xiaoxiang.org.vo.Orderdetail" fetch="join" lazy="false">
             <column name="idOder" not-null="true" />
         </many-to-one>
         <property name="commentLevel" type="java.lang.Short">

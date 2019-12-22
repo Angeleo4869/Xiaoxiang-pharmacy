@@ -10,18 +10,16 @@
             <column name="idVouchers" />
             <generator class="native" />
         </id>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join">
-            <column name="idBuyer" not-null="true" />
-        </many-to-one>
-        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="join">
-            <column name="idShop_Goods" not-null="true" />
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false" />
+        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="join" lazy="false">
+            <column name="idShop_Goods" not-null="true" /> 
         </many-to-one>
         <property name="vouchersAmount" type="java.lang.Double">
             <column name="VouchersAmount" precision="22" scale="0" not-null="true" />
         </property>
-        <set name="orderdetails" inverse="true" lazy="true">
+        <set name="orderdetails" inverse="true">
             <key>
-                <column name="idVouchers" not-null="true" />
+                <column name="idVouchers" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Orderdetail" />
         </set>

@@ -10,6 +10,9 @@
             <column name="idBuyer" />
             <generator class="native" />
         </id>
+        <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" fetch="select">
+            <column name="AddressDefault" />
+        </many-to-one>
         <property name="buyerName" type="java.lang.String">
             <column name="BuyerName" length="45" />
         </property>
@@ -28,12 +31,6 @@
         <property name="buyerHeadpor" type="java.lang.String">
             <column name="buyerHeadpor" length="45" />
         </property>
-        <set name="oders" inverse="true">
-            <key>
-                <column name="idBuyer" not-null="true" />
-            </key>
-            <one-to-many class="com.xiaoxiang.org.vo.Oder" />
-        </set>
         <set name="voucherses" inverse="true">
             <key>
                 <column name="idBuyer" not-null="true" />

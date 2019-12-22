@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.struts2.json.annotations.JSON;
 
+import com.xiaoxiang.org.dao.MajorfunctionDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Buyer;
 import com.xiaoxiang.org.vo.ShopGoods;
@@ -19,35 +20,38 @@ public class HomePageAction extends BaseAction {
 	private Buyer buyer = new Buyer();
 	private ShopGoods shopGoods = new ShopGoods();
 	private ShopGoodsDAO shopGoodsDAO = new ShopGoodsDAO();
+	//主页推荐（登录/非登录）
 	public String execute() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		buyer = null;
-		if(buyer!=null)
+		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
+		if(buyer.getIdBuyer()!=null)
 		list = shopGoodsDAO.membersRecommendedGoods(buyer);
 		else {
 			list = shopGoodsDAO.touristsRecommendedGoods();
 		}
-		
-//		for(int i=0;i<list.size();i++){
-//			shopGoods = ((ShopGoods)list.get(i));
-////			System.out.println(shopGoods.getGoods().getGoodsComName());
-//			getDataMap().put("ShopGoodsid:"+shopGoods.getIdShopGoods().toString(),shopGoods);
-//			getDataMap().put(SUCCESS, true);
-//		}
 		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}
 	
+	//搜索商品，店铺，分类关键字
 	public String searchQuery() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		String keyWord = request.getParameter("Search");
-		keyWord = "感冒";
 		list = shopGoodsDAO.search(keyWord);
 		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}
+	
+	//药品分类表
+	public String viewGoodscClass() throws Exception{
+		responseSetHeader();
+		setDataMap(new HashMap<String, Object>());
+		list = new MajorfunctionDAO().findAll();
+		getDataMap().put(ShopGoods, list);
+		return DataMap;
+	}	
 	
 	
 	@JSON(serialize=false)

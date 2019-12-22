@@ -71,6 +71,7 @@ public class Majorfunction implements java.io.Serializable {
 	public void setGoodsSeries(String goodsSeries) {
 		this.goodsSeries = goodsSeries;
 	}
+
 	@JSON(serialize=false)
 	public Set getGoodses() {
 		return this.goodses;

@@ -190,6 +190,7 @@ public class Goods implements java.io.Serializable {
 	public void setGoodsManufacturer(String goodsManufacturer) {
 		this.goodsManufacturer = goodsManufacturer;
 	}
+
 	@JSON(serialize=false)
 	public Set getShopGoodses() {
 		return this.shopGoodses;

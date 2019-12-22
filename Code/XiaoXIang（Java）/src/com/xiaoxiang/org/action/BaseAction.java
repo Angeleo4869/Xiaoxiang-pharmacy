@@ -1,6 +1,8 @@
 package com.xiaoxiang.org.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ public class BaseAction extends ActionSupport {
 	HttpServletResponse response = ServletActionContext.getResponse();
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Map<String, Object> dataMap;
+	List list = new ArrayList();
 	public static String DataMap = "dataMap";
 	public static String Admin = "Admin";
 	public static String Buyer = "Buyer";
@@ -29,6 +32,7 @@ public class BaseAction extends ActionSupport {
 	public static String ShopGoods = "ShopGoods";
 	public static String Order = "Oder";
 	public static String Goods = "Goods";
+	public static String Shippingaddress = "shippingaddress";
 	public void responseSetHeader() throws Exception{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");

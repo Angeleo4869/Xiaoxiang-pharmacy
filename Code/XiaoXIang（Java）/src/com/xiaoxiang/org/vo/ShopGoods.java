@@ -21,8 +21,8 @@ public class ShopGoods implements java.io.Serializable {
 	private Integer shopGoodsInventory;
 	private Double shopGoodsFreight;
 	private Integer shopGoodsSales;
+	private String shopGoodsName;
 	private Set voucherses = new HashSet(0);
-	private Set oders = new HashSet(0);
 	private Set shoppingcarts = new HashSet(0);
 	private Set collections = new HashSet(0);
 	private Set orderdetails = new HashSet(0);
@@ -35,18 +35,19 @@ public class ShopGoods implements java.io.Serializable {
 
 	/** minimal constructor */
 	public ShopGoods(Store store, Goods goods, Double shopGoodsPrice, Integer shopGoodsInventory,
-			Double shopGoodsFreight, Integer shopGoodsSales) {
+			Double shopGoodsFreight, Integer shopGoodsSales, String shopGoodsName) {
 		this.store = store;
 		this.goods = goods;
 		this.shopGoodsPrice = shopGoodsPrice;
 		this.shopGoodsInventory = shopGoodsInventory;
 		this.shopGoodsFreight = shopGoodsFreight;
 		this.shopGoodsSales = shopGoodsSales;
+		this.shopGoodsName = shopGoodsName;
 	}
 
 	/** full constructor */
 	public ShopGoods(Store store, Goods goods, String shopGoodsImage, Double shopGoodsPrice, Integer shopGoodsInventory,
-			Double shopGoodsFreight, Integer shopGoodsSales, Set voucherses, Set oders, Set shoppingcarts,
+			Double shopGoodsFreight, Integer shopGoodsSales, String shopGoodsName, Set voucherses, Set shoppingcarts,
 			Set collections, Set orderdetails) {
 		this.store = store;
 		this.goods = goods;
@@ -55,8 +56,8 @@ public class ShopGoods implements java.io.Serializable {
 		this.shopGoodsInventory = shopGoodsInventory;
 		this.shopGoodsFreight = shopGoodsFreight;
 		this.shopGoodsSales = shopGoodsSales;
+		this.shopGoodsName = shopGoodsName;
 		this.voucherses = voucherses;
-		this.oders = oders;
 		this.shoppingcarts = shoppingcarts;
 		this.collections = collections;
 		this.orderdetails = orderdetails;
@@ -127,6 +128,14 @@ public class ShopGoods implements java.io.Serializable {
 	public void setShopGoodsSales(Integer shopGoodsSales) {
 		this.shopGoodsSales = shopGoodsSales;
 	}
+
+	public String getShopGoodsName() {
+		return this.shopGoodsName;
+	}
+
+	public void setShopGoodsName(String shopGoodsName) {
+		this.shopGoodsName = shopGoodsName;
+	}
 	@JSON(serialize=false)
 	public Set getVoucherses() {
 		return this.voucherses;
@@ -134,14 +143,6 @@ public class ShopGoods implements java.io.Serializable {
 
 	public void setVoucherses(Set voucherses) {
 		this.voucherses = voucherses;
-	}
-	@JSON(serialize=false)
-	public Set getOders() {
-		return this.oders;
-	}
-
-	public void setOders(Set oders) {
-		this.oders = oders;
 	}
 	@JSON(serialize=false)
 	public Set getShoppingcarts() {
