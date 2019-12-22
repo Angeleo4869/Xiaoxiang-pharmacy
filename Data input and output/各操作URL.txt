@@ -19,12 +19,21 @@ BuyerNumber，BuyerPassword
 返回
 {"success":true}
 
-买家个人中心编辑
+买家个人中心
 PersonalCenter
 请求：
 idBuyer
 返回
-
+{"Buyer":
+    {"buyerEmail":"17680149722@163.com",       //邮箱
+     "buyerHeadpor":null,                                   //头像
+     "buyerName":"张三",                                   //姓名
+     "buyerNumber":"1768149722",	       //账号
+     "buyerPassword":"Zhangsan17680149722", //密码（未加密）
+     "buyerTel":"17680149722",		       //电话
+     "idBuyer":11			       //ID
+    }
+}
 
 
 

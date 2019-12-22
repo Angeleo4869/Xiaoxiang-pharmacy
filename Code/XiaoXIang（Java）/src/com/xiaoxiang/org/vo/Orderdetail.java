@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Orderdetail entity. @author MyEclipse Persistence Tools
  */
@@ -150,7 +152,7 @@ public class Orderdetail implements java.io.Serializable {
 	public void setOderState(Short oderState) {
 		this.oderState = oderState;
 	}
-
+	@JSON(serialize=false)
 	public Set getCommentses() {
 		return this.commentses;
 	}

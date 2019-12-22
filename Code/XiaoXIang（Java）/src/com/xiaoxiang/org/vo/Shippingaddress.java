@@ -3,6 +3,8 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Shippingaddress entity. @author MyEclipse Persistence Tools
  */
@@ -12,11 +14,14 @@ public class Shippingaddress implements java.io.Serializable {
 	// Fields
 
 	private Integer idShippingAddress;
-	private Integer idBuyer;
+	private Buyer buyer;
 	private String recipientName;
 	private String recipientTel;
-	private String recipientAddress;
+	private String addressDetail;
+	private String provinces;
+	private String city;
 	private Set orderdetails = new HashSet(0);
+	private Set buyers = new HashSet(0);
 
 	// Constructors
 
@@ -25,21 +30,27 @@ public class Shippingaddress implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Shippingaddress(Integer idBuyer, String recipientName, String recipientTel, String recipientAddress) {
-		this.idBuyer = idBuyer;
+	public Shippingaddress(Buyer buyer, String recipientName, String recipientTel, String addressDetail,
+			String provinces, String city) {
+		this.buyer = buyer;
 		this.recipientName = recipientName;
 		this.recipientTel = recipientTel;
-		this.recipientAddress = recipientAddress;
+		this.addressDetail = addressDetail;
+		this.provinces = provinces;
+		this.city = city;
 	}
 
 	/** full constructor */
-	public Shippingaddress(Integer idBuyer, String recipientName, String recipientTel, String recipientAddress,
-			Set orderdetails) {
-		this.idBuyer = idBuyer;
+	public Shippingaddress(Buyer buyer, String recipientName, String recipientTel, String addressDetail,
+			String provinces, String city, Set orderdetails, Set buyers) {
+		this.buyer = buyer;
 		this.recipientName = recipientName;
 		this.recipientTel = recipientTel;
-		this.recipientAddress = recipientAddress;
+		this.addressDetail = addressDetail;
+		this.provinces = provinces;
+		this.city = city;
 		this.orderdetails = orderdetails;
+		this.buyers = buyers;
 	}
 
 	// Property accessors
@@ -52,12 +63,12 @@ public class Shippingaddress implements java.io.Serializable {
 		this.idShippingAddress = idShippingAddress;
 	}
 
-	public Integer getIdBuyer() {
-		return this.idBuyer;
+	public Buyer getBuyer() {
+		return this.buyer;
 	}
 
-	public void setIdBuyer(Integer idBuyer) {
-		this.idBuyer = idBuyer;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 
 	public String getRecipientName() {
@@ -76,20 +87,44 @@ public class Shippingaddress implements java.io.Serializable {
 		this.recipientTel = recipientTel;
 	}
 
-	public String getRecipientAddress() {
-		return this.recipientAddress;
+	public String getAddressDetail() {
+		return this.addressDetail;
 	}
 
-	public void setRecipientAddress(String recipientAddress) {
-		this.recipientAddress = recipientAddress;
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 
+	public String getProvinces() {
+		return this.provinces;
+	}
+
+	public void setProvinces(String provinces) {
+		this.provinces = provinces;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	@JSON(serialize=false)
 	public Set getOrderdetails() {
 		return this.orderdetails;
 	}
 
 	public void setOrderdetails(Set orderdetails) {
 		this.orderdetails = orderdetails;
+	}
+	@JSON(serialize=false)
+	public Set getBuyers() {
+		return this.buyers;
+	}
+
+	public void setBuyers(Set buyers) {
+		this.buyers = buyers;
 	}
 
 }

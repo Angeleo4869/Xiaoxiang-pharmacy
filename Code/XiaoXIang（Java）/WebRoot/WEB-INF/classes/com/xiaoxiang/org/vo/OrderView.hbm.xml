@@ -10,8 +10,14 @@
             <key-property name="idorder" type="java.lang.Integer">
                 <column name="idorder" />
             </key-property>
+            <key-property name="idStore" type="java.lang.Integer">
+                <column name="idStore" />
+            </key-property>
             <key-property name="idbuyer" type="java.lang.Integer">
                 <column name="idbuyer" />
+            </key-property>
+            <key-property name="storename" type="java.lang.String">
+                <column name="storename" length="45" />
             </key-property>
             <key-property name="odstate" type="java.lang.Short">
                 <column name="odstate" />
@@ -21,6 +27,9 @@
             </key-property>
             <key-property name="shimage" type="java.lang.String">
                 <column name="shimage" length="45" />
+            </key-property>
+            <key-property name="shPrice" type="java.lang.Double">
+                <column name="shPrice" precision="22" scale="0" />
             </key-property>
             <key-property name="odprice" type="java.lang.Double">
                 <column name="odprice" precision="22" scale="0" />

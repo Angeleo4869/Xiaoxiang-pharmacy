@@ -49,6 +49,8 @@ public class GoodsDAO extends BaseHibernateDAO {
 		} catch (Exception re) {
 			log.error("delete failed", re);
 			return false;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -56,23 +58,29 @@ public class GoodsDAO extends BaseHibernateDAO {
 		log.debug("getting Goods instance with id: " + id);
 		try {
 			Goods instance = (Goods) getSession().get(Goods.class, id);
+			closeSession();
 			return instance;
 		} catch (Exception re) {
 			log.error("get failed", re);
-			return null;
+			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
 	public List findByExample(Goods instance) {
 		log.debug("finding Goods instance by example");
 		try {
-			List results = getSession().createCriteria(Goods.class).add(Example.create(instance))
-					.list();
+			List results = getSession().createCriteria(Goods.class)
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
+			closeSession();
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

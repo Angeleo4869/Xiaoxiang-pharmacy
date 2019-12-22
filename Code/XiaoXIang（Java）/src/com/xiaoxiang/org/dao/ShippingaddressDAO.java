@@ -8,40 +8,40 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xiaoxiang.org.vo.Buyer;
+import com.xiaoxiang.org.vo.Shippingaddress;
 
 /**
- * A data access object (DAO) providing persistence and search support for Buyer
- * entities. Transaction control of the save(), update() and delete() operations
- * can directly support Spring container-managed transactions or they can be
- * augmented to handle user-managed Spring transactions. Each of these methods
- * provides additional information for how to configure it for the desired type
- * of transaction control.
+ * A data access object (DAO) providing persistence and search support for
+ * Shippingaddress entities. Transaction control of the save(), update() and
+ * delete() operations can directly support Spring container-managed
+ * transactions or they can be augmented to handle user-managed Spring
+ * transactions. Each of these methods provides additional information for how
+ * to configure it for the desired type of transaction control.
  * 
- * @see com.xiaoxiang.org.dao.Buyer
+ * @see com.xiaoxiang.org.dao.Shippingaddress
  * @author MyEclipse Persistence Tools
  */
-public class BuyerDAO extends BaseHibernateDAO {
-	private static final Logger log = LoggerFactory.getLogger(BuyerDAO.class);
+public class ShippingaddressDAO extends BaseHibernateDAO {
+	private static final Logger log = LoggerFactory.getLogger(ShippingaddressDAO.class);
 
-	public boolean save(Buyer transientInstance) {
-		log.debug("saving Buyer instance");
+	public boolean save(Shippingaddress transientInstance) {
+		log.debug("saving Shippingaddress instance");
 		try {
 			getSession().save(transientInstance);
 			transation.commit();
 			log.debug("save successful");
 			closeSession();
 			return true;
-		} catch (Exception e) {
-			log.error("save failed", e);
+		} catch (Exception re) {
+			log.error("save failed", re);
 			return false;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public boolean delete(Buyer persistentInstance) {
-		log.debug("deleting Buyer instance");
+	public boolean delete(Shippingaddress persistentInstance) {
+		log.debug("deleting Shippingaddress instance");
 		try {
 			getSession().delete(persistentInstance);
 			transation.commit();
@@ -56,27 +56,23 @@ public class BuyerDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Buyer findById(java.lang.Integer id) {
-		log.debug("getting Buyer instance with id: " + id);
+	public Shippingaddress findById(java.lang.Integer id) {
+		log.debug("getting Shippingaddress instance with id: " + id);
 		try {
-			Buyer instance = (Buyer) getSession().get(Buyer.class, id);
-			closeSession();
+			Shippingaddress instance = (Shippingaddress) getSession().get(Shippingaddress.class, id);
 			return instance;
 		} catch (Exception re) {
 			log.error("get failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
-	public List findByExample(Buyer instance) {
-		log.debug("finding Buyer instance by example");
+	public List findByExample(Shippingaddress instance) {
+		log.debug("finding Shippingaddress instance by example");
 		try {
-			List results = getSession().createCriteria(Buyer.class)
+			List results = getSession().createCriteria(Shippingaddress.class)
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
-			closeSession();
 			return results;
 		} catch (Exception re) {
 			log.error("find by example failed", re);
@@ -87,12 +83,11 @@ public class BuyerDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Buyer instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding Shippingaddress instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from Buyer as model where model." + propertyName + "= ?";
+			String queryString = "from Shippingaddress as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
-			closeSession();
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
@@ -103,13 +98,13 @@ public class BuyerDAO extends BaseHibernateDAO {
 	}
 
 	public List findAll() {
-		log.debug("finding all Buyer instances");
+		log.debug("finding all Shippingaddress instances");
 		try {
-			String queryString = "from Buyer";
+			String queryString = "from Shippingaddress";
 			Query queryObject = getSession().createQuery(queryString);
 			closeSession();
 			return queryObject.list();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find all failed", re);
 			throw re;
 		}finally {
@@ -117,23 +112,20 @@ public class BuyerDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Buyer merge(Buyer detachedInstance) {
-		log.debug("merging Buyer instance");
+	public Shippingaddress merge(Shippingaddress detachedInstance) {
+		log.debug("merging Shippingaddress instance");
 		try {
-			Buyer result = (Buyer) getSession().merge(detachedInstance);
+			Shippingaddress result = (Shippingaddress) getSession().merge(detachedInstance);
 			log.debug("merge successful");
-			closeSession();
 			return result;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("merge failed", re);
 			throw re;
-		}finally {
-			closeSession();
 		}
 	}
 
-	public boolean attachDirty(Buyer instance) {
-		log.debug("attaching dirty Buyer instance");
+	public boolean attachDirty(Shippingaddress instance) {
+		log.debug("attaching dirty Shippingaddress instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			transation.commit();
@@ -142,19 +134,18 @@ public class BuyerDAO extends BaseHibernateDAO {
 			return true;
 		} catch (Exception re) {
 			log.error("attach failed", re);
-			return false;
+			throw re;
 		}finally {
 			closeSession();
 		}
 	}
 
-	public void attachClean(Buyer instance) {
-		log.debug("attaching clean Buyer instance");
+	public void attachClean(Shippingaddress instance) {
+		log.debug("attaching clean Shippingaddress instance");
 		try {
 			getSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
-			closeSession();
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("attach failed", re);
 			throw re;
 		}finally {

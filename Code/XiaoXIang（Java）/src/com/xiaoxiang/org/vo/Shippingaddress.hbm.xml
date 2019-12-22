@@ -10,23 +10,35 @@
             <column name="idShippingAddress" />
             <generator class="native" />
         </id>
-        <property name="idBuyer" type="java.lang.Integer">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false">
             <column name="idBuyer" not-null="true" />
-        </property>
+        </many-to-one>
         <property name="recipientName" type="java.lang.String">
             <column name="RecipientName" length="45" not-null="true" />
         </property>
         <property name="recipientTel" type="java.lang.String">
             <column name="RecipientTel" length="11" not-null="true" />
         </property>
-        <property name="recipientAddress" type="java.lang.String">
-            <column name="RecipientAddress" length="45" not-null="true" />
+        <property name="addressDetail" type="java.lang.String">
+            <column name="AddressDetail" length="45" not-null="true" />
+        </property>
+        <property name="provinces" type="java.lang.String">
+            <column name="Provinces" length="45" not-null="true" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="City" length="45" not-null="true" />
         </property>
         <set name="orderdetails" inverse="true">
             <key>
                 <column name="ShippingAddress" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Orderdetail" />
+        </set>
+        <set name="buyers" inverse="true">
+            <key>
+                <column name="AddressDefault" />
+            </key>
+            <one-to-many class="com.xiaoxiang.org.vo.Buyer" />
         </set>
     </class>
 </hibernate-mapping>

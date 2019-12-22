@@ -15,7 +15,6 @@ public class AdminAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private Admin admin = new Admin();
 	private AdminDAO adminDAO = new AdminDAO();
-	private List<Admin> list = new ArrayList<Admin>();
 	public String execute() throws Exception {
         responseSetHeader();
         setDataMap(new HashMap<String, Object>());

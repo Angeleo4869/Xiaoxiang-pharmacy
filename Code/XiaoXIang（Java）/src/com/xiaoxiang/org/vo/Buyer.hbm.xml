@@ -10,6 +10,9 @@
             <column name="idBuyer" />
             <generator class="native" />
         </id>
+        <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" fetch="select">
+            <column name="AddressDefault" />
+        </many-to-one>
         <property name="buyerName" type="java.lang.String">
             <column name="BuyerName" length="45" />
         </property>

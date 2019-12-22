@@ -21,8 +21,8 @@ public class BuyerAction extends BaseAction {
        buyer.setBuyerNumber(request.getParameter("BuyerNumber"));
        buyer.setBuyerPassword(request.getParameter("BuyerPassword"));
        if(buyer.getBuyerNumber()!=null){
-       List<Buyer> list = buyerDAO.findByExample(getBuyer());
-       getDataMap().put(Buyer,list);
+    	   list = buyerDAO.findByExample(getBuyer());
+    	   getDataMap().put(Buyer,list);
 		}else {
 			getDataMap().put(ERROR,false);
 		}
@@ -59,7 +59,7 @@ public class BuyerAction extends BaseAction {
 	     setDataMap(new HashMap<String, Object>());
 		 Integer id = Integer.valueOf(request.getParameter("idBuyer"));     
 	     buyer = buyerDAO.findById(id);
-	     getDataMap().put(SUCCESS, buyer);
+	     getDataMap().put(Buyer, buyer);
 	     return DataMap;
 	}
 	

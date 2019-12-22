@@ -25,18 +25,24 @@ idbuyer：买家ID
 idbuyer：买家ID
 idorder：订单ID
 odNumber： 商品数量
-odstate订单状态 0未付款  1已付款 2已发货 3 已完成
+odstate订单状态 0未付款  1已付款 2已发货 3 已完成 4 退款
 shimage： 商品图片
 shname： 商品名称
 odprice：交易金额
 成交价 = 商品价格*商品数量
-{"Order":
+{"Oder":
      [
-	{"id": {"idbuyer":11,"idorder":1,"odNumber":1,"odstate":0,"shimage":"0001","shname":"板蓝根·","odprice":40.0}},
-	{"id": {"idbuyer":11,"idorder":2,"odNumber":1,"odstate":0,"shimage":"0001","shname":"感冒灵 ","odprice":20.9}},
-	{"id": {"idbuyer":11,"idorder":3,"odNumber":1,"odstate":0,"shimage":"0001","shname":"感冒灵 ","odprice":20.9}},
-	{"id": {"idbuyer":11,"idorder":4,"odNumber":1,"odstate":0,"shimage":"0001","shname":"感冒灵","odprice":20.9}},
-	{"id": {"idbuyer":11,"idorder":5,"odNumber":1,"odstate":0,"shimage":"0001","shname":"感冒灵","odprice":20.9}}
+	[
+	     {"id":{"idbuyer":11,"idorder":1,"odNumber":1,"odprice":40.0,"odstate":0,"shimage":"0001","shname":"板蓝根·"}}
+	],
+	[
+     	     {"id":{"idbuyer":11,"idorder":2,"odNumber":1,"odprice":20.9,"odstate":1,"shimage":"0001","shname":"感冒灵 "}}
+ 	],
+	[
+ 	     {"id":{"idbuyer":11,"idorder":3,"odNumber":1,"odprice":20.9,"odstate":2,"shimage":"0001","shname":"感冒灵 "}}
+ 	],
+	[
+ 	     {"id":{"idbuyer":11,"idorder":4,"odNumber":1,"odprice":20.9,"odstate":3,"shimage":"0001","shname":"感冒灵"}}
+	]
      ]
-
 }
