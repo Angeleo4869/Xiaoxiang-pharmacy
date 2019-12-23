@@ -73,12 +73,12 @@ public class BuyerDAO extends BaseHibernateDAO {
 	public List findByExample(Buyer instance) {
 		log.debug("finding Buyer instance by example");
 		try {
-			List results = getSession().createCriteria(Buyer.class).add(Example.create(instance))
-					.list();
+			List results = getSession().createCriteria(Buyer.class)
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			closeSession();
 			return results;
-		} catch (RuntimeException re) {
+		} catch (Exception re) {
 			log.error("find by example failed", re);
 			throw re;
 		}finally {
@@ -135,7 +135,7 @@ public class BuyerDAO extends BaseHibernateDAO {
 	public boolean attachDirty(Buyer instance) {
 		log.debug("attaching dirty Buyer instance");
 		try {
-			getSession().update(instance);
+			getSession().saveOrUpdate(instance);
 			transation.commit();
 			log.debug("attach successful");
 			closeSession();

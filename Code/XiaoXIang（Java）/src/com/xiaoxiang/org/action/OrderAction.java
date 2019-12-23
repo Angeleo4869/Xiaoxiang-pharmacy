@@ -1,5 +1,6 @@
 package com.xiaoxiang.org.action;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,11 @@ public class OrderAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Orderdetail orderdetail;
-	private ShopGoods shopGoods;
-	private Buyer buyer;
+	private Orderdetail orderdetail = new Orderdetail();
+	private ShopGoods shopGoods = new ShopGoods();
+	private Buyer buyer = new Buyer();
 	private OrderdetailDAO orderdetailDAO = new OrderdetailDAO();
-	private List<List> list;
+	private ArrayList<List> list = new ArrayList<List>();
 	
 	//购买，但未付款
 	public String placeOrder() throws Exception{
@@ -26,7 +27,7 @@ public class OrderAction extends BaseAction {
         setDataMap(new HashMap<String, Object>());
 		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
 		shopGoods.setIdShopGoods(Integer.valueOf(request.getParameter("idShopGoods")));
-		int goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));
+		Integer goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));
         orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer()+shopGoods.getIdShopGoods());
 		orderdetail.setBuyer(buyer);
 		orderdetail.setShopGoods(shopGoods);
@@ -45,9 +46,9 @@ public class OrderAction extends BaseAction {
 	public String viewOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-//		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
-		list = null;
-		for(Short orderstate = 0;orderstate<4;orderstate++){
+        Integer id = Integer.valueOf(request.getParameter("idBuyer"));
+		buyer.setIdBuyer(id);
+		for(Short orderstate = 0;orderstate<5;orderstate++){
 			list.add(orderdetailDAO.findByOrderView(11,orderstate));
 		}
 		getDataMap().put(Order, list);
@@ -57,16 +58,16 @@ public class OrderAction extends BaseAction {
 	public String viewOrderDetail() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        //buyer.setIdBuyer(11);
-        orderdetail= orderdetailDAO.findById(11);
+        Integer id = Integer.valueOf(request.getParameter("idOrder"));
+        orderdetail= orderdetailDAO.findById(id);
 		getDataMap().put(Order, orderdetail);
 		return DataMap;
 	}
-	
+	//付款完成(修改订单状态)
 	public String paymentOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        Short logistics = (Short.valueOf(request.getParameter("")));
+        Short logistics = (Short.valueOf(request.getParameter("")));//管理员确认收款，修改订单表，提示卖家发货
         orderdetail.setLogistics(logistics);
         if(orderdetailDAO.attachDirty(orderdetail)){
         	getDataMap().put(SUCCESS, true);

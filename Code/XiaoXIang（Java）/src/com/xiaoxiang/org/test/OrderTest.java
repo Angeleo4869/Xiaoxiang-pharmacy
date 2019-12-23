@@ -13,7 +13,7 @@ import com.xiaoxiang.org.vo.ShopGoods;
 
 public class OrderTest {
 
-	private static ArrayList<List> list;
+	private static ArrayList<List> list = new ArrayList<List>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,12 +22,11 @@ public class OrderTest {
 		OrderdetailDAO orderdetailDAO  = new OrderdetailDAO();
 		Orderdetail orderdetail = new Orderdetail();
 		buyer = new BuyerDAO().findById(11);
-		list = null;
 		for(int orderstate = 0;orderstate<4;orderstate++){
 			List order = orderdetailDAO.findByOrderView(11,(short)orderstate);
 			System.out.println(order.get(0));
-			//list.add(order);
-			//System.out.println(list.get(0).get(0));
+			list.addAll(order);
+			System.out.println(list.get(0));
 		}
 	}
 

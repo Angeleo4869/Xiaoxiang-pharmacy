@@ -71,8 +71,8 @@ public class StoreDAO extends BaseHibernateDAO {
 	public List findByExample(Store instance) {
 		log.debug("finding Store instance by example");
 		try {
-			List results = getSession().createCriteria(Store.class).add(Example.create(instance))
-					.list();
+			List results = getSession().createCriteria(Store.class)
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			closeSession();
 			return results;

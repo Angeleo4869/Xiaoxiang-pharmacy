@@ -19,6 +19,9 @@ public class ShoppingCartAction extends BaseAction {
 	public String addShoppingCart() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
+//        shoppingcart.setBuyer(buyer);
+//        shoppingcart.setShopGoods(shopGoods);
+//        shoppingcart.setGoodsNumber(goodsNumber);
         if(shoppingcartDAO.save(shoppingcart)){
         	getDataMap().put(SUCCESS, true);
         }else {

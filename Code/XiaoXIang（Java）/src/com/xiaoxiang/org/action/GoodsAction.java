@@ -14,11 +14,10 @@ public class GoodsAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List list;
 	private Goods goods = new Goods();
 	private Majorfunction majorfunction = new Majorfunction();
 	private GoodsDAO goodsDAO = new GoodsDAO();
-	
+	//所有药品
 	public String execute() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
@@ -26,25 +25,24 @@ public class GoodsAction extends BaseAction {
         getDataMap().put(Goods, list);
         return DataMap;
 	}
-	
+	//增加药品
 	public String addGoods() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        
-        goods.setGoodsNumber("1602082074");
-	    goods.setGoodsCheName("Banlangen Keli");
-	    goods.setGoodsComName("板蓝根颗粒");
-	    goods.setGoodsComposition("板蓝根");
-	    goods.setStorePurchasePrice(30.00);
-	    goods.setGoodsCharacter("浅棕色至深棕色颗粒；味甜，微苦。");
-	    goods.setGoodsManufacturer("广州白云山和记黄埔中药有限公司");
-	    goods.setGoodsProductionDate(new Date());
-	    goods.setGoodsSpecifications("10g*20包");
-	    goods.setGoodsTaboo("尚不明确");
-	    goods.setGoodsUsage("开水冲服，一次半~1袋，一日3~4次");
-	    goods.setGoodsValidity(24);
-	    majorfunction = new MajorfunctionDAO().findById(2);
-	    goods.setMajorfunction(majorfunction);
+        majorfunction = new MajorfunctionDAO().findById(Integer.valueOf(request.getParameter("GoodsValidity")));
+        goods.setGoodsNumber(request.getParameter("GoodsNumber"));//药品编号（条形码）
+	    goods.setGoodsCheName(request.getParameter("GoodsCheName"));//药品名称
+	    goods.setGoodsComName(request.getParameter("GoodsComName"));//药品拼音或化学名
+	    goods.setGoodsComposition(request.getParameter("GoodsComposition"));//药品成分
+	    goods.setStorePurchasePrice(Double.valueOf(request.getParameter("StorePurchasePrice")));//药品进价
+	    goods.setGoodsCharacter(request.getParameter("GoodsCharacter"));//药品性状
+	    goods.setGoodsManufacturer(request.getParameter("GoodsManufacturer"));//药品厂家
+	    goods.setGoodsProductionDate(new Date());//生产日期
+	    goods.setGoodsSpecifications(request.getParameter("GoodsSpecifications"));//药品规格
+	    goods.setGoodsTaboo(request.getParameter("GoodsTaboo"));//药品禁忌
+	    goods.setGoodsUsage(request.getParameter("GoodsUsage"));//药品服用方法
+	    goods.setGoodsValidity(Integer.valueOf(request.getParameter("GoodsValidity")));//药品有效期（月）
+	    goods.setMajorfunction(majorfunction);//药品类别
 	    if(goodsDAO.save(goods)){
 	    	getDataMap().put(SUCCESS, true);
 	    }else {
@@ -52,12 +50,11 @@ public class GoodsAction extends BaseAction {
 		}
         return DataMap;
 	}
-	
+	//删除药品
 	public String deleteGoods() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-		Integer id = Integer.valueOf(request.getParameter("idGood"));
-        goods = goodsDAO.findById(id);
+		goods.setIdGoods(Integer.valueOf(request.getParameter("idGoods")));
 		if(goodsDAO.delete(goods)){
 			getDataMap().put(SUCCESS, true);
 		}else {
@@ -65,11 +62,11 @@ public class GoodsAction extends BaseAction {
 		}
 		return DataMap;
 	}
-	
+	//查看药品参数
     public String viewGoodsDetail() throws Exception{
 		responseSetHeader();
 	    setDataMap(new HashMap<String, Object>());
-		Integer id = Integer.valueOf(request.getParameter("idGood"));
+		Integer id = Integer.valueOf(request.getParameter("idGoods"));
 		getDataMap().put(Goods, goodsDAO.findById(id));
 		return DataMap;
 	}

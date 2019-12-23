@@ -13,7 +13,9 @@ public class StoreAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private Store store = new Store();
 	private StoreDAO storeDao = new StoreDAO();
-	public String execute() throws Exception{
+	
+	//商家登录
+	public String storeLogin() throws Exception{
 		// TODO Auto-generated method stub
 		
 		responseSetHeader();
@@ -22,19 +24,19 @@ public class StoreAction extends BaseAction {
 		store.setStorePassword(request.getParameter("StorePassword"));
 		if(store.getStoreNumber()!=null){
 		List<Store> list = storeDao.findByExample(store);
-		getDataMap().put("Store", list);
+		getDataMap().put(Store, list);
 		} else {
 			getDataMap().put(ERROR, false);
 		}
 		return DataMap;
 	}
-	
-	public String register() throws Exception{
+	//商家注册
+	public String storeRegister() throws Exception{
         responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 //        store.setStoreName("仁和药房");
-//        store.setStoreNumber("xiaomm@yaofang.com");
-//        store.setStorePassword("renhe");
+        store.setStoreNumber(request.getParameter("StoreNumber"));
+        store.setStorePassword(request.getParameter("StorePassword"));
 //        store.setStorePhyName("陈旭");
 //        store.setStorePhyIdCard("911101068022288754");
 //        store.setStoreState((short)1);

@@ -17,25 +17,25 @@
             <column name="StorePassword" length="16" not-null="true" />
         </property>
         <property name="storeName" type="java.lang.String">
-            <column name="StoreName" length="45" not-null="true" />
+            <column name="StoreName" length="45" />
         </property>
         <property name="storeState" type="java.lang.Short">
-            <column name="StoreState" not-null="true" />
+            <column name="StoreState" />
         </property>
         <property name="storePhyName" type="java.lang.String">
-            <column name="StorePhyName" length="45" not-null="true" />
+            <column name="StorePhyName" length="45" />
         </property>
         <property name="storePhyIdCard" type="java.lang.String">
-            <column name="StorePhyIdCard" length="24" not-null="true" />
+            <column name="StorePhyIdCard" length="24" />
         </property>
         <property name="storeLicense" type="java.lang.String">
-            <column name="StoreLicense" length="45" not-null="true" />
+            <column name="StoreLicense" length="45" />
         </property>
         <property name="storeTel" type="java.lang.String">
-            <column name="StoreTel" length="45" not-null="true" unique="true" />
+            <column name="StoreTel" length="45" />
         </property>
         <property name="storeAddress" type="java.lang.String">
-            <column name="StoreAddress" length="45" not-null="true" />
+            <column name="StoreAddress" length="45" />
         </property>
         <set name="complaintses" inverse="true">
             <key>

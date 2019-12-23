@@ -14,6 +14,7 @@ public class Buyer implements java.io.Serializable {
 	// Fields
 
 	private Integer idBuyer;
+	private Shippingaddress shippingaddress;
 	private String buyerName;
 	private String buyerNumber;
 	private String buyerPassword;
@@ -39,9 +40,10 @@ public class Buyer implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Buyer(String buyerName, String buyerNumber, String buyerPassword, String buyerEmail, String buyerTel,
-			String buyerHeadpor, Set voucherses, Set shoppingcarts, Set orderdetails, Set complaintses,
-			Set collections) {
+	public Buyer(Shippingaddress shippingaddress, String buyerName, String buyerNumber, String buyerPassword,
+			String buyerEmail, String buyerTel, String buyerHeadpor, Set voucherses, Set shoppingcarts,
+			Set orderdetails, Set complaintses, Set collections) {
+		this.shippingaddress = shippingaddress;
 		this.buyerName = buyerName;
 		this.buyerNumber = buyerNumber;
 		this.buyerPassword = buyerPassword;
@@ -63,6 +65,14 @@ public class Buyer implements java.io.Serializable {
 
 	public void setIdBuyer(Integer idBuyer) {
 		this.idBuyer = idBuyer;
+	}
+
+	public Shippingaddress getShippingaddress() {
+		return this.shippingaddress;
+	}
+
+	public void setShippingaddress(Shippingaddress shippingaddress) {
+		this.shippingaddress = shippingaddress;
 	}
 
 	public String getBuyerName() {
@@ -112,7 +122,6 @@ public class Buyer implements java.io.Serializable {
 	public void setBuyerHeadpor(String buyerHeadpor) {
 		this.buyerHeadpor = buyerHeadpor;
 	}
-
 	@JSON(serialize=false)
 	public Set getVoucherses() {
 		return this.voucherses;
@@ -121,7 +130,6 @@ public class Buyer implements java.io.Serializable {
 	public void setVoucherses(Set voucherses) {
 		this.voucherses = voucherses;
 	}
-
 	@JSON(serialize=false)
 	public Set getShoppingcarts() {
 		return this.shoppingcarts;
@@ -130,7 +138,6 @@ public class Buyer implements java.io.Serializable {
 	public void setShoppingcarts(Set shoppingcarts) {
 		this.shoppingcarts = shoppingcarts;
 	}
-
 	@JSON(serialize=false)
 	public Set getOrderdetails() {
 		return this.orderdetails;
@@ -139,7 +146,6 @@ public class Buyer implements java.io.Serializable {
 	public void setOrderdetails(Set orderdetails) {
 		this.orderdetails = orderdetails;
 	}
-
 	@JSON(serialize=false)
 	public Set getComplaintses() {
 		return this.complaintses;
@@ -148,7 +154,7 @@ public class Buyer implements java.io.Serializable {
 	public void setComplaintses(Set complaintses) {
 		this.complaintses = complaintses;
 	}
-
+	
 	@JSON(serialize=false)
 	public Set getCollections() {
 		return this.collections;

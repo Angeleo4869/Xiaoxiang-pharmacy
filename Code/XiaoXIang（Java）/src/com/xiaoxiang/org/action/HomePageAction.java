@@ -44,7 +44,7 @@ public class HomePageAction extends BaseAction {
 		return DataMap;
 	}
 	
-	//搜索商品，店铺关键字
+	//药品分类表
 	public String viewGoodscClass() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
@@ -52,6 +52,8 @@ public class HomePageAction extends BaseAction {
 		getDataMap().put(ShopGoods, list);
 		return DataMap;
 	}	
+	
+	
 	@JSON(serialize=false)
 	public ShopGoods getShopGoods() {
 		return shopGoods;
