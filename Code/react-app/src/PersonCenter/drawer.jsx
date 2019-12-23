@@ -142,7 +142,8 @@ function ResponsiveDrawer(props) {
   })
   useEffect(
     ()=>{
-      axios.get('http://localhost:8080/XiaoXiangPharmacy/PersonalCenter.action',
+      if(cookie.load('userId')!=null){
+      axios.get(global.data.request+'PersonalCenter.action',
       {
         params: {
           idBuyer:cookie.load('userId')
@@ -152,7 +153,11 @@ function ResponsiveDrawer(props) {
           stePdata( response.data.Buyer);
           // console.log(response.data)
         }
-    )
+    )}else{
+      alert("请您先登陆")
+      window.location.href = global.data.localadd+"Login"
+      }
+
     },[]
   )
   // console.log(Pdata)

@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
       padding: theme.spacing(3, 2),
-      minHeight:'150%'
+      minHeight:'150%',
+      width: '100%',
     },
     list: {
       display: 'flex',

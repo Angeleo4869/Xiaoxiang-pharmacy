@@ -46,7 +46,8 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
-    height:'calc(100vh)'
+    height:'calc(100vh)',
+    minWidth:100
   },
   tabitem: {
     backgroundColor: "#0F0F0F",

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './loadding';
-
+import './GlobalData';
 
 ReactDOM.render(<App />, document.getElementById('food'));
 // ReactDOM.render(<Container />, document.getElementById('food'));

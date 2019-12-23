@@ -114,13 +114,14 @@ export default function SimpleContainer() {
     })
     useEffect(
       ()=>{
-        axios.get('http://localhost:8080/XiaoXiangPharmacy/ViewGoodsDetail.action',
+        axios.get(global.data.request+'ViewGoodsDetail.action',
         {
           params: {
-            idGood:query.get("goodid")
+            idGoods:query.get("goodid")
           }
         }).then(
           (response)=>{
+            console.log(response)
             steGdata( response.data.Goods);
           }
       )
@@ -168,7 +169,7 @@ export default function SimpleContainer() {
               <Rotate />
             </ListItem>
           </Box>
-          <ListItem key='2'><Norms user={query.get("name")} Gdata={Gdata}/></ListItem>  
+          <ListItem key='2'><Norms user={query.get("name")} Gdata={Gdata} /></ListItem>  
         </div>
         <Box><Tabs Gdata={Gdata}/></Box>
       </Container>
