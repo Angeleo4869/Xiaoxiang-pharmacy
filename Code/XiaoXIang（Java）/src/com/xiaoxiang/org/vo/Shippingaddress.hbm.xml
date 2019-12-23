@@ -10,7 +10,7 @@
             <column name="idShippingAddress" />
             <generator class="native" />
         </id>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="join" lazy="false">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="false">
             <column name="idBuyer" not-null="true" />
         </many-to-one>
         <property name="recipientName" type="java.lang.String">

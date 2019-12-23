@@ -8,6 +8,10 @@ public class Admin implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idAdmin;
 	private String adminNumber;
 	private String adminPassword;
