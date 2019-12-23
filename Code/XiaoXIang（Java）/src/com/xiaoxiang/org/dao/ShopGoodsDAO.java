@@ -134,7 +134,6 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		log.debug("recommended Goods instances");
 		try {
 			String queryString = "from GoodsView";
-			
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (Exception re) {

@@ -24,8 +24,7 @@ public class OrderTest {
 		buyer = new BuyerDAO().findById(11);
 		for(int orderstate = 0;orderstate<4;orderstate++){
 			List order = orderdetailDAO.findByOrderView(11,(short)orderstate);
-			System.out.println(order.get(0));
-			list.addAll(order);
+			list.add(order);
 			System.out.println(list.get(0));
 		}
 	}

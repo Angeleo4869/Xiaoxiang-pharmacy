@@ -40,8 +40,8 @@ public class ShippingAddressAction extends BaseAction {
         setDataMap(new HashMap<String, Object>());
         buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
         shippingaddress.setBuyer(buyer);
-        list = shippingaddressDAO.findByExample(shippingaddress);
-        getDataMap().put(Shippingaddress, true);        
+        setList(shippingaddressDAO.findByExample(shippingaddress));
+        getDataMap().put(ShippingAddress, getList());        
         return DataMap;
 	}
 

@@ -62,7 +62,7 @@ public class Shippingaddress implements java.io.Serializable {
 	public void setIdShippingAddress(Integer idShippingAddress) {
 		this.idShippingAddress = idShippingAddress;
 	}
-
+	@JSON(serialize=false)
 	public Buyer getBuyer() {
 		return this.buyer;
 	}

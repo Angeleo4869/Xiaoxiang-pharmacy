@@ -87,7 +87,7 @@ public class OrderdetailDAO extends BaseHibernateDAO {
 	public List findByOrderView(Integer idbuyer,Short orderstate){
 		log.debug("finding Orderdetail_View instance by idbuyer");
 		try {
-			String queryString = "SELECT * FROM order_view"
+			String queryString = "SELECT * FROM  order_view"
 					+ " where idbuyer = ?  and odstate = ? ";
 			SQLQuery queryObject = getSession().createSQLQuery(queryString);
 			queryObject.setParameter(0, idbuyer);
