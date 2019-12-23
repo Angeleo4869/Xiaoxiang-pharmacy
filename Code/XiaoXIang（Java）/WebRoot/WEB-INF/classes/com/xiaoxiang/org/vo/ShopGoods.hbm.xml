@@ -10,10 +10,10 @@
             <column name="idShop_Goods" />
             <generator class="native" />
         </id>
-        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" fetch="join" lazy="false">
+        <many-to-one name="store" class="com.xiaoxiang.org.vo.Store" lazy="no-proxy">
             <column name="Stort" not-null="true" />
         </many-to-one>
-        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" fetch="join" lazy="false">
+        <many-to-one name="goods" class="com.xiaoxiang.org.vo.Goods" lazy="no-proxy">
             <column name="Goods" not-null="true" />
         </many-to-one>
         <property name="shopGoodsImage" type="java.lang.String">
@@ -33,6 +33,9 @@
         </property>
         <property name="shopGoodsName" type="java.lang.String">
             <column name="shop_goodsName" length="45" not-null="true" />
+        </property>
+        <property name="shopGoodsDetailImage" type="java.lang.String">
+            <column name="shop_goodsDetailImage" length="45" />
         </property>
         <set name="voucherses" inverse="true">
             <key>

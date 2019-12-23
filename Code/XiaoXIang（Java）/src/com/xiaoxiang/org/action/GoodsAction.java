@@ -21,8 +21,8 @@ public class GoodsAction extends BaseAction {
 	public String execute() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        list = goodsDAO.findAll();
-        getDataMap().put(Goods, list);
+        setList(goodsDAO.findAll());
+        getDataMap().put(Goods, getList());
         return DataMap;
 	}
 	//增加药品
@@ -62,12 +62,13 @@ public class GoodsAction extends BaseAction {
 		}
 		return DataMap;
 	}
-	//查看药品参数
+	//查看商品详情
     public String viewGoodsDetail() throws Exception{
 		responseSetHeader();
 	    setDataMap(new HashMap<String, Object>());
-		Integer id = Integer.valueOf(request.getParameter("idGoods"));
-		getDataMap().put(Goods, goodsDAO.findById(id));
+		Integer id = Integer.valueOf(request.getParameter("idShopGoods"));
+		setList( goodsDAO.findGoodsDeatil(id));
+		getDataMap().put(Goods,getList());
 		return DataMap;
 	}
 

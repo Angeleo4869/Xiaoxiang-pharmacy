@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.xiaoxiang.org.vo.Goods;
+import com.xiaoxiang.org.vo.GoodsDetailView;
 
 /**
  * A data access object (DAO) providing persistence and search support for Goods
@@ -67,6 +69,22 @@ public class GoodsDAO extends BaseHibernateDAO {
 			closeSession();
 		}
 	}
+	
+	public List  findGoodsDeatil(java.lang.Integer id) {
+		log.debug("getting Goods instance with id: " + id);
+		try {
+			String queryString = "select * from GoodsDetail_view where idShop_Goods = ? ";
+			SQLQuery queryObject = getSession().createSQLQuery(queryString);
+			queryObject.setParameter(0, id);
+			queryObject.addEntity(GoodsDetailView.class);
+			return queryObject.list();
+		} catch (Exception re) {
+			log.error("find all failed", re);
+			throw re;
+		}finally {
+			closeSession();
+		}
+	}
 
 	public List findByExample(Goods instance) {
 		log.debug("finding Goods instance by example");
@@ -74,7 +92,6 @@ public class GoodsDAO extends BaseHibernateDAO {
 			List results = getSession().createCriteria(Goods.class)
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
-			closeSession();
 			return results;
 		} catch (Exception re) {
 			log.error("find by example failed", re);

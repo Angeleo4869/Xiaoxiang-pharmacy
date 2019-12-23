@@ -10,16 +10,16 @@
             <column name="idOrder" />
             <generator class="native" />
         </id>
-        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" fetch="select">
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="false">
             <column name="idBuyer" not-null="true" />
         </many-to-one>
-        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" fetch="select">
+        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" lazy="false">
             <column name="idShop_Goods" not-null="true" />
         </many-to-one>
-        <many-to-one name="vouchers" class="com.xiaoxiang.org.vo.Vouchers" fetch="select">
+        <many-to-one name="vouchers" class="com.xiaoxiang.org.vo.Vouchers"  lazy="false">
             <column name="idVouchers" />
         </many-to-one>
-        <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" fetch="select">
+        <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" lazy="false">
             <column name="ShippingAddress" />
         </many-to-one>
         <property name="paymentTime" type="java.util.Date">
@@ -40,7 +40,7 @@
         <property name="oderState" type="java.lang.Short">
             <column name="OderState" not-null="true" />
         </property>
-        <set name="commentses" inverse="true">
+        <set name="commentses" inverse="true" lazy="true">
             <key>
                 <column name="idOder" not-null="true" />
             </key>

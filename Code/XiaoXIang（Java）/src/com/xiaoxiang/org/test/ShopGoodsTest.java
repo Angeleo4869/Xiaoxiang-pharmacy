@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.xiaoxiang.org.dao.GoodsDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
-import com.xiaoxiang.org.dao.StoreDAO;
 import com.xiaoxiang.org.vo.Buyer;
 import com.xiaoxiang.org.vo.Goods;
 import com.xiaoxiang.org.vo.ShopGoods;
@@ -19,6 +18,7 @@ public class ShopGoodsTest {
 		Goods goods = new Goods();
 		Buyer buyer = new Buyer();
 		ShopGoods shopGoods = new ShopGoods();
+		GoodsDAO goodsDAO = new GoodsDAO();
 		ShopGoodsDAO dao = new ShopGoodsDAO();
 //		goods = new GoodsDAO().findById(2);
 //		System.out.println(goods.getGoodsNumber());
@@ -35,11 +35,10 @@ public class ShopGoodsTest {
 //		if(dao.save(shopGoods)){
 //			System.out.println(shopGoods.getGoods().getGoodsComName());
 //		}
-		buyer.setIdBuyer(11);
-		list = dao.membersRecommendedGoods(buyer);
+//		buyer.setIdBuyer(11);
+		list = goodsDAO.findGoodsDeatil(1);
 		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i));
-			
+			System.out.println(list.get(i));	
 		}
 	}
 

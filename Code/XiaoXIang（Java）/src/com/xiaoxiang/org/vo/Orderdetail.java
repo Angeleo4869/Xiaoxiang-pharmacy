@@ -72,7 +72,7 @@ public class Orderdetail implements java.io.Serializable {
 	public void setIdOrder(Integer idOrder) {
 		this.idOrder = idOrder;
 	}
-
+	@JSON(serialize=false)
 	public Buyer getBuyer() {
 		return this.buyer;
 	}

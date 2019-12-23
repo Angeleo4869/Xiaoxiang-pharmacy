@@ -24,7 +24,7 @@ public class BaseAction extends ActionSupport {
 	HttpServletResponse response = ServletActionContext.getResponse();
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Map<String, Object> dataMap;
-	List list = new ArrayList();
+	private List list = new ArrayList();
 	public static String DataMap = "dataMap";
 	public static String Admin = "Admin";
 	public static String Buyer = "Buyer";
@@ -32,7 +32,8 @@ public class BaseAction extends ActionSupport {
 	public static String ShopGoods = "ShopGoods";
 	public static String Order = "Oder";
 	public static String Goods = "Goods";
-	public static String Shippingaddress = "shippingaddress";
+	public static String ShippingAddress = "shippingaddress";
+	public static String MajorFunction = "Majorfunction";
 	public void responseSetHeader() throws Exception{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -43,28 +44,19 @@ public class BaseAction extends ActionSupport {
 		response.setContentType("text/html; charset=utf-8");
 	}
 	
-	//解析请求的Json数据
-    private String getRequestPostData(HttpServletRequest request) throws IOException {
-        int contentLength = request.getContentLength();
-        if(contentLength<0){
-            return null;
-        }
-        byte buffer[] = new byte[contentLength];
-        for (int i = 0; i < contentLength;) {
-            int len = request.getInputStream().read(buffer, i, contentLength - i);
-            if (len == -1) {
-                break;
-            }
-            i += len;
-        }
-        return new String(buffer, "utf-8");
-    }
-    
 	public Map<String, Object> getDataMap() {
 		return dataMap;
 	}
 	protected void setDataMap(Map<String, Object> dataMap) {
 		this.dataMap = dataMap;
+	}
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
 	}
 
 }
