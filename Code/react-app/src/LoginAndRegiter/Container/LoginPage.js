@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import cookie from 'react-cookies'
 // import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios,axios } from 'react-axios'
 //  import requ from './admintest';
 import axios from 'axios';
@@ -29,18 +30,28 @@ function Copyright() {
 }
 //事件请求，不需要渲染
 function test (){
-  if(document.getElementById("ad").value!==null&&document.getElementById("pd").value)  {   
-    axios.get('http://localhost:8080/XiaoXiangPharmacy/AdminLogin.action',
+  if(document.getElementById("ad").value&&document.getElementById("pd").value)  {   
+    axios.get('http://localhost:8080/XiaoXiangPharmacy/BuyerLogin.action',
      {
       params: {
-        AdminNumber:document.getElementById("ad").value,
-        AdminPassword:document.getElementById("pd").value
+        BuyerNumber:document.getElementById("ad").value,
+        BuyerPassword:document.getElementById("pd").value
       }
     })
     .then(function (response) {
       console.log(response)
-      alert(response.data.success)
-      if(response.data.success){
+      
+      if(response.data.Buyer.length!==0){
+        if(response.data.Buyer[0].buyerName===null){
+          alert("欢迎登陆："+ "陌生人")
+        }else{
+          alert("欢迎登陆："+ response.data.Buyer[0].buyerName)
+        }
+        //浏览器存在周期
+        cookie.save('userId', response.data.Buyer[0].idBuyer, { path: '/'})
+        //仅在会话，标签栏
+        sessionStorage.setItem("Umessage",response.data.Buyer[0].buyerNumber);
+        
         window.location.href = "http://localhost:3000/PersonCenter"
       }
       else

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 // import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,7 +24,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import SettingsIcon from '@material-ui/icons/Settings';
-
+import axios from 'axios';
+import cookie from 'react-cookies';
 //个人中心模块接口
 import {
     Route,
@@ -43,7 +44,7 @@ import Address from './../PersonSetting/address';
 import NewAddress from './../PersonSetting/newaddress';
 import './../CSS/Center.css';
 import Cbadge from './../Test/C_badge';
-import Data from './../GlobalData';
+
 
 const drawerWidth = 200;
 
@@ -129,7 +130,32 @@ function ResponsiveDrawer(props) {
   {name:'我的订单',id:'1',src:'/PersonCenter/order'},
   {name:'购物车',id:'3',src:'/PersonCenter/Shoppingcart'}
 ];
-
+  //const state + effect 仅在加载时请求数据库  个人信息数据
+  const [Pdata,stePdata] = React.useState({
+    buyerEmail: "",
+    buyerHeadpor: null,
+    buyerName: "",
+    buyerNumber: "",
+    buyerPassword: "",
+    buyerTel: "",
+    idBuyer: 0,
+  })
+  useEffect(
+    ()=>{
+      axios.get('http://localhost:8080/XiaoXiangPharmacy/PersonalCenter.action',
+      {
+        params: {
+          idBuyer:cookie.load('userId')
+        }
+      }).then(
+        (response)=>{
+          stePdata( response.data.Buyer);
+          // console.log(response.data)
+        }
+    )
+    },[]
+  )
+  // console.log(Pdata)
   const drawer = (
     <div>
       <div className={classes.toolbar} >
@@ -181,7 +207,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             潇湘药房
           </Typography>
-          <Link to="/PersonCenter/message"><Cbadge  B_num={Data.Bnum} /></Link>
+          <Link to="/PersonCenter/message"><Cbadge  B_num={10} /></Link>
           <Link to="/PersonCenter/Setting"><SettingsIcon style={{color:"#FFFFFF",position:'absolute',right:140,top:25}} /></Link>
         </Toolbar>
       </AppBar>
@@ -220,10 +246,10 @@ function ResponsiveDrawer(props) {
         <div id="back-to-top-anchor" />
         <Switch >                                {/*单选控制path=*有效*/}
           <Route exact path="/PersonCenter/">
-                  <App />
+                  <App data={Pdata}/>
           </Route>
           <Route path="/PersonCenter/Setting">
-                  <Setting/>
+                  <Setting data={Pdata}/>
           </Route>
           <Route path="/PersonCenter/modify/Revise">
                   <Revise/>

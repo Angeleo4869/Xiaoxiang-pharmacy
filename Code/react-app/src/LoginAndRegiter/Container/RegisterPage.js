@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 // import {LoginPage} from './LoginPage';
  
 function Copyright() {
@@ -52,6 +53,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+//事件请求，不需要渲染
+function test (){
+  if(document.getElementById("pn").value&&document.getElementById("pd").value)  {   
+    axios.get('http://localhost:8080/XiaoXiangPharmacy/BuyerRegister.action',
+     {
+      params: {
+        BuyerNumber:document.getElementById("pn").value,
+        BuyerPassword:document.getElementById("pd").value
+      }
+    })
+    .then(function (response) {
+      // console.log(response)
+      if(response.data.success===true){
+        alert("注册成功")
+        window.location.href = "http://localhost:3000/Login"
+      }
+      else
+      alert("该账号已存在，注册失败")
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }else{
+    alert("input message")
+  }
+}
+
+
 export default function SignUp() {
   const classes = useStyles();
 
@@ -65,7 +94,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           注 册
         </Typography>
-        <form method={'post'} action={'http://localhost:8080/XiaoXiangPharmacy/BuyerRegister.action'} className={classes.form} noValidate>
+        <form method={'post'}  className={classes.form} noValidate>
           <Grid container spacing={2}>
             
             <Grid item xs={12}>
@@ -73,9 +102,9 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="邮箱"
-                name="email"
+                id="pn"
+                label="账号"
+                name="account"
                 autoComplete="email"
               />
             </Grid>
@@ -87,7 +116,7 @@ export default function SignUp() {
                 name="password"
                 label="密码"
                 type="password"
-                id="password"
+                id="pd"
                 autoComplete="current-password"
               />
             </Grid>
@@ -99,11 +128,12 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={test}
           >
             注 册
           </Button>

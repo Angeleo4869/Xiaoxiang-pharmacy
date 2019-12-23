@@ -28,23 +28,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function orderList(props){
     const classes = useStyles();
+    // console.log(props.content)
     return(
       <Paper className={classes.paper}>
         <List className={classes.list}>
-          <Typography noWrap><PhoneIcon fontSize='small'/>{props.content.name}</Typography>
-          <Typography noWrap style={{position:'absolute',right:'2%'}}>{props.content.state}</Typography>
+          <Typography noWrap><PhoneIcon fontSize='small'/>{props.content.id.storename}</Typography>
+          {/* <Typography noWrap style={{position:'absolute',right:'2%'}}>{props.content.id.odstate}</Typography> */}
         </List>
         <List className={classes.list}>
-          <img className={classes.img} alt="complex" src={props.content.imagesrc} />
+          <img className={classes.img} alt="complex" src="/Pic/D1.jpg" />
           <span style={{position:'absolute',left:85,width:250,height:30}}>
-          <p > {props.content.goodname}
+          <p > {props.content.id.shname}
           </p>
           </span>
-          <h6 style={{position:'absolute',right:5}}>￥{props.content.finprice}</h6>
+          <h6 style={{position:'absolute',right:5}}>￥{props.content.id.odprice}</h6>
           <Hidden smDown>
             <List style={{position:'absolute',left:340,width:50,height:30}}>
-              <Typography><s>￥{props.content.preprice}</s></Typography>
-              <Typography>￥{props.content.price}</Typography>
+              <Typography>￥{props.content.id.shPrice}</Typography>
+              <Typography>X{props.content.id.odNumber}</Typography>
             </List>
           </Hidden>
           <Hidden smDown>

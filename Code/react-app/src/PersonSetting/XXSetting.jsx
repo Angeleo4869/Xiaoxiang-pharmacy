@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs(props) {
     const classes = useStyles();
   return (
     <div style={{position:'relative',width:'100%'}}>
@@ -56,7 +56,7 @@ export default function FullWidthTabs() {
                 <div style={{display:'flex',width:'100%'}}>
                     <InboxIcon/>
                     <div style={{display:'inline'}}>
-                        <Typography>昵称</Typography>
+                        <Typography>昵称:</Typography>
                         <Typography>会员名</Typography>
                     </div>
                     <Button style={{position:'absolute',right:5}}>编辑</Button>
