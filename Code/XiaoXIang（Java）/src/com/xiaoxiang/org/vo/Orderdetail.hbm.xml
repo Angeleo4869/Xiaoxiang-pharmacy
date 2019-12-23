@@ -10,6 +10,7 @@
             <column name="idOrder" />
             <generator class="native" />
         </id>
+<<<<<<< HEAD
         <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="false">
             <column name="idBuyer" not-null="true" />
         </many-to-one>
@@ -20,6 +21,18 @@
             <column name="idVouchers" />
         </many-to-one>
         <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" lazy="false">
+=======
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="no-proxy">
+            <column name="idBuyer" not-null="true" />
+        </many-to-one>
+        <many-to-one name="shopGoods" class="com.xiaoxiang.org.vo.ShopGoods" lazy="no-proxy">
+            <column name="idShop_Goods" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vouchers" class="com.xiaoxiang.org.vo.Vouchers"  lazy="no-proxy">
+            <column name="idVouchers" />
+        </many-to-one>
+        <many-to-one name="shippingaddress" class="com.xiaoxiang.org.vo.Shippingaddress" lazy="no-proxy">
+>>>>>>> 86a43b09348f7dcc48490cd09522414975f720e4
             <column name="ShippingAddress" />
         </many-to-one>
         <property name="paymentTime" type="java.util.Date">

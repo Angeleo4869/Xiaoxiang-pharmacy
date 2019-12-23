@@ -10,7 +10,11 @@
             <column name="idShippingAddress" />
             <generator class="native" />
         </id>
+<<<<<<< HEAD
         <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="no-proxy">
+=======
+        <many-to-one name="buyer" class="com.xiaoxiang.org.vo.Buyer" lazy="false">
+>>>>>>> 86a43b09348f7dcc48490cd09522414975f720e4
             <column name="idBuyer" not-null="true" />
         </many-to-one>
         <property name="recipientName" type="java.lang.String">
