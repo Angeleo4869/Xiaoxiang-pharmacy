@@ -54,7 +54,7 @@ public class BuyerAction extends BaseAction {
 		 responseSetHeader();
 	     setDataMap(new HashMap<String, Object>());
 		 Integer id = Integer.valueOf(request.getParameter("idBuyer"));  
-		 buyer.setIdBuyer(id);
+		 setBuyer(buyerDAO.findById(id));
 	     if(buyerDAO.delete(getBuyer())){
 	    	getDataMap().put(SUCCESS, true);
 	     }else {
@@ -75,7 +75,8 @@ public class BuyerAction extends BaseAction {
 	public String editBuyer() throws Exception{
 		 responseSetHeader();
 	     setDataMap(new HashMap<String, Object>());
-		 buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
+		 Integer id = Integer.valueOf(request.getParameter("idBuyer"));
+		 setBuyer(buyerDAO.findById(id));
 		 buyer.setBuyerName(request.getParameter("BuyerName"));
 		 buyer.setBuyerHeadpor(request.getParameter("Headpor"));
 		 buyer.setBuyerTel(request.getParameter("BuyerTel"));

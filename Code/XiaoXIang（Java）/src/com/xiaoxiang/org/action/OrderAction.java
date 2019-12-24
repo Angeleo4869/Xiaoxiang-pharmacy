@@ -28,7 +28,6 @@ public class OrderAction extends BaseAction {
 	public String placeOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        
 		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));//买家ID
 		Integer flag = Integer.valueOf(request.getParameter("idShopGoods"));
 		Integer goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));//商品数量
@@ -55,9 +54,8 @@ public class OrderAction extends BaseAction {
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
         Integer id = Integer.valueOf(request.getParameter("idBuyer"));
-		buyer.setIdBuyer(id);
 		for(Short orderstate = 0;orderstate<5;orderstate++){
-			list.add(orderdetailDAO.findByOrderView(11,orderstate));
+			list.add(orderdetailDAO.findByOrderView(id,orderstate));
 		}
 		getDataMap().put(Order, list);
 		return DataMap;
@@ -75,7 +73,9 @@ public class OrderAction extends BaseAction {
 	public String paymentOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        Short oderState = (Short.valueOf(request.getParameter("OderState")));//管理员确认收款，修改订单表，提示卖家发货
+        Integer id = Integer.valueOf(request.getParameter("idOrder"));
+        Short oderState = (Short.valueOf(request.getParameter("OrderState")));//管理员确认收款，修改订单表，提示卖家发货
+        setOrderdetail(orderdetailDAO.findById(id));
         orderdetail.setOderState(oderState);
         if(orderdetailDAO.attachDirty(orderdetail)){
         	getDataMap().put(SUCCESS, true);

@@ -269,7 +269,7 @@
 		</action>
 		
 		<!-- 添加收藏   -->
-		<action name="AddCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		<action name="AddCollection" class="com.xiaoxiang.org.action.CollectionAction"
 		method="addCollection">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
@@ -277,7 +277,7 @@
 		</action>
 		
 		<!-- 删除收藏   -->
-		<action name="DeleteCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		<action name="DeleteCollection" class="com.xiaoxiang.org.action.CollectionAction"
 		method="deleteCollection">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
@@ -285,7 +285,7 @@
 		</action>
 		
 		<!-- 查看收藏   -->
-		<action name="ViewCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		<action name="ViewCollection" class="com.xiaoxiang.org.action.CollectionAction"
 		method="ViewCollection">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>

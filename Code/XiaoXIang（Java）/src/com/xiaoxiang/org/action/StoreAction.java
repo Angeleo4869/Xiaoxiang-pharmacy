@@ -18,6 +18,7 @@ public class StoreAction extends BaseAction {
 	private StoreDAO storeDao = new StoreDAO();
 	private ShopGoods shopgoods = new ShopGoods();
 	private Goods goods = new Goods();
+	private ShopGoodsDAO shopGoodsDAO = new ShopGoodsDAO();
 	//查看所有商家
 	public String execute() throws Exception{
 
@@ -62,6 +63,8 @@ public class StoreAction extends BaseAction {
 	public String editStore() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
+		Integer id = Integer.valueOf(request.getParameter("idStore"));
+		setStore(storeDao.findById(id));
 		store.setStoreName(request.getParameter("StoreName"));
         store.setStorePhyName(request.getParameter("StorePhyName"));//法人姓名
         store.setStorePhyIdCard(request.getParameter("StorePhyIdCard"));//法人身份证
@@ -91,7 +94,8 @@ public class StoreAction extends BaseAction {
 	public String deleteStore() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		store.setIdStore(Integer.valueOf(request.getParameter("idStore")));
+		Integer id = Integer.valueOf(request.getParameter("idStore"));
+		setStore(storeDao.findById(id));
 		if(storeDao.delete(getStore())){
 	      	getDataMap().put(SUCCESS, true);
 	      }else {
@@ -104,8 +108,9 @@ public class StoreAction extends BaseAction {
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		String flag = request.getParameter("idShopgoods");
-		if(flag!=null)		//判断id是否为null 
-		shopgoods.setIdShopGoods(Integer.valueOf(flag));
+		if(flag!=null){//判断id是否为null 
+			setShopgoods(shopGoodsDAO.findById(Integer.valueOf(flag)));
+		}
 		flag = request.getParameter("idgoods");
 		if(flag!=null)		//判断id是否为null 
 		goods.setIdGoods(Integer.valueOf(flag));
@@ -129,12 +134,13 @@ public class StoreAction extends BaseAction {
 	        return DataMap;
 	}
 	
-	
+	//
 	public String deleteShopGoods() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		shopgoods.setIdShopGoods(Integer.valueOf(request.getParameter("idShopGoods")));
-		if(new ShopGoodsDAO().delete(getShopgoods())){
+		Integer id = Integer.valueOf(request.getParameter("idShopGoods"));
+		setShopgoods(shopGoodsDAO.findById(id));
+		if(shopGoodsDAO.delete(getShopgoods())){
 	      	getDataMap().put(SUCCESS, true);
 	      }else {
 	      	getDataMap().put(ERROR,false);

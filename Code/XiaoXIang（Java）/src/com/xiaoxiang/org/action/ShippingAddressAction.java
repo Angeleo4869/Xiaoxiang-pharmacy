@@ -22,8 +22,10 @@ public class ShippingAddressAction extends BaseAction {
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
         String flag = request.getParameter("idShippingaddress");
-        if(flag!=null)//判断id是否为null  
-        shippingaddress.setIdShippingAddress(Integer.valueOf(flag));
+        if(flag!=null){//判断id是否为null  
+        	
+        	setShippingaddress(shippingaddressDAO.findById(Integer.valueOf(flag)));//id不为null 修改收货地址 先获取再修改
+        }
         buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
         shippingaddress.setBuyer(buyer);
         shippingaddress.setRecipientName(request.getParameter("RecipientName"));

@@ -59,7 +59,8 @@ public class GoodsAction extends BaseAction {
 	public String deleteGoods() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-		goods.setIdGoods(Integer.valueOf(request.getParameter("idGoods")));
+        Integer id = Integer.valueOf(request.getParameter("idGoods"));
+		setGoods(goodsDAO.findById(id));
 		if(goodsDAO.delete(goods)){
 			getDataMap().put(SUCCESS, true);
 		}else {

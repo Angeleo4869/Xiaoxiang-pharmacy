@@ -5,3 +5,66 @@
 查看个人地址 118.25.67.96:8080/XiaoXiangPharmacy/ViewAddress.action?idBuyer=11
 查看订单 118.25.67.96:8080/XiaoXiangPharmacy/ViewOrder.action?idBuyer=11
 主界面 118.25.67.96:8080/XiaoXiangPharmacy/HomePage.action?idBuyer=11  （未完善）
+
+
+管理登录
+http://localhost:8080/XiaoXiangPharmacy/AdminLogin.action?AdminNumber=leo&AdminPassword=123456
+
+用户：
+用户注册
+http://localhost:8080/XiaoXiangPharmacy/BuyerRegister.action?BuyerNumber=12345678901&BuyerPassword=123456
+用户信息完善/编辑
+http://localhost:8080/XiaoXiangPharmacy/EditBuyer.action?idBuyer=18&BuyerName=%E6%9D%8E%E5%9B%9B&Headpor=17&BuyerTel=12345678901&BuyerEmail=12345678901@163.com
+用户登录
+http://localhost:8080/XiaoXiangPharmacy/BuyerLogin.action?BuyerNumber=12345678901&BuyerPassword=123456
+用户个人中心查看
+http://localhost:8080/XiaoXiangPharmacy/PersonalCenter.action?idBuyer=17
+用户注销(有记录无法删除)
+http://localhost:8080/XiaoXiangPharmacy/DeleteBuyer.action?idBuyer=17
+
+卖家略
+
+主页：
+已登录
+http://localhost:8080/XiaoXiangPharmacy/HomePage.action?idBuyer=17
+未登录
+http://localhost:8080/XiaoXiangPharmacy/HomePage.action
+查询
+http://localhost:8080/XiaoXiangPharmacy/SearchQuery.action?Search=感冒
+
+商品详情
+http://localhost:8080/XiaoXiangPharmacy/ViewShopGoodsDetail.action?idShopGoods=1
+商品参数
+http://localhost:8080/XiaoXiangPharmacy/ViewGoodsDetail.action?idGoods=5
+分类表
+http://localhost:8080/XiaoXiangPharmacy/ViewGoodscClass.action
+添加/修改商品
+localhost:8080/XiaoXiangPharmacy/AddOrChangeGoods.action?idGoods（有： 修改商品参数， 无：添加商品）&MajorFunction=2&GoodsNumber=00000001&GoodsCheName=999感冒灵&GoodsComName=999ganmaoling&GoodsComposition=（成分）&StorePurchasePrice=10.9（进价）&GoodsCharacter=（性状）&GoodsManufacturer=（厂家名称）&GoodsSpecifications=（药品规格）&GoodsTaboo=（药品禁忌）&GoodsUsage=（服用方法）&GoodsValidity=24（有效期/月）
+删除药品
+localhost:8080/XiaoXiangPharmacy/DeleteGoods.action?idGoods=3
+
+添加购物车
+http://localhost:8080/XiaoXiangPharmacy/AddShoppingCart.action?idBuyer=18&idShopGoods=3&GoodsNumber=1
+删除购物车
+localhost:8080/XiaoXiangPharmacy/DeleteShoppingCart.action?idShoppingCart=1
+查看购物车
+（）
+
+购买：
+http://localhost:8080/XiaoXiangPharmacy/PlaceOrder.action?idBuyer=18&idShopGoods=5&GoodsNumber=4&ShippingAddress=2
+查看订单
+http://localhost:8080/XiaoXiangPharmacy/ViewOrder.action?idBuyer=18
+订单详情
+http://localhost:8080/XiaoXiangPharmacy/ViewOrderDetail.action?idOrder=4
+
+已付款确认（OrderState=1 已付款 2 已发货 3 已收货 4 退款）
+http://localhost:8080/XiaoXiangPharmacy/PaymentOrder.action?idOrder=4&OrderState=1
+
+查看收货地址
+http://localhost:8080/XiaoXiangPharmacy/ViewAddress.action?idBuyer=11
+增加/修改收货地址
+localhost:8080/XiaoXiangPharmacy/AddOrChangeAddress.action?idBuyer=11&（略）
+删除收货地址
+
+
+

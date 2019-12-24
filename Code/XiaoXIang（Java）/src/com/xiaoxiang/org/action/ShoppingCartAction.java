@@ -40,7 +40,8 @@ public class ShoppingCartAction extends BaseAction {
 	public String deleteShoppingCart() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        shoppingcart.setIdshoppingcart(Integer.valueOf(request.getParameter("idShoppingCart")));
+        Integer id = Integer.valueOf(request.getParameter("idShoppingCart"));
+       setShoppingcart(shoppingcartDAO.findById(id));
         if(shoppingcartDAO.delete(shoppingcart)){
         	getDataMap().put(SUCCESS, true);
         }else {
@@ -49,6 +50,17 @@ public class ShoppingCartAction extends BaseAction {
         return DataMap;
 	}
 	
+	//¹ºÎï³µ
+		public String viewShoppingCart() throws Exception{
+			responseSetHeader();
+	        setDataMap(new HashMap<String, Object>());
+	        Integer id = Integer.valueOf(request.getParameter("idBuyer"));
+	        buyer.setIdBuyer(id);
+	        shoppingcart.setBuyer(buyer);
+	       setList(shoppingcartDAO.findByExample(shoppingcart));
+	        getDataMap().put(ShopGoods, getList());
+	        return DataMap;
+		}
 	
 	public Shoppingcart getShoppingcart() {
 		return shoppingcart;

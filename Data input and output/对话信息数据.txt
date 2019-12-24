@@ -1,9 +1,314 @@
-输入
-用户的唯一id
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
 
-输出 昵称 头像 信息
-[{name:'ITEMONE',img:'moren',message:[{con:'0',mess:'diyddddige'},{con:'1',mess:'dieaaaaaaaarge'},{con:'0',mess:'diige'},{con:'1',mess:'diaaaage'}]},
-    {name:'ITEM TWO',img:'moren',message:[{con:'1',mess:'diyige'},{con:'0',mess:'dierge'}]},
-    {name:'ITEM THREE',img:'moren',message:[{con:'0',mess:'diyige'},{con:'1',mess:'dierge'}]},
-    
-  ];
+	<package name="default" extends="json-default,struts-default">
+	
+		<!-- 管理员登录 -->
+		<action name="AdminLogin"
+			class="com.xiaoxiang.org.action.AdminAction">
+			 <result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 买家登录 -->
+		<action name="BuyerLogin"
+			class="com.xiaoxiang.org.action.BuyerAction" method="buyerLogin">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 买家注册 -->
+		<action name="BuyerRegister"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="buyerRegister">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 查看个人中心 -->
+		<action name="PersonalCenter"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="personalCenter">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 编辑个人中心 -->
+		<action name="EditBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="editBuyer">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 买家注销 -->
+		<action name="DeleteBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="buyerCancellation">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!--  查看所有买家  -->
+		<action name="AllBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 卖家登录 -->
+		<action name="StoreLogin"
+			class="com.xiaoxiang.org.action.StoreAction" method="storeLogin">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 卖家注册 -->
+		<action name="StoreRegister"
+			class="com.xiaoxiang.org.action.StoreAction" method="storeRegister">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 卖家信息 -->
+		<action name="ViewStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="viewStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 编辑卖家信息 -->
+		<action name="EditStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="editStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除卖家 -->
+		<action name="DeleteStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="deleteStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 主页and推荐 -->
+		<action name="HomePage"
+		 class="com.xiaoxiang.org.action.HomePageAction" >
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 搜索 -->
+		<action name="SearchQuery"
+		 class="com.xiaoxiang.org.action.HomePageAction" method="searchQuery">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 所有商品 -->
+		<action name="ViewAllGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" >
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 所有已上架商品 -->
+		<action name="ViewAllShopGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="allShopGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品详情 -->
+		<action name="ViewShopGoodsDetail"
+			class="com.xiaoxiang.org.action.GoodsAction" method="viewShopGoodsDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品参数 -->
+		<action name="ViewGoodsDetail"
+			class="com.xiaoxiang.org.action.GoodsAction" method="viewGoodsDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 分类表  -->
+		<action name="ViewGoodscClass"
+		 class="com.xiaoxiang.org.action.HomePageAction" method="viewGoodscClass">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 添加/修改商品 -->
+		<action name="AddOrChangeGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="addOrChangeGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除商品 -->
+		<action name="DeleteGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="deleteGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		
+		<!-- 添加购物车 -->							
+		<action name="AddShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction" 
+		 method="addShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除购物车 -->
+		<action name="DeleteShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction"
+		  method="deleteShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+
+		<!-- 购买   未付款 -->
+		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+				
+		<!-- 查看订单 -->
+		<action name="ViewOrder" 
+			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 查看订单详情 -->
+		<action name="ViewOrderDetail" class="com.xiaoxiang.org.action.OrderAction" 
+		method="viewOrderDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 修改订单表   -->
+		<action name="PaymentOrder" class="com.xiaoxiang.org.action.OrderAction"
+		 method="paymentOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+
+		<!-- 查看收货地址   -->
+		<action name="ViewAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="viewAddress">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 修改收货地址   -->
+		<action name="addOrChangeAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="addOrChangeAddress">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除收货地址   -->
+		<action name="DeleteAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="deleteAddress">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+				
+		<!-- 测试action   -->
+		<action name="TestAction" class="com.xiaoxiang.org.action.TestAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品上架   -->
+		<action name="AddOrChangeShopGoods" class="com.xiaoxiang.org.action.StoreAction"
+		method="addOrChangeShopGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品下架   -->
+		<action name="DeleteShopGoods" class="com.xiaoxiang.org.action.StoreAction"
+		method="deleteShopGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 添加收藏   -->
+		<action name="AddCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="addCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除收藏   -->
+		<action name="DeleteCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="deleteCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 查看收藏   -->
+		<action name="ViewCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="ViewCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		
+		<!--
+		//评论
+		<action name="Vouchers">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		
+		//投诉
+		<action name="Comments">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		 -->
+	</package>
+</struts>    
