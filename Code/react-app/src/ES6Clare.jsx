@@ -101,6 +101,9 @@ class Welcome extends React.Component{
                 <Link to="/Shop">
                     <button onClick={this.handleClick}>shap!</button>
                 </Link>
+                <Link to="/ShopView">
+                    <button onClick={this.handleClick}>shapView!</button>
+                </Link>
                 <Link to="/ImedPurchase">
                      <Button>立即购买</Button>
                 </Link>

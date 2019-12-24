@@ -49,7 +49,7 @@ export default function orderList(props){
               <Typography>X{props.content.id.odNumber}</Typography>
             </List>
           </Hidden>
-          <Hidden smDown>
+          <Hidden xsUp>
             <List style={{position:'absolute',right:80,width:70,height:50}}>
               <Typography fontSize='small'>交易状态</Typography>
               <Typography>订单详情</Typography>
@@ -57,7 +57,7 @@ export default function orderList(props){
             </List>
           </Hidden>
         </List>
-        <Hidden smUp>
+        <Hidden smDown>
             <List style={{display:'flex',position:'relative',top:20}}>
               <Typography fontSize='small'>交易状态</Typography>
               <Typography>订单详情</Typography>

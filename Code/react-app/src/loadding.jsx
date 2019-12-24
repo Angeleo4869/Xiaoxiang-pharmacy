@@ -1,5 +1,7 @@
 import React from 'react';
-import Welcome from './ES6Clare';
+import Test from './ES6Clare';
+
+// import Welcome from './MainInterface/collect';
 import Container from './PersonCenter/drawer';
 import Login from './LoginAndRegiter/Container/LoginPage';
 import Register from './LoginAndRegiter/Container/RegisterPage';
@@ -7,7 +9,7 @@ import GoodsDetails from './GoodsDetails/gooddetails';
 import ImedPurchases from './PuerchaseAndPay/ImediyPurchase';
 import Management from './BGManagement/BGMainInterface/bgmgmn';
 import Shop from './ExhibitShow/ShopManage/ShopManagement';
-import Data from './GlobalData';
+import ShopView from './ExhibitShow/ShopShow/shopshow';
 // import App from './PersonCenter/PersonCenter.jsx';
 // import App from './GoodsDetails/gooddetails';
 // import App from './GoodsDetails/rotate/TgetData';
@@ -29,7 +31,8 @@ function RootRouter() {
       <Router>
           <div id="foodd"></div>
       <Switch >
-        <Route exact path="/" children={<Welcome />} />
+        <Route exact path="/" children={<Test />} />
+
         <Route path="/PersonCenter">
           <Container />
         </Route>
@@ -50,6 +53,12 @@ function RootRouter() {
         </Route>
         <Route path="/Shop">
           <Shop />
+        </Route>
+        <Route path="/ShopView">
+          <ShopView />
+        </Route>
+        <Route path="/Test">
+          <Test />
         </Route>
       </Switch>      
       </Router>

@@ -17,6 +17,7 @@ import cookie from 'react-cookies'
 import {
   useLocation
 } from "react-router-dom";
+import { Hidden } from '@material-ui/core';
 function TabPanel(props) {
   // const { children, content, value, index, ...other } = props;
   const hii = props.value!==props.index;
@@ -66,8 +67,13 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       width: `calc(100vw - 23px)`,
     }
-
   },
+  appbar: {
+    width: `calc(100vw - 220px)`,
+    [theme.breakpoints.down('xs')]: {
+      width: `calc(100vw)`,
+    }
+  }
   
 }));
 
@@ -150,7 +156,7 @@ export default function FullWidthTabs() {
 
   return (
     <div className={classes.root}>
-      
+      <Hidden smUp>
       <AppBar position="relative" color="#000000" style={{width:'100%'}} >
         <Tabs
           value={value}
@@ -159,7 +165,7 @@ export default function FullWidthTabs() {
           textColor="primary"
           variant="standard"
           aria-label="full width tabs example"
-          style={{width:'100%'}}
+          className={classes.appbar}
           centered
         >
         <Tab style={{minWidth:20}} icon={<PhoneIcon />} label="待付款" {...a11yProps(0)}/>
@@ -170,25 +176,41 @@ export default function FullWidthTabs() {
          
         </Tabs>
       </AppBar>
+      </Hidden>
+      <Hidden xsDown>
+      <AppBar position="relative" color="#000000" style={{width:'100%'}} >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="standard"
+          aria-label="full width tabs example"
+          className={classes.appbar}
+        >
+        <Tab style={{minWidth:20}} icon={<PhoneIcon />} label="待付款" {...a11yProps(0)}/>
+        <Tab style={{minWidth:20}} icon={<FavoriteIcon />} label="待发货" {...a11yProps(1)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="待收货" {...a11yProps(2)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="待评价" {...a11yProps(2)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="退款" {...a11yProps(2)} />
+         
+        </Tabs>
+      </AppBar>
+      </Hidden>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} content={Odata[0]} dir={theme.direction}>
-          
         </TabPanel>
         <TabPanel value={value} index={1} content={Odata[1]} dir={theme.direction}>
-          
         </TabPanel>
         <TabPanel value={value} index={2} content={Odata[2]} dir={theme.direction}>
-          Item Three
         </TabPanel>
         <TabPanel value={value} index={3} content={Odata[3]} dir={theme.direction}>
-          Item Three
         </TabPanel>
         <TabPanel value={value} index={4} content={Odata[4]} dir={theme.direction}>
-          Item Three
         </TabPanel>
       </SwipeableViews>
     </div>
