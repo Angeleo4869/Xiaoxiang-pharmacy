@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sun.org.apache.regexp.internal.recompile;
 import com.xiaoxiang.org.vo.Collection;
 
 /**
@@ -24,25 +25,33 @@ import com.xiaoxiang.org.vo.Collection;
 public class CollectionDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(CollectionDAO.class);
 
-	public void save(Collection transientInstance) {
+	public boolean save(Collection transientInstance) {
 		log.debug("saving Collection instance");
 		try {
 			getSession().save(transientInstance);
+			transation.commit();
 			log.debug("save successful");
-		} catch (RuntimeException re) {
+			return true;
+		} catch (Exception re) {
 			log.error("save failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
-	public void delete(Collection persistentInstance) {
+	public boolean delete(Collection persistentInstance) {
 		log.debug("deleting Collection instance");
 		try {
 			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-		} catch (RuntimeException re) {
+			return true;
+		} catch (Exception re) {
 			log.error("delete failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

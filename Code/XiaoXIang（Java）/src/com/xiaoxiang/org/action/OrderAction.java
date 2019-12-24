@@ -28,12 +28,13 @@ public class OrderAction extends BaseAction {
 	public String placeOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
+        
 		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));//买家ID
-		shopGoods.setIdShopGoods(Integer.valueOf(request.getParameter("idShopGoods")));//上架商品ID
+		Integer flag = Integer.valueOf(request.getParameter("idShopGoods"));
 		Integer goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));//商品数量
 		shippingaddress.setIdShippingAddress(Integer.valueOf(request.getParameter("ShippingAddress")));//收货地址
-		shopGoods = new ShopGoodsDAO().findById(shopGoods.getIdShopGoods());
-        orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer()+shopGoods.getIdShopGoods());
+		shopGoods = new ShopGoodsDAO().findById(flag);
+        orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer().toString()+shopGoods.getIdShopGoods().toString());
 		orderdetail.setBuyer(buyer);
 		orderdetail.setShopGoods(shopGoods);
 		orderdetail.setLogistics((short) 0);//发货状态
@@ -83,6 +84,30 @@ public class OrderAction extends BaseAction {
         }
 		
 		return DataMap;
+	}
+	public Orderdetail getOrderdetail() {
+		return orderdetail;
+	}
+	public void setOrderdetail(Orderdetail orderdetail) {
+		this.orderdetail = orderdetail;
+	}
+	public ShopGoods getShopGoods() {
+		return shopGoods;
+	}
+	public void setShopGoods(ShopGoods shopGoods) {
+		this.shopGoods = shopGoods;
+	}
+	public Shippingaddress getShippingaddress() {
+		return shippingaddress;
+	}
+	public void setShippingaddress(Shippingaddress shippingaddress) {
+		this.shippingaddress = shippingaddress;
+	}
+	public Buyer getBuyer() {
+		return buyer;
+	}
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 
 }

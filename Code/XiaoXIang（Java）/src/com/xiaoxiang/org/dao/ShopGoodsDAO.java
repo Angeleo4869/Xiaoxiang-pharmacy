@@ -62,7 +62,6 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		log.debug("getting ShopGoods instance with id: " + id);
 		try {
 			ShopGoods instance = (ShopGoods) getSession().get(ShopGoods.class, id);
-			closeSession();
 			return instance;
 		} catch (Exception re) {
 			log.error("get failed", re);

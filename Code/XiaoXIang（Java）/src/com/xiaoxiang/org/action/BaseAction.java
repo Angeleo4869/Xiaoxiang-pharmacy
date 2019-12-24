@@ -34,7 +34,7 @@ public class BaseAction extends ActionSupport {
 	public static String Goods = "Goods";
 	public static String ShippingAddress = "shippingaddress";
 	public static String MajorFunction = "Majorfunction";
-	
+	public static String Collection = "Collection";
 	
 	public void responseSetHeader() throws Exception{
 		

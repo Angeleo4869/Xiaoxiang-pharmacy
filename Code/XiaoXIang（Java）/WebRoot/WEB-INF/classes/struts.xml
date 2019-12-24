@@ -236,6 +236,14 @@
 			 </result>
 		</action>
 		
+		<!-- 删除收货地址   -->
+		<action name="DeleteAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="deleteAddress">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
 				
 		<!-- 测试action   -->
 		<action name="TestAction" class="com.xiaoxiang.org.action.TestAction">
@@ -260,14 +268,41 @@
 			 </result>
 		</action>
 		
+		<!-- 添加收藏   -->
+		<action name="AddCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="addCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除收藏   -->
+		<action name="DeleteCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="deleteCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 查看收藏   -->
+		<action name="ViewCollection" class="com.xiaoxiang.org.action.CollectionActio"
+		method="ViewCollection">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
 		
 		<!--
+		//评论
 		<action name="Vouchers">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
+		
+		//投诉
 		<action name="Comments">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>

@@ -1,7 +1,6 @@
 package com.xiaoxiang.org.action;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.xiaoxiang.org.dao.ShippingaddressDAO;
 import com.xiaoxiang.org.vo.Buyer;
@@ -9,6 +8,10 @@ import com.xiaoxiang.org.vo.Shippingaddress;
 
 public class ShippingAddressAction extends BaseAction {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Buyer buyer = new Buyer(); 
 	private Shippingaddress shippingaddress = new Shippingaddress();
 	private ShippingaddressDAO shippingaddressDAO = new ShippingaddressDAO();
@@ -18,6 +21,9 @@ public class ShippingAddressAction extends BaseAction {
 		
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
+        String flag = request.getParameter("idShippingaddress");
+        if(flag!=null)//判断id是否为null  
+        shippingaddress.setIdShippingAddress(Integer.valueOf(flag));
         buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
         shippingaddress.setBuyer(buyer);
         shippingaddress.setRecipientName(request.getParameter("RecipientName"));
@@ -42,6 +48,18 @@ public class ShippingAddressAction extends BaseAction {
         shippingaddress.setBuyer(buyer);
         setList(shippingaddressDAO.findByExample(shippingaddress));
         getDataMap().put(ShippingAddress, getList());        
+        return DataMap;
+	}
+	
+	//删除收货地址
+	public String deleteAddress() throws Exception{
+		responseSetHeader();
+        setDataMap(new HashMap<String, Object>());
+        shippingaddress.setIdShippingAddress(Integer.valueOf(request.getParameter("idShippingaddress")));
+        if(shippingaddressDAO.delete(getShippingaddress())){
+        	 getDataMap().put(SUCCESS, true);     
+        }
+        getDataMap().put(ERROR, false);        
         return DataMap;
 	}
 

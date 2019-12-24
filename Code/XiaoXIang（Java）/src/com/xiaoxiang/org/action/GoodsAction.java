@@ -27,11 +27,14 @@ public class GoodsAction extends BaseAction {
         getDataMap().put(Goods, getList());
         return DataMap;
 	}
-	//增加药品
-	public String addOrChangeGoods() throws Exception{
+	//增加或编辑药品信息
+	public String addOrChangeGoods() throws Exception{       //id为null 执行Update 否则执行Save
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        majorfunction = new MajorfunctionDAO().findById(Integer.valueOf(request.getParameter("GoodsValidity")));
+        String flag = request.getParameter("idGoods");
+        if(flag!=null)//判断id是否为null  
+        goods.setIdGoods(Integer.valueOf(flag));
+        majorfunction = new MajorfunctionDAO().findById(Integer.valueOf(request.getParameter("MajorFunction")));
         goods.setGoodsNumber(request.getParameter("GoodsNumber"));//药品编号（条形码）
 	    goods.setGoodsCheName(request.getParameter("GoodsCheName"));//药品名称
 	    goods.setGoodsComName(request.getParameter("GoodsComName"));//药品拼音或化学名

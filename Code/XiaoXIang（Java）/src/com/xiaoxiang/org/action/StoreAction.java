@@ -63,16 +63,16 @@ public class StoreAction extends BaseAction {
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		store.setStoreName(request.getParameter("StoreName"));
-      store.setStorePhyName(request.getParameter("StorePhyName"));//法人姓名
-      store.setStorePhyIdCard(request.getParameter("StorePhyIdCard"));//法人身份证
-      store.setStoreState((short)1);//店铺状态 1 开业
-      store.setStoreAddress(request.getParameter("StoreAddress"));//店铺地址
-      store.setStoreLicense(request.getParameter("StoreLicense"));//店铺营业许可证
-      store.setStoreTel(request.getParameter("StoreTel"));//店铺电话
-      if(storeDao.attachDirty(getStore())){
-      	getDataMap().put(SUCCESS, true);
-      }else {
-      	getDataMap().put(ERROR,false);
+        store.setStorePhyName(request.getParameter("StorePhyName"));//法人姓名
+        store.setStorePhyIdCard(request.getParameter("StorePhyIdCard"));//法人身份证
+        store.setStoreState((short)1);//店铺状态 1 开业
+        store.setStoreAddress(request.getParameter("StoreAddress"));//店铺地址
+        store.setStoreLicense(request.getParameter("StoreLicense"));//店铺营业许可证
+        store.setStoreTel(request.getParameter("StoreTel"));//店铺电话
+        if(storeDao.attachDirty(getStore())){
+      	 getDataMap().put(SUCCESS, true);
+         } else {
+      	  getDataMap().put(ERROR,false);
       }
       return DataMap;
 	}
@@ -100,11 +100,18 @@ public class StoreAction extends BaseAction {
 	        return DataMap;
 	}
 	//增加或修改上架商品
-	public String  addOrChangeShopGoods() throws Exception{
+	public String  addOrChangeShopGoods() throws Exception{   //id为null 执行Update 否则执行Save
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		store.setIdStore(Integer.valueOf(request.getParameter("idStore")));
-		goods.setIdGoods(Integer.valueOf(request.getParameter("idgoods")));
+		String flag = request.getParameter("idShopgoods");
+		if(flag!=null)		//判断id是否为null 
+		shopgoods.setIdShopGoods(Integer.valueOf(flag));
+		flag = request.getParameter("idgoods");
+		if(flag!=null)		//判断id是否为null 
+		goods.setIdGoods(Integer.valueOf(flag));
+		flag = request.getParameter("idStore");
+		if(flag!=null)      //判断id是否为null 
+		store.setIdStore(Integer.valueOf(flag));
 		shopgoods.setShopGoodsName(request.getParameter("ShopGoodsName"));//上架商品名称
 		shopgoods.setShopGoodsImage(request.getParameter("ShopGoodsImage"));//商品展示图
 		shopgoods.setShopGoodsFreight(Double.valueOf(request.getParameter("ShopGoodsFreight")));//运费

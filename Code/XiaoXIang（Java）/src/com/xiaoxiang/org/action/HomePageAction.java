@@ -26,7 +26,7 @@ public class HomePageAction extends BaseAction {
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		String flag = request.getParameter("idBuyer");
-		if(flag!=null){
+		if(flag!=null){//ÅÐ¶ÏidBuyerÊÇ·ñÎªnull
 		buyer.setIdBuyer(Integer.valueOf(flag));
 		setList(shopGoodsDAO.membersRecommendedGoods(buyer));
 		}else {
