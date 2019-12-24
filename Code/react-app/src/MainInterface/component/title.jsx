@@ -7,6 +7,8 @@ const useStyles = makeStyles(theme => ({
         
     },
     safe_warm: {
+        position:'relative',
+        width:'100%',
         background: '#ffffc7',
     },
     link:{

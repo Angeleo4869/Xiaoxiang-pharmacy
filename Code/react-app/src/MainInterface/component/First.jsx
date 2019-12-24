@@ -4,7 +4,6 @@ import TiTle from './title';
 import Search from './Search';
 import Hot from './Hot';
 import Strip from './Strip';
-import Topsmall from './topSmall';
 import FirstMiddle from './FirstMiddle';
 
 const First  = props =>{

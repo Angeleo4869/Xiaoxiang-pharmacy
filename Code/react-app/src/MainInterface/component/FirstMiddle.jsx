@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LunBO from './lunBo';
-import LunBo1 from './lunbo1';
 import Typography from '@material-ui/core/Typography';
 import Center from 'react-center';
 import { Link } from '@material-ui/core';
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         width:166,
         height:468,
         marginLeft:'14%', 
-        background: '#5e5e5e',
+        
         [theme.breakpoints.down('md')]: {
 
             marginLeft:'0%',
@@ -50,7 +49,7 @@ const useStyles = makeStyles(theme => ({
         marginTop:5,
     },
     divssss:{
-        width:290,
+        width:290 ,
         height:468,
         
     },
@@ -70,7 +69,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     divb:{
-        width:166,
+        width:'166px',
         height:23.4,
         marginTop:'11.7px',
     },
@@ -105,7 +104,7 @@ const second ={
     background: '#ffffff',
 }
 const front ={
-    
+    background: '#ffffff',
     width:820,
     height:450,
 }
@@ -361,7 +360,7 @@ export default function Test(props){
                    </Typography>
                </div>
                <div className={classes.divtu}>
-               <Link href="//www.baidu.com" ><img src="/Pic/xin.png"/></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link href="//www.baidu.com" ><img src="/Pic/er.png"/></Link>
+               <Link href="//www.baidu.com" ><img alt="loading" src="/Pic/xin.png"/></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link href="//www.baidu.com" ><img alt="loading" src="/Pic/er.png"/></Link>
                </div>
                <div className={classes.divsss}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    <Typography noWrap >

@@ -1,22 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import { makeStyles } from '@material-ui/core/styles';
  import "slick-carousel/slick/slick-theme.css";
  import { Link } from '@material-ui/core';
- import CardMedia from '@material-ui/core/CardMedia';
- const useStyles = makeStyles(theme => ({
-  media: {
-    height:'80px',
-    width:'170px',
-    },
-    div :{
-      height:'330px',
-      width:'550px',
-      background: '#5e5e5e',
-    },
-}));
-
 export default class SimpleSlider extends React.Component {
   constructor(props){
     super(props);
@@ -33,10 +19,10 @@ export default class SimpleSlider extends React.Component {
       slidesToScroll: 1
     };
     return (
-      <Slider {...settings} style={{width:835,height:430,background: '#5e5e5e',}}>
+      <Slider {...settings} style={{width:835,height:430}}>
         {this.state.name&&this.state.name.map((text,index) => (
           <div key={index} >
-            <Link to={text.to}><img style={{width:835,height:469}} src={text.imgsrc}/></Link>
+            <Link to={text.to}><img alt="loading" style={{width:835,height:469}} src={text.imgsrc}/></Link>
           </div>
         ))}
       </Slider>

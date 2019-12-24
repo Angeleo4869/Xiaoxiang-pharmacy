@@ -4,19 +4,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Center from 'react-center';
-import Fab from '@material-ui/core/Fab';
-import Zoom from '@material-ui/core/Zoom';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 const defaultProps = {
     bgcolor: 'background.paper',
     // m: 1,
     border: 1,
   };
   
-const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles(theme => ({
+    divBig:{
+        position:'relative',
+        width:'70%',
+    },
     div:{
-        width:650,
+        position:'relative',
+        width:'60%',
         height:360,
         marginTop:40,
     },
@@ -25,7 +26,8 @@ const useStyles = makeStyles(theme => ({
         height:360,
     },
     divs:{
-        width:216.5,
+        position:'relative',
+        width:'20%',
         height:360,
         marginTop:40,
     },
@@ -34,7 +36,8 @@ const useStyles = makeStyles(theme => ({
         height:360,
     },
     divBox:{
-        width:216.6,
+        position:'relative',
+        width:'20%',
         height:250,
     },
     dd:{
@@ -43,6 +46,8 @@ const useStyles = makeStyles(theme => ({
     ddd:{
         display:'flex',
         height:400,
+        position:'relative',
+        width:'100%',
     },
     dddd:{
         display:'flex',
@@ -52,49 +57,9 @@ const useStyles = makeStyles(theme => ({
         color:'#ff0000',
     }
 }));
-
-const link1={
-    color:'#00F000',
-}
-const link2={
-    color:'#000F00',
-}
-const link3={
-    color:'#000000',
-}
-const link4={
-    color:'#000000',
-}
 const link5={
     color:'#000000',
 }
-function ScrollTop(props) {
-    const { children, window } = props;
-    const classes = useStyles();
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
-      disableHysteresis: true,
-      threshold: 100,
-    });
-  
-    const handleClick = event => {
-      const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
-      if (anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    };
-  
-    return (
-      <Zoom in={trigger}>
-        <div onClick={handleClick} role="presentation" className={classes.fixscroll}>
-          {children}
-        </div>
-      </Zoom>
-    );
-  }
 export default function Test(props){
     
     const classes = useStyles();
@@ -114,18 +79,18 @@ export default function Test(props){
         {id:Links5,mr:()=>(setLinks5(Links6)),mt:()=>(setLinks5(link5))}
     ]
     return(
-        <div >
+        <div className={classes.divBig}>
             <div className={classes.ddd}>
             
             {All[0].contX.map((text,index)=>(
                 <div className={classes.div} key={index}>
-                    <Link to={text.to}><img className={classes.div1} src={text.imgsrc}/></Link>
+                    <Link to={text.to}><img alt="loading" className={classes.div1} src={text.imgsrc}/></Link>
                 </div>
                 ))}
                 
                 {All[0].contY.map((text,index)=>(
                     <div className={classes.divs} key={index}>
-                        <Link to={text.to}><img className={classes.divs1} src={text.imgsrc}/></Link>
+                        <Link to={text.to}><img alt="loading" className={classes.divs1} src={text.imgsrc}/></Link>
                     </div>
                 ))}
             </div>
@@ -133,7 +98,7 @@ export default function Test(props){
                 {eventContent.map((text,index)=>(
                     <Box key={index} className={classes.divBox} borderColor="#DDDDDD" {...defaultProps}>
                          <Center>
-                             <Link to={All[0].contZ[index].to}><img src={All[0].contZ[index].imgsrc}/></Link>   
+                             <Link to={All[0].contZ[index].to}><img alt="loading" src={All[0].contZ[index].imgsrc}/></Link>   
                          </Center>
                          <div >
                             <Center>

@@ -18,6 +18,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   divs: {
+    position:'relative',
+    width:'100%',
     // background: '#EEEEEE',
   },
   divider: {

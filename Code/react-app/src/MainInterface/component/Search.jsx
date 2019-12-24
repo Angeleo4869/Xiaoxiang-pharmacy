@@ -5,8 +5,6 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import CardMedia from '@material-ui/core/CardMedia';
-import { Link } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: '2px 4px',
@@ -18,8 +16,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
   divs:{
+    position:'relative',
+    width:'100%',
      display:'flex',
-     width:'100%',
      height:'106px',
     // background: '#EEEEEE',
   },

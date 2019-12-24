@@ -1,14 +1,15 @@
 import React from 'react';
-import Left from './SecondLeft';
-import Right from './SecondRight';
+import Left from './ThreeLeft';
+import Right from './ThreeRight';
 import { makeStyles } from '@material-ui/core/styles';
-import { classes } from 'istanbul-lib-coverage';
 const useStyles = makeStyles(theme => ({
   div:{
     display:'flex',
+    position:'relative',
+    width:'100%',
   },
 }));
-const Second  = props =>{
+const Three  = props =>{
   const classes = useStyles();
     return(
             <div className={classes.div}>
@@ -17,4 +18,4 @@ const Second  = props =>{
             </div>
     );
   }
-export default Second ;
+export default Three ;

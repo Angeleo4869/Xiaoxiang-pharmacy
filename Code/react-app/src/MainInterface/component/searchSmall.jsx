@@ -4,9 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import CardMedia from '@material-ui/core/CardMedia';
-import { Link } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   root: {
     position:'relative',

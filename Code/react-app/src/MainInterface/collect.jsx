@@ -1,9 +1,9 @@
 import React from 'react';
-import First from './First';
-import FirstA from './First1';
-import Second from './Second';
-import Three from './Three';
-import FirstBottomSmall from './FirstBottomSmall';
+import First from './component/First';
+import FirstA from './component/First1';
+import Second from './component/Second';
+import Three from './component/Three';
+import FirstBottomSmall from './component/FirstBottomSmall';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -12,22 +12,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Center from 'react-center';
 import Typography from '@material-ui/core/Typography';
-import { Link } from '@material-ui/core';
-import LunBo1 from './lunbo1';
-import TopSmall from './topSmall';
-import SearchSmall from './searchSmall';
-import SmallStrip from './smallStrip';
-import SecondRightSmall from './SecondRightSmall';
-import ThreeRightSmall from './ThreeRightSmall';
+import LunBo1 from './component/lunbo1';
+import TopSmall from './component/topSmall';
+import SearchSmall from './component/searchSmall';
+import SmallStrip from './component/smallStrip';
+import SecondRightSmall from './component/SecondRightSmall';
+import ThreeRightSmall from './component/ThreeRightSmall';
 const defaultProps = {
     bgcolor: 'background.paper',
     // m: 0.1,
     border: 2,
   };
 
-const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   divsss:{
+    position:'relative',
+    width:'100%',
     [theme.breakpoints.down('sm')]: {
       background:'#77DDFF',
     },
@@ -38,6 +38,8 @@ const useStyles = makeStyles(theme => ({
   },
     divBig:{
       display:'inline',
+      position:'relative',
+    width:'100%',
       [theme.breakpoints.down('sm')]: {
         display:'none',
       },
@@ -103,12 +105,6 @@ const useStyles = makeStyles(theme => ({
         height:50,
         cursor:'pointer',
   }
-const linkss={
-    color:'#ff0000',
-}
-const links={
-    color:'#000000',
-}
 const divc={
   display:'none',
   width:50,
@@ -266,7 +262,7 @@ const Total  = props =>{
           ],
         contF://轮播图
           [
-            {to:'//www.baidu.com',imgsrc:'/Pic/xiao7.png'},
+            {to:'//www.baidu.com',imgsrc:'/Pic/12.png'},
             {to:'//www.baidu.com',imgsrc:'/Pic/xiao2.png'},
             {to:'//www.baidu.com',imgsrc:'/Pic/xiao3.png'},
             {to:'//www.baidu.com',imgsrc:'/Pic/xiao4.png'},

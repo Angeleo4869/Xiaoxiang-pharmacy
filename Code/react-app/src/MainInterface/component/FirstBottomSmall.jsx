@@ -39,7 +39,7 @@ const Top = props =>{
         <div className={classes.divs}>
           {ConT&&ConT.map((text,index) => (
           <div key={index} className={classes.divss}>
-            <Link to={text.to}><img className={classes.divimg} src={text.imgsrc}/></Link>
+            <Link to={text.to}><img alt="loading" className={classes.divimg} src={text.imgsrc}/></Link>
           </div>
           ))}
         </div> 

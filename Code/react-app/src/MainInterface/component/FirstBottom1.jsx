@@ -4,8 +4,10 @@ import { Link } from '@material-ui/core';
 // import './CSS/Center.css';
 const useStyles = makeStyles(theme => ({
   div: {
+    position:'relative',
     display:'flex',
-    width:195, 
+    width:'80%',
+    height:100,
     marginLeft:'13.7%',
   },
   divss: {
@@ -27,7 +29,7 @@ const Top = props =>{
         <div className={classes.divs}>&nbsp;
           {cont&&cont.map((text,index) => (
           <div key={index} className={classes.div}>
-            <Link to={text.to}><img src={text.imgsrc}/></Link>
+            <Link to={text.to}><img alt="loading" className={classes.divs} src={text.imgsrc}/></Link>
           </div>
           ))}
         </div>

@@ -11,8 +11,10 @@ const useStyles = makeStyles(theme => ({
     marginLeft:'13.7%',
   },
   divss: {
+    position:'relative',
+
     display:'flex',
-    width:280,   
+    width:'18%',   
   },
   divs: {
     display:'flex',
@@ -27,11 +29,11 @@ const Top = props =>{
       
         <div className={classes.divs}>&nbsp;
           <div className={classes.div}>
-            <img src="/Pic/time.png"/>
+            <img alt="loading" src="/Pic/time.png"/>
           </div>
           {ConT&&ConT.map((text,index) => (
           <div key={index} className={classes.divss}>
-            <Link to={text.to}><img src={text.imgsrc}/></Link>
+            <Link to={text.to}><img alt="loading" className={classes.divs} src={text.imgsrc}/></Link>
           </div>
           ))}
         </div> 
