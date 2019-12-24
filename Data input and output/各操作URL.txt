@@ -1,43 +1,7 @@
-管理员登录
-AdminLogin.action
-请求：
-AdminNumber，AdminPassword
-返回：
-{"Admin":[{"adminNumber":"leo","adminPassword":"123456","idAdmin":1}]}
-
-买家登录
-BuyerLogin.action
-请求：
-BuyerNumber,BuyerPassword
-返回：
-
-
-买家注册
-BuyerRegister.action
-请求：
-BuyerNumber，BuyerPassword
-返回
-{"success":true}
-
-买家个人中心
-PersonalCenter
-请求：
-idBuyer
-返回
-{"Buyer":
-    {"buyerEmail":"17680149722@163.com",       //邮箱
-     "buyerHeadpor":null,                                   //头像
-     "buyerName":"张三",                                   //姓名
-     "buyerNumber":"1768149722",	       //账号
-     "buyerPassword":"Zhangsan17680149722", //密码（未加密）
-     "buyerTel":"17680149722",		       //电话
-     "idBuyer":11			       //ID
-    }
-}
-
-
-
-
-
-
-
+登录 118.25.67.96:8080/XiaoXiangPharmacy/BuyerLogin.action?BuyerNumber=17680149722&BuyerPassword=Zhangsan17680149722
+注册 BuyerRegister 
+查看个人中心信息 118.25.67.96:8080/XiaoXiangPharmacy/PersonalCenter.action?idBuyer=11
+查看商品详细信息 118.25.67.96:8080/XiaoXiangPharmacy/ViewGoodsDetail.action?idGood=2
+查看个人地址 118.25.67.96:8080/XiaoXiangPharmacy/ViewAddress.action?idBuyer=11
+查看订单 118.25.67.96:8080/XiaoXiangPharmacy/ViewOrder.action?idBuyer=11
+主界面 118.25.67.96:8080/XiaoXiangPharmacy/HomePage.action?idBuyer=11  （未完善）
