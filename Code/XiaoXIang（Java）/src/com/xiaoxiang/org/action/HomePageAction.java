@@ -16,21 +16,23 @@ public class HomePageAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List list;
 	private Buyer buyer = new Buyer();
 	private ShopGoods shopGoods = new ShopGoods();
 	private ShopGoodsDAO shopGoodsDAO = new ShopGoodsDAO();
+	
+	
 	//Ö÷Ò³ÍÆ¼ö£¨µÇÂ¼/·ÇµÇÂ¼£©
 	public String execute() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
-		if(buyer.getIdBuyer()!=null)
-		list = shopGoodsDAO.membersRecommendedGoods(buyer);
-		else {
-			list = shopGoodsDAO.touristsRecommendedGoods();
+		String flag = request.getParameter("idBuyer");
+		if(flag!=null){
+		buyer.setIdBuyer(Integer.valueOf(flag));
+		setList(shopGoodsDAO.membersRecommendedGoods(buyer));
+		}else {
+			setList(shopGoodsDAO.touristsRecommendedGoods());
 		}
-		getDataMap().put(ShopGoods, list);
+		getDataMap().put(ShopGoods, getList());
 		return DataMap;
 	}
 	
@@ -39,8 +41,8 @@ public class HomePageAction extends BaseAction {
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
 		String keyWord = request.getParameter("Search");
-		list = shopGoodsDAO.search(keyWord);
-		getDataMap().put(ShopGoods, list);
+		setList( shopGoodsDAO.search(keyWord));
+		getDataMap().put(ShopGoods, getList());
 		return DataMap;
 	}
 	
@@ -48,11 +50,11 @@ public class HomePageAction extends BaseAction {
 	public String viewGoodscClass() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		list = new MajorfunctionDAO().findAll();
-		getDataMap().put(ShopGoods, list);
+		setList(new MajorfunctionDAO().findAll());
+		getDataMap().put(MajorFunction, getList());
 		return DataMap;
 	}	
-	
+
 	
 	@JSON(serialize=false)
 	public ShopGoods getShopGoods() {
@@ -68,19 +70,14 @@ public class HomePageAction extends BaseAction {
 		return buyer;
 	}
 
-
-
 	public void setBuyer(Buyer buyer) {
 		this.buyer = buyer;
 	}
-
 
 	@JSON(serialize=false)
 	public ShopGoodsDAO getShopGoodsDAO() {
 		return shopGoodsDAO;
 	}
-
-
 
 	public void setShopGoodsDAO(ShopGoodsDAO shopGoodsDAO) {
 		this.shopGoodsDAO = shopGoodsDAO;

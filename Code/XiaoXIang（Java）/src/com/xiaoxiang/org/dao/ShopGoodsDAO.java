@@ -43,12 +43,13 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(ShopGoods persistentInstance) {
+	public boolean delete(ShopGoods persistentInstance) {
 		log.debug("deleting ShopGoods instance");
 		try {
 			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-			closeSession();
+			return true;
 		} catch (Exception re) {
 			log.error("delete failed", re);
 			throw re;
@@ -134,7 +135,6 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		log.debug("recommended Goods instances");
 		try {
 			String queryString = "from GoodsView";
-			
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (Exception re) {
@@ -180,11 +180,13 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(ShopGoods instance) {
+	public boolean attachDirty(ShopGoods instance) {
 		log.debug("attaching dirty ShopGoods instance");
 		try {
 			getSession().saveOrUpdate(instance);
+			transation.commit();
 			log.debug("attach successful");
+			return true;
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;

@@ -27,7 +27,11 @@ const defaultProps = {
 const useStyles = makeStyles(theme => ({
   divsss:{
     position:'relative',
+<<<<<<< HEAD
     width:'100%',
+=======
+      width:'100%',
+>>>>>>> f5ae7fb0ca87a5362db915237d6a4d9550f48b1d
     [theme.breakpoints.down('sm')]: {
       background:'#77DDFF',
     },
@@ -39,7 +43,11 @@ const useStyles = makeStyles(theme => ({
     divBig:{
       display:'inline',
       position:'relative',
+<<<<<<< HEAD
     width:'100%',
+=======
+      width:'100%',
+>>>>>>> f5ae7fb0ca87a5362db915237d6a4d9550f48b1d
       [theme.breakpoints.down('sm')]: {
         display:'none',
       },

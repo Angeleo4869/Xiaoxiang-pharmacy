@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -45,6 +45,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-around',
   },
 });
+
 const Cont = [
 {id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
 {id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
@@ -58,8 +59,12 @@ const Cont = [
 {id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'},
 {id:'1',name:'伸腿瞪眼丸',price:'120',imagesrc:'/Pic/D1.jpg'}
 ]
-export default function SimpleCard() {
-  const classes = useStyles();
+export default function SimpleCard(props) {
+  const classes = useStyles(); 
+  if(props.data.buyerName===null){
+    props.data.buyerName="陌生人"
+  }
+  // console.log(props.data)
   // const bull = <span className={classes.bullet}>•</span>;
   // const decide = 0;
   return (
@@ -68,7 +73,7 @@ export default function SimpleCard() {
       <CardContent>
       <List horizontal="true" style={{display:'flex',justifyContent:'space-around',backgroundColor:'#EFFEFE'}}>
         <Avatar alt="not" src="/Pic/D1.jpg"  />                
-        <div style={{position:'relative',left:0}}>Your name</div>
+        <div style={{position:'relative',left:0}}>{props.data.buyerName}</div>
         <Link to="/PersonCenter/show/address"><Typography className={classes.title} color="textSecondary" gutterBottom>收货地址</Typography></Link>
         <Typography className={classes.title} color="textSecondary" gutterBottom>优惠信息</Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>会员信息</Typography>              

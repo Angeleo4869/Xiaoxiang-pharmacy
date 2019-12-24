@@ -22,8 +22,8 @@ public class AdminAction extends BaseAction {
         admin.setAdminPassword(request.getParameter("AdminPassword"));
         if(admin.getAdminNumber()!=null){
         	System.out.println(admin.getAdminNumber());
-        list = adminDAO.findByExample(admin);
-        getDataMap().put("Admin", list);
+        setList(adminDAO.findByExample(admin));
+        getDataMap().put("Admin", getList());
         }else {
         	getDataMap().put(ERROR, false);
         }

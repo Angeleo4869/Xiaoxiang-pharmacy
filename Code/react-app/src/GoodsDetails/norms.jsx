@@ -4,9 +4,11 @@ import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Box from '@material-ui/core/Box';
+import cookie from 'react-cookies';
 import {
     Link
   } from 'react-router-dom';
+  
 export default class norms extends React.Component{
     constructor(props){
         super(props);
@@ -14,6 +16,27 @@ export default class norms extends React.Component{
              Gnum:1
         }
     }
+    fLogin = () =>{
+        if(cookie.load('userId')===this.props.user){
+            //创建订单页数据
+            var GoodData = {"value" : [{
+                "Gname":this.props.Gdata.goodsComName,
+                "Gspec":this.props.Gdata.goodsSpecifications,
+                "Gprice":this.props.Gdata.storePurchasePrice,
+                "Gnum":this.state.Gnum,
+                "Gimage":"",
+                "idGoods":this.props.Gdata.idShopGoods
+                }],
+                "GFprice":this.props.Gdata.storePurchasePrice*this.state.Gnum,
+                "Ordernum" :1
+            };
+            sessionStorage.setItem("DDorder",JSON.stringify(GoodData))
+            window.location.href = global.data.localadd+"ImedPurchase"
+        }else{
+            alert("请先登录")
+        }
+    }
+
     addGunm=()=>{
         this.setState({
             Gnum : this.state.Gnum+1
@@ -31,10 +54,10 @@ export default class norms extends React.Component{
         return(
             <List style={{position:'relative',left:10,top:0}}>
                 <div style={{display:'flex'}}>
-                <h2>商品名称:&nbsp;</h2><h5 style={{marginTop:27}}>通宵胫骨贴</h5>
+                <h2>商品名称:&nbsp;</h2><h5 style={{marginTop:27}}>{this.props.Gdata.goodsComName}</h5>
                 </div>
                 <div style={{display:'flex'}}>
-                <h3>规格选择区:&nbsp;</h3><h5 style={{marginTop:20}}>10（包）*25g</h5>
+                <h3>规格选择区:&nbsp;</h3><h5 style={{marginTop:20}}>{this.props.Gdata.goodsSpecifications}</h5>
                 </div>
                 <div style={{display:'flex'}}>
                 <h3>数量选择:&nbsp;</h3>
@@ -48,10 +71,13 @@ export default class norms extends React.Component{
                         <RemoveIcon onClick={this.subGnum}/>
                     </div>
                 </div>
+                <div>
+                    <h3>价格：{parseFloat(this.props.Gdata.storePurchasePrice*this.state.Gnum).toFixed(1)}</h3>
+                </div>
                 <div><Button>加入购物车</Button>
-                <Link to="/ImedPurchase">
-                     <Button>立即购买</Button>
-                </Link>
+                
+                <Button onClick={this.fLogin}>立即购买</Button>
+                
                 </div>
             </List>
         );

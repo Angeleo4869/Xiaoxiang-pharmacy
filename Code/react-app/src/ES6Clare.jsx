@@ -1,5 +1,5 @@
-import React from 'react';//���ڴ������
-import PropTypes from 'prop-types';//���ڵ��� prop-types ģ�飬ʹ�����ܹ��������ͼ��ķ�����Ϊ props �������͡�
+import React from 'react';//
+import PropTypes from 'prop-types';//
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import cookie from 'react-cookies'
 
 import {Link} from 'react-router-dom';
 class Welcome extends React.Component{
@@ -28,11 +28,19 @@ class Welcome extends React.Component{
     handleClick(){
         console.log(this);
     }
+
+
     render(){
+        var user = "";
+        if(cookie.load('userId')!=null){
+            user = cookie.load('userId');
+        }else{
+            user = "tourist";
+        }
         return(
             <div>
                 <div style={{display:"flex",maxWidth:800}}>
-                    <Link  to="/GoodsDetails?name=xiaofeng&age=18">
+                    <Link  to={"/GoodsDetails?name=" + user + "&goodid=2"}>
                         <Card style={{width:'90%',maxWidth:600}}>
                             <CardActionArea>
                                 <CardMedia
@@ -53,7 +61,7 @@ class Welcome extends React.Component{
                             </CardActionArea>
                         </Card>
                     </Link>
-                    <Link  to="/GoodsDetails?name=dafeng&age=19">
+                    <Link  to={"/GoodsDetails?name=" + user + "&goodid=3"}>
                         <Card style={{width:'90%',maxWidth:600}}>
                             <CardActionArea>
                             
@@ -92,6 +100,9 @@ class Welcome extends React.Component{
                 </Link>
                 <Link to="/Shop">
                     <button onClick={this.handleClick}>shap!</button>
+                </Link>
+                <Link to="/ShopView">
+                    <button onClick={this.handleClick}>shapView!</button>
                 </Link>
                 <Link to="/ImedPurchase">
                      <Button>立即购买</Button>

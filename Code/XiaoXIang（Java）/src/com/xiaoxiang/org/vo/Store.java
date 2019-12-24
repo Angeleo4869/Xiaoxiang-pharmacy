@@ -3,6 +3,8 @@ package com.xiaoxiang.org.vo;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Store entity. @author MyEclipse Persistence Tools
  */
@@ -134,7 +136,7 @@ public class Store implements java.io.Serializable {
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress = storeAddress;
 	}
-
+	@JSON(serialize=false)
 	public Set getComplaintses() {
 		return this.complaintses;
 	}
@@ -142,7 +144,7 @@ public class Store implements java.io.Serializable {
 	public void setComplaintses(Set complaintses) {
 		this.complaintses = complaintses;
 	}
-
+	@JSON(serialize=false)
 	public Set getShopGoodses() {
 		return this.shopGoodses;
 	}

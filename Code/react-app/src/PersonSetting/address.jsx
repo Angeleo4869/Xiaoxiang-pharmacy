@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -9,7 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import axios from 'axios';
+import cookie from 'react-cookies';
 import {
   Link
 } from 'react-router-dom';
@@ -42,15 +43,44 @@ const useStyles = makeStyles(theme => ({
 
 const longText ='添加新地址';
 
-const ConT =[{name:'折原临也',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-{ name:'平和岛静雄',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-{name:'伊藤健太郎',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-];
+// const ConT =[{name:'折原临也',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// { name:'平和岛静雄',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// {name:'伊藤健太郎',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// ];
 export default function PaperSheet() {
   const classes = useStyles();
+  const [Adata,setAdata] = React.useState(
+    [
+      {"addressDetail":"0","city":"0","idShippingAddress":1,"provinces":"0","recipientName":"网络连接错误","recipientTel":"0"},
+      {"addressDetail":"0","city":"0","idShippingAddress":2,"provinces":"0","recipientName":"0","recipientTel":"0"}
+    ])
 
+  useEffect(
+    ()=>{
+      if(cookie.load('userId')!=null){
+        axios.get(global.data.request+'ViewAddress.action',
+        {
+          params: {
+            idBuyer:cookie.load('userId')
+          }
+        }).then(
+          (response)=>{
+            setAdata(response.data.shippingaddress);
+            sessionStorage.setItem("addr" , JSON.stringify(response.data.shippingaddress));
+          }
+        )
+    }else{
+      alert("请登录")
+      window.location.href = global.data.localadd +'Login'
+    }
+
+    },[]
+  )
+      // alert(Adata[0].city)
+      // console.log(Adata)
   return (
     <div style={{width:'100%'}}>
+      
       <div style={{display:'flex',width:'100%'}}>
           <Typography variant="h6" style={{margin:5,marginLeft:15}} >
               我的地址
@@ -65,20 +95,20 @@ export default function PaperSheet() {
       </div>
 
       <Divider style={{position:'relative',top:10,left:10}}/>
-        {ConT.map((text)=>(
-          <Card className={classes.cardstyle} style={{height:70,marginTop:20}}>
+        {Adata.map((text,index)=>(
+          <Card key={index} className={classes.cardstyle} style={{height:70,marginTop:20}}>
             <div style={{display:'flex'}}>
-              <Avatar className={classes.orange} style={{position:'relative',top:15,left:15}}>{text.name.charAt(0)}</Avatar>
+              <Avatar className={classes.orange} style={{position:'relative',top:15,left:15}}>{text.recipientName.charAt(0)}</Avatar>
               <div style={{display:'inline'}}>
                 <Typography variant="h7" style={{margin:5,marginLeft:30}} >
-                  {text.name}
+                  {text.recipientName}
                 </Typography>
                 <Typography variant="h7" style={{margin:5,marginLeft:30}} >
-                  {text.num}
+                  {text.recipientTel}
                 </Typography>
                 <div className={classes.address} style={{margin:5,marginLeft:25}}>
                   <Typography variant="h7" style={{margin:5,position:'relative',top:7}} >
-                    {text.add}
+                    {text.provinces}{text.city}{text.addressDetail}
                   </Typography>
                 </div>
               </div>

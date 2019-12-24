@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.OrderdetailDAO;
+import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Buyer;
 import com.xiaoxiang.org.vo.Orderdetail;
+import com.xiaoxiang.org.vo.Shippingaddress;
 import com.xiaoxiang.org.vo.ShopGoods;
 
 public class OrderAction extends BaseAction {
@@ -17,21 +19,26 @@ public class OrderAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private Orderdetail orderdetail = new Orderdetail();
 	private ShopGoods shopGoods = new ShopGoods();
+	private Shippingaddress shippingaddress = new Shippingaddress();
 	private Buyer buyer = new Buyer();
 	private OrderdetailDAO orderdetailDAO = new OrderdetailDAO();
 	private ArrayList<List> list = new ArrayList<List>();
-	
+
 	//购买，但未付款
 	public String placeOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
-		shopGoods.setIdShopGoods(Integer.valueOf(request.getParameter("idShopGoods")));
-		Integer goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));
+		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));//买家ID
+		shopGoods.setIdShopGoods(Integer.valueOf(request.getParameter("idShopGoods")));//上架商品ID
+		Integer goodsnumber = Integer.valueOf(request.getParameter("GoodsNumber"));//商品数量
+		shippingaddress.setIdShippingAddress(Integer.valueOf(request.getParameter("ShippingAddress")));//收货地址
+		shopGoods = new ShopGoodsDAO().findById(shopGoods.getIdShopGoods());
         orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer()+shopGoods.getIdShopGoods());
 		orderdetail.setBuyer(buyer);
 		orderdetail.setShopGoods(shopGoods);
-		orderdetail.setLogistics((short) 0);//订单状态  0 未付款
+		orderdetail.setLogistics((short) 0);//发货状态
+		orderdetail.setOderState((short) 0);//未付款
+		orderdetail.setShippingaddress(shippingaddress);
 		orderdetail.setPaymentTime(new Date());
 		orderdetail.setGoodsNumber(goodsnumber);
 		orderdetail.setTotalPrice(shopGoods.getShopGoodsPrice()*orderdetail.getGoodsNumber());
@@ -67,8 +74,8 @@ public class OrderAction extends BaseAction {
 	public String paymentOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        Short logistics = (Short.valueOf(request.getParameter("")));//管理员确认收款，修改订单表，提示卖家发货
-        orderdetail.setLogistics(logistics);
+        Short oderState = (Short.valueOf(request.getParameter("OderState")));//管理员确认收款，修改订单表，提示卖家发货
+        orderdetail.setOderState(oderState);
         if(orderdetailDAO.attachDirty(orderdetail)){
         	getDataMap().put(SUCCESS, true);
         }else {
