@@ -43,34 +43,45 @@ const useStyles = makeStyles(theme => ({
 
 const longText ='添加新地址';
 
-const ConT =[{name:'折原临也',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-{ name:'平和岛静雄',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-{name:'伊藤健太郎',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
-];
+// const ConT =[{name:'折原临也',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// { name:'平和岛静雄',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// {name:'伊藤健太郎',add:'我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址',num:'1234567890'},
+// ];
 export default function PaperSheet() {
   const classes = useStyles();
   const [Adata,setAdata] = React.useState(
     [
-      {"addressDetail":"岳麓区","city":"长沙市","idShippingAddress":1,"provinces":"湖南省","recipientName":"张三","recipientTel":"15935745682"},
-      {"addressDetail":"汉寿","city":"常德市","idShippingAddress":2,"provinces":"湖南省","recipientName":"张三","recipientTel":"15107190987"}
+      {"addressDetail":"0","city":"0","idShippingAddress":1,"provinces":"0","recipientName":"网络连接错误","recipientTel":"0"},
+      {"addressDetail":"0","city":"0","idShippingAddress":2,"provinces":"0","recipientName":"0","recipientTel":"0"}
     ])
 
   useEffect(
     ()=>{
-      axios.get('http://localhost:8080/XiaoXiangPharmacy/ViewAddress.action',
-      {
-        params: {
-          idBuyer:cookie.load('userId')
-        }
-      }).then(
-        (response)=>{
-          setAdata(response.data.shippingaddress);
-          console.log(Adata)
-        }
-    )
+      if(sessionStorage.getItem("addr")==null){
+        // alert("request")
+        axios.get(global.data.request+'ViewAddress.action',
+        {
+          params: {
+            idBuyer:cookie.load('userId')
+          }
+        }).then(
+          (response)=>{
+            
+            setAdata(response.data.shippingaddress);
+            sessionStorage.setItem("addr" , JSON.stringify(response.data.shippingaddress));
+            // console.log(response)
+            // alert("1")
+          }
+        )
+    }else{
+      // alert("session")
+      setAdata(JSON.parse(sessionStorage.getItem("addr")))
+    }
+
     },[]
   )
-
+      // alert(Adata[0].city)
+      // console.log(Adata)
   return (
     <div style={{width:'100%'}}>
       

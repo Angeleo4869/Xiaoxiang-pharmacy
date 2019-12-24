@@ -18,8 +18,20 @@ export default class norms extends React.Component{
     }
     fLogin = () =>{
         if(cookie.load('userId')===this.props.user){
-            // sessionStorage.setItem("DDorder",this.props.Gdata)
-            window.location.href = "http://localhost:3000/ImedPurchase"
+            //创建订单页数据
+            var GoodData = {"value" : [{
+                "Gname":this.props.Gdata.goodsComName,
+                "Gspec":this.props.Gdata.goodsSpecifications,
+                "Gprice":this.props.Gdata.storePurchasePrice,
+                "Gnum":this.state.Gnum,
+                "Gimage":"",
+                "idGoods":this.props.Gdata.idShopGoods
+                }],
+                "GFprice":this.props.Gdata.storePurchasePrice*this.state.Gnum,
+                "Ordernum" :1
+            };
+            sessionStorage.setItem("DDorder",JSON.stringify(GoodData))
+            window.location.href = global.data.localadd+"ImedPurchase"
         }else{
             alert("请先登录")
         }

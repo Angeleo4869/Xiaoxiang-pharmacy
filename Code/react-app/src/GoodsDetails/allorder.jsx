@@ -22,7 +22,7 @@ function TabPanel(props) {
   const hii = props.value!==props.index;
   
   return (
-    <div stye={{hidden:hii}} >
+    <div stye={{hidden:hii, width: `calc(100vw - 23px)`}} >
     {/* <Typography
       component="div"
       role="tabpanel"
@@ -53,6 +53,7 @@ function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
+    
   };
 }
 
@@ -63,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft:10,
     width:'100%',
     [theme.breakpoints.down('sm')]: {
-      width:'68%',
+      width: `calc(100vw - 23px)`,
     }
 
   },
@@ -122,9 +123,9 @@ export default function FullWidthTabs() {
   useEffect(() => {
     if(cookie.load('userId')==null){
       alert("请先登录")
-      window.location.href = "http://localhost:3000/Login"
+      window.location.href = global.data.localadd+"Login"
     }
-    axios.get('http://localhost:8080/XiaoXiangPharmacy/ViewOrder.action',
+    axios.get(global.data.request+'ViewOrder.action',
       {
         params: {
           idBuyer:cookie.load('userId')
@@ -159,12 +160,13 @@ export default function FullWidthTabs() {
           variant="standard"
           aria-label="full width tabs example"
           style={{width:'100%'}}
+          centered
         >
-        <Tab icon={<PhoneIcon />} label="待付款" {...a11yProps(0)}/>
-        <Tab icon={<FavoriteIcon />} label="待发货" {...a11yProps(1)} />
-        <Tab icon={<PersonPinIcon />} label="待收货" {...a11yProps(2)} />
-        <Tab icon={<PersonPinIcon />} label="待评价" {...a11yProps(2)} />
-        <Tab icon={<PersonPinIcon />} label="退款" {...a11yProps(2)} />
+        <Tab style={{minWidth:20}} icon={<PhoneIcon />} label="待付款" {...a11yProps(0)}/>
+        <Tab style={{minWidth:20}} icon={<FavoriteIcon />} label="待发货" {...a11yProps(1)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="待收货" {...a11yProps(2)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="待评价" {...a11yProps(2)} />
+        <Tab style={{minWidth:20}} icon={<PersonPinIcon />} label="退款" {...a11yProps(2)} />
          
         </Tabs>
       </AppBar>

@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import cookie from 'react-cookies'
+import { withRouter } from "react-router-dom"
 // import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios,axios } from 'react-axios'
 //  import requ from './admintest';
 import axios from 'axios';
@@ -29,9 +30,9 @@ function Copyright() {
   );
 }
 //事件请求，不需要渲染
-function test (){
+function test (props){
   if(document.getElementById("ad").value&&document.getElementById("pd").value)  {   
-    axios.get('http://localhost:8080/XiaoXiangPharmacy/BuyerLogin.action',
+    axios.get(global.data.request+"BuyerLogin.action",
      {
       params: {
         BuyerNumber:document.getElementById("ad").value,
@@ -51,8 +52,9 @@ function test (){
         cookie.save('userId', response.data.Buyer[0].idBuyer, { path: '/'})
         //仅在会话，标签栏
         sessionStorage.setItem("Umessage",response.data.Buyer[0].buyerNumber);
-        
-        window.location.href = "http://localhost:3000/PersonCenter"
+        // alert(global.data.localadd+'PersonCenter')
+        window.location.href = global.data.localadd+"PersonCenter"
+        // props.history.push("/PersonCenter")
       }
       else
       alert("message error")
