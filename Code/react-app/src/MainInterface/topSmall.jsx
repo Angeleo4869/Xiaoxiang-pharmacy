@@ -38,6 +38,8 @@ const Top = props =>{
             <Link className={classes.links} href="//www.baidu.com" ><Typography noWrap >个人中心</Typography></Link>
             <Divider className={classes.links} className={classes.divider} orientation="vertical" />
             <Link className={classes.links} href="//www.baidu.com" ><Typography noWrap >在线客服</Typography></Link>
+            <Divider className={classes.links} className={classes.divider} orientation="vertical" />
+            <Link className={classes.links} to="/Test" ><Typography noWrap >测试</Typography></Link>
           </div>
           </Center>
         </div>

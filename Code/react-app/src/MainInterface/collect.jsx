@@ -28,6 +28,8 @@ const defaultProps = {
 const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   divsss:{
+    position:'relative',
+      width:'100%',
     [theme.breakpoints.down('sm')]: {
       background:'#77DDFF',
     },
@@ -38,6 +40,8 @@ const useStyles = makeStyles(theme => ({
   },
     divBig:{
       display:'inline',
+      position:'relative',
+      width:'100%',
       [theme.breakpoints.down('sm')]: {
         display:'none',
       },

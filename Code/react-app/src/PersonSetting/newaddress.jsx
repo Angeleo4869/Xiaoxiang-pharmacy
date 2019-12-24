@@ -11,7 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
+import cookie from 'react-cookies';
 const useStyles = makeStyles(theme => ({
     root: {
       padding: theme.spacing(1, 3),
@@ -112,6 +114,38 @@ export default function PaperSheet() {
         setState({ ...state, [name]: event.target.checked });
       };
 
+      const Bclick = () =>{
+        var name = document.getElementById("Gpeople").value;
+        var phone = document.getElementById("Gphone").value;
+        var Adetail = age2 +  document.getElementById("indetail").value;
+        if(cookie.load('userdId')==null){
+          if(name!=''&&phone!=''&&age!=''&&age1!=''&&Adetail!=''&&document.getElementById("indetail").value!=''){
+            axios.get(global.data.request+'addOrChangeAddress.action',
+            {
+              params: {
+                RecipientName: name,
+                RecipientTel: phone,
+                Provinces: age,
+                City: age1,
+                AddressDetail: Adetail,
+                idBuyer: cookie.load('userId')
+              }
+            }).then(
+              (response)=>{
+                alert(response.data.success)
+                window.location.href = global.data.localadd +'PersonCenter'
+                // console.log(response.data)
+              }
+            )
+          }else{
+            alert("input message")
+          }
+        }else{
+          alert("请登录")
+          window.location.href = global.data.localadd +'Login'
+        }
+      }
+
   return (
     <div style={{width:'100%'}}>
         <div style={{display:'flex',width:'100%'}}>
@@ -122,7 +156,7 @@ export default function PaperSheet() {
         <Divider style={{position:'relative',top:10,left:10}}/>
             <div style={{display:'inline',position:'relative',left:10}} >
                 <TextField
-                id="filled-search"
+                id="Gpeople"
                 label="收 货 人"
                 type="search"
                 className={classes.address}
@@ -130,7 +164,7 @@ export default function PaperSheet() {
                 variant="filled"
                 />
                 <TextField
-                id="filled-search"
+                id="Gphone"
                 label="手机号码"
                 type="search"
                 className={classes.address}
@@ -153,7 +187,7 @@ export default function PaperSheet() {
                     >
                     
                     {arealist.map((test)=>(
-                        <MenuItem value={test}>
+                        <MenuItem key={test} value={test}>
                             {test}
                         </MenuItem>
                     ))}
@@ -173,7 +207,7 @@ export default function PaperSheet() {
                     MenuProps={MenuProps}
                     >
                     {citylist.map((test)=>(
-                        <MenuItem value={test}>
+                        <MenuItem key={test} value={test}>
                             {test}
                         </MenuItem>
                     ))}
@@ -193,7 +227,7 @@ export default function PaperSheet() {
                     MenuProps={MenuProps}
                     >
                     {countrysidelist.map((test)=>(
-                        <MenuItem value={test}>
+                        <MenuItem key={test} value={test}>
                             {test}
                         </MenuItem>
                     ))}
@@ -201,7 +235,7 @@ export default function PaperSheet() {
                 </FormControl>
 
                 <TextField
-                id="filled-search"
+                id="indetail"
                 label="详细地址：如道路、门牌号、小区、楼栋号、单元室等"
                 type="search"
                 className={classes.address}
@@ -219,6 +253,7 @@ export default function PaperSheet() {
                         }
                     />
                 </div>
+                <Button onClick={Bclick}>确认</Button>
                 <Divider style={{position:'relative',top:10,left:0}}/>
             </div>
             <div style={{height:95}}>s</div>{/* 注意一定要加，不然显示不全 */}

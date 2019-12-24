@@ -108,7 +108,7 @@ export default function MaterialTableDemo() {
                 data[j].buyerTel="未设置"
             }
             var Adata = {'columns': column,'data' : data}
-            console.log(data)
+            // console.log(data)
             setState(Adata)
         }
       )
@@ -128,6 +128,27 @@ export default function MaterialTableDemo() {
               resolve();
               setState(prevState => {
                 const data = [...prevState.data];
+                // console.log(newData)
+                if(newData.idBuyer==null)
+                  newData.idBuyer="未设置"
+                if(newData.buyerEmail==null)
+                  newData.buyerEmail="未设置"
+                if(newData.buyerHeadpor==null)
+                  newData.buyerHeadpor="未设置"
+                if(newData.buyerName==null)
+                  newData.buyerName="未设置"
+                if(newData.buyerNumber==null)
+                  newData.buyerNumber="未设置"
+                if(newData.buyerPassword==null)
+                  newData.buyerPassword="未设置"
+                if(newData.buyerTel==null)
+                  newData.buyerTel="未设置"
+                  var query = JSON.stringify(newData)
+                  query = JSON.parse(query)
+                  delete query.tableData
+                //此处返回query
+                
+                console.log(query)
                 data.push(newData);
                 return { ...prevState, data };
               });
@@ -140,9 +161,15 @@ export default function MaterialTableDemo() {
               if (oldData) {
                 setState(prevState => {
                   const data = [...prevState.data];
-                  console.log(prevState)
+                  // console.log(data)
                   data[data.indexOf(oldData)] = newData;
-                  console.log(data)
+                  // console.log(newData)
+                  var query = JSON.stringify(newData)
+                  query = JSON.parse(query)
+                  delete query.tableData
+                  //此处写返回query
+
+                  console.log(query)
                   return { ...prevState, data };
                 });
               }
@@ -154,9 +181,15 @@ export default function MaterialTableDemo() {
               resolve();
               setState(prevState => {
                 const data = [...prevState.data];
-                console.log(prevState)
+                // console.log(data)
                 data.splice(data.indexOf(oldData), 1);
-                console.log(data)
+                // console.log(oldData)
+                var query = JSON.stringify(oldData)
+                query = JSON.parse(query)
+                delete query.tableData
+                //此处返回query
+
+                console.log(query)
                 return { ...prevState, data };
               });
             }, 600);

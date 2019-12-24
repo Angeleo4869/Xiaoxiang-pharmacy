@@ -57,8 +57,7 @@ export default function PaperSheet() {
 
   useEffect(
     ()=>{
-      if(sessionStorage.getItem("addr")==null){
-        // alert("request")
+      if(cookie.load('userId')!=null){
         axios.get(global.data.request+'ViewAddress.action',
         {
           params: {
@@ -66,16 +65,13 @@ export default function PaperSheet() {
           }
         }).then(
           (response)=>{
-            
             setAdata(response.data.shippingaddress);
             sessionStorage.setItem("addr" , JSON.stringify(response.data.shippingaddress));
-            // console.log(response)
-            // alert("1")
           }
         )
     }else{
-      // alert("session")
-      setAdata(JSON.parse(sessionStorage.getItem("addr")))
+      alert("请登录")
+      window.location.href = global.data.localadd +'Login'
     }
 
     },[]
