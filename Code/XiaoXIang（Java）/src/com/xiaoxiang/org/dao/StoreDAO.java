@@ -1,6 +1,7 @@
 package com.xiaoxiang.org.dao;
 
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
@@ -40,13 +41,14 @@ public class StoreDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Store persistentInstance) {
+	public boolean delete(Store persistentInstance) {
 		log.debug("deleting Store instance");
 		try {
 			getSession().delete(persistentInstance);
+			transation.commit();
 			log.debug("delete successful");
-			closeSession();
-		} catch (RuntimeException re) {
+			return true;
+		} catch (Exception re) {
 			log.error("delete failed", re);
 			throw re;
 		}finally {
@@ -90,7 +92,6 @@ public class StoreDAO extends BaseHibernateDAO {
 			String queryString = "from Store as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
-			closeSession();
 			return queryObject.list();
 		} catch (Exception re) {
 			log.error("find by property name failed", re);
@@ -105,7 +106,6 @@ public class StoreDAO extends BaseHibernateDAO {
 		try {
 			String queryString = "from Store";
 			Query queryObject = getSession().createQuery(queryString);
-			closeSession();
 			return queryObject.list();
 		} catch (Exception re) {
 			log.error("find all failed", re);
@@ -130,11 +130,13 @@ public class StoreDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Store instance) {
+	public boolean attachDirty(Store instance) {
 		log.debug("attaching dirty Store instance");
 		try {
 			getSession().saveOrUpdate(instance);
+			transation.commit();
 			log.debug("attach successful");
+			return true;
 		} catch (Exception re) {
 			log.error("attach failed", re);
 			throw re;

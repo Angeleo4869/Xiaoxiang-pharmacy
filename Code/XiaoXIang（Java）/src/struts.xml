@@ -44,6 +44,22 @@
 			 </result>
 		</action>
 		
+		<!-- 买家注销 -->
+		<action name="DeleteBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction" method="buyerCancellation">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!--  查看所有买家  -->
+		<action name="AllBuyer"
+		 class="com.xiaoxiang.org.action.BuyerAction">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
 		<!-- 卖家登录 -->
 		<action name="StoreLogin"
 			class="com.xiaoxiang.org.action.StoreAction" method="storeLogin">
@@ -60,7 +76,31 @@
 			 </result>
 		</action>
 		
-		<!-- 主页推荐 -->
+		<!-- 卖家信息 -->
+		<action name="ViewStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="viewStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 编辑卖家信息 -->
+		<action name="EditStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="editStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 删除卖家 -->
+		<action name="DeleteStore"
+			class="com.xiaoxiang.org.action.StoreAction" method="deleteStore">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 主页and推荐 -->
 		<action name="HomePage"
 		 class="com.xiaoxiang.org.action.HomePageAction" >
 			<result name="dataMap" type="json">
@@ -76,6 +116,38 @@
 			 </result>
 		</action>
 		
+		<!-- 所有商品 -->
+		<action name="ViewAllGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" >
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 所有已上架商品 -->
+		<action name="ViewAllShopGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="allShopGoods">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品详情 -->
+		<action name="ViewShopGoodsDetail"
+			class="com.xiaoxiang.org.action.GoodsAction" method="viewShopGoodsDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+		<!-- 商品参数 -->
+		<action name="ViewGoodsDetail"
+			class="com.xiaoxiang.org.action.GoodsAction" method="viewGoodsDetail">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
 		<!-- 分类表  -->
 		<action name="ViewGoodscClass"
 		 class="com.xiaoxiang.org.action.HomePageAction" method="viewGoodscClass">
@@ -84,9 +156,9 @@
 			 </result>
 		</action>
 		
-		<!-- 添加商品 -->
-		<action name="AddGoods"
-			class="com.xiaoxiang.org.action.GoodsAction" method="addGoods">
+		<!-- 添加/修改商品 -->
+		<action name="AddOrChangeGoods"
+			class="com.xiaoxiang.org.action.GoodsAction" method="addOrChangeGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
@@ -100,13 +172,6 @@
 			 </result>
 		</action>
 		
-		<!-- 商品详情 -->
-		<action name="ViewGoodsDetail"
-			class="com.xiaoxiang.org.action.GoodsAction" method="viewGoodsDetail">
-			<result name="dataMap" type="json">
-			 	<param name="root">dataMap</param>
-			 </result>
-		</action>
 		
 		<!-- 添加购物车 -->							
 		<action name="AddShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction" 
@@ -123,7 +188,14 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-		
+
+		<!-- 购买   未付款 -->
+		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+				
 		<!-- 查看订单 -->
 		<action name="ViewOrder" 
 			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
@@ -132,27 +204,39 @@
 			 </result>
 		</action>
 		
-		<!-- 购买   未付款 -->
-		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
-			<result name="dataMap" type="json">
-			 	<param name="root">dataMap</param>
-			 </result>
-		</action>
-		
 		<!-- 查看订单详情 -->
-		<action name="ViewOrderDetail" class="com.xiaoxiang.org.action.OrderAction" method="viewOrderDetail">
+		<action name="ViewOrderDetail" class="com.xiaoxiang.org.action.OrderAction" 
+		method="viewOrderDetail">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
 		<!-- 修改订单表   -->
-		<action name="PaymentOrder" class="com.xiaoxiang.org.action.OrderAction" method="paymentOrder">
+		<action name="PaymentOrder" class="com.xiaoxiang.org.action.OrderAction"
+		 method="paymentOrder">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+
+		<!-- 查看收货地址   -->
+		<action name="ViewAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="viewAddress">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
+		<!-- 修改收货地址   -->
+		<action name="addOrChangeAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" 
+		method="addOrChangeAddress">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+				
 		<!-- 测试action   -->
 		<action name="TestAction" class="com.xiaoxiang.org.action.TestAction">
 			<result name="dataMap" type="json">
@@ -160,20 +244,23 @@
 			 </result>
 		</action>
 		
-		
-		<!-- 查看收货地址   -->
-		<action name="ViewAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" method="viewAddress">
+		<!-- 商品上架   -->
+		<action name="AddOrChangeShopGoods" class="com.xiaoxiang.org.action.StoreAction"
+		method="addOrChangeShopGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 		
-		<!-- 修改收货地址   -->
-		<action name="addOrChangeAddress" class="com.xiaoxiang.org.action.ShippingAddressAction" method="addOrChangeAddress">
+		<!-- 商品下架   -->
+		<action name="DeleteShopGoods" class="com.xiaoxiang.org.action.StoreAction"
+		method="deleteShopGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
+		
+		
 		<!--
 		<action name="Vouchers">
 			<result name="dataMap" type="json">

@@ -123,6 +123,8 @@ public class GoodsDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 
@@ -138,14 +140,18 @@ public class GoodsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Goods instance) {
+	public boolean attachDirty(Goods instance) {
 		log.debug("attaching dirty Goods instance");
 		try {
 			getSession().saveOrUpdate(instance);
+			transation.commit();
 			log.debug("attach successful");
-		} catch (RuntimeException re) {
+			return true;
+		} catch (Exception re) {
 			log.error("attach failed", re);
 			throw re;
+		}finally {
+			closeSession();
 		}
 	}
 

@@ -86,7 +86,7 @@ public class Goods implements java.io.Serializable {
 	public void setIdGoods(Integer idGoods) {
 		this.idGoods = idGoods;
 	}
-
+	@JSON(serialize=false)
 	public Majorfunction getMajorfunction() {
 		return this.majorfunction;
 	}

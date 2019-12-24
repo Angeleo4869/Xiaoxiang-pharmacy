@@ -34,6 +34,8 @@ public class BaseAction extends ActionSupport {
 	public static String Goods = "Goods";
 	public static String ShippingAddress = "shippingaddress";
 	public static String MajorFunction = "Majorfunction";
+	
+	
 	public void responseSetHeader() throws Exception{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");
