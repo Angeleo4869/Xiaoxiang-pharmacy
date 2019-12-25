@@ -14,7 +14,8 @@ import Box from '@material-ui/core/Box';
 // import OrderDetails from './orderDetails';
 import OrderDetails from './maporderDetail';
 import axios from 'axios';
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
+import {Link} from 'react-router-dom';
 import {
   useLocation
 } from "react-router-dom";
@@ -37,7 +38,9 @@ function TabPanel(props) {
 
     {props.content && props.content.map((text,index) => (
        <Box border={0} key={index} >
+          <Link to="/PersonCenter/orderdetail" onClick={()=>{alert("1")}}>
            <OrderDetails  content={text}/>
+          </Link>
         </Box>
     ))}
     <div style={{height:95}}><hr/></div>

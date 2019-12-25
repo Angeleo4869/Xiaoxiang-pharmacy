@@ -8,7 +8,7 @@ import Register from './LoginAndRegiter/Container/RegisterPage';
 import GoodsDetails from './GoodsDetails/gooddetails';
 import ImedPurchases from './PuerchaseAndPay/ImediyPurchase';
 import Management from './BGManagement/BGMainInterface/bgmgmn';
-import Shop from './ExhibitShow/ShopManage/ShopManagement';
+import Shop from './BGManagement/ShopManage/ShopManagement';
 import ShopView from './ExhibitShow/ShopShow/shopshow';
 // import App from './PersonCenter/PersonCenter.jsx';
 // import App from './GoodsDetails/gooddetails';

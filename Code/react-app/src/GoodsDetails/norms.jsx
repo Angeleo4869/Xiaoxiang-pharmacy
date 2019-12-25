@@ -34,9 +34,10 @@ export default class norms extends React.Component{
                 "orderaddress" :""
             };
             sessionStorage.setItem("DDorder",JSON.stringify(GoodData))
-            window.location.href = global.data.localadd+"ImedPurchase"
+            // window.location.href = global.data.localadd+"ImedPurchase"
         }else{
             alert("请先登录")
+            window.location.href = global.data.localadd
         }
     }
 
@@ -82,9 +83,9 @@ export default class norms extends React.Component{
                     <h3>价格：{parseFloat(this.props.Gdata.storePurchasePrice*this.state.Gnum).toFixed(1)}</h3>
                 </div>
                 <div><Button>加入购物车</Button>
-                
-                <Button onClick={this.fLogin}>立即购买</Button>
-                
+                <Link to="/ImedPurchase" onClick={this.fLogin}>
+                <Button >立即购买</Button>
+                </Link>
                 </div>
             </List>
         );

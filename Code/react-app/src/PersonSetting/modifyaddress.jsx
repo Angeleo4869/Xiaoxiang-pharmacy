@@ -14,6 +14,7 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import cookie from 'react-cookies';
+import {Link} from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
     root: {
       padding: theme.spacing(1, 3),
@@ -116,17 +117,17 @@ export default function PaperSheet() {
       useEffect(
         ()=>{
           if(sessionStorage.getItem("Defaultmessage")!=null){
-          var DAM = JSON.parse(sessionStorage.getItem("Defaultmessage"))
-          setAge(DAM.province)
-          setAge1(DAM.city)
-          setAge2(DAM.detail)
-          document.getElementById("Gpeople").value = DAM.name;
-          document.getElementById("Gphone").value = DAM.phone;
-          idaddress = DAM.id;
-        }else{
-          alert("请不要直接访问该页面")
-            window.location.href = global.data.localadd +'PersonCenter/show/address'
-        }
+            var DAM = JSON.parse(sessionStorage.getItem("Defaultmessage"))
+            setAge(DAM.province)
+            setAge1(DAM.city)
+            setAge2(DAM.detail)
+            document.getElementById("Gpeople").value = DAM.name;
+            document.getElementById("Gphone").value = DAM.phone;
+            idaddress = DAM.id;
+          }else{
+            alert("请不要直接访问该页面")
+              window.location.href = global.data.localadd +'PersonCenter/show/address'
+          }
         }
       )
 
@@ -151,6 +152,7 @@ export default function PaperSheet() {
                 }).then(
                   (response)=>{
                     alert(response.data.success)
+                    sessionStorage.removeItem("Defaultmessage");
                     window.location.href = global.data.localadd +'PersonCenter'
                     // console.log(response.data)
                   }
@@ -272,7 +274,10 @@ export default function PaperSheet() {
                         }
                     />
                 </div>
-                <Button onClick={Bclick}>确认</Button>
+                <Link to="/PersonCenter/show/address" onClick={Bclick}>
+                  <Button >确认</Button>
+                </Link>
+                
                 <Divider style={{position:'relative',top:10,left:0}}/>
             </div>
             <div style={{height:95}}>s</div>{/* 注意一定要加，不然显示不全 */}

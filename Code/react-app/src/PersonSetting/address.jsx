@@ -84,7 +84,7 @@ export default function PaperSheet() {
   const modify = (event,id,name,phone,province,city,detail)=>{
     var content = {'id':id,'name':name,'phone':phone,'province':province,'city':city,'detail':detail}
     sessionStorage.setItem("Defaultmessage",JSON.stringify(content))
-    window.location.href= global.data.localadd +'PersonCenter/show/Modifyaddress'
+    // window.location.href= global.data.localadd +'PersonCenter/show/Modifyaddress'
   }
   
   const cdelete = (event,id)=>{
@@ -128,9 +128,11 @@ export default function PaperSheet() {
               </div>
               <Divider orientation="vertical" />
               <div style={{display:'flex',position:'absolute',margin:5,marginLeft:15,right:30}}>
-                <Button onClick={(e)=>modify(e,text.idShippingAddress,text.recipientName,text.recipientTel, text.provinces,text.city,text.addressDetail)} variant="outlined" size="small" color="primary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
-                  编辑
-                </Button>
+                <Link to="/PersonCenter/show/Modifyaddress" onClick={(e)=>modify(e,text.idShippingAddress,text.recipientName,text.recipientTel, text.provinces,text.city,text.addressDetail)}>
+                  <Button  variant="outlined" size="small" color="primary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
+                    编辑
+                  </Button>
+                </Link>
                 <Button onClick={(e)=>cdelete(e,text.idShippingAddress)} variant="outlined" size="small" color="secondary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
                   删除
                 </Button>
