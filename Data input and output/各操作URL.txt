@@ -44,21 +44,21 @@ localhost:8080/XiaoXiangPharmacy/AddOrChangeGoods.action?idGoods（有： 修改
 localhost:8080/XiaoXiangPharmacy/DeleteGoods.action?idGoods=3
 
 添加购物车
-http://localhost:8080/XiaoXiangPharmacy/AddShoppingCart.action?idBuyer=18&idShopGoods=3&GoodsNumber=1
+http://localhost:8080/XiaoXiangPharmacy/AddShoppingCart.action?idBuyer=18&idShopGoods=4&GoodsNumber=1
 删除购物车
 localhost:8080/XiaoXiangPharmacy/DeleteShoppingCart.action?idShoppingCart=1
 查看购物车
-（）
+http://localhost:8080/XiaoXiangPharmacy/ViewShoppingCart.action?idBuyer=11
 
 购买：
-http://localhost:8080/XiaoXiangPharmacy/PlaceOrder.action?idBuyer=18&idShopGoods=5&GoodsNumber=4&ShippingAddress=2
+http://localhost:8080/XiaoXiangPharmacy/PlaceOrder.action?idBuyer=17&idShopGoods=4&GoodsNumber=3&ShippingAddress=3
 查看订单
 http://localhost:8080/XiaoXiangPharmacy/ViewOrder.action?idBuyer=18
 订单详情
-http://localhost:8080/XiaoXiangPharmacy/ViewOrderDetail.action?idOrder=4
+http://localhost:8080/XiaoXiangPharmacy/ViewOrderDetail.action?idOrder=7
 
 已付款确认（OrderState=1 已付款 2 已发货 3 已收货 4 退款）
-http://localhost:8080/XiaoXiangPharmacy/PaymentOrder.action?idOrder=4&OrderState=1
+http://localhost:8080/XiaoXiangPharmacy/PaymentOrder.action?idOrder=7&OrderState=1
 
 查看收货地址
 http://localhost:8080/XiaoXiangPharmacy/ViewAddress.action?idBuyer=11
