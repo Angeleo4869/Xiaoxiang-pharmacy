@@ -116,7 +116,7 @@
 			 </result>
 		</action>
 		
-		<!-- 所有商品 -->
+		<!-- 管理员查看所有商品 -->
 		<action name="ViewAllGoods"
 			class="com.xiaoxiang.org.action.GoodsAction" >
 			<result name="dataMap" type="json">
@@ -124,8 +124,8 @@
 			 </result>
 		</action>
 		
-		<!-- 所有已上架商品 -->
-		<action name="ViewAllShopGoods"
+		<!-- 管理员和店铺查看已上架商品 -->
+		<action name="ViewShopGoods"
 			class="com.xiaoxiang.org.action.GoodsAction" method="allShopGoods">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
@@ -188,15 +188,24 @@
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
-
-		<!-- 购买   未付款 -->
+		
+		<!-- 查看购物车 -->
+		<action name="ViewShoppingCart" class="com.xiaoxiang.org.action.ShoppingCartAction"
+		  method="viewShoppingCart">
+			<result name="dataMap" type="json">
+			 	<param name="root">dataMap</param>
+			 </result>
+		</action>
+		
+	
+		<!-- 下单   未付款 -->
 		<action name="PlaceOrder" class="com.xiaoxiang.org.action.OrderAction" method="placeOrder">
 			<result name="dataMap" type="json">
 			 	<param name="root">dataMap</param>
 			 </result>
 		</action>
 				
-		<!-- 查看订单 -->
+		<!-- 卖家，买家 查看订单 -->
 		<action name="ViewOrder" 
 			class="com.xiaoxiang.org.action.OrderAction" method="viewOrder">
 			<result name="dataMap" type="json">
@@ -244,13 +253,6 @@
 			 </result>
 		</action>
 		
-				
-		<!-- 测试action   -->
-		<action name="TestAction" class="com.xiaoxiang.org.action.TestAction">
-			<result name="dataMap" type="json">
-			 	<param name="root">dataMap</param>
-			 </result>
-		</action>
 		
 		<!-- 商品上架   -->
 		<action name="AddOrChangeShopGoods" class="com.xiaoxiang.org.action.StoreAction"

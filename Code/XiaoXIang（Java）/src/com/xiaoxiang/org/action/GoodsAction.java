@@ -5,9 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.xiaoxiang.org.dao.GoodsDAO;
+import com.xiaoxiang.org.dao.GoodsViewDAO;
 import com.xiaoxiang.org.dao.MajorfunctionDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Goods;
+import com.xiaoxiang.org.vo.GoodsDetailViewId;
+import com.xiaoxiang.org.vo.GoodsView;
+import com.xiaoxiang.org.vo.GoodsViewId;
+import com.xiaoxiang.org.vo.GoodsView;
 import com.xiaoxiang.org.vo.Majorfunction;
 
 public class GoodsAction extends BaseAction {
@@ -18,7 +23,9 @@ public class GoodsAction extends BaseAction {
 	private Goods goods = new Goods();
 	private Majorfunction majorfunction = new Majorfunction();
 	private GoodsDAO goodsDAO = new GoodsDAO();
-	
+	private GoodsView goodsView = new GoodsView();
+	private GoodsViewId goodsViewId = new GoodsViewId();
+	private GoodsViewDAO goodsViewDAO = new GoodsViewDAO();
 	//所有药品
 	public String execute() throws Exception{
 		responseSetHeader();
@@ -88,11 +95,15 @@ public class GoodsAction extends BaseAction {
 		return DataMap;
 	}
     
-	//所有上架商品
+	//所有上架商品或店家上架的所有商品
 	public String allShopGoods() throws Exception{
 		responseSetHeader();
 		setDataMap(new HashMap<String, Object>());
-		setList(new  ShopGoodsDAO().touristsRecommendedGoods());
+		String flag = request.getParameter("IdStore");
+		if(flag!=null)
+		goodsViewId.setIdStore(Integer.valueOf(flag));
+		goodsView.setId(goodsViewId);
+		setList(goodsViewDAO.findByExample(goodsView));
 		getDataMap().put(ShopGoods, getList());
 		return DataMap;
 	}

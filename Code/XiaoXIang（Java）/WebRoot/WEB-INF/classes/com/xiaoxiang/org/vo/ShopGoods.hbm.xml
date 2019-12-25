@@ -37,25 +37,25 @@
         <property name="shopGoodsDetailImage" type="java.lang.String">
             <column name="shop_goodsDetailImage" length="45" />
         </property>
-        <set name="voucherses" inverse="true">
+        <set name="voucherses" inverse="true" lazy="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Vouchers" />
         </set>
-        <set name="shoppingcarts" inverse="true">
+        <set name="shoppingcarts" inverse="true" lazy="true">
             <key>
                 <column name="Shop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Shoppingcart" />
         </set>
-        <set name="collections" inverse="true">
+        <set name="collections" inverse="true" lazy="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>
             <one-to-many class="com.xiaoxiang.org.vo.Collection" />
         </set>
-        <set name="orderdetails" inverse="true">
+        <set name="orderdetails" inverse="true" lazy="true">
             <key>
                 <column name="idShop_Goods" not-null="true" />
             </key>

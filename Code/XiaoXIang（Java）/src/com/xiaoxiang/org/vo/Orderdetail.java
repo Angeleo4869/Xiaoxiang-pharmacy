@@ -15,6 +15,7 @@ public class Orderdetail implements java.io.Serializable {
 	// Fields
 
 	private Integer idOrder;
+	private Store store;
 	private Buyer buyer;
 	private ShopGoods shopGoods;
 	private Vouchers vouchers;
@@ -47,9 +48,10 @@ public class Orderdetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderdetail(Buyer buyer, ShopGoods shopGoods, Vouchers vouchers, Shippingaddress shippingaddress,
-			Date paymentTime, Double totalPrice, String orderNumber, Short logistics, Integer goodsNumber,
-			Short oderState, Set commentses) {
+	public Orderdetail(Store store, Buyer buyer, ShopGoods shopGoods, Vouchers vouchers,
+			Shippingaddress shippingaddress, Date paymentTime, Double totalPrice, String orderNumber, Short logistics,
+			Integer goodsNumber, Short oderState, Set commentses) {
+		this.store = store;
 		this.buyer = buyer;
 		this.shopGoods = shopGoods;
 		this.vouchers = vouchers;
@@ -72,7 +74,15 @@ public class Orderdetail implements java.io.Serializable {
 	public void setIdOrder(Integer idOrder) {
 		this.idOrder = idOrder;
 	}
-	@JSON(serialize=false)
+
+	public Store getStore() {
+		return this.store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	public Buyer getBuyer() {
 		return this.buyer;
 	}

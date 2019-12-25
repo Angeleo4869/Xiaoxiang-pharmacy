@@ -1,13 +1,18 @@
 package com.xiaoxiang.org.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.xiaoxiang.org.dao.BuyerDAO;
+import com.xiaoxiang.org.dao.OrderViewDAO;
 import com.xiaoxiang.org.dao.OrderdetailDAO;
 import com.xiaoxiang.org.dao.ShopGoodsDAO;
 import com.xiaoxiang.org.vo.Buyer;
+import com.xiaoxiang.org.vo.OrderView;
+import com.xiaoxiang.org.vo.OrderViewId;
 import com.xiaoxiang.org.vo.Orderdetail;
 import com.xiaoxiang.org.vo.Shippingaddress;
 import com.xiaoxiang.org.vo.ShopGoods;
@@ -17,14 +22,18 @@ public class OrderAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Buyer buyer = new Buyer();
 	private Orderdetail orderdetail = new Orderdetail();
 	private ShopGoods shopGoods = new ShopGoods();
 	private Shippingaddress shippingaddress = new Shippingaddress();
-	private Buyer buyer = new Buyer();
+	private OrderView orderView = new OrderView();
+	private OrderViewId orderViewId = new OrderViewId();
 	private OrderdetailDAO orderdetailDAO = new OrderdetailDAO();
-	private ArrayList<List> list = new ArrayList<List>();
-
-	//购买，但未付款
+	private OrderViewDAO orderViewDAO = new OrderViewDAO();
+	private ArrayList<List> arrayList = new ArrayList<List>();
+	
+//下单
 	public String placeOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
@@ -36,6 +45,7 @@ public class OrderAction extends BaseAction {
         orderdetail.setOrderNumber(new Date().toString()+buyer.getIdBuyer().toString()+shopGoods.getIdShopGoods().toString());
 		orderdetail.setBuyer(buyer);
 		orderdetail.setShopGoods(shopGoods);
+		orderdetail.setStore(shopGoods.getStore());
 		orderdetail.setLogistics((short) 0);//发货状态
 		orderdetail.setOderState((short) 0);//未付款
 		orderdetail.setShippingaddress(shippingaddress);
@@ -53,11 +63,20 @@ public class OrderAction extends BaseAction {
 	public String viewOrder() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        Integer id = Integer.valueOf(request.getParameter("idBuyer"));
-		for(Short orderstate = 0;orderstate<5;orderstate++){
-			list.add(orderdetailDAO.findByOrderView(id,orderstate));
+       String flag = request.getParameter("idBuyer");
+       orderViewId.setIdbuyer(null);
+       orderViewId.setIdStore(null);
+        if(flag!=null)
+        	orderViewId.setIdbuyer(Integer.valueOf(flag));
+        flag = request.getParameter("idStore");
+        if(flag!=null)
+        	orderViewId.setIdStore(Integer.valueOf(flag));
+        for(Short orderstate = 0;orderstate<5;orderstate++){
+			orderViewId.setOdstate(orderstate);
+			orderView.setId(orderViewId);
+			getArrayList().add(orderdetailDAO.findByOrderView(orderView));
 		}
-		getDataMap().put(Order, list);
+		getDataMap().put(Order, getArrayList());
 		return DataMap;
 	}
 	//订单详情
@@ -77,7 +96,13 @@ public class OrderAction extends BaseAction {
         Short oderState = (Short.valueOf(request.getParameter("OrderState")));//管理员确认收款，修改订单表，提示卖家发货
         setOrderdetail(orderdetailDAO.findById(id));
         orderdetail.setOderState(oderState);
+        setShopGoods(orderdetail.getShopGoods());
+        if(oderState==1)
+        	shopGoods.setShopGoodsInventory(shopGoods.getShopGoodsInventory()-1);
+        if(oderState==2)
+        	shopGoods.setShopGoodsSales(shopGoods.getShopGoodsSales()+1);
         if(orderdetailDAO.attachDirty(orderdetail)){
+        	new ShopGoodsDAO().attachDirty(getShopGoods());
         	getDataMap().put(SUCCESS, true);
         }else {
         	getDataMap().put(ERROR, false);
@@ -85,6 +110,15 @@ public class OrderAction extends BaseAction {
 		
 		return DataMap;
 	}
+	//获取系统时间
+    private String dateTime(){
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		//System.out.println(sdf.format(calendar.getTime()));
+		String Time = new String(sdf.format(new java.util.Date()).trim());
+		return Time;
+		}
+    
 	public Orderdetail getOrderdetail() {
 		return orderdetail;
 	}
@@ -108,6 +142,24 @@ public class OrderAction extends BaseAction {
 	}
 	public void setBuyer(Buyer buyer) {
 		this.buyer = buyer;
+	}
+	public OrderView getOrderView() {
+		return orderView;
+	}
+	public void setOrderView(OrderView orderView) {
+		this.orderView = orderView;
+	}
+	public OrderViewId getOrderViewId() {
+		return orderViewId;
+	}
+	public void setOrderViewId(OrderViewId orderViewId) {
+		this.orderViewId = orderViewId;
+	}
+	public ArrayList<List> getArrayList() {
+		return arrayList;
+	}
+	public void setArrayList(ArrayList<List> arrayList) {
+		this.arrayList = arrayList;
 	}
 
 }

@@ -17,6 +17,7 @@ public class GoodsDetailViewId implements java.io.Serializable {
 	private Integer shopGoodsInventory;
 	private String shopGoodsDetailImage;
 	private String goodsSpecifications;
+	private Integer idGoods;
 
 	// Constructors
 
@@ -26,7 +27,7 @@ public class GoodsDetailViewId implements java.io.Serializable {
 
 	/** minimal constructor */
 	public GoodsDetailViewId(Integer idShopGoods, String shopGoodsName, Double shopGoodsPrice, Integer shopGoodsSales,
-			Double shopGoodsFreight, Integer shopGoodsInventory, String goodsSpecifications) {
+			Double shopGoodsFreight, Integer shopGoodsInventory, String goodsSpecifications, Integer idGoods) {
 		this.idShopGoods = idShopGoods;
 		this.shopGoodsName = shopGoodsName;
 		this.shopGoodsPrice = shopGoodsPrice;
@@ -34,12 +35,13 @@ public class GoodsDetailViewId implements java.io.Serializable {
 		this.shopGoodsFreight = shopGoodsFreight;
 		this.shopGoodsInventory = shopGoodsInventory;
 		this.goodsSpecifications = goodsSpecifications;
+		this.idGoods = idGoods;
 	}
 
 	/** full constructor */
 	public GoodsDetailViewId(Integer idShopGoods, String shopGoodsImage, String shopGoodsName, Double shopGoodsPrice,
 			Integer shopGoodsSales, Double shopGoodsFreight, Integer shopGoodsInventory, String shopGoodsDetailImage,
-			String goodsSpecifications) {
+			String goodsSpecifications, Integer idGoods) {
 		this.idShopGoods = idShopGoods;
 		this.shopGoodsImage = shopGoodsImage;
 		this.shopGoodsName = shopGoodsName;
@@ -49,6 +51,7 @@ public class GoodsDetailViewId implements java.io.Serializable {
 		this.shopGoodsInventory = shopGoodsInventory;
 		this.shopGoodsDetailImage = shopGoodsDetailImage;
 		this.goodsSpecifications = goodsSpecifications;
+		this.idGoods = idGoods;
 	}
 
 	// Property accessors
@@ -125,6 +128,14 @@ public class GoodsDetailViewId implements java.io.Serializable {
 		this.goodsSpecifications = goodsSpecifications;
 	}
 
+	public Integer getIdGoods() {
+		return this.idGoods;
+	}
+
+	public void setIdGoods(Integer idGoods) {
+		this.idGoods = idGoods;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -159,7 +170,9 @@ public class GoodsDetailViewId implements java.io.Serializable {
 								&& this.getShopGoodsDetailImage().equals(castOther.getShopGoodsDetailImage())))
 				&& ((this.getGoodsSpecifications() == castOther.getGoodsSpecifications())
 						|| (this.getGoodsSpecifications() != null && castOther.getGoodsSpecifications() != null
-								&& this.getGoodsSpecifications().equals(castOther.getGoodsSpecifications())));
+								&& this.getGoodsSpecifications().equals(castOther.getGoodsSpecifications())))
+				&& ((this.getIdGoods() == castOther.getIdGoods()) || (this.getIdGoods() != null
+						&& castOther.getIdGoods() != null && this.getIdGoods().equals(castOther.getIdGoods())));
 	}
 
 	public int hashCode() {
@@ -174,6 +187,7 @@ public class GoodsDetailViewId implements java.io.Serializable {
 		result = 37 * result + (getShopGoodsInventory() == null ? 0 : this.getShopGoodsInventory().hashCode());
 		result = 37 * result + (getShopGoodsDetailImage() == null ? 0 : this.getShopGoodsDetailImage().hashCode());
 		result = 37 * result + (getGoodsSpecifications() == null ? 0 : this.getGoodsSpecifications().hashCode());
+		result = 37 * result + (getIdGoods() == null ? 0 : this.getIdGoods().hashCode());
 		return result;
 	}
 

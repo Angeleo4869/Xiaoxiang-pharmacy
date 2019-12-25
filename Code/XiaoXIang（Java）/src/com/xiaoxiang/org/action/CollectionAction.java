@@ -36,9 +36,8 @@ public class CollectionAction extends BaseAction {
 	public String deleteCollection() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-		buyer.setIdBuyer(Integer.valueOf(request.getParameter("idBuyer")));
-		collection.setBuyer(buyer);
-		collection.setShopGoods(shopgoods);
+		Integer id  = Integer.valueOf(request.getParameter("idCollection"));
+		setCollection(collectionDAO.findById(id));
 		if(collectionDAO.delete(collection)){
 			getDataMap().put(SUCCESS,true);
 		}else {
@@ -70,6 +69,14 @@ public class CollectionAction extends BaseAction {
 	}
 	public void setShopgoods(ShopGoods shopgoods) {
 		this.shopgoods = shopgoods;
+	}
+
+	public Collection getCollection() {
+		return collection;
+	}
+
+	public void setCollection(Collection collection) {
+		this.collection = collection;
 	}
 	
 

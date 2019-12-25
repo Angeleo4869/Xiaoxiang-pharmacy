@@ -57,7 +57,8 @@ public class ShippingAddressAction extends BaseAction {
 	public String deleteAddress() throws Exception{
 		responseSetHeader();
         setDataMap(new HashMap<String, Object>());
-        shippingaddress.setIdShippingAddress(Integer.valueOf(request.getParameter("idShippingaddress")));
+        Integer id = Integer.valueOf(request.getParameter("idShippingaddress"));
+        setShippingaddress(shippingaddressDAO.findById(id));
         if(shippingaddressDAO.delete(getShippingaddress())){
         	 getDataMap().put(SUCCESS, true);     
         }

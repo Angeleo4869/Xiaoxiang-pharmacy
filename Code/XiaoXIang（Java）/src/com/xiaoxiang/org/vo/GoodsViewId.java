@@ -15,6 +15,8 @@ public class GoodsViewId implements java.io.Serializable {
 	private String goodsMajorFunctioncol;
 	private String goodsSeries;
 	private String goodsClass;
+	private Integer idGoods;
+	private Integer idStore;
 
 	// Constructors
 
@@ -23,16 +25,19 @@ public class GoodsViewId implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public GoodsViewId(Integer idShopGoods, String shopGoodsName, Double shopGoodsPrice, String goodsMajorFunctioncol) {
+	public GoodsViewId(Integer idShopGoods, String shopGoodsName, Double shopGoodsPrice, String goodsMajorFunctioncol,
+			Integer idGoods, Integer idStore) {
 		this.idShopGoods = idShopGoods;
 		this.shopGoodsName = shopGoodsName;
 		this.shopGoodsPrice = shopGoodsPrice;
 		this.goodsMajorFunctioncol = goodsMajorFunctioncol;
+		this.idGoods = idGoods;
+		this.idStore = idStore;
 	}
 
 	/** full constructor */
 	public GoodsViewId(Integer idShopGoods, String shopGoodsImage, String shopGoodsName, Double shopGoodsPrice,
-			String goodsMajorFunctioncol, String goodsSeries, String goodsClass) {
+			String goodsMajorFunctioncol, String goodsSeries, String goodsClass, Integer idGoods, Integer idStore) {
 		this.idShopGoods = idShopGoods;
 		this.shopGoodsImage = shopGoodsImage;
 		this.shopGoodsName = shopGoodsName;
@@ -40,6 +45,8 @@ public class GoodsViewId implements java.io.Serializable {
 		this.goodsMajorFunctioncol = goodsMajorFunctioncol;
 		this.goodsSeries = goodsSeries;
 		this.goodsClass = goodsClass;
+		this.idGoods = idGoods;
+		this.idStore = idStore;
 	}
 
 	// Property accessors
@@ -100,6 +107,22 @@ public class GoodsViewId implements java.io.Serializable {
 		this.goodsClass = goodsClass;
 	}
 
+	public Integer getIdGoods() {
+		return this.idGoods;
+	}
+
+	public void setIdGoods(Integer idGoods) {
+		this.idGoods = idGoods;
+	}
+
+	public Integer getIdStore() {
+		return this.idStore;
+	}
+
+	public void setIdStore(Integer idStore) {
+		this.idStore = idStore;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -126,9 +149,12 @@ public class GoodsViewId implements java.io.Serializable {
 				&& ((this.getGoodsSeries() == castOther.getGoodsSeries())
 						|| (this.getGoodsSeries() != null && castOther.getGoodsSeries() != null
 								&& this.getGoodsSeries().equals(castOther.getGoodsSeries())))
-				&& ((this.getGoodsClass() == castOther.getGoodsClass())
-						|| (this.getGoodsClass() != null && castOther.getGoodsClass() != null
-								&& this.getGoodsClass().equals(castOther.getGoodsClass())));
+				&& ((this.getGoodsClass() == castOther.getGoodsClass()) || (this.getGoodsClass() != null
+						&& castOther.getGoodsClass() != null && this.getGoodsClass().equals(castOther.getGoodsClass())))
+				&& ((this.getIdGoods() == castOther.getIdGoods()) || (this.getIdGoods() != null
+						&& castOther.getIdGoods() != null && this.getIdGoods().equals(castOther.getIdGoods())))
+				&& ((this.getIdStore() == castOther.getIdStore()) || (this.getIdStore() != null
+						&& castOther.getIdStore() != null && this.getIdStore().equals(castOther.getIdStore())));
 	}
 
 	public int hashCode() {
@@ -141,6 +167,8 @@ public class GoodsViewId implements java.io.Serializable {
 		result = 37 * result + (getGoodsMajorFunctioncol() == null ? 0 : this.getGoodsMajorFunctioncol().hashCode());
 		result = 37 * result + (getGoodsSeries() == null ? 0 : this.getGoodsSeries().hashCode());
 		result = 37 * result + (getGoodsClass() == null ? 0 : this.getGoodsClass().hashCode());
+		result = 37 * result + (getIdGoods() == null ? 0 : this.getIdGoods().hashCode());
+		result = 37 * result + (getIdStore() == null ? 0 : this.getIdStore().hashCode());
 		return result;
 	}
 

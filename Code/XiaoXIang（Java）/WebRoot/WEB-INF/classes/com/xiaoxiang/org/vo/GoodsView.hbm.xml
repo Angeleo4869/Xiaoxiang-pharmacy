@@ -28,6 +28,12 @@
             <key-property name="goodsClass" type="java.lang.String">
                 <column name="GoodsClass" length="45" />
             </key-property>
+            <key-property name="idGoods" type="java.lang.Integer">
+                <column name="idGoods" />
+            </key-property>
+            <key-property name="idStore" type="java.lang.Integer">
+                <column name="idStore" />
+            </key-property>
         </composite-id>
     </class>
 </hibernate-mapping>

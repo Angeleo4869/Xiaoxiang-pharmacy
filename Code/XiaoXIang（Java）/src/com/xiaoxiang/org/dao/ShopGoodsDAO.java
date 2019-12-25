@@ -144,6 +144,22 @@ public class ShopGoodsDAO extends BaseHibernateDAO {
 		}
 	}
 	
+	public GoodsView findGoodsByIdShopGoods(ShopGoods id ){
+		log.debug("recommended Goods instances");
+		try { 
+			String queryString = "select * from Goods_view where idShop_Goods = ?";
+			SQLQuery queryObject = getSession().createSQLQuery(queryString);
+			queryObject.setParameter(0, id.getIdShopGoods());
+			queryObject.addEntity(GoodsView.class);
+			return (GoodsView)queryObject.list().get(0);
+		} catch (Exception re) {
+			log.error("find all failed", re);
+			return null;
+		}finally {
+			closeSession();
+		}
+	}
+	
 	public List membersRecommendedGoods(Buyer buyer){
 		log.debug("recommended Goods instances");
 		try {

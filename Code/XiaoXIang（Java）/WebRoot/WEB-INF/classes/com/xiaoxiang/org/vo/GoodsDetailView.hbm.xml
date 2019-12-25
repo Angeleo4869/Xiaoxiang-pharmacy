@@ -34,6 +34,9 @@
             <key-property name="goodsSpecifications" type="java.lang.String">
                 <column name="GoodsSpecifications" length="45" />
             </key-property>
+            <key-property name="idGoods" type="java.lang.Integer">
+                <column name="idGoods" />
+            </key-property>
         </composite-id>
     </class>
 </hibernate-mapping>
