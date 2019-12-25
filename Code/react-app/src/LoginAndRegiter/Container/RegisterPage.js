@@ -82,6 +82,7 @@ function test (){
 
 
 export default function SignUp() {
+  document.title = "注册";
   const classes = useStyles();
 
   return (

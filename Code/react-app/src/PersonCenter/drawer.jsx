@@ -42,6 +42,8 @@ import Revise from './../PersonSetting/revise';
 import Message from './../PersonSetting/message';
 import Address from './../PersonSetting/address';
 import NewAddress from './../PersonSetting/newaddress';
+import ModifyAddress from './../PersonSetting/modifyaddress';
+import Orderdetail from './../GoodsDetails/orderDetail';
 import './../CSS/Center.css';
 import Cbadge from './../Test/C_badge';
 
@@ -118,6 +120,7 @@ function ScrollTop(props) {
 }
 
 function ResponsiveDrawer(props) {
+  document.title = "个人中心";
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -265,11 +268,17 @@ function ResponsiveDrawer(props) {
           <Route path="/PersonCenter/show/Newaddress">
                   <NewAddress/>
           </Route>
+          <Route path="/PersonCenter/show/Modifyaddress">
+                  <ModifyAddress/>
+          </Route>
           <Route path="/PersonCenter/message">
                   <Message/>
           </Route>
           <Route path="/PersonCenter/order">
                   <App3 />
+          </Route>
+          <Route path="/PersonCenter/orderdetail">
+                  <Orderdetail />
           </Route>
           <Route path="/PersonCenter/Shoppingcart">
                   <App2/>

@@ -96,6 +96,7 @@ import {
   }
 //通过路由得到goodid再得到数据
 export default function SimpleContainer() {
+  document.title = "商品详情";
     const classes = useStyles();
     let query = useQuery();
     const [Gdata,steGdata] = React.useState({
@@ -169,7 +170,7 @@ export default function SimpleContainer() {
               <Rotate />
             </ListItem>
           </Box>
-          <ListItem key='2'><Norms user={query.get("name")} Gdata={Gdata} /></ListItem>  
+          <ListItem key='2'><Norms user={query.get("name")}  Gdata={Gdata} /></ListItem>  
         </div>
         <Box><Tabs Gdata={Gdata}/></Box>
       </Container>

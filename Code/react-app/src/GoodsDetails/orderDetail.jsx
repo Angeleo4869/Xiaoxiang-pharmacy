@@ -7,7 +7,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import Box from '@material-ui/core/Box';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1, 3),
@@ -45,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     position:'absolute',
     left:`calc(4.75vw - 10px)`,
     [theme.breakpoints.down('xs')]: {
-    left:`calc(12vw - 10px)`,
+    left:`calc(12vw - 5px)`,
     }
   },
   shop: {
@@ -123,7 +122,8 @@ export default function PaperSheet() {
   const classes = useStyles();
   return (
     <div style={{width:'100%'}}>
-        <Card>
+      
+        <Card style={{marginLeft:15}}>
         <div style={{display:'flex',width:'100%',position:'relative'}}>
             <LocalShippingIcon style={{marginLeft:10,marginTop:10,fontSize: 40}} color="primary"/>
             <Typography color="textSecondary" variant="h6" style={{maginLeft:40,marginTop:15}} >
@@ -152,7 +152,7 @@ export default function PaperSheet() {
                 益丰大药房
             </Typography>
             <br/>   
-            <img className={classes.image} src='/picture/yao.jpg'/>
+            <img className={classes.image} src='/Pic/yao.jpg'/>
         </div>
         <div style={{display:'inline'}}>
             <Typography  className={classes.detail1} >
@@ -185,6 +185,9 @@ export default function PaperSheet() {
               </div>
           </Card>
         </Card>
+        
+        <Divider style={{height:95}}/>
+        
     </div>
   );
 }

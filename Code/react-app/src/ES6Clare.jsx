@@ -37,10 +37,11 @@ class Welcome extends React.Component{
         }else{
             user = "tourist";
         }
+        document.title = "测试界面";
         return(
             <div>
                 <div style={{display:"flex",maxWidth:800}}>
-                    <Link  to={"/GoodsDetails?name=" + user + "&goodid=2"}>
+                    <Link  to={"/GoodsDetails?name=" + user + "&goodid=4"}>
                         <Card style={{width:'90%',maxWidth:600}}>
                             <CardActionArea>
                                 <CardMedia

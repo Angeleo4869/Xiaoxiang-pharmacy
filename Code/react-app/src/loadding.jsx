@@ -17,7 +17,7 @@ import ShopView from './ExhibitShow/ShopShow/shopshow';
  import App from './Test/C_badge';
 //  import App2 from './PersonSetting/XXSetting';
  import App2 from './PersonSetting/message';
-
+// import './CSS/Center.css';
 // import App from './GoodsDetails/Tabs';
 import {
     BrowserRouter as Router,
@@ -27,34 +27,35 @@ import {
 
 
 function RootRouter() {
+  
   return (
       <Router>
           <div id="foodd"></div>
       <Switch >
-        <Route exact path="/" children={<Test />} />
+        <Route exact path="/" children={<Test />}  />
 
-        <Route path="/PersonCenter">
+        <Route path="/PersonCenter" >
           <Container />
         </Route>
-        <Route path="/Login">
+        <Route path="/Login" >
           <Login />
         </Route>
-        <Route path="/Register">
+        <Route path="/Register" >
           <Register />
         </Route>
-        <Route path="/GoodsDetails">
+        <Route path="/GoodsDetails" >
           <GoodsDetails />
         </Route>
-        <Route path="/ImedPurchase">
+        <Route path="/ImedPurchase" >
           <ImedPurchases />
         </Route>
-        <Route path="/XXYFReactManagement">
+        <Route path="/XXYFReactManagement" >
           <Management />
         </Route>
-        <Route path="/Shop">
+        <Route path="/Shop" >
           <Shop />
         </Route>
-        <Route path="/ShopView">
+        <Route path="/ShopView" >
           <ShopView />
         </Route>
         <Route path="/Test">

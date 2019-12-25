@@ -8,4 +8,5 @@ global.data = {
     address : ["朱奇峰","15107361892","湖南中医药大学岳麓区学士街道湖南中医药大学含浦校区"],
     request : "http://118.25.67.96:8080/XiaoXiangPharmacy/",
     localadd : "http://10.136.1.219:3000/"
+    // localadd : "http://localhost:3000/"
 };

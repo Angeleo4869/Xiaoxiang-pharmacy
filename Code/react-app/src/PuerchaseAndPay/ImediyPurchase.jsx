@@ -233,6 +233,7 @@ function ResponsiveDialog() {
 
 
 export default function imedPurchase() {
+  document.title = "立即支付";
     const classes = useStyles();
     
     const conT =[
@@ -267,11 +268,13 @@ export default function imedPurchase() {
     const id = open ? 'simple-popover' : undefined;
 //默认地址的数据
 const [Ddata,setDdata] = React.useState({"addressDetail":"0","city":"0","idShippingAddress":1,"provinces":"0","recipientName":"0","recipientTel":"0"})
+//所有地址信息
 const [Adata,setAdata] = React.useState(
     [
       {"addressDetail":"0","city":"0","idShippingAddress":1,"provinces":"0","recipientName":"0","recipientTel":"0"},
       {"addressDetail":"0","city":"0","idShippingAddress":2,"provinces":"0","recipientName":"0","recipientTel":"0"}
     ])
+//订单信息
 const [OData,setOdata] = React.useState(
   {"value" : [{
     "Gname":"0",
@@ -279,10 +282,13 @@ const [OData,setOdata] = React.useState(
     "Gprice":"0",
     "Gnum":"0",
     "Gimage":"0",
-    "idGoods":"0"
+    "idGoods":"0",
+    "buyerid":"0",
+    "goodid":"0"
     }],
-    "GFprice":0,
+    "GFprice":"0",
     "Ordernum" :1,
+    "orderaddress" :"0"
 })
   useEffect(
     ()=>{
@@ -308,11 +314,14 @@ const [OData,setOdata] = React.useState(
       //界面显示的值
       setDdata(JSON.parse(sessionStorage.getItem("addr"))[0])
     }
+//设置odata的值
+    var buffer = JSON.parse(sessionStorage.getItem("DDorder"))
+    buffer.orderaddress = Ddata.idShippingAddress;
 
-      setOdata(JSON.parse(sessionStorage.getItem("DDorder")))
+    setOdata(buffer)
     },[]
   )
-    console.log(OData.value);
+    console.log(OData);
 //地址栏采用全局数据，在进入此界面时获取
   return (
       <div>
@@ -464,10 +473,12 @@ const [OData,setOdata] = React.useState(
                 </Typography>
                 {/* <Button>提交订单</Button> */}
                 <span onClick={()=>{
+                  //得到事件的对象
                         var event = event ? event : window.event;
                         var obj = event.srcElement ? event.srcElement : event.target;
                         if(obj.innerHTML==="提交订单"){
-                            
+                            console.log("正在提交")
+
                         }else if(obj.innerHTML==="支付完成"){
                             alert("支付已完成")
                             

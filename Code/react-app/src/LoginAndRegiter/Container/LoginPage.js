@@ -98,6 +98,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignInSide() {
+  document.title = "登录";
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>

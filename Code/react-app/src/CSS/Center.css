@@ -1,2 +1,3 @@
 a:link,a:visited{color:#444;text-decoration:none;}
 a:hover{color:#444;}
+.tabbrowser-tab:nth-child(4n+1){background:#62B76E !important;}

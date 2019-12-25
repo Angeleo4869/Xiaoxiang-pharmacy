@@ -11,7 +11,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Box from '@material-ui/core/Box';
 
-import OrderDetails from './orderDetails';
+// import OrderDetails from './orderDetails';
+import OrderDetails from './maporderDetail';
 import axios from 'axios';
 import cookie from 'react-cookies'
 import {
