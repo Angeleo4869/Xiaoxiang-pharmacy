@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -118,34 +118,35 @@ export default function PaperSheet() {
         var name = document.getElementById("Gpeople").value;
         var phone = document.getElementById("Gphone").value;
         var Adetail = age2 +  document.getElementById("indetail").value;
-        if(cookie.load('userdId')==null){
-          if(name!=''&&phone!=''&&age!=''&&age1!=''&&Adetail!=''&&document.getElementById("indetail").value!=''){
-            axios.get(global.data.request+'addOrChangeAddress.action',
-            {
-              params: {
-                RecipientName: name,
-                RecipientTel: phone,
-                Provinces: age,
-                City: age1,
-                AddressDetail: Adetail,
-                idBuyer: cookie.load('userId')
+        
+            if(cookie.load('userdId')==null){
+              if(name!==''&&phone!==''&&age!==''&&age1!==''&&Adetail!==''&&document.getElementById("indetail").value!==''){
+                axios.get(global.data.request+'addOrChangeAddress.action',
+                {
+                  params: {
+                    RecipientName: name,
+                    RecipientTel: phone,
+                    Provinces: age,
+                    City: age1,
+                    AddressDetail: Adetail,
+                    idBuyer: cookie.load('userId')
+                  }
+                }).then(
+                  (response)=>{
+                    alert(response.data.success)
+                    window.location.href = global.data.localadd +'PersonCenter'
+                    // console.log(response.data)
+                  }
+                )
+              }else{
+                alert("input message")
               }
-            }).then(
-              (response)=>{
-                alert(response.data.success)
-                window.location.href = global.data.localadd +'PersonCenter'
-                // console.log(response.data)
-              }
-            )
-          }else{
-            alert("input message")
-          }
-        }else{
-          alert("请登录")
-          window.location.href = global.data.localadd +'Login'
+            }else{
+              alert("请登录")
+              window.location.href = global.data.localadd +'Login'
+            }
         }
-      }
-
+        
   return (
     <div style={{width:'100%'}}>
         <div style={{display:'flex',width:'100%'}}>

@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function VerticalTabs() {
+  document.title = "店铺";
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 

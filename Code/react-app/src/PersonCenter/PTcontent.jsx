@@ -12,7 +12,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-
+import axios from 'axios';
+import cookie from 'react-cookies';
 import {
   Route,
   Link,
@@ -61,9 +62,42 @@ const Cont = [
 ]
 export default function SimpleCard(props) {
   const classes = useStyles(); 
+  const userid = cookie.load('userId'); 
   if(props.data.buyerName===null){
     props.data.buyerName="陌生人"
   }
+  const [Gdata,setGdata] = React.useState(
+    [
+      {'id':{idShopGoods:'1',
+      shopGoodsName:'0',
+      shopGoodsPrice:'0',
+      shopGoodsImage:'/Pic/D1.jpg'}},
+      {'id':{idShopGoods:'1',
+      shopGoodsName:'0',
+      shopGoodsPrice:'0',
+      shopGoodsImage:'/Pic/D1.jpg'}},
+      {'id':{idShopGoods:'1',
+      shopGoodsName:'0',
+      shopGoodsPrice:'0',
+      shopGoodsImage:'/Pic/D1.jpg'}}
+    ]
+  )
+  useEffect(
+    ()=>{
+      axios.get(global.data.request+'HomePage.action',
+      {
+        params: {
+          idBuyer: userid
+        }
+      }).then(
+        (response)=>{
+          setGdata( response.data.ShopGoods);
+          // console.log(response.data)
+        }
+      )
+    },[]
+  )
+    console.log(Gdata)
   // console.log(props.data)
   // const bull = <span className={classes.bullet}>•</span>;
   // const decide = 0;
@@ -106,18 +140,22 @@ export default function SimpleCard(props) {
           <nav style={{display:'flex'}} className={classes.drawer} aria-label="mailbox folders">
           <Hidden xsDown implementation="css">
             <GridList cellHeight={330}  cols={4}>
-                  {Cont.map((text,index) => (
+                  {Gdata.map((text,index) => (
                     <GridListTile key={index} >
-                      <PTCard  size={2} id={text.id} name={text.name} price={text.price} imagesrc={text.imagesrc} />
-                    </GridListTile>
+                      <Link to={"/GoodsDetails?name=" + userid + "&goodid=" + text.id.idShopGoods}>
+                      <PTCard  size={2} id={text.id.idShopGoods} name={text.id.shopGoodsName} price={text.id.shopGoodsPrice} imagesrc='/Pic/D1.jpg' />
+                      </Link>
+                      </GridListTile>
                   ))}
             </GridList>
           </Hidden>
           <Hidden smUp implementation="css">
             <GridList cellHeight={300}  cols={2}>
-                    {Cont.map((text,index) => (
+                    {Gdata.map((text,index) => (
                       <GridListTile key={index} >
-                        <PTCard   size={1} id={text.id} name={text.name} price={text.price} imagesrc={text.imagesrc}/>
+                        <Link to={"/GoodsDetails?name=" + userid + "&goodid=" + text.id.idShopGoods}>
+                        <PTCard   size={1} id={text.id.idShopGoods} name={text.id.shopGoodsName} price={text.id.shopGoodsPrice} imagesrc='/Pic/D1.jpg'/>
+                        </Link>
                       </GridListTile>
                     ))}
             </GridList>

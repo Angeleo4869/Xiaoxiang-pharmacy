@@ -25,15 +25,19 @@ export default class norms extends React.Component{
                 "Gprice":this.props.Gdata.storePurchasePrice,
                 "Gnum":this.state.Gnum,
                 "Gimage":"",
-                "idGoods":this.props.Gdata.idShopGoods
+                "idGoods":this.props.Gdata.idShopGoods,
+                "buyerid":cookie.load('userId'),
+                "goodid":this.props.Gdata.idGoods
                 }],
                 "GFprice":this.props.Gdata.storePurchasePrice*this.state.Gnum,
-                "Ordernum" :1
+                "Ordernum" :1,
+                "orderaddress" :""
             };
             sessionStorage.setItem("DDorder",JSON.stringify(GoodData))
-            window.location.href = global.data.localadd+"ImedPurchase"
+            // window.location.href = global.data.localadd+"ImedPurchase"
         }else{
             alert("请先登录")
+            window.location.href = global.data.localadd
         }
     }
 
@@ -62,22 +66,26 @@ export default class norms extends React.Component{
                 <div style={{display:'flex'}}>
                 <h3>数量选择:&nbsp;</h3>
                     <div style={{display:'flex',marginTop:20}}>
-                        <AddIcon onClick={this.addGunm}/>
-                        <Box style={{backgroundColor:"#F0F0F0",height:25,width:30,MozOutlineRadius:5}}>
+                        <Box style={{border:'1px solid #f0f0f0',height:25}} >
+                            <AddIcon onClick={this.addGunm}/>
+                        </Box>
+                        <Box style={{height:25,width:40,border:'1px solid #f0f0f0'}}>
                             <center>
                             <h3 style={{marginTop:2,}}>{this.state.Gnum}</h3>
                             </center>
                         </Box>
-                        <RemoveIcon onClick={this.subGnum}/>
+                        <Box style={{border:'1px solid #f0f0f0',height:25}} >
+                            <RemoveIcon onClick={this.subGnum}/>
+                        </Box>
                     </div>
                 </div>
                 <div>
                     <h3>价格：{parseFloat(this.props.Gdata.storePurchasePrice*this.state.Gnum).toFixed(1)}</h3>
                 </div>
                 <div><Button>加入购物车</Button>
-                
-                <Button onClick={this.fLogin}>立即购买</Button>
-                
+                <Link to="/ImedPurchase" onClick={this.fLogin}>
+                <Button >立即购买</Button>
+                </Link>
                 </div>
             </List>
         );

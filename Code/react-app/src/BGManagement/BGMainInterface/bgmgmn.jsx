@@ -70,6 +70,7 @@ const columns = [
 });
 
 export default function StickyHeadTable() {
+    document.title = "管理系统";
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);

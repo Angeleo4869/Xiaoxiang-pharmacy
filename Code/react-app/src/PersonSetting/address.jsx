@@ -51,7 +51,12 @@ export default function PaperSheet() {
   const classes = useStyles();
   const [Adata,setAdata] = React.useState(
     [
-      {"addressDetail":"0","city":"0","idShippingAddress":1,"provinces":"0","recipientName":"网络连接错误","recipientTel":"0"},
+      {"addressDetail":"0",
+      "city":"0",
+      "idShippingAddress":1,
+      "provinces":"0",
+      "recipientName":"网络连接错误",
+      "recipientTel":"0"},
       {"addressDetail":"0","city":"0","idShippingAddress":2,"provinces":"0","recipientName":"0","recipientTel":"0"}
     ])
 
@@ -76,6 +81,15 @@ export default function PaperSheet() {
 
     },[]
   )
+  const modify = (event,id,name,phone,province,city,detail)=>{
+    var content = {'id':id,'name':name,'phone':phone,'province':province,'city':city,'detail':detail}
+    sessionStorage.setItem("Defaultmessage",JSON.stringify(content))
+    // window.location.href= global.data.localadd +'PersonCenter/show/Modifyaddress'
+  }
+  
+  const cdelete = (event,id)=>{
+    alert(id)
+  }
       // alert(Adata[0].city)
       // console.log(Adata)
   return (
@@ -114,10 +128,12 @@ export default function PaperSheet() {
               </div>
               <Divider orientation="vertical" />
               <div style={{display:'flex',position:'absolute',margin:5,marginLeft:15,right:30}}>
-                <Button variant="outlined" size="small" color="primary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
-                  编辑
-                </Button>
-                <Button variant="outlined" size="small" color="secondary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
+                <Link to="/PersonCenter/show/Modifyaddress" onClick={(e)=>modify(e,text.idShippingAddress,text.recipientName,text.recipientTel, text.provinces,text.city,text.addressDetail)}>
+                  <Button  variant="outlined" size="small" color="primary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
+                    编辑
+                  </Button>
+                </Link>
+                <Button onClick={(e)=>cdelete(e,text.idShippingAddress)} variant="outlined" size="small" color="secondary" style={{marginLeft:5,position:'relative',top:15,right:-30}}>
                   删除
                 </Button>
               </div>

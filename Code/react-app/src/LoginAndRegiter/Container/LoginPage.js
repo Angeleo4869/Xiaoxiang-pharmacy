@@ -98,6 +98,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignInSide() {
+  document.title = "登录";
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
@@ -138,6 +139,7 @@ export default function SignInSide() {
               control={<Checkbox value="remember" color="primary" />}
               label="记住密码"
             />
+            
             <Button
               // type="submit"
               fullWidth

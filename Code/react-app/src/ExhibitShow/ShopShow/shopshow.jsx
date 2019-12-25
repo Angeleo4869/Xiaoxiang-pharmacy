@@ -93,6 +93,7 @@ function a11yProps(index) {
 }
 
 function SwipeableTextMobileStepper() {
+  document.title = "店铺主页";
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
